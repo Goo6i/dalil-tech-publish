@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware\App;
 
+use App\Enums\PostPlatform\ContentType;
 use App\Http\Resources\App\HandleInertiaRequests\AuthAccountResource;
 use App\Http\Resources\App\HandleInertiaRequests\AuthPlanResource;
 use App\Http\Resources\App\HandleInertiaRequests\AuthUserResource;
@@ -60,6 +61,17 @@ class HandleInertiaRequests extends Middleware
             'aiEnabled' => ! empty(config('services.gemini.api_key')) || ! empty(config('services.openai.api_key')),
             'selfHosted' => $isSelfHosted,
             'googleAuthEnabled' => config('trypost.google_auth_enabled'),
+        ];
+    }
+
+    /**
+     * @return array<string, callable>
+     */
+    public function shareOnce(Request $request): array
+    {
+        return [
+            ...parent::shareOnce($request),
+            'contentTypeMediaRules' => fn (): array => ContentType::mediaRulesForFrontend(),
         ];
     }
 }
