@@ -43,4 +43,5 @@ export interface Channel {
     publishConfig?: Record<string, any> | null;
     creatorInfo?: ChannelTikTokCreatorInfo | null;
     boards?: PinterestBoard[];
+    boardsTruncated?: boolean;
 }
