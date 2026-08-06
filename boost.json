@@ -8,6 +8,7 @@
     "nightwatch_mcp": true,
     "sail": false,
     "skills": [
+        "infer-conventions",
         "ai-sdk-development",
         "cashier-stripe-development",
         "laravel-best-practices",
