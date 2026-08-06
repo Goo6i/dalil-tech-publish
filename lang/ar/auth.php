@@ -69,6 +69,8 @@ return [
         'page_title' => 'تسجيل الدخول',
         'email' => 'البريد الإلكتروني',
         'password' => 'كلمة المرور',
+        'show_password' => 'إظهار كلمة المرور',
+        'hide_password' => 'إخفاء كلمة المرور',
         'forgot_password' => 'نسيت كلمة المرور؟',
         'remember_me' => 'تذكّرني',
         'submit' => 'تسجيل الدخول',
