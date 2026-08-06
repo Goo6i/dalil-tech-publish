@@ -1,39 +1,40 @@
 <script setup lang="ts">
-import { Link, router, usePage } from '@inertiajs/vue3';
+import { Link, usePage } from '@inertiajs/vue3';
 import {
     IconAffiliate,
     IconAlertTriangle,
     IconBolt,
+    IconBrandX,
     IconCalendar,
     IconChartBar,
     IconChevronRight,
     IconClock,
     IconFileCheck,
     IconFileText,
+    IconGift,
     IconHash,
     IconLifebuoy,
-    IconPhoto,
     IconPencil,
-    IconPlus,
+    IconPhoto,
     IconSelector,
     IconTag,
 } from '@tabler/icons-vue';
 import { trans } from 'laravel-vue-i18n';
 import { computed } from 'vue';
 
-import { create as createPost, index as postsIndex } from '@/actions/App/Http/Controllers/App/PostController';
+import {
+    create as createPost,
+    index as postsIndex,
+} from '@/actions/App/Http/Controllers/App/PostController';
 import NavMain from '@/components/NavMain.vue';
 import NavSupport from '@/components/NavSupport.vue';
-import NavUser from '@/components/NavUser.vue';
+import NotificationBell from '@/components/NotificationBell.vue';
 import ThemeToggle from '@/components/ThemeToggle.vue';
 import { Avatar } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
     DropdownMenu,
     DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import {
@@ -46,6 +47,7 @@ import {
     SidebarMenuItem,
     useSidebar,
 } from '@/components/ui/sidebar';
+import WorkspaceMenuContent from '@/components/WorkspaceMenuContent.vue';
 import { useWorkspaceRole } from '@/composables/useWorkspaceRole';
 import { accounts, analytics, calendar } from '@/routes/app';
 import { index as assets } from '@/routes/app/assets';
@@ -53,8 +55,7 @@ import { index as automations } from '@/routes/app/automations';
 import { portal } from '@/routes/app/billing';
 import { index as labels } from '@/routes/app/labels';
 import { index as signatures } from '@/routes/app/signatures';
-import { create as createWorkspaceRoute, switchMethod } from '@/routes/app/workspaces';
-import type { NavItem } from '@/types';
+import type { NavItem, User } from '@/types';
 
 interface Workspace {
     id: string;
@@ -63,15 +64,29 @@ interface Workspace {
 }
 
 const page = usePage();
-const currentWorkspace = computed<Workspace | null>(() => page.props.auth.currentWorkspace as Workspace | null);
-const workspaces = computed<Workspace[]>(() => page.props.auth.workspaces as Workspace[]);
-const subscriptionPastDue = computed<boolean>(() => Boolean(page.props.auth.subscriptionPastDue));
-const isRtl = computed<boolean>(() => Boolean((page.props as Record<string, unknown>).isRtl));
+const user = computed(() => page.props.auth.user as User);
+const currentWorkspace = computed<Workspace | null>(
+    () => page.props.auth.currentWorkspace as Workspace | null,
+);
+const workspaces = computed<Workspace[]>(
+    () => page.props.auth.workspaces as Workspace[],
+);
+const subscriptionPastDue = computed<boolean>(() =>
+    Boolean(page.props.auth.subscriptionPastDue),
+);
+// RTL: flip the whole sidebar to the right edge for Arabic (page.props.isRtl
+// is shared from the backend locale). Kept from our fork through the upstream
+// sidebar-unification rewrite.
+const isRtl = computed<boolean>(() =>
+    Boolean((page.props as Record<string, unknown>).isRtl),
+);
 
-const { canCreatePost, canManageAccounts, canManageAutomations, canCreateWorkspace } = useWorkspaceRole();
-
-// Open the workspace menu to the side on desktop (like the user menu) but keep
-// it below the trigger on mobile, where the sidebar is an overlay sheet.
+const {
+    canCreatePost,
+    canManageAccounts,
+    canManageAutomations,
+    canCreateWorkspace,
+} = useWorkspaceRole();
 const { isMobile } = useSidebar();
 
 const mainNavItems = computed<NavItem[]>(() => [
@@ -102,7 +117,11 @@ const postsNavItems = computed<NavItem[]>(() => [
         title: trans('sidebar.posts.all'),
         href: postsIndex.url(),
         icon: IconFileText,
-        excludeActive: [postsIndex.url('scheduled'), postsIndex.url('published'), postsIndex.url('draft')],
+        excludeActive: [
+            postsIndex.url('scheduled'),
+            postsIndex.url('published'),
+            postsIndex.url('draft'),
+        ],
     },
     {
         title: trans('sidebar.posts.scheduled'),
@@ -152,23 +171,23 @@ const workspaceNavItems = computed<NavItem[]>(() => [
         : []),
 ]);
 
-const supportNavItems = computed(() => [
+const bottomNavItems = computed(() => [
+    {
+        title: trans('sidebar.support.referral'),
+        href: 'https://affiliates.trypost.it/',
+        icon: IconGift,
+    },
+    {
+        title: trans('sidebar.support.stay_updated'),
+        href: 'https://x.com/trypostit',
+        icon: IconBrandX,
+    },
     {
         title: trans('sidebar.support.docs'),
-        href: 'https://dalil-tech.com/publish',
+        href: 'https://docs.trypost.it',
         icon: IconLifebuoy,
     },
 ]);
-
-const switchWorkspace = (workspaceId: string) => {
-    router.post(switchMethod.url(workspaceId), {}, {
-        preserveScroll: true,
-    });
-};
-
-const handleCreateWorkspace = () => {
-    router.visit(createWorkspaceRoute.url());
-};
 </script>
 
 <template>
@@ -176,50 +195,64 @@ const handleCreateWorkspace = () => {
         <SidebarHeader>
             <SidebarMenu>
                 <SidebarMenuItem>
-                    <DropdownMenu>
-                        <DropdownMenuTrigger as-child>
-                            <SidebarMenuButton size="lg"
-                                class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
-                                <Avatar :src="currentWorkspace?.logo_url" :name="currentWorkspace?.name ?? '?'"
-                                    class="h-8 w-8 shrink-0 rounded-md border-2 border-foreground"
-                                    fallback-class="bg-violet-100 text-violet-700 font-bold" />
-                                <div class="grid flex-1 text-left text-sm leading-tight">
-                                    <span class="truncate font-semibold">
-                                        {{ currentWorkspace?.name ?? $t('sidebar.select_workspace') }}
-                                    </span>
-                                </div>
-                                <component :is="isMobile ? IconSelector : IconChevronRight" class="ml-auto size-4" />
-                            </SidebarMenuButton>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent class="w-(--reka-dropdown-menu-trigger-width) min-w-56"
-                            align="start" :side="isMobile ? 'bottom' : 'right'" :side-offset="4">
-                            <DropdownMenuLabel>
-                                {{ $t('sidebar.workspaces') }}
-                            </DropdownMenuLabel>
-                            <div class="space-y-0.5">
-                                <DropdownMenuItem v-for="workspace in workspaces" :key="workspace.id"
-                                    :class="workspace.id === currentWorkspace?.id ? 'bg-accent text-accent-foreground' : ''"
-                                    @click="switchWorkspace(workspace.id)">
-                                    <Avatar :src="workspace.logo_url" :name="workspace.name"
-                                        class="h-6 w-6 shrink-0 rounded-md border-2 border-foreground" fallback-class="text-[10px] bg-violet-100 text-violet-700 font-bold" />
-                                    {{ workspace.name }}
-                                </DropdownMenuItem>
-                            </div>
-                            <template v-if="canCreateWorkspace">
-                                <DropdownMenuSeparator />
-                                <DropdownMenuItem @click="handleCreateWorkspace">
-                                    <IconPlus class="size-4" />
-                                    {{ $t('sidebar.create_workspace') }}
-                                </DropdownMenuItem>
-                            </template>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
+                    <div class="flex items-center gap-1">
+                        <DropdownMenu>
+                            <DropdownMenuTrigger as-child>
+                                <SidebarMenuButton
+                                    size="lg"
+                                    class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+                                    data-test="sidebar-menu-button"
+                                    data-testid="sidebar-workspace-menu"
+                                    dusk="sidebar-workspace-menu"
+                                >
+                                    <Avatar
+                                        :src="currentWorkspace?.logo_url"
+                                        :name="currentWorkspace?.name ?? '?'"
+                                        class="h-8 w-8 shrink-0 rounded-md border-2 border-foreground"
+                                        fallback-class="bg-violet-100 text-violet-700 font-bold"
+                                    />
+                                    <div
+                                        class="grid min-w-0 flex-1 text-left text-sm leading-tight"
+                                    >
+                                        <span class="truncate font-semibold">
+                                            {{
+                                                currentWorkspace?.name ??
+                                                $t('sidebar.select_workspace')
+                                            }}
+                                        </span>
+                                    </div>
+                                    <component
+                                        :is="
+                                            isMobile
+                                                ? IconSelector
+                                                : IconChevronRight
+                                        "
+                                        class="ml-auto size-4"
+                                    />
+                                </SidebarMenuButton>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent
+                                class="w-(--reka-dropdown-menu-trigger-width) min-w-64"
+                                align="start"
+                                :side="isMobile ? 'bottom' : 'right'"
+                                :side-offset="4"
+                            >
+                                <WorkspaceMenuContent
+                                    :user="user"
+                                    :current-workspace="currentWorkspace"
+                                    :workspaces="workspaces"
+                                    :can-create-workspace="canCreateWorkspace"
+                                />
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+
+                        <NotificationBell v-if="currentWorkspace" />
+                    </div>
                 </SidebarMenuItem>
             </SidebarMenu>
         </SidebarHeader>
 
         <SidebarContent class="gap-px">
-            <!-- Create Post Button -->
             <div v-if="currentWorkspace && canCreatePost" class="px-2 py-2">
                 <Link :href="createPost.url()" class="block">
                     <Button class="w-full">
@@ -229,11 +262,25 @@ const handleCreateWorkspace = () => {
             </div>
 
             <NavMain v-if="currentWorkspace" :items="mainNavItems" />
-            <NavMain v-if="currentWorkspace" :items="postsNavItems" :label="$t('sidebar.groups.posts')" />
-            <NavMain v-if="currentWorkspace && workspaceNavItems.length" :items="workspaceNavItems" :label="$t('sidebar.groups.workspace')" />
-            <NavSupport v-if="currentWorkspace" :items="supportNavItems" :label="$t('sidebar.groups.others')" />
-        </SidebarContent>
+            <NavMain
+                v-if="currentWorkspace"
+                :items="postsNavItems"
+                :label="$t('sidebar.groups.posts')"
+            />
+            <NavMain
+                v-if="currentWorkspace && workspaceNavItems.length"
+                :items="workspaceNavItems"
+                :label="$t('sidebar.groups.workspace')"
+            />
 
+            <div class="mt-auto">
+                <NavSupport
+                    v-if="currentWorkspace"
+                    :items="bottomNavItems"
+                    :label="$t('sidebar.groups.others')"
+                />
+            </div>
+        </SidebarContent>
         <SidebarFooter>
             <div
                 v-if="subscriptionPastDue"
@@ -242,7 +289,9 @@ const handleCreateWorkspace = () => {
             >
                 <div class="flex items-center gap-2 text-destructive">
                     <IconAlertTriangle class="size-4 shrink-0" />
-                    <span class="text-sm font-semibold">{{ $t('billing.past_due_notice.title') }}</span>
+                    <span class="text-sm font-semibold">{{
+                        $t('billing.past_due_notice.title')
+                    }}</span>
                 </div>
                 <p class="mt-1 text-xs text-muted-foreground">
                     {{ $t('billing.past_due_notice.description') }}
@@ -259,7 +308,6 @@ const handleCreateWorkspace = () => {
                 </Button>
             </div>
             <ThemeToggle />
-            <NavUser />
         </SidebarFooter>
     </Sidebar>
 </template>
