@@ -46,10 +46,29 @@ return [
         'friend' => 'Friend or colleague',
         'blog' => 'Blog, newsletter or article',
         'other' => 'Something else',
+    'welcome' => 'Welcome to TryPost, :name',
+    'skip_step' => 'Skip this step',
+    'status' => [
+        'complete' => 'Complete',
+        'todo' => 'To do',
+        'skipped' => 'Skipped',
+    'mcp' => [
+        'copied' => 'MCP URL copied.',
+    'social' => [
+        'connected_elsewhere' => 'You already connected an account in another workspace, so this step is done.',
     ],
-    'connect' => [
-        'title' => 'Connect your first network',
-        'description' => 'Link at least one social account to start scheduling. You can add more anytime.',
-        'must_connect' => 'Connect at least one network to continue.',
+    'first_post' => [
+        'title' => 'Create your first post',
+        'description' => 'Try this starter prompt with your connected assistant, or create the post directly in TryPost.',
+        'prompt_label' => 'Sample prompt',
+        'sample_prompt' => 'Create a friendly social post introducing my brand and adapt it for each connected network.',
+        'copy_prompt' => 'Copy prompt',
+        'copied' => 'Sample prompt copied.',
+        'create_button' => 'Create your first post',
+        'or' => 'or',
+    ],
+    'ready' => [
+        'title' => 'You are ready to publish',
+        'description' => 'You are set. Continue to TryPost and start planning your content.',
     ],
 ];

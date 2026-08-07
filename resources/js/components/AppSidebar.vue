@@ -31,6 +31,7 @@ import NavMain from '@/components/NavMain.vue';
 import NavSupport from '@/components/NavSupport.vue';
 import NotificationBell from '@/components/NotificationBell.vue';
 import ThemeToggle from '@/components/ThemeToggle.vue';
+import SidebarOnboarding from '@/components/onboarding/SidebarOnboarding.vue';
 import { Avatar } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -289,6 +290,8 @@ const bottomNavItems = computed(() => [
             </div>
         </SidebarContent>
         <SidebarFooter>
+            <SidebarOnboarding v-if="currentWorkspace" />
+
             <div
                 v-if="subscriptionPastDue"
                 dusk="past-due-notice"

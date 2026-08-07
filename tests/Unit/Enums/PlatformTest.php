@@ -150,3 +150,12 @@ test('tiktok publish config exposes the compliance urls but no privacy options',
 test('platforms without extra publish config expose nothing', function () {
     expect(Platform::LinkedIn->publishConfig())->toBe([]);
 });
+
+test('connectable options are sorted alphabetically by label', function () {
+    $labels = array_column(Platform::connectableOptions(), 'label');
+
+    $sorted = $labels;
+    natcasesort($sorted);
+
+    expect($labels)->toBe(array_values($sorted));
+});
