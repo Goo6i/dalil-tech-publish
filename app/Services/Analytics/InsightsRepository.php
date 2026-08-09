@@ -34,8 +34,8 @@ class InsightsRepository
     /**
      * Daily follower momentum for the given pairs, over the trailing $days days.
      *
-     * Note: account_momentum has no platform column (it is grouped by username
-     * only), so this filters by username alone rather than the full pair.
+     * account_momentum is grouped per (platform, username), so this uses the
+     * standard pair filter like every other method.
      *
      * @param  list<array{platform: string, username: string}>  $pairs
      * @return list<array<string, mixed>>
@@ -46,14 +46,14 @@ class InsightsRepository
             return [];
         }
 
-        $usernames = array_values(array_unique(array_column($pairs, 'username')));
-
-        return DB::connection('analytics')
+        $query = DB::connection('analytics')
             ->table('account_momentum')
-            ->whereIn('username', $usernames)
             ->where('day', '>=', now()->subDays($days))
+            ->orderBy('platform')
             ->orderBy('username')
-            ->orderBy('day')
+            ->orderBy('day');
+
+        return $this->wherePairs($query, $pairs)
             ->get()
             ->map(fn ($row) => (array) $row)
             ->all();
