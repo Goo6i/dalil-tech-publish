@@ -52,8 +52,14 @@ const startGeneration = async () => {
 // fails and we show nothing, avoiding the typewriter-of-JSON effect).
 const previewText = computed(() => {
     if (! text.value) return '';
+    // Some models (e.g. MiniMax) wrap the object in ```json fences or add
+    // prose around it, so parse the outermost {...} slice rather than the
+    // raw stream.
+    const start = text.value.indexOf('{');
+    const end = text.value.lastIndexOf('}');
+    if (start === -1 || end <= start) return '';
     try {
-        const parsed = JSON.parse(text.value);
+        const parsed = JSON.parse(text.value.slice(start, end + 1));
         if (parsed && typeof parsed.content === 'string') return parsed.content;
     } catch {
         // Mid-stream the JSON is incomplete — leave preview empty.

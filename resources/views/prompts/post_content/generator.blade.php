@@ -56,6 +56,7 @@ Use these as a stylistic reference. Generate something different (about the user
 
 @if(($format ?? 'single') === 'carousel')
 Output format: a JSON object with `caption` (the Instagram caption text) and a `slides` array.
+Respond with the raw JSON object only: no markdown code fences, no text before or after it.
 
 CRITICAL: The `slides` array MUST contain exactly {{ $slide_count ?? 1 }} items — no fewer, no more. Count carefully before responding. Each slide object must have:
 - `role`: one of `hook`, `development`, `proof`, `cta` (see roteiro rules below)
@@ -106,7 +107,7 @@ A single, specific next action the reader can do right now. Not "follow for more
 **Caption:**
 The `caption` should tease the carousel's promise and reinforce the swipe — not summarize. Make the reader curious about what's inside the slides, then encourage swiping.
 @else
-Output format: a JSON object with:
+Output format (raw JSON object only, no markdown code fences, no text before or after it): a JSON object with:
 - `content`: the full post caption in {{ $content_language ?? 'en' }} (no preamble, no quotation marks). This is what gets published.
 - `image_title`: a short headline (5-12 words) in {{ $content_language ?? 'en' }} that will be overlaid on the image. Make it a hook that stops the scroll. Do NOT just copy the first sentence of content — write something punchier.
 - `image_body`: 1-2 short sentences (max 25 words) in {{ $content_language ?? 'en' }} that go below image_title on the image. Tease the rest so the reader opens the caption.
