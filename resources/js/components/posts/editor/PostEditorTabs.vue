@@ -47,6 +47,9 @@ interface TikTokCreatorInfo {
     duet_disabled: boolean;
     stitch_disabled: boolean;
     max_video_post_duration_sec: number | null;
+    // false when TikTok could not tell us what this creator may post right now.
+    available: boolean;
+    error_code: string | null;
 }
 
 const props = defineProps<{

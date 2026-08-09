@@ -90,6 +90,12 @@ return [
             'interaction_disabled_by_creator' => 'TikTok アカウントの設定でオフになっています',
             'max_duration_exceeded' => '動画の長さは :duration 秒ですが、このアカウントでは最大 :max 秒までの動画しか投稿できません。',
             'processing_hint' => '公開後、コンテンツが処理されて TikTok プロフィールに表示されるまで数分かかる場合があります。',
+            'creator_info' => [
+                'unavailable' => 'この TikTok アカウントの投稿設定を読み込めなかったため、現在この投稿を公開できません。数分後にもう一度お試しください。',
+                'spam_risk_too_many_posts' => '最近の投稿数が多すぎるため、TikTok がこのアカウントの投稿を一時的に停止しています。しばらくしてからお試しください。',
+                'spam_risk_user_banned_from_posting' => 'TikTok がこのアカウントの投稿を禁止しているため、この投稿は公開できません。',
+                'reached_active_user_cap' => 'このアプリの TikTok 一日あたりのアクティブユーザー上限に達しました。明日もう一度お試しください。',
+            ],
             'brand_organic' => 'あなたのブランド',
             'brand_organic_hint' => '自分自身または自分のブランドを宣伝しています。この動画は「ブランドオーガニック」に分類されます。',
             'brand_content' => 'ブランドコンテンツ',

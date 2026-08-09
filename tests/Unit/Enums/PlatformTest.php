@@ -135,3 +135,18 @@ test('the linkedin card is connectable while either capability is enabled', func
     config(['trypost.platforms.linkedin-page.enabled' => true]);
     expect(Platform::LinkedInPage->isConnectable())->toBeFalse();
 });
+
+test('tiktok publish config exposes the compliance urls but no privacy options', function () {
+    $config = Platform::TikTok->publishConfig();
+
+    // TikTok requires the visibility options to come from creator_info for the
+    // connected account. A static list here is a rejection cause, so it must
+    // not exist at all.
+    expect($config)->not->toHaveKey('privacyLevelOptions')
+        ->and($config['musicUsageConfirmationUrl'])->toBe('https://www.tiktok.com/legal/page/global/music-usage-confirmation/en')
+        ->and($config['brandedContentPolicyUrl'])->toBe('https://www.tiktok.com/legal/page/global/bc-policy/en');
+});
+
+test('platforms without extra publish config expose nothing', function () {
+    expect(Platform::LinkedIn->publishConfig())->toBe([]);
+});

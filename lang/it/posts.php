@@ -90,6 +90,12 @@ return [
             'interaction_disabled_by_creator' => 'Disattivato nelle impostazioni del tuo account TikTok',
             'max_duration_exceeded' => 'Il video dura :duration s ma questo account può pubblicare solo video fino a :max s.',
             'processing_hint' => 'Dopo la pubblicazione, potrebbero volerci alcuni minuti perché il contenuto venga elaborato e appaia sul tuo profilo TikTok.',
+            'creator_info' => [
+                'unavailable' => 'Non è stato possibile caricare le impostazioni di pubblicazione di questo account TikTok, quindi questo post non può essere pubblicato ora. Riprova tra qualche minuto.',
+                'spam_risk_too_many_posts' => 'TikTok ha sospeso le pubblicazioni su questo account perché sono stati pubblicati troppi post di recente. Riprova più tardi.',
+                'spam_risk_user_banned_from_posting' => 'TikTok ha vietato le pubblicazioni da questo account, quindi questo post non può essere pubblicato.',
+                'reached_active_user_cap' => 'TikTok ha raggiunto il limite giornaliero di utenti attivi per questa app. Riprova domani.',
+            ],
             'brand_organic' => 'Il tuo brand',
             'brand_organic_hint' => 'Stai promuovendo te stesso o il tuo brand. Questo video sarà classificato come Brand Organic.',
             'brand_content' => 'Contenuto brandizzato',

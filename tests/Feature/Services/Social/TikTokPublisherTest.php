@@ -1039,3 +1039,196 @@ test('tiktok publisher still reports success when derivative cleanup throws on t
 
     expect($result['id'])->toBe('pub_cleanup_throws_123');
 });
+
+test('tiktok publisher throws when the video is longer than the creator can post', function () {
+    $this->postPlatform->update(['meta' => ['privacy_level' => 'PUBLIC_TO_EVERYONE']]);
+    $this->post->update([
+        'media' => [
+            [
+                'id' => 'test-media-long-video',
+                'path' => 'media/2026-01/long-video.mp4',
+                'url' => 'https://example.com/media/2026-01/long-video.mp4',
+                'mime_type' => 'video/mp4',
+                'original_filename' => 'long-video.mp4',
+                'meta' => ['duration' => 420],
+            ],
+        ],
+    ]);
+
+    Http::fake([
+        $this->api.'/post/publish/creator_info/query/' => Http::response([
+            'data' => [
+                'privacy_level_options' => ['PUBLIC_TO_EVERYONE'],
+                'max_video_post_duration_sec' => 300,
+            ],
+        ], 200),
+        $this->api.'/post/publish/video/init/' => Http::response([
+            'data' => ['publish_id' => 'pub_long_123'],
+        ], 200),
+    ]);
+
+    expect(fn () => $this->publisher->publish($this->postPlatform))
+        ->toThrow(TikTokPublishException::class, 'This video is 420s long but this TikTok account can only post videos up to 300s.');
+
+    // The upload must never start: TikTok would reject it after the whole file transfer.
+    Http::assertNotSent(fn ($request) => str_contains($request->url(), '/post/publish/video/init/'));
+});
+
+test('tiktok publisher publishes a video that fits the creator duration cap', function () {
+    $this->postPlatform->update(['meta' => ['privacy_level' => 'PUBLIC_TO_EVERYONE']]);
+    $this->post->update([
+        'media' => [
+            [
+                'id' => 'test-media-short-video',
+                'path' => 'media/2026-01/short-video.mp4',
+                'url' => 'https://example.com/media/2026-01/short-video.mp4',
+                'mime_type' => 'video/mp4',
+                'original_filename' => 'short-video.mp4',
+                'meta' => ['duration' => 42],
+            ],
+        ],
+    ]);
+
+    Http::fake([
+        $this->api.'/post/publish/creator_info/query/' => Http::response([
+            'data' => [
+                'privacy_level_options' => ['PUBLIC_TO_EVERYONE'],
+                'max_video_post_duration_sec' => 300,
+            ],
+        ], 200),
+        $this->api.'/post/publish/video/init/' => Http::response([
+            'data' => ['publish_id' => 'pub_short_123'],
+        ], 200),
+        $this->api.'/post/publish/status/fetch/' => Http::response([
+            'data' => ['status' => 'PUBLISH_COMPLETE', 'publish_id' => 'pub_short_123'],
+        ], 200),
+    ]);
+
+    expect($this->publisher->publish($this->postPlatform))->toHaveKey('id');
+});
+
+test('tiktok publisher does not block a video when creator_info is unavailable', function () {
+    $this->postPlatform->update(['meta' => ['privacy_level' => 'PUBLIC_TO_EVERYONE']]);
+    $this->post->update([
+        'media' => [
+            [
+                'id' => 'test-media-video',
+                'path' => 'media/2026-01/test-video.mp4',
+                'url' => 'https://example.com/media/2026-01/test-video.mp4',
+                'mime_type' => 'video/mp4',
+                'original_filename' => 'test-video.mp4',
+                'meta' => ['duration' => 420],
+            ],
+        ],
+    ]);
+
+    Http::fake([
+        $this->api.'/post/publish/creator_info/query/' => Http::response([
+            'error' => ['code' => 'spam_risk_too_many_posts'],
+        ], 200),
+        $this->api.'/post/publish/video/init/' => Http::response([
+            'data' => ['publish_id' => 'pub_unknown_cap'],
+        ], 200),
+        $this->api.'/post/publish/status/fetch/' => Http::response([
+            'data' => ['status' => 'PUBLISH_COMPLETE', 'publish_id' => 'pub_unknown_cap'],
+        ], 200),
+    ]);
+
+    // Without a known cap there is nothing to enforce; publishing behaves as before.
+    expect($this->publisher->publish($this->postPlatform))->toHaveKey('id');
+});
+
+test('tiktok publisher throws when branded content is published privately', function () {
+    $this->postPlatform->update([
+        'meta' => [
+            'privacy_level' => 'SELF_ONLY',
+            'brand_content_toggle' => true,
+        ],
+    ]);
+    $this->post->update([
+        'media' => [
+            [
+                'id' => 'test-media-video',
+                'path' => 'media/2026-01/test-video.mp4',
+                'url' => 'https://example.com/media/2026-01/test-video.mp4',
+                'mime_type' => 'video/mp4',
+                'original_filename' => 'test-video.mp4',
+            ],
+        ],
+    ]);
+
+    Http::fake([
+        $this->api.'/post/publish/video/init/' => Http::response([
+            'data' => ['publish_id' => 'pub_branded_private'],
+        ], 200),
+    ]);
+
+    expect(fn () => $this->publisher->publish($this->postPlatform))
+        ->toThrow(TikTokPublishException::class, 'Branded content cannot be posted privately.');
+
+    Http::assertNotSent(fn ($request) => str_contains($request->url(), '/post/publish/video/init/'));
+});
+
+test('tiktok publisher throws when a branded photo post is published privately', function () {
+    $this->postPlatform->update([
+        'content_type' => ContentType::TikTokPhoto,
+        'meta' => [
+            'privacy_level' => 'SELF_ONLY',
+            'brand_content_toggle' => true,
+        ],
+    ]);
+    $this->post->update([
+        'media' => [
+            [
+                'id' => 'test-media-photo',
+                'path' => 'media/2026-01/photo.jpg',
+                'url' => 'https://example.com/media/2026-01/photo.jpg',
+                'mime_type' => 'image/jpeg',
+                'original_filename' => 'photo.jpg',
+                'meta' => ['width' => 1080, 'height' => 1080],
+            ],
+        ],
+    ]);
+
+    Http::fake([
+        $this->api.'/post/publish/content/init/' => Http::response([
+            'data' => ['publish_id' => 'pub_branded_photo'],
+        ], 200),
+    ]);
+
+    expect(fn () => $this->publisher->publish($this->postPlatform))
+        ->toThrow(TikTokPublishException::class, 'Branded content cannot be posted privately.');
+
+    Http::assertNotSent(fn ($request) => str_contains($request->url(), '/post/publish/content/init/'));
+});
+
+test('tiktok publisher still publishes branded content that is not private', function () {
+    $this->postPlatform->update([
+        'meta' => [
+            'privacy_level' => 'PUBLIC_TO_EVERYONE',
+            'brand_content_toggle' => true,
+        ],
+    ]);
+    $this->post->update([
+        'media' => [
+            [
+                'id' => 'test-media-video',
+                'path' => 'media/2026-01/test-video.mp4',
+                'url' => 'https://example.com/media/2026-01/test-video.mp4',
+                'mime_type' => 'video/mp4',
+                'original_filename' => 'test-video.mp4',
+            ],
+        ],
+    ]);
+
+    Http::fake([
+        $this->api.'/post/publish/video/init/' => Http::response([
+            'data' => ['publish_id' => 'pub_branded_public'],
+        ], 200),
+        $this->api.'/post/publish/status/fetch/' => Http::response([
+            'data' => ['status' => 'PUBLISH_COMPLETE', 'publish_id' => 'pub_branded_public'],
+        ], 200),
+    ]);
+
+    expect($this->publisher->publish($this->postPlatform))->toHaveKey('id');
+});

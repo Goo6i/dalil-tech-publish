@@ -90,6 +90,12 @@ return [
             'interaction_disabled_by_creator' => 'Uitgeschakeld in je TikTok-accountinstellingen',
             'max_duration_exceeded' => 'De video is :duration s lang, maar dit account kan alleen video\'s tot :max s plaatsen.',
             'processing_hint' => 'Na het publiceren kan het enkele minuten duren voordat de content is verwerkt en op je TikTok-profiel verschijnt.',
+            'creator_info' => [
+                'unavailable' => 'We konden de plaatsingsinstellingen van dit TikTok-account niet laden, dus dit bericht kan nu niet worden geplaatst. Probeer het over een paar minuten opnieuw.',
+                'spam_risk_too_many_posts' => 'TikTok heeft plaatsen op dit account gepauzeerd omdat er recent te veel berichten zijn geplaatst. Probeer het later opnieuw.',
+                'spam_risk_user_banned_from_posting' => 'TikTok heeft dit account verbannen van plaatsen, dus dit bericht kan niet worden geplaatst.',
+                'reached_active_user_cap' => 'TikTok heeft de daglimiet van actieve gebruikers voor deze app bereikt. Probeer het morgen opnieuw.',
+            ],
             'brand_organic' => 'Je merk',
             'brand_organic_hint' => 'Je promoot jezelf of je eigen merk. Deze video wordt geclassificeerd als Brand Organic.',
             'brand_content' => 'Branded content',

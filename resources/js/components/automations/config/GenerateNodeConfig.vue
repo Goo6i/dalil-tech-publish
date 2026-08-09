@@ -36,6 +36,9 @@ interface TikTokCreatorInfo {
     duet_disabled: boolean;
     stitch_disabled: boolean;
     max_video_post_duration_sec: number | null;
+    // false when TikTok could not tell us what this creator may post right now.
+    available: boolean;
+    error_code: string | null;
 }
 
 interface GenerateAccount {
@@ -248,7 +251,11 @@ const accountIssue = (accountId: string): string | null => {
     const mediaIssue = getMediaIncompatibilityReason(entry.content_type, syntheticImages(intendedImageCount.value));
     if (mediaIssue) return mediaIssue;
     const account = accountById(accountId);
-    return account ? getPlatformMetaIssue(account.platform, entry.meta) : null;
+    if (!account) return null;
+    return getPlatformMetaIssue(account.platform, entry.meta, {
+        creatorInfo: getCreatorInfo(account),
+        contentType: entry.content_type,
+    });
 };
 
 // Clamp the chosen count to what the selected accounts actually allow — runs on

@@ -4,6 +4,7 @@ import { computed, type ComputedRef, type Ref } from 'vue';
 import { getMediaItemIssue, getMediaValidationWarning } from '@/composables/useMedia';
 import { getMediaRulesForContentType } from '@/composables/useMediaRules';
 import { getPlatformLabel } from '@/composables/usePlatformLogo';
+import { isVideo } from '@/lib/mediaType';
 import { ContentType } from '@/types/content-type';
 import type { MediaItem } from '@/types/media';
 import { Platform } from '@/types/platform';
@@ -34,27 +35,83 @@ export const PLATFORM_VARIANTS: Record<string, string[]> = {
 // required title from the post content, so an empty post can't be scheduled.
 const CONTENT_TYPES_REQUIRING_TEXT = new Set<string>([ContentType.YouTubeShort]);
 
-type MetaRule = (meta: Record<string, any>) => { valid: boolean; tooltipKey: string | null };
+/**
+ * The subset of TikTok's creator_info response the publish gate reads. `available`
+ * is false whenever TikTok could not tell us what this creator may post right now
+ * (spam_risk_too_many_posts, reached_active_user_cap, an HTTP failure, …).
+ */
+export interface TikTokCreatorInfoLike {
+    privacy_level_options?: string[];
+    max_video_post_duration_sec?: number | null;
+    available?: boolean;
+    error_code?: string | null;
+}
+
+/**
+ * Live, per-account facts a meta rule may need on top of the meta blob itself.
+ * Everything is optional so callers that have no creator_info to hand (the
+ * automation Generate node) behave exactly as before.
+ */
+export interface PlatformMetaContext {
+    creatorInfo?: TikTokCreatorInfoLike | null;
+    videoDurationSec?: number | null;
+    contentType?: string | null;
+}
+
+interface MetaRuleResult {
+    valid: boolean;
+    tooltipKey: string | null;
+    tooltipParams?: Record<string, string>;
+}
+
+type MetaRule = (meta: Record<string, any>, ctx: PlatformMetaContext) => MetaRuleResult;
 
 // Platforms whose `meta` blob has publish-time requirements. `valid` gates
 // scheduling; `tooltipKey` (when set) surfaces a platform-specific message
 // — null means "blocks the publish but no dedicated message, fall through
 // to the generic incomplete tooltip".
 const PLATFORM_META_RULES: Record<string, MetaRule> = {
-    [Platform.TikTok]: (meta) => {
+    [Platform.TikTok]: (meta, ctx) => {
+        // creator_info is the only permitted source of this account's posting
+        // options. When TikTok says the creator cannot post right now it answers
+        // with HTTP 200 and no data, so an unavailable payload has to block the
+        // publish outright rather than quietly render an empty form.
+        if (ctx.creatorInfo?.available === false) {
+            return {
+                valid: false,
+                tooltipKey: 'posts.form.tiktok.creator_info.unavailable',
+            };
+        }
+
+        const maxDurationSec = ctx.creatorInfo?.max_video_post_duration_sec ?? null;
+        // TikTok's per-creator length cap. A warning is not enough: an over-length
+        // video is rejected by TikTok after the upload, so it blocks scheduling.
+        const durationExceeded = ctx.contentType === ContentType.TikTokVideo
+            && typeof ctx.videoDurationSec === 'number'
+            && typeof maxDurationSec === 'number'
+            && ctx.videoDurationSec > maxDurationSec;
+
         const disclosureIncomplete = Boolean(meta.disclose)
             && !meta.brand_organic_toggle
             && !meta.brand_content_toggle;
         const privacyLevelMissing = !meta.privacy_level;
         let tooltipKey: string | null = null;
+        let tooltipParams: Record<string, string> | undefined;
         if (disclosureIncomplete) {
             tooltipKey = 'posts.form.tiktok.compliance_incomplete';
         } else if (privacyLevelMissing) {
             tooltipKey = 'posts.form.tiktok.privacy_required';
+        } else if (durationExceeded) {
+            tooltipKey = 'posts.form.tiktok.max_duration_exceeded';
+            tooltipParams = {
+                duration: String(ctx.videoDurationSec ?? 0),
+                max: String(maxDurationSec ?? 0),
+            };
         }
         return {
-            valid: !disclosureIncomplete && !privacyLevelMissing,
+            valid: !disclosureIncomplete && !privacyLevelMissing && !durationExceeded,
             tooltipKey,
+            tooltipParams,
         };
     },
     [Platform.Pinterest]: (meta) => ({
@@ -74,20 +131,26 @@ const PLATFORM_META_RULES: Record<string, MetaRule> = {
 export const evaluatePlatformMeta = (
     platform: string,
     meta: Record<string, any>,
-): { valid: boolean; tooltipKey: string | null } => {
+    ctx: PlatformMetaContext = {},
+): MetaRuleResult => {
     const rule = PLATFORM_META_RULES[platform];
     if (!rule) return { valid: true, tooltipKey: null };
-    return rule(meta ?? {});
+    return rule(meta ?? {}, ctx);
 };
 
 /**
  * Translated meta issue for a platform (or null when compliant) — the same
  * requirement the post editor enforces before scheduling.
  */
-export const getPlatformMetaIssue = (platform: string, meta: Record<string, any>): string | null => {
-    const result = evaluatePlatformMeta(platform, meta);
+export const getPlatformMetaIssue = (
+    platform: string,
+    meta: Record<string, any>,
+    ctx: PlatformMetaContext = {},
+): string | null => {
+    const result = evaluatePlatformMeta(platform, meta, ctx);
     if (result.valid) return null;
-    return result.tooltipKey ? trans(result.tooltipKey) : trans('posts.edit.compliance_incomplete');
+    if (!result.tooltipKey) return trans('posts.edit.compliance_incomplete');
+    return trans(result.tooltipKey, result.tooltipParams ?? {});
 };
 
 // The editor's compliance copy keyed by the shared media-warning core's key.
@@ -150,10 +213,13 @@ interface UsePostComplianceOptions {
     platformContentTypes: Ref<Record<string, string>>;
     platformMeta: Ref<Record<string, Record<string, any>>>;
     platformConfigs: Record<string, { maxContentLength?: number | null }>;
+    // Live TikTok creator_info keyed by social account id. Optional so callers
+    // without it keep their current behaviour.
+    tiktokCreatorInfos?: ComputedRef<Record<string, TikTokCreatorInfoLike> | null> | Ref<Record<string, TikTokCreatorInfoLike> | null>;
 }
 
 export const usePostCompliance = (opts: UsePostComplianceOptions) => {
-    const { post, content, media, selectedPlatformIds, platformContentTypes, platformMeta, platformConfigs } = opts;
+    const { post, content, media, selectedPlatformIds, platformContentTypes, platformMeta, platformConfigs, tiktokCreatorInfos } = opts;
 
     const selectedPlatforms = computed(() => post.value.post_platforms.filter(
         (pp) => selectedPlatformIds.value.includes(pp.id),
@@ -219,8 +285,23 @@ export const usePostCompliance = (opts: UsePostComplianceOptions) => {
         return issues;
     });
 
+    // Duration of the attached video, matching what the channel settings panel
+    // shows — the per-creator TikTok cap is checked against it.
+    const videoDurationSec = computed<number | null>(() => {
+        const video = media.value.find((item) => isVideo(item));
+        const duration = video?.meta?.duration;
+        return typeof duration === 'number' ? Math.ceil(duration) : null;
+    });
+
+    const creatorInfoFor = (pp: CompliancePostPlatform): TikTokCreatorInfoLike | null =>
+        pp.social_account_id ? tiktokCreatorInfos?.value?.[pp.social_account_id] ?? null : null;
+
     const platformMetaResults = computed(() => selectedPlatforms.value.map(
-        (pp) => evaluatePlatformMeta(pp.platform, platformMeta.value[pp.id] ?? {}),
+        (pp) => evaluatePlatformMeta(pp.platform, platformMeta.value[pp.id] ?? {}, {
+            creatorInfo: creatorInfoFor(pp),
+            videoDurationSec: videoDurationSec.value,
+            contentType: platformContentTypes.value[pp.id] ?? pp.content_type ?? null,
+        }),
     ));
 
     const hasContentOrMedia = computed(
@@ -259,8 +340,8 @@ export const usePostCompliance = (opts: UsePostComplianceOptions) => {
         const combined = [...mediaReasons, ...lengthReasons].join('\n');
         if (combined) return combined;
 
-        const metaTooltipKey = platformMetaResults.value.find((r) => r.tooltipKey)?.tooltipKey;
-        if (metaTooltipKey) return trans(metaTooltipKey);
+        const metaResult = platformMetaResults.value.find((r) => r.tooltipKey);
+        if (metaResult?.tooltipKey) return trans(metaResult.tooltipKey, metaResult.tooltipParams ?? {});
 
         if (!hasContentOrMedia.value) return trans('posts.edit.compliance.requires_content_or_media');
 

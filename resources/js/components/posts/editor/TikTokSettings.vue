@@ -35,6 +35,9 @@ interface CreatorInfo {
     duet_disabled: boolean;
     stitch_disabled: boolean;
     max_video_post_duration_sec: number | null;
+    // false when TikTok could not tell us what this creator may post right now.
+    available: boolean;
+    error_code: string | null;
 }
 
 interface Props {
@@ -130,11 +133,27 @@ const brandContentToggle = computed({
     set: (value: boolean) => updateMeta({ brand_content_toggle: value }),
 });
 
-// Prefer the creator_info API response; fall back to the static list from the Platform enum.
-const allPrivacyOptions = computed(() => {
-    const fromApi = props.creatorInfo?.privacy_level_options ?? [];
-    return fromApi.length > 0 ? fromApi : props.publishConfig?.privacyLevelOptions ?? [];
-});
+// TikTok requires the visibility options to be the ones creator_info returned for
+// THIS account. There is deliberately no fallback list: when creator_info is
+// unavailable the composer must block, not offer options TikTok never granted.
+const allPrivacyOptions = computed<string[]>(() => props.creatorInfo?.privacy_level_options ?? []);
+
+// creator_info is missing, or TikTok answered that this creator cannot post right
+// now (spam_risk_too_many_posts, reached_active_user_cap, …). Either way there is
+// no compliant form to render.
+const creatorInfoUnavailable = computed(() =>
+    !props.creatorInfo || props.creatorInfo.available === false || allPrivacyOptions.value.length === 0,
+);
+
+const creatorInfoMessageKeys: Record<string, string> = {
+    spam_risk_too_many_posts: 'posts.form.tiktok.creator_info.spam_risk_too_many_posts',
+    spam_risk_user_banned_from_posting: 'posts.form.tiktok.creator_info.spam_risk_user_banned_from_posting',
+    reached_active_user_cap: 'posts.form.tiktok.creator_info.reached_active_user_cap',
+};
+
+const creatorInfoMessageKey = computed(() =>
+    creatorInfoMessageKeys[props.creatorInfo?.error_code ?? ''] ?? 'posts.form.tiktok.creator_info.unavailable',
+);
 
 // Render every option creator_info returns. SELF_ONLY is shown but disabled when
 // Branded Content is checked (TikTok UX Guideline Point 3b — must show interaction,
@@ -143,6 +162,9 @@ const privacyOptions = computed(() => allPrivacyOptions.value);
 
 const isSelfOnlyDisabled = (option: string): boolean =>
     option === 'SELF_ONLY' && brandContentToggle.value;
+
+const creatorAvatarUrl = computed(() => props.creatorInfo?.creator_avatar_url ?? props.socialAccount?.avatar_url ?? null);
+const creatorDisplayName = computed(() => props.creatorInfo?.creator_nickname ?? props.socialAccount?.display_name ?? '');
 
 const commentDisabled = computed(() => Boolean(props.creatorInfo?.comment_disabled));
 const duetDisabled = computed(() => Boolean(props.creatorInfo?.duet_disabled));
@@ -219,6 +241,25 @@ watch(
         </button>
 
         <div v-if="open" class="space-y-5 border-t-2 border-foreground/10 px-4 pb-4 pt-4">
+            <!-- Creator identity — shown even when the rest of the form is blocked -->
+            <div v-if="socialAccount" class="flex items-center gap-3 rounded-lg bg-foreground/5 p-3">
+                <Avatar
+                    :src="creatorAvatarUrl"
+                    :name="creatorDisplayName"
+                    class="size-9 shrink-0 rounded-full border-2 border-foreground shadow-2xs"
+                />
+                <div class="min-w-0 flex-1">
+                    <p class="text-[11px] font-black uppercase tracking-widest text-foreground/60">{{ $t('posts.form.tiktok.posting_to') }}</p>
+                    <p class="truncate text-sm">
+                        <span class="font-bold text-foreground">{{ creatorDisplayName }}</span>
+                        <span v-if="socialAccount?.username" class="font-medium text-foreground/60">&nbsp;@{{ socialAccount.username }}</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- The settings form only exists when TikTok told us what this creator
+                 may post. Otherwise the blocking notice below stands in for it. -->
+            <template v-if="!creatorInfoUnavailable">
             <!-- Variant: Video / Photo carousel -->
             <div class="space-y-2">
                 <p class="text-[11px] font-black uppercase tracking-widest text-foreground/60">{{ $t('posts.form.tiktok.variant_label') }}</p>
@@ -238,22 +279,6 @@ watch(
                     </button>
                 </div>
                 <InputError :message="contentTypeError" />
-            </div>
-
-            <!-- Creator identity -->
-            <div v-if="socialAccount" class="flex items-center gap-3 rounded-lg bg-foreground/5 p-3">
-                <Avatar
-                    :src="socialAccount.avatar_url"
-                    :name="socialAccount.display_name"
-                    class="size-9 shrink-0 rounded-full border-2 border-foreground shadow-2xs"
-                />
-                <div class="min-w-0 flex-1">
-                    <p class="text-[11px] font-black uppercase tracking-widest text-foreground/60">{{ $t('posts.form.tiktok.posting_to') }}</p>
-                    <p class="truncate text-sm">
-                        <span class="font-bold text-foreground">{{ socialAccount.display_name }}</span>
-                        <span v-if="socialAccount?.username" class="font-medium text-foreground/60">&nbsp;@{{ socialAccount.username }}</span>
-                    </p>
-                </div>
             </div>
 
             <!-- Privacy Level -->
@@ -375,6 +400,22 @@ watch(
                     </div>
                 </div>
             </div>
+            </template>
+        </div>
+
+        <!-- Never inside the collapsible body: TikTok requires the Music Usage
+             Confirmation declaration and the processing notice to be visible
+             without any user action, and the blocking notice has to be readable
+             whether or not the panel is expanded. -->
+        <div class="space-y-3 border-t-2 border-foreground/10 px-4 pb-4 pt-4">
+            <!-- creator_info unavailable — publishing is blocked, not merely degraded -->
+            <div
+                v-if="creatorInfoUnavailable"
+                class="flex items-start gap-2 rounded-lg border-2 border-foreground bg-rose-50 p-3 text-xs font-semibold text-rose-700"
+            >
+                <IconAlertTriangle class="mt-0.5 size-4 shrink-0" />
+                <span>{{ $t(creatorInfoMessageKey) }}</span>
+            </div>
 
             <!-- Compliance declaration — always visible per TikTok UX guideline Point 2/4 -->
             <p class="text-xs text-muted-foreground">
@@ -401,7 +442,7 @@ watch(
             </p>
 
             <!-- Post-publish notice required by TikTok Content Sharing Guidelines -->
-            <p class="mt-3 text-xs text-muted-foreground">
+            <p class="text-xs text-muted-foreground">
                 {{ $t('posts.form.tiktok.processing_hint') }}
             </p>
         </div>

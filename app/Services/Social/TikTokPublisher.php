@@ -102,6 +102,78 @@ class TikTokPublisher
     }
 
     /**
+     * Branded content can never be private. The composer disables SELF_ONLY while
+     * Branded Content is checked, but the API/MCP/scheduled paths never touch that
+     * UI, so the combination is rejected here as well.
+     *
+     * @param  array<string, mixed>  $meta
+     */
+    private function guardBrandedContentPrivacy(array $meta, string $privacyLevel): void
+    {
+        if (! data_get($meta, 'brand_content_toggle', false)) {
+            return;
+        }
+
+        if ($privacyLevel !== 'SELF_ONLY') {
+            return;
+        }
+
+        throw new TikTokPublishException(
+            userMessage: 'Branded content cannot be posted privately. Choose a visibility other than "Only me", or turn Branded content off.',
+            category: ErrorCategory::ContentPolicy,
+        );
+    }
+
+    /**
+     * Server-side backstop for TikTok's per-creator video length cap. The composer
+     * blocks the publish button, but scheduled, API and MCP posts never run that
+     * check, and TikTok rejects an over-length video only after the upload.
+     *
+     * The cap is per creator, so it comes from creator_info. When the duration was
+     * never recorded at upload time, or creator_info is unavailable, there is
+     * nothing to compare and publishing proceeds exactly as before.
+     */
+    private function assertVideoWithinCreatorLimit(PostPlatform $postPlatform, MediaItem $media): void
+    {
+        $duration = data_get($media->meta ?? [], 'duration');
+
+        if (! is_numeric($duration)) {
+            return;
+        }
+
+        $creatorInfo = rescue(
+            fn () => app(TikTokCreatorInfo::class)->fetch($postPlatform->socialAccount),
+            null,
+            report: false,
+        );
+
+        if (! is_array($creatorInfo) || ($creatorInfo['available'] ?? false) !== true) {
+            return;
+        }
+
+        $max = $creatorInfo['max_video_post_duration_sec'] ?? null;
+
+        if (! is_numeric($max) || (int) $max <= 0) {
+            return;
+        }
+
+        $seconds = (int) ceil((float) $duration);
+
+        if ($seconds <= (int) $max) {
+            return;
+        }
+
+        throw new TikTokPublishException(
+            userMessage: sprintf(
+                'This video is %ds long but this TikTok account can only post videos up to %ds.',
+                $seconds,
+                (int) $max,
+            ),
+            category: ErrorCategory::MediaFormat,
+        );
+    }
+
+    /**
      * Build the post_info payload for a VIDEO post. TikTok's video endpoint
      * accepts the caption in the `title` field (capped at 2200 chars by the
      * platform's maxContentLength).
@@ -111,10 +183,13 @@ class TikTokPublisher
     private function buildVideoPostInfo(PostPlatform $postPlatform, ?string $content): array
     {
         $meta = $postPlatform->meta ?? [];
+        $privacyLevel = $this->resolveRequiredPrivacyLevel($postPlatform);
+
+        $this->guardBrandedContentPrivacy($meta, $privacyLevel);
 
         $postInfo = [
             'title' => $content ?? '',
-            'privacy_level' => $this->resolveRequiredPrivacyLevel($postPlatform),
+            'privacy_level' => $privacyLevel,
             'disable_duet' => ! data_get($meta, 'allow_duet', false),
             'disable_comment' => ! data_get($meta, 'allow_comments', false),
             'disable_stitch' => ! data_get($meta, 'allow_stitch', false),
@@ -146,10 +221,13 @@ class TikTokPublisher
     private function buildPhotoPostInfo(PostPlatform $postPlatform, ?string $content): array
     {
         $meta = $postPlatform->meta ?? [];
+        $privacyLevel = $this->resolveRequiredPrivacyLevel($postPlatform);
+
+        $this->guardBrandedContentPrivacy($meta, $privacyLevel);
 
         $postInfo = [
             'description' => $content ?? '',
-            'privacy_level' => $this->resolveRequiredPrivacyLevel($postPlatform),
+            'privacy_level' => $privacyLevel,
             'disable_comment' => ! data_get($meta, 'allow_comments', false),
         ];
 
@@ -166,6 +244,8 @@ class TikTokPublisher
 
     private function publishVideo(PostPlatform $postPlatform, $media, ?string $content): array
     {
+        $this->assertVideoWithinCreatorLimit($postPlatform, $media);
+
         $response = $this->getHttpClient()
             ->post("{$this->baseUrl}/post/publish/video/init/", [
                 'post_info' => $this->buildVideoPostInfo($postPlatform, $content),

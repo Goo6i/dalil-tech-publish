@@ -391,8 +391,12 @@ enum Platform: string
     }
 
     /**
-     * Static, platform-specific data exposed to the frontend (e.g. TikTok privacy options,
-     * compliance URLs). Returns an empty array for platforms with no extra config.
+     * Static, platform-specific data exposed to the frontend (e.g. compliance URLs).
+     * Returns an empty array for platforms with no extra config.
+     *
+     * TikTok privacy options are deliberately absent: TikTok requires them to come
+     * from the live creator_info response for the connected account, so a static
+     * list here would be a compliance violation waiting to be reintroduced.
      *
      * @return array<string, mixed>
      */
@@ -400,12 +404,6 @@ enum Platform: string
     {
         return match ($this) {
             self::TikTok => [
-                'privacyLevelOptions' => [
-                    'PUBLIC_TO_EVERYONE',
-                    'MUTUAL_FOLLOW_FRIENDS',
-                    'FOLLOWER_OF_CREATOR',
-                    'SELF_ONLY',
-                ],
                 'musicUsageConfirmationUrl' => 'https://www.tiktok.com/legal/page/global/music-usage-confirmation/en',
                 'brandedContentPolicyUrl' => 'https://www.tiktok.com/legal/page/global/bc-policy/en',
             ],

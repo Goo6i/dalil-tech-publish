@@ -90,6 +90,12 @@ return [
             'interaction_disabled_by_creator' => 'TikTok 계정 설정에서 꺼져 있음',
             'max_duration_exceeded' => '동영상 길이가 :duration초이지만 이 계정은 최대 :max초까지만 게시할 수 있습니다.',
             'processing_hint' => '게시 후 콘텐츠가 처리되어 TikTok 프로필에 표시되기까지 몇 분이 걸릴 수 있습니다.',
+            'creator_info' => [
+                'unavailable' => '이 TikTok 계정의 게시 설정을 불러오지 못해 지금은 이 게시물을 발행할 수 없습니다. 몇 분 후에 다시 시도하세요.',
+                'spam_risk_too_many_posts' => '최근에 너무 많은 게시물이 올라와 TikTok이 이 계정의 게시를 일시 중지했습니다. 나중에 다시 시도하세요.',
+                'spam_risk_user_banned_from_posting' => 'TikTok이 이 계정의 게시를 차단해 이 게시물을 발행할 수 없습니다.',
+                'reached_active_user_cap' => '이 앱의 TikTok 일일 활성 사용자 한도에 도달했습니다. 내일 다시 시도하세요.',
+            ],
             'brand_organic' => '내 브랜드',
             'brand_organic_hint' => '본인 또는 본인의 브랜드를 홍보하는 경우입니다. 이 동영상은 브랜드 오가닉으로 분류됩니다.',
             'brand_content' => '브랜디드 콘텐츠',

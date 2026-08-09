@@ -90,6 +90,12 @@ return [
             'interaction_disabled_by_creator' => 'Wyłączone w ustawieniach Twojego konta TikTok',
             'max_duration_exceeded' => 'Film trwa :duration s, ale to konto może publikować filmy o długości maks. :max s.',
             'processing_hint' => 'Po opublikowaniu przetworzenie treści i pojawienie się jej na Twoim profilu TikTok może zająć kilka minut.',
+            'creator_info' => [
+                'unavailable' => 'Nie udało się wczytać ustawień publikowania tego konta TikTok, więc tego posta nie można teraz opublikować. Spróbuj ponownie za kilka minut.',
+                'spam_risk_too_many_posts' => 'TikTok wstrzymał publikowanie na tym koncie, ponieważ ostatnio opublikowano zbyt wiele postów. Spróbuj ponownie później.',
+                'spam_risk_user_banned_from_posting' => 'TikTok zablokował publikowanie z tego konta, więc tego posta nie można opublikować.',
+                'reached_active_user_cap' => 'TikTok osiągnął dzienny limit aktywnych użytkowników tej aplikacji. Spróbuj ponownie jutro.',
+            ],
             'brand_organic' => 'Twoja marka',
             'brand_organic_hint' => 'Promujesz siebie lub własną markę. Ten film zostanie sklasyfikowany jako Brand Organic.',
             'brand_content' => 'Treść sponsorowana',

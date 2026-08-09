@@ -90,6 +90,12 @@ return [
             'interaction_disabled_by_creator' => '已在你的 TikTok 账号设置中关闭',
             'max_duration_exceeded' => '视频时长为 :duration 秒，但此账号只能发布最长 :max 秒的视频。',
             'processing_hint' => '发布后，内容可能需要几分钟才能处理完成并出现在你的 TikTok 主页上。',
+            'creator_info' => [
+                'unavailable' => '无法加载此 TikTok 账号的发布设置，因此现在无法发布这条内容。请几分钟后重试。',
+                'spam_risk_too_many_posts' => '由于近期发布的内容过多，TikTok 已暂停此账号的发布。请稍后重试。',
+                'spam_risk_user_banned_from_posting' => 'TikTok 已禁止此账号发布内容，因此无法发布这条内容。',
+                'reached_active_user_cap' => '此应用已达到 TikTok 每日活跃用户上限。请明天重试。',
+            ],
             'brand_organic' => '你的品牌',
             'brand_organic_hint' => '你在推广你自己或你自己的品牌。此视频将被归类为品牌自有内容。',
             'brand_content' => '品牌内容',

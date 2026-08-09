@@ -92,6 +92,12 @@ return [
             'interaction_disabled_by_creator' => 'TikTok hesap ayarlarınızda kapalı',
             'max_duration_exceeded' => 'Video :duration sn uzunluğunda ancak bu hesap yalnızca :max sn\'ye kadar video paylaşabilir.',
             'processing_hint' => 'Yayınladıktan sonra, içeriğin işlenip TikTok profilinizde görünmesi birkaç dakika sürebilir.',
+            'creator_info' => [
+                'unavailable' => 'Bu TikTok hesabının paylaşım ayarları yüklenemedi, bu yüzden bu gönderi şu anda paylaşılamıyor. Birkaç dakika sonra tekrar deneyin.',
+                'spam_risk_too_many_posts' => 'Son zamanlarda çok fazla gönderi paylaşıldığı için TikTok bu hesapta paylaşımı duraklattı. Daha sonra tekrar deneyin.',
+                'spam_risk_user_banned_from_posting' => 'TikTok bu hesabın paylaşım yapmasını engelledi, bu yüzden bu gönderi paylaşılamıyor.',
+                'reached_active_user_cap' => 'TikTok bu uygulama için günlük aktif kullanıcı sınırına ulaştı. Yarın tekrar deneyin.',
+            ],
             'brand_organic' => 'Markanız',
             'brand_organic_hint' => 'Kendinizi veya kendi markanızı tanıtıyorsunuz. Bu video Marka Organik olarak sınıflandırılacak.',
             'brand_content' => 'Markalı içerik',

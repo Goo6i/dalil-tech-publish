@@ -90,6 +90,12 @@ return [
             'interaction_disabled_by_creator' => 'Turned off in your TikTok account settings',
             'max_duration_exceeded' => 'Video is :duration s long but this account can only post videos up to :max s.',
             'processing_hint' => 'After publishing, it may take a few minutes for the content to process and appear on your TikTok profile.',
+            'creator_info' => [
+                'unavailable' => 'We couldn\'t load this TikTok account\'s posting settings, so this post can\'t be published right now. Try again in a few minutes.',
+                'spam_risk_too_many_posts' => 'TikTok has paused posting on this account because too many posts were published recently. Try again later.',
+                'spam_risk_user_banned_from_posting' => 'TikTok has banned this account from posting, so this post cannot be published.',
+                'reached_active_user_cap' => 'TikTok has reached its daily limit of active users for this app. Try again tomorrow.',
+            ],
             'brand_organic' => 'Your brand',
             'brand_organic_hint' => 'You are promoting yourself or your own brand. This video will be classified as Brand Organic.',
             'brand_content' => 'Branded content',
