@@ -4,6 +4,7 @@ import { computed } from 'vue';
 
 import ChannelConfigurator from '@/components/ChannelConfigurator.vue';
 import LabelBadge from '@/components/labels/LabelBadge.vue';
+import BestTimeHint from '@/components/posts/editor/BestTimeHint.vue';
 import { Badge } from '@/components/ui/badge';
 import { usePageErrors } from '@/composables/usePageErrors';
 import { getPlatformLogo } from '@/composables/usePlatformLogo';
@@ -64,6 +65,9 @@ interface TikTokCreatorInfo {
     duet_disabled: boolean;
     stitch_disabled: boolean;
     max_video_post_duration_sec: number | null;
+    // false when TikTok could not tell us what this creator may post right now.
+    available: boolean;
+    error_code: string | null;
 }
 
 const props = defineProps<{
@@ -145,14 +149,28 @@ const channels = computed<Channel[]>(() =>
         boards: getBoards(pp),
     })),
 );
+
+// First selected channel that has a known username, so the best-time hint
+// has an account to look up. Platform-only channels (no linked social
+// account yet) have nothing to key a hint against.
+const bestTimeHintChannel = computed(() =>
+    channels.value.find((c) => props.selectedPlatformIds.includes(c.id) && c.username),
+);
 </script>
 
 <template>
     <div class="space-y-6">
         <div>
-            <p class="mb-3 text-[11px] font-black uppercase tracking-widest text-foreground/60">
-                {{ $t('posts.edit.publish_to') }}
-            </p>
+            <div class="mb-3 flex flex-wrap items-center justify-between gap-2">
+                <p class="text-[11px] font-black uppercase tracking-widest text-foreground/60">
+                    {{ $t('posts.edit.publish_to') }}
+                </p>
+                <BestTimeHint
+                    v-if="bestTimeHintChannel"
+                    :platform="bestTimeHintChannel.platform"
+                    :username="bestTimeHintChannel.username"
+                />
+            </div>
             <ChannelConfigurator
                 :channels="channels"
                 :selected-ids="selectedPlatformIds"

@@ -120,4 +120,39 @@ return [
 
         'tiktok_studio_link' => 'Retention and traffic sources live in TikTok Studio',
     ],
+
+    'best_times' => [
+        'title' => 'Best times to post',
+        'description' => 'Ranked cells come from your own posting history, scored 24 hours after each post. A cell only ranks once it has at least 3 scored posts; below that it shows how many posts it has instead of a rank.',
+        'columns' => [
+            'weekday' => 'Weekday',
+            'weekend' => 'Weekend',
+        ],
+        'dayparts' => [
+            'morning' => 'Morning',
+            'afternoon' => 'Afternoon',
+            'evening' => 'Evening',
+            'night' => 'Night',
+        ],
+        'cell' => [
+            'median_views_24h' => 'Median views (24h)',
+            'n' => 'n=:n',
+            'best' => 'Best',
+            'empty' => 'No posts yet',
+        ],
+    ],
+
+    'hint' => [
+        'best_slot' => 'Best slot so far: :daypart :daytype (n=:n)',
+        'daypart' => [
+            'morning' => 'morning',
+            'afternoon' => 'afternoon',
+            'evening' => 'evening',
+            'night' => 'night',
+        ],
+        'daytype' => [
+            'weekday' => 'weekday',
+            'weekend' => 'weekend',
+        ],
+    ],
 ];
