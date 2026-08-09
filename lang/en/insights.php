@@ -68,6 +68,11 @@ return [
     'alerts' => [
         'title' => 'Recent alerts',
         'empty' => 'No alerts sent yet.',
+        'types' => [
+            'breakout' => 'Breakout',
+            'flop' => 'Flop',
+            'resurgence' => 'Resurgence',
+        ],
     ],
 
     'video' => [

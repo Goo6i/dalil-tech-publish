@@ -250,11 +250,7 @@ const relativeTime = (date: string): string => dayjs.utc(date).local().fromNow()
 const warnRows = computed(() => props.dataQuality.filter((row) => row.status === 'WARN'));
 const hasDataQualityWarning = computed(() => warnRows.value.length > 0);
 
-const alertTypeLabel = (type: string): string =>
-    type
-        .split('_')
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' ');
+const alertTypeLabel = (type: string): string => trans(`insights.alerts.types.${type}`);
 </script>
 
 <template>
