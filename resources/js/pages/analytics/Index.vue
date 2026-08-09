@@ -5,6 +5,7 @@ import { computed, ref } from 'vue';
 
 import AnalyticsAccountSelector from '@/components/analytics/AnalyticsAccountSelector.vue';
 import FacebookAnalytics from '@/components/analytics/FacebookAnalytics.vue';
+import InsightsTabs from '@/components/analytics/InsightsTabs.vue';
 import InstagramAnalytics from '@/components/analytics/InstagramAnalytics.vue';
 import LinkedInPageAnalytics from '@/components/analytics/LinkedInPageAnalytics.vue';
 import PinterestAnalytics from '@/components/analytics/PinterestAnalytics.vue';
@@ -56,6 +57,8 @@ const platformSupportsDateRange = computed(() => {
         <div
             class="mx-auto flex h-full w-full max-w-6xl flex-col gap-6 px-6 py-8"
         >
+            <InsightsTabs />
+
             <div class="flex flex-wrap items-center justify-between gap-3">
                 <PageHeader :title="$t('sidebar.analytics')" />
                 <div class="flex w-full flex-wrap items-center gap-3 sm:w-auto">
