@@ -9,6 +9,7 @@ use App\Http\Controllers\App\AutomationController;
 use App\Http\Controllers\App\BillingController;
 use App\Http\Controllers\App\DiscordController as AppDiscordController;
 use App\Http\Controllers\App\GiphyController;
+use App\Http\Controllers\App\InsightsController;
 use App\Http\Controllers\App\LinkPreviewController;
 use App\Http\Controllers\App\NotificationController;
 use App\Http\Controllers\App\OnboardingController;
@@ -175,6 +176,14 @@ Route::middleware(['auth', EnsureAccountReady::class, EnsureHasWorkspace::class]
 
     // Analytics
     Route::get('analytics', [AnalyticsController::class, 'index'])->name('app.analytics');
+
+    // Insights (owned analytics DB) - registered before the analytics/{account}
+    // wildcard so 'insights' isn't swallowed by that single-segment binding.
+    Route::get('analytics/insights', [InsightsController::class, 'index'])->name('app.insights');
+    Route::get('analytics/insights/videos/{videoId}', [InsightsController::class, 'video'])->name('app.insights.video');
+    Route::get('analytics/insights/best-times', [InsightsController::class, 'bestTimes'])->name('app.insights.best_times');
+    Route::get('analytics/insights/best-time-hint', [InsightsController::class, 'hint'])->name('app.insights.hint');
+
     Route::get('analytics/{account}', [AnalyticsController::class, 'show'])->name('app.analytics.show');
 
     // Calendar
