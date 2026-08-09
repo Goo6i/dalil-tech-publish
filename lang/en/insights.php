@@ -9,6 +9,7 @@ return [
         'nav_label' => 'Analytics view',
         'live' => 'Live',
         'insights' => 'Insights',
+        'best_times' => 'Best Times',
     ],
 
     'filters' => [

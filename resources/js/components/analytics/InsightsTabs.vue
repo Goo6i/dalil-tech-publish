@@ -22,8 +22,11 @@ const tabClass = (active: boolean) =>
         <Link :href="analytics.url()" :class="tabClass(urlIsActive(analytics.url(), { exact: true }))">
             {{ $t('insights.tabs.live') }}
         </Link>
-        <Link :href="insights.url()" :class="tabClass(urlIsActive(insights.url()))">
+        <Link :href="insights.url()" :class="tabClass(urlIsActive(insights.url(), { exclude: [insights.best_times.url()] }))">
             {{ $t('insights.tabs.insights') }}
+        </Link>
+        <Link :href="insights.best_times.url()" :class="tabClass(urlIsActive(insights.best_times.url(), { exact: true }))">
+            {{ $t('insights.tabs.best_times') }}
         </Link>
     </nav>
 </template>
