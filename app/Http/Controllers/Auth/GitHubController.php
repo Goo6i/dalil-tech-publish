@@ -97,6 +97,14 @@ class GitHubController extends Controller
 
     private function registerNewUser(\Laravel\Socialite\Contracts\User $githubUser): RedirectResponse
     {
+        // Respect the invite-only lock (SELF_HOSTED): social login may sign in
+        // an existing user, but must not CREATE a new account when public
+        // sign ups are closed and there is no pending invite. Mirrors
+        // EnsureRegistrationEnabled.
+        if (config('trypost.self_hosted') && ! session()->has('pending_invite_id')) {
+            return redirect()->route('login')->with('flash.error', __('auth.registration_closed'));
+        }
+
         $utmParameters = $this->retrieveUtmParameters();
 
         $user = CreateUser::execute([

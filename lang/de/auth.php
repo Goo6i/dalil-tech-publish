@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 return [
+    'registration_closed' => 'Sign ups are currently closed. You need an invitation to join.',
 
     /*
     |--------------------------------------------------------------------------

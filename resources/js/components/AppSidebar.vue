@@ -155,11 +155,6 @@ const workspaceNavItems = computed<NavItem[]>(() => [
 
 const supportNavItems = computed(() => [
     {
-        title: trans('sidebar.support.referral'),
-        href: 'https://dalil-tech.com',
-        icon: IconGift,
-    },
-    {
         title: trans('sidebar.support.stay_updated'),
         href: 'https://dalil-tech.com',
         icon: IconBrandX,
