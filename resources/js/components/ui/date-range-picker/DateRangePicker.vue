@@ -151,7 +151,7 @@ watch(
                 :key="preset.label"
                 variant="ghost"
                 size="sm"
-                class="h-7 w-full justify-start text-xs font-bold text-foreground hover:bg-violet-100 hover:text-foreground"
+                class="h-7 w-full justify-start text-xs font-bold text-foreground hover:bg-violet-100 hover:text-violet-950"
                 @click="applyPreset(preset)"
               >
                 {{ preset.label }}

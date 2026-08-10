@@ -270,7 +270,7 @@ watch(
                         type="button"
                         class="cursor-pointer rounded-full border-2 px-3 py-1 text-xs font-bold uppercase tracking-widest transition-colors disabled:cursor-not-allowed disabled:opacity-50"
                         :class="contentType === variant.value
-                            ? 'border-foreground bg-violet-100 text-foreground shadow-2xs'
+                            ? 'border-foreground bg-violet-100 text-violet-950 shadow-2xs'
                             : 'border-foreground/30 text-foreground/70 hover:border-foreground hover:text-foreground'"
                         :disabled="props.disabled"
                         @click="pickVariant(variant.value)"

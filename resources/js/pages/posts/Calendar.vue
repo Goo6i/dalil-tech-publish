@@ -225,11 +225,11 @@ const isCurrentMonth = (day: dayjs.Dayjs): boolean => {
 const getStatusColor = (status: string): string => {
     const colors: Record<string, string> = {
         draft: 'bg-card text-foreground',
-        scheduled: 'bg-violet-100 text-foreground',
-        publishing: 'bg-amber-100 text-foreground',
-        published: 'bg-emerald-100 text-foreground',
-        partially_published: 'bg-amber-100 text-foreground',
-        failed: 'bg-rose-100 text-foreground',
+        scheduled: 'bg-violet-100 text-violet-950',
+        publishing: 'bg-amber-100 text-amber-950',
+        published: 'bg-emerald-100 text-emerald-950',
+        partially_published: 'bg-amber-100 text-amber-950',
+        failed: 'bg-rose-100 text-rose-950',
     };
     return colors[status] ?? colors.draft;
 };
@@ -500,7 +500,7 @@ const formatTime = (scheduledAt: string): string => {
                                 <Link
                                     v-if="canCreatePost"
                                     :href="createPostUrl(day.format('YYYY-MM-DD'))"
-                                    class="inline-flex size-6 items-center justify-center rounded-full border-2 border-foreground bg-card text-foreground opacity-0 shadow-2xs transition-all hover:rotate-90 hover:bg-violet-100 focus:opacity-100 group-hover:opacity-100"
+                                    class="inline-flex size-6 items-center justify-center rounded-full border-2 border-foreground bg-card text-foreground opacity-0 shadow-2xs transition-all hover:rotate-90 hover:bg-violet-100 hover:text-violet-950 focus:opacity-100 group-hover:opacity-100"
                                 >
                                     <IconPlus class="size-3.5" stroke-width="3" />
                                 </Link>

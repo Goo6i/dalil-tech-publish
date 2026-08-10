@@ -209,7 +209,7 @@ const bestTimeHintChannel = computed(() =>
                                     :href="pp.platform_url"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    class="inline-flex size-7 items-center justify-center rounded-full border-2 border-foreground bg-card text-foreground shadow-2xs transition-transform hover:rotate-3 hover:bg-violet-100"
+                                    class="inline-flex size-7 items-center justify-center rounded-full border-2 border-foreground bg-card text-foreground shadow-2xs transition-transform hover:rotate-3 hover:bg-violet-100 hover:text-violet-950"
                                 >
                                     <IconExternalLink class="size-3.5" stroke-width="2.5" />
                                 </a>
