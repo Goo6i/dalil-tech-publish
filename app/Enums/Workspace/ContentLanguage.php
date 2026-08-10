@@ -17,19 +17,6 @@ namespace App\Enums\Workspace;
 enum ContentLanguage: string
 {
     case English = 'en';
-    case PortugueseBrazil = 'pt-BR';
-    case Spanish = 'es';
-    case French = 'fr';
-    case German = 'de';
-    case Italian = 'it';
-    case Dutch = 'nl';
-    case Polish = 'pl';
-    case Greek = 'el';
-    case Japanese = 'ja';
-    case Korean = 'ko';
-    case Chinese = 'zh';
-    case Russian = 'ru';
-    case Turkish = 'tr';
     case Arabic = 'ar';
 
     public const DEFAULT = self::English;
@@ -41,19 +28,6 @@ enum ContentLanguage: string
     {
         return match ($this) {
             self::English => 'English',
-            self::PortugueseBrazil => 'Português (Brasil)',
-            self::Spanish => 'Español',
-            self::French => 'Français',
-            self::German => 'Deutsch',
-            self::Italian => 'Italiano',
-            self::Dutch => 'Nederlands',
-            self::Polish => 'Polski',
-            self::Greek => 'Ελληνικά',
-            self::Japanese => '日本語',
-            self::Korean => '한국어',
-            self::Chinese => '中文',
-            self::Russian => 'Русский',
-            self::Turkish => 'Türkçe',
             self::Arabic => 'العربية',
         };
     }
@@ -66,19 +40,6 @@ enum ContentLanguage: string
     {
         return match ($this) {
             self::English => 'English',
-            self::PortugueseBrazil => 'Brazilian Portuguese',
-            self::Spanish => 'Spanish',
-            self::French => 'French',
-            self::German => 'German',
-            self::Italian => 'Italian',
-            self::Dutch => 'Dutch',
-            self::Polish => 'Polish',
-            self::Greek => 'Greek',
-            self::Japanese => 'Japanese',
-            self::Korean => 'Korean',
-            self::Chinese => 'Chinese',
-            self::Russian => 'Russian',
-            self::Turkish => 'Turkish',
             self::Arabic => 'Arabic',
         };
     }

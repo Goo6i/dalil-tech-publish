@@ -60,7 +60,6 @@ class HandleInertiaRequests extends Middleware
             'aiEnabled' => ! empty(config('services.gemini.api_key')) || ! empty(config('services.openai.api_key')),
             'selfHosted' => $isSelfHosted,
             'googleAuthEnabled' => config('trypost.google_auth_enabled'),
-            'githubAuthEnabled' => config('trypost.github_auth_enabled'),
         ];
     }
 }

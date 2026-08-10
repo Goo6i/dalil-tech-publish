@@ -56,9 +56,6 @@ return [
     'or_continue_with_email' => 'أو تابع باستخدام البريد الإلكتروني',
     'google_login' => 'تسجيل الدخول عبر Google',
     'google_signup' => 'التسجيل عبر Google',
-    'github_login' => 'تسجيل الدخول عبر GitHub',
-    'github_signup' => 'التسجيل عبر GitHub',
-    'github_email_unavailable' => 'تعذر جلب بريدك الإلكتروني من GitHub. اجعل بريدك على GitHub عامًا أو امنح نطاق الوصول إلى البريد، ثم حاول مرة أخرى.',
 
     'signup_success' => [
         'page_title' => 'مرحبًا',

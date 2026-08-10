@@ -39,7 +39,7 @@ type Session = {
 };
 
 type ConnectedAccount = {
-    provider: 'google' | 'github';
+    provider: 'google';
     label: string;
     connected: boolean;
     can_disconnect: boolean;
