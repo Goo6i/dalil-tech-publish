@@ -279,7 +279,7 @@ onBeforeUnmount(() => {
                     <TooltipTrigger as-child>
                         <button
                             type="button"
-                            class="inline-flex size-6 items-center justify-center rounded-md text-foreground/70 transition-colors hover:bg-foreground/10 hover:text-foreground"
+                            class="inline-flex size-6 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-foreground/10 hover:text-foreground"
                             :aria-label="$t('automations.config.expand_editor')"
                             @click="isExpanded = true"
                         >
@@ -293,7 +293,7 @@ onBeforeUnmount(() => {
                     <TooltipTrigger as-child>
                         <button
                             type="button"
-                            class="inline-flex size-6 items-center justify-center rounded-md text-foreground/70 transition-colors hover:bg-foreground/10 hover:text-foreground"
+                            class="inline-flex size-6 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-foreground/10 hover:text-foreground"
                             :aria-label="$t('common.actions.copy')"
                             @click="copyToClipboard(modelValue)"
                         >

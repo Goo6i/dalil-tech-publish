@@ -115,7 +115,7 @@ const activeContentType = computed((): string | undefined => {
                 >
                     {{ $t('posts.edit.preview_empty.title') }}
                 </p>
-                <p class="text-xs font-medium text-foreground/60">{{ $t('posts.edit.preview_empty.description') }}</p>
+                <p class="text-xs font-medium text-muted-foreground">{{ $t('posts.edit.preview_empty.description') }}</p>
             </div>
         </div>
     </div>

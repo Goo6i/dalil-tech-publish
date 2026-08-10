@@ -77,14 +77,14 @@ const platformSupportsDateRange = computed(() => {
 
             <div
                 v-if="accounts.length === 0"
-                class="flex flex-1 items-center justify-center text-sm font-medium text-foreground/60"
+                class="flex flex-1 items-center justify-center text-sm font-medium text-muted-foreground"
             >
                 {{ $t('analytics.no_accounts') }}
             </div>
 
             <div
                 v-else-if="!selectedAccountId"
-                class="flex flex-1 items-center justify-center text-sm font-medium text-foreground/60"
+                class="flex flex-1 items-center justify-center text-sm font-medium text-muted-foreground"
             >
                 {{ $t('analytics.select_account') }}
             </div>
@@ -146,7 +146,7 @@ const platformSupportsDateRange = computed(() => {
 
             <div
                 v-else
-                class="flex flex-1 items-center justify-center text-sm font-medium text-foreground/60"
+                class="flex flex-1 items-center justify-center text-sm font-medium text-muted-foreground"
             >
                 {{ $t('analytics.no_data') }}
             </div>

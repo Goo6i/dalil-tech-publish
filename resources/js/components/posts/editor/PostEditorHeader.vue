@@ -55,7 +55,7 @@ const isPublished = computed(() => PUBLISHED_STATUSES.includes(props.post.status
                     <p class="text-sm font-semibold text-foreground">
                         {{ $t('posts.edit.scheduled_overlay_title') }}
                     </p>
-                    <p class="text-xs text-foreground/70">
+                    <p class="text-xs text-muted-foreground">
                         {{ $t('posts.edit.scheduled_overlay_subtitle', { date: pickTimeLabel }) }}
                     </p>
                 </div>
@@ -63,7 +63,7 @@ const isPublished = computed(() => PUBLISHED_STATUSES.includes(props.post.status
         </template>
 
         <div v-else class="flex items-center gap-3 pl-12 md:pl-0">
-            <span v-if="isSaving" class="flex items-center gap-1.5 text-xs font-semibold text-foreground/70">
+            <span v-if="isSaving" class="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
                 <IconLoader2 class="size-3.5 animate-spin" />
                 {{ $t('posts.edit.saving') }}
             </span>
@@ -75,7 +75,7 @@ const isPublished = computed(() => PUBLISHED_STATUSES.includes(props.post.status
                 <IconCircleCheck class="size-3.5" stroke-width="2.5" />
                 {{ $t('posts.edit.status.published') }}
             </span>
-            <span v-else class="flex items-center gap-1.5 text-xs font-semibold text-foreground/60">
+            <span v-else class="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
                 <span class="size-2 rounded-full bg-foreground/40" />
                 {{ $t('posts.edit.draft') }}
             </span>

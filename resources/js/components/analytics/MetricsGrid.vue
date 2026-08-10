@@ -113,7 +113,7 @@ const matchMetric = (label: string): Mapping => {
         <Card v-for="metric in metrics" :key="metric.label">
             <CardContent class="p-6">
                 <div class="flex items-start justify-between gap-3">
-                    <p class="text-[11px] font-black uppercase tracking-widest text-foreground/60">{{ metric.label }}</p>
+                    <p class="text-[11px] font-black uppercase tracking-widest text-muted-foreground">{{ metric.label }}</p>
                     <span
                         :class="[
                             'inline-flex size-10 shrink-0 items-center justify-center rounded-2xl border-2 border-foreground shadow-2xs',
@@ -132,7 +132,7 @@ const matchMetric = (label: string): Mapping => {
     </div>
 
     <!-- No Data -->
-    <div v-else class="flex h-full items-center justify-center text-sm font-medium text-foreground/60">
+    <div v-else class="flex h-full items-center justify-center text-sm font-medium text-muted-foreground">
         {{ emptyLabel }}
     </div>
 </template>

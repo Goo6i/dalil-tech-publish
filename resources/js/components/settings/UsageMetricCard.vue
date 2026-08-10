@@ -48,7 +48,7 @@ const isOverLimit = computed(
 <template>
     <div class="space-y-4 rounded-xl border-2 border-foreground bg-card p-5 shadow-2xs">
         <div class="flex items-start justify-between gap-3">
-            <p class="text-[11px] font-black uppercase tracking-widest text-foreground/60">
+            <p class="text-[11px] font-black uppercase tracking-widest text-muted-foreground">
                 {{ label }}
             </p>
             <span
@@ -68,7 +68,7 @@ const isOverLimit = computed(
                     class="text-3xl font-bold tracking-tight"
                     :class="isOverLimit ? 'text-rose-600' : 'text-foreground'"
                 >{{ formatNumber(current) }}</span>
-                <span v-if="hasLimit" class="text-base font-bold text-foreground/40">
+                <span v-if="hasLimit" class="text-base font-bold text-subtle-foreground">
                     / {{ formatNumber(limit as number) }}
                 </span>
             </p>

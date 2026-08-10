@@ -9,6 +9,7 @@ import { createApp, h } from 'vue';
 
 import { initializeDataLayer } from './datalayer';
 import dayjs from './dayjs';
+import { initAppearance } from './composables/useAppearance';
 import { capturePageview, initializePostHog, syncPostHogContext } from './posthog';
 import type { Auth } from './types';
 
@@ -27,6 +28,8 @@ createInertiaApp({
 
         // Set dayjs locale based on user's language
         dayjs.locale(locale.toLowerCase());
+
+        initAppearance();
 
         const auth = props.initialPage.props.auth as Auth | undefined;
         const flash = props.initialPage.props.flash as

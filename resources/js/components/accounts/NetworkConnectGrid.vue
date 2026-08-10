@@ -285,7 +285,7 @@ const cardState = computed((): Record<string, CardStateValue> => {
                     </span>
                     <p
                         v-if="cardState[platform.value] === CardState.Connect"
-                        class="mt-0.5 line-clamp-2 text-xs leading-tight text-foreground/60"
+                        class="mt-0.5 line-clamp-2 text-xs leading-tight text-muted-foreground"
                     >
                         {{ getPlatformDescription(platform.value) }}
                     </p>
@@ -297,7 +297,7 @@ const cardState = computed((): Record<string, CardStateValue> => {
                     </p>
                     <p
                         v-else
-                        class="mt-0.5 truncate text-xs leading-tight text-foreground/70"
+                        class="mt-0.5 truncate text-xs leading-tight text-muted-foreground"
                     >
                         {{
                             cardConnection[platform.value]?.display_name ||

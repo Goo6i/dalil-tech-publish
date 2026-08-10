@@ -139,7 +139,7 @@ onBeforeUnmount(() => {
             <template v-if="isSearching">
                 <div
                     v-if="searchResults.length === 0"
-                    class="flex h-full items-center justify-center px-4 text-center text-xs font-medium text-foreground/60"
+                    class="flex h-full items-center justify-center px-4 text-center text-xs font-medium text-muted-foreground"
                 >
                     {{ trans('posts.edit.emoji_picker.empty') }}
                 </div>
@@ -162,7 +162,7 @@ onBeforeUnmount(() => {
                 <section v-if="recentEmojis.length > 0">
                     <h3
                         :ref="setHeaderRef('recent')"
-                        class="sticky top-0 z-10 bg-card/95 px-1 py-1.5 text-[11px] font-black uppercase tracking-widest text-foreground/60 backdrop-blur"
+                        class="sticky top-0 z-10 bg-card/95 px-1 py-1.5 text-[11px] font-black uppercase tracking-widest text-muted-foreground backdrop-blur"
                     >
                         {{ categoryLabel('recent') }}
                     </h3>
@@ -184,7 +184,7 @@ onBeforeUnmount(() => {
                 <section v-for="category in EMOJI_CATEGORIES" :key="category">
                     <h3
                         :ref="setHeaderRef(category)"
-                        class="sticky top-0 z-10 bg-card/95 px-1 py-1.5 text-[11px] font-black uppercase tracking-widest text-foreground/60 backdrop-blur"
+                        class="sticky top-0 z-10 bg-card/95 px-1 py-1.5 text-[11px] font-black uppercase tracking-widest text-muted-foreground backdrop-blur"
                     >
                         {{ categoryLabel(category) }}
                     </h3>

@@ -119,12 +119,12 @@ const logoutDialogOpen = ref(false);
                                     {{ parseBrowserName(session.user_agent) }}
                                     <span
                                         v-if="parseOsName(session.user_agent)"
-                                        class="font-medium text-foreground/60"
+                                        class="font-medium text-muted-foreground"
                                     >
                                         {{ $t('settings.authentication.sessions.on') }} {{ parseOsName(session.user_agent) }}
                                     </span>
                                 </div>
-                                <div class="flex items-center gap-1.5 text-xs font-medium text-foreground/60">
+                                <div class="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
                                     <span>{{ session.ip_address ?? $t('settings.authentication.sessions.unknown_ip') }}</span>
                                     <span aria-hidden="true">·</span>
                                     <template v-if="session.is_current">
@@ -299,7 +299,7 @@ const logoutDialogOpen = ref(false);
                                     <span class="size-1.5 rounded-full bg-emerald-500" />
                                     <span>{{ $t('settings.authentication.providers.connected') }}</span>
                                 </div>
-                                <div v-else class="text-xs font-medium text-foreground/60">
+                                <div v-else class="text-xs font-medium text-muted-foreground">
                                     {{ $t('settings.authentication.providers.not_connected') }}
                                 </div>
                             </div>

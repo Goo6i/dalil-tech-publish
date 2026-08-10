@@ -185,7 +185,7 @@ const hasClass = computed(() => props.video.class !== null && props.video.class 
             <div class="flex flex-col gap-3">
                 <Link
                     :href="insights.url()"
-                    class="inline-flex w-fit items-center gap-1 text-sm font-medium text-foreground/60 hover:text-foreground hover:underline"
+                    class="inline-flex w-fit items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground hover:underline"
                 >
                     <IconArrowLeft class="size-4" />
                     {{ $t('insights.title') }}
@@ -196,7 +196,7 @@ const hasClass = computed(() => props.video.class !== null && props.video.class 
                         <h1 class="text-2xl font-semibold leading-tight text-foreground sm:text-4xl" style="font-family: var(--font-display)">
                             {{ pageTitle }}
                         </h1>
-                        <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-foreground/70">
+                        <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground">
                             <span>{{ $t('insights.video.posted_label') }} {{ postedRelative }}</span>
                             <span class="inline-flex items-center gap-1.5">
                                 <img :src="getPlatformLogo(video.platform)" :alt="platformLabel" class="size-4 rounded-sm" />
@@ -213,7 +213,7 @@ const hasClass = computed(() => props.video.class !== null && props.video.class 
                     <CardTitle>{{ $t('insights.video.trajectory.title') }}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <div v-if="trajectoryPoints.length === 0" class="flex h-48 items-center justify-center text-sm font-medium text-foreground/60">
+                    <div v-if="trajectoryPoints.length === 0" class="flex h-48 items-center justify-center text-sm font-medium text-muted-foreground">
                         {{ $t('insights.video.trajectory.no_data') }}
                     </div>
                     <template v-else>
@@ -241,7 +241,7 @@ const hasClass = computed(() => props.video.class !== null && props.video.class 
                             <VisCrosshair :template="trajectoryTooltip" color="#3ECF8E" />
                             <VisTooltip />
                         </VisXYContainer>
-                        <p v-if="peakPoint" class="mt-1 text-center text-[11px] font-medium text-foreground/50">
+                        <p v-if="peakPoint" class="mt-1 text-center text-[11px] font-medium text-subtle-foreground">
                             {{ $t('insights.video.trajectory.peak_marker') }}: {{ formatNumber(peakPoint.views_per_hour) }}
                             {{ $t('insights.video.trajectory.per_hour') }} @ {{ trajectoryTickFormat(peakPoint.age_h) }}
                         </p>
@@ -254,7 +254,7 @@ const hasClass = computed(() => props.video.class !== null && props.video.class 
                     <CardTitle>{{ $t('insights.video.milestones.title') }}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <p v-if="atAge.length === 0" class="py-4 text-center text-sm font-medium text-foreground/60">
+                    <p v-if="atAge.length === 0" class="py-4 text-center text-sm font-medium text-muted-foreground">
                         {{ $t('insights.video.milestones.no_data') }}
                     </p>
                     <TooltipProvider v-else :delay-duration="200">
@@ -287,16 +287,16 @@ const hasClass = computed(() => props.video.class !== null && props.video.class 
                             <div class="text-lg font-bold text-foreground">
                                 {{ formatNumber(toNum(expectation.expected_7d_low)) }} &ndash; {{ formatNumber(toNum(expectation.expected_7d_high)) }}
                             </div>
-                            <p class="text-xs font-medium text-foreground/60">{{ $t('insights.video.expectation.band_label') }}</p>
+                            <p class="text-xs font-medium text-muted-foreground">{{ $t('insights.video.expectation.band_label') }}</p>
                             <p v-if="hasActual7d" class="text-sm font-medium text-foreground">
                                 {{ $t('insights.video.expectation.actual_label') }}: {{ formatNumber(toNum(expectation.actual_7d)) }}
                             </p>
-                            <p class="text-xs font-medium text-foreground/60">
+                            <p class="text-xs font-medium text-muted-foreground">
                                 {{ $t('insights.video.expectation.training_n_label') }}: {{ toNum(expectation.training_n) }}
                             </p>
-                            <p class="text-xs text-foreground/60">{{ $t('insights.video.expectation.explanation') }}</p>
+                            <p class="text-xs text-muted-foreground">{{ $t('insights.video.expectation.explanation') }}</p>
                         </template>
-                        <p v-else class="text-sm font-medium text-foreground/60">
+                        <p v-else class="text-sm font-medium text-muted-foreground">
                             {{ $t('insights.video.expectation.insufficient_data') }}
                             <template v-if="expectation">({{ toNum(expectation.training_n) }})</template>
                         </p>
@@ -316,9 +316,9 @@ const hasClass = computed(() => props.video.class !== null && props.video.class 
                             <p class="text-sm font-medium text-foreground">
                                 {{ $t('insights.video.class.peak_share_label') }}: {{ toPercent(video.peak_share_f) }}
                             </p>
-                            <p class="text-xs text-foreground/60">{{ $t('insights.video.class.explanation') }}</p>
+                            <p class="text-xs text-muted-foreground">{{ $t('insights.video.class.explanation') }}</p>
                         </template>
-                        <p v-else class="text-sm font-medium text-foreground/60">{{ $t('insights.video.class.insufficient_data') }}</p>
+                        <p v-else class="text-sm font-medium text-muted-foreground">{{ $t('insights.video.class.insufficient_data') }}</p>
                     </CardContent>
                 </Card>
             </div>
@@ -329,15 +329,15 @@ const hasClass = computed(() => props.video.class !== null && props.video.class 
                 </CardHeader>
                 <CardContent class="grid grid-cols-3 gap-4">
                     <div>
-                        <p class="text-xs font-black uppercase tracking-widest text-foreground/60">{{ $t('insights.video.mix.like_rate') }}</p>
+                        <p class="text-xs font-black uppercase tracking-widest text-muted-foreground">{{ $t('insights.video.mix.like_rate') }}</p>
                         <p class="text-xl font-bold text-foreground">{{ toNum(video.like_rate) }}%</p>
                     </div>
                     <div>
-                        <p class="text-xs font-black uppercase tracking-widest text-foreground/60">{{ $t('insights.video.mix.comment_rate') }}</p>
+                        <p class="text-xs font-black uppercase tracking-widest text-muted-foreground">{{ $t('insights.video.mix.comment_rate') }}</p>
                         <p class="text-xl font-bold text-foreground">{{ toNum(video.comment_rate) }}%</p>
                     </div>
                     <div>
-                        <p class="text-xs font-black uppercase tracking-widest text-foreground/60">{{ $t('insights.video.mix.share_rate') }}</p>
+                        <p class="text-xs font-black uppercase tracking-widest text-muted-foreground">{{ $t('insights.video.mix.share_rate') }}</p>
                         <p class="text-xl font-bold text-foreground">{{ toNum(video.share_rate) }}%</p>
                     </div>
                 </CardContent>
@@ -350,7 +350,7 @@ const hasClass = computed(() => props.video.class !== null && props.video.class 
                         <TooltipProvider :delay-duration="200">
                             <Tooltip>
                                 <TooltipTrigger as-child>
-                                    <IconInfoCircle class="size-3.5 shrink-0 cursor-help text-foreground/50" />
+                                    <IconInfoCircle class="size-3.5 shrink-0 cursor-help text-subtle-foreground" />
                                 </TooltipTrigger>
                                 <TooltipContent>
                                     <p class="max-w-64 text-xs">{{ $t('insights.video.attribution.disclaimer') }}</p>
@@ -362,7 +362,7 @@ const hasClass = computed(() => props.video.class !== null && props.video.class 
                 <CardContent class="space-y-3">
                     <div class="grid grid-cols-3 gap-4">
                         <div>
-                            <p class="text-xs font-black uppercase tracking-widest text-foreground/60">
+                            <p class="text-xs font-black uppercase tracking-widest text-muted-foreground">
                                 {{ $t('insights.video.attribution.followers_earned') }}
                             </p>
                             <p class="text-xl font-bold text-foreground">
@@ -370,7 +370,7 @@ const hasClass = computed(() => props.video.class !== null && props.video.class 
                             </p>
                         </div>
                         <div>
-                            <p class="text-xs font-black uppercase tracking-widest text-foreground/60">
+                            <p class="text-xs font-black uppercase tracking-widest text-muted-foreground">
                                 {{ $t('insights.video.attribution.followers_per_1k_views') }}
                             </p>
                             <p class="text-xl font-bold text-foreground">
@@ -382,7 +382,7 @@ const hasClass = computed(() => props.video.class !== null && props.video.class 
                             </p>
                         </div>
                         <div>
-                            <p class="text-xs font-black uppercase tracking-widest text-foreground/60">
+                            <p class="text-xs font-black uppercase tracking-widest text-muted-foreground">
                                 {{ $t('insights.video.attribution.avg_confidence') }}
                             </p>
                             <p class="text-xl font-bold text-foreground">
@@ -390,7 +390,7 @@ const hasClass = computed(() => props.video.class !== null && props.video.class 
                             </p>
                         </div>
                     </div>
-                    <p class="text-xs text-foreground/50">{{ $t('insights.video.attribution.disclaimer') }}</p>
+                    <p class="text-xs text-subtle-foreground">{{ $t('insights.video.attribution.disclaimer') }}</p>
                 </CardContent>
             </Card>
 
@@ -398,7 +398,7 @@ const hasClass = computed(() => props.video.class !== null && props.video.class 
                 href="https://www.tiktok.com/tiktokstudio/analytics"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-sm font-medium text-foreground/70 underline hover:text-foreground"
+                class="text-sm font-medium text-muted-foreground underline hover:text-foreground"
             >
                 {{ $t('insights.video.tiktok_studio_link') }}
             </a>

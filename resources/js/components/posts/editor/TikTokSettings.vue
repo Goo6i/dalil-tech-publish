@@ -234,10 +234,10 @@ watch(
                     <img :src="getPlatformLogo('tiktok')" alt="TikTok" class="size-full object-cover" />
                 </span>
                 <span class="truncate font-bold text-foreground">{{ $t('posts.form.tiktok.settings') }}</span>
-                <span v-if="socialAccount?.username" class="truncate font-medium text-foreground/60">·&nbsp;@{{ socialAccount.username }}</span>
+                <span v-if="socialAccount?.username" class="truncate font-medium text-muted-foreground">·&nbsp;@{{ socialAccount.username }}</span>
             </span>
-            <IconChevronUp v-if="open" class="size-4 shrink-0 text-foreground/60" />
-            <IconChevronDown v-else class="size-4 shrink-0 text-foreground/60" />
+            <IconChevronUp v-if="open" class="size-4 shrink-0 text-muted-foreground" />
+            <IconChevronDown v-else class="size-4 shrink-0 text-muted-foreground" />
         </button>
 
         <div v-if="open" class="space-y-5 border-t-2 border-foreground/10 px-4 pb-4 pt-4">
@@ -249,10 +249,10 @@ watch(
                     class="size-9 shrink-0 rounded-full border-2 border-foreground shadow-2xs"
                 />
                 <div class="min-w-0 flex-1">
-                    <p class="text-[11px] font-black uppercase tracking-widest text-foreground/60">{{ $t('posts.form.tiktok.posting_to') }}</p>
+                    <p class="text-[11px] font-black uppercase tracking-widest text-muted-foreground">{{ $t('posts.form.tiktok.posting_to') }}</p>
                     <p class="truncate text-sm">
                         <span class="font-bold text-foreground">{{ creatorDisplayName }}</span>
-                        <span v-if="socialAccount?.username" class="font-medium text-foreground/60">&nbsp;@{{ socialAccount.username }}</span>
+                        <span v-if="socialAccount?.username" class="font-medium text-muted-foreground">&nbsp;@{{ socialAccount.username }}</span>
                     </p>
                 </div>
             </div>
@@ -262,7 +262,7 @@ watch(
             <template v-if="!creatorInfoUnavailable">
             <!-- Variant: Video / Photo carousel -->
             <div class="space-y-2">
-                <p class="text-[11px] font-black uppercase tracking-widest text-foreground/60">{{ $t('posts.form.tiktok.variant_label') }}</p>
+                <p class="text-[11px] font-black uppercase tracking-widest text-muted-foreground">{{ $t('posts.form.tiktok.variant_label') }}</p>
                 <div class="flex flex-wrap gap-2">
                     <button
                         v-for="variant in variants"
@@ -271,7 +271,7 @@ watch(
                         class="cursor-pointer rounded-full border-2 px-3 py-1 text-xs font-bold uppercase tracking-widest transition-colors disabled:cursor-not-allowed disabled:opacity-50"
                         :class="contentType === variant.value
                             ? 'border-foreground bg-violet-100 text-violet-950 shadow-2xs'
-                            : 'border-foreground/30 text-foreground/70 hover:border-foreground hover:text-foreground'"
+                            : 'border-foreground/30 text-muted-foreground hover:border-foreground hover:text-foreground'"
                         :disabled="props.disabled"
                         @click="pickVariant(variant.value)"
                     >
@@ -283,7 +283,7 @@ watch(
 
             <!-- Privacy Level -->
             <div class="space-y-2">
-                <Label class="text-[11px] font-black uppercase tracking-widest text-foreground/60">{{ $t("posts.form.tiktok.privacy_level") }}</Label>
+                <Label class="text-[11px] font-black uppercase tracking-widest text-muted-foreground">{{ $t("posts.form.tiktok.privacy_level") }}</Label>
                 <Select v-model="privacyLevel" :disabled="props.disabled">
                     <SelectTrigger class="w-full">
                         <SelectValue :placeholder="$t('posts.form.tiktok.privacy_placeholder')" />
@@ -300,7 +300,7 @@ watch(
                         </SelectItem>
                     </SelectContent>
                 </Select>
-                <p class="text-xs font-medium text-foreground/60">{{ $t("posts.form.tiktok.privacy_hint") }}</p>
+                <p class="text-xs font-medium text-muted-foreground">{{ $t("posts.form.tiktok.privacy_hint") }}</p>
                 <p
                     v-if="brandContentToggle"
                     class="flex items-start gap-1.5 rounded-md border-2 border-foreground bg-amber-50 p-2 text-xs font-semibold text-amber-800"
@@ -318,7 +318,7 @@ watch(
 
             <!-- Auto Add Music (photos only) -->
             <div v-if="isPhotoPost" class="space-y-2">
-                <Label class="text-[11px] font-black uppercase tracking-widest text-foreground/60">{{ $t("posts.form.tiktok.auto_add_music") }}</Label>
+                <Label class="text-[11px] font-black uppercase tracking-widest text-muted-foreground">{{ $t("posts.form.tiktok.auto_add_music") }}</Label>
                 <Select v-model="autoAddMusic" :disabled="props.disabled">
                     <SelectTrigger class="w-full">
                         <SelectValue />
@@ -328,12 +328,12 @@ watch(
                         <SelectItem value="no">{{ $t('posts.form.tiktok.no') }}</SelectItem>
                     </SelectContent>
                 </Select>
-                <p class="text-xs font-medium text-foreground/60">{{ $t("posts.form.tiktok.auto_add_music_hint") }}</p>
+                <p class="text-xs font-medium text-muted-foreground">{{ $t("posts.form.tiktok.auto_add_music_hint") }}</p>
             </div>
 
             <!-- Allow User To -->
             <div class="space-y-2">
-                <Label class="text-[11px] font-black uppercase tracking-widest text-foreground/60">{{ $t("posts.form.tiktok.allow_users") }}</Label>
+                <Label class="text-[11px] font-black uppercase tracking-widest text-muted-foreground">{{ $t("posts.form.tiktok.allow_users") }}</Label>
                 <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
                     <label class="flex items-center gap-2 text-sm" :class="{ 'opacity-50': commentDisabled }" :title="commentDisabled ? $t('posts.form.tiktok.interaction_disabled_by_creator') : ''">
                         <Checkbox v-model="allowComments" :disabled="props.disabled || commentDisabled" />
@@ -366,7 +366,7 @@ watch(
                     <Checkbox v-model="discloseOpen" :disabled="props.disabled" />
                     {{ $t('posts.form.tiktok.disclose') }}
                 </label>
-                <p class="ml-6 text-xs font-medium text-foreground/60">{{ $t("posts.form.tiktok.disclose_hint") }}</p>
+                <p class="ml-6 text-xs font-medium text-muted-foreground">{{ $t("posts.form.tiktok.disclose_hint") }}</p>
 
                 <!-- Promotional Content warning (shown once a sub-toggle is picked) -->
                 <div v-if="hasAnyBrandToggle" class="ml-6 flex items-start gap-3 rounded-lg border-2 border-foreground bg-amber-100 p-3 shadow-2xs">
@@ -389,14 +389,14 @@ watch(
                             <Checkbox v-model="brandOrganicToggle" :disabled="props.disabled" />
                             {{ $t('posts.form.tiktok.brand_organic') }}
                         </label>
-                        <p class="ml-6 text-xs font-medium text-foreground/60">{{ $t("posts.form.tiktok.brand_organic_hint") }}</p>
+                        <p class="ml-6 text-xs font-medium text-muted-foreground">{{ $t("posts.form.tiktok.brand_organic_hint") }}</p>
                     </div>
                     <div class="space-y-1">
                         <label class="flex items-center gap-2 text-sm">
                             <Checkbox v-model="brandContentToggle" :disabled="props.disabled" />
                             {{ $t('posts.form.tiktok.brand_content') }}
                         </label>
-                        <p class="ml-6 text-xs font-medium text-foreground/60">{{ $t("posts.form.tiktok.brand_content_hint") }}</p>
+                        <p class="ml-6 text-xs font-medium text-muted-foreground">{{ $t("posts.form.tiktok.brand_content_hint") }}</p>
                     </div>
                 </div>
             </div>

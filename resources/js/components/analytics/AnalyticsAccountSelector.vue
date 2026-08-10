@@ -68,15 +68,15 @@ const select = (account: AnalyticsAccount) => {
                     </div>
                     <span class="min-w-0 flex-1 truncate">
                         <span class="font-bold text-foreground">{{ selected.display_name }}</span>
-                        <span v-if="selected.username" class="ml-1.5 text-xs font-medium text-foreground/60">
+                        <span v-if="selected.username" class="ml-1.5 text-xs font-medium text-muted-foreground">
                             @{{ selected.username }}
                         </span>
                     </span>
                 </template>
                 <template v-else>
-                    <span class="text-foreground/60">{{ $t('analytics.select_account') }}</span>
+                    <span class="text-muted-foreground">{{ $t('analytics.select_account') }}</span>
                 </template>
-                <IconChevronDown class="ml-auto size-4 shrink-0 text-foreground/60" />
+                <IconChevronDown class="ml-auto size-4 shrink-0 text-muted-foreground" />
             </Button>
         </PopoverTrigger>
 
@@ -110,7 +110,7 @@ const select = (account: AnalyticsAccount) => {
                             </div>
                             <div class="min-w-0 flex-1">
                                 <p class="truncate font-bold text-foreground">{{ account.display_name }}</p>
-                                <p v-if="account.username" class="truncate text-xs font-medium text-foreground/60">
+                                <p v-if="account.username" class="truncate text-xs font-medium text-muted-foreground">
                                     @{{ account.username }}
                                 </p>
                             </div>

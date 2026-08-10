@@ -269,7 +269,7 @@ const onAltTextSave = (alt: string): void => {
                             class="flex h-full w-full flex-col items-center justify-center gap-1 bg-rose-50 p-2 text-center"
                         >
                             <IconFileTypePdf class="size-7 text-rose-600" />
-                            <span class="line-clamp-2 break-all text-[10px] font-medium text-foreground/70">{{ item.original_filename || 'PDF' }}</span>
+                            <span class="line-clamp-2 break-all text-[10px] font-medium text-muted-foreground">{{ item.original_filename || 'PDF' }}</span>
                         </div>
                         <img
                             v-else
@@ -361,7 +361,7 @@ const onAltTextSave = (alt: string): void => {
                     <button
                         v-if="!readOnly"
                         type="button"
-                        class="flex aspect-square cursor-pointer flex-col items-center justify-center gap-1 rounded-xl border-2 border-dashed border-foreground/25 text-foreground/60 transition-colors hover:border-foreground hover:bg-foreground/5 hover:text-foreground"
+                        class="flex aspect-square cursor-pointer flex-col items-center justify-center gap-1 rounded-xl border-2 border-dashed border-foreground/25 text-muted-foreground transition-colors hover:border-foreground hover:bg-foreground/5 hover:text-foreground"
                         @click="mediaPickerDialog?.open()"
                     >
                         <IconLibraryPhoto class="size-5" />
@@ -479,7 +479,7 @@ const onAltTextSave = (alt: string): void => {
                     v-model="content"
                     :readonly="readOnly"
                     :placeholder="readOnly ? '' : $t('posts.edit.caption_placeholder')"
-                    class="relative block w-full resize-none border-0 bg-transparent p-0 font-sans text-base leading-[1.7] shadow-none outline-none placeholder:text-foreground/40"
+                    class="relative block w-full resize-none border-0 bg-transparent p-0 font-sans text-base leading-[1.7] shadow-none outline-none placeholder:text-subtle-foreground"
                     style="min-height: 280px; field-sizing: content;"
                 />
             </div>

@@ -51,7 +51,7 @@ const select = (key: string) => {
             <div class="flex items-start gap-2 p-3">
                 <div class="min-w-0 flex-1">
                     <p class="truncate text-sm font-bold text-foreground">{{ style.name }}</p>
-                    <p v-if="style.description" class="mt-0.5 text-xs leading-snug text-foreground/60">{{ style.description }}</p>
+                    <p v-if="style.description" class="mt-0.5 text-xs leading-snug text-muted-foreground">{{ style.description }}</p>
                 </div>
                 <IconCheck v-if="modelValue === style.key" class="mt-0.5 size-4 shrink-0 text-foreground" stroke-width="3" />
             </div>
@@ -70,9 +70,9 @@ const select = (key: string) => {
                 </div>
                 <div class="min-w-0 flex-1">
                     <p class="text-sm font-bold text-foreground">{{ selectedOption.name }}</p>
-                    <p v-if="selectedOption.description" class="mt-0.5 text-xs leading-snug text-foreground/60">{{ selectedOption.description }}</p>
+                    <p v-if="selectedOption.description" class="mt-0.5 text-xs leading-snug text-muted-foreground">{{ selectedOption.description }}</p>
                 </div>
-                <IconChevronDown class="mr-1 size-4 shrink-0 text-foreground/60 transition-transform" :class="open ? 'rotate-180' : ''" />
+                <IconChevronDown class="mr-1 size-4 shrink-0 text-muted-foreground transition-transform" :class="open ? 'rotate-180' : ''" />
             </button>
         </CollapsibleTrigger>
         <CollapsibleContent class="mt-2 space-y-2">
@@ -89,7 +89,7 @@ const select = (key: string) => {
                 </div>
                 <div class="min-w-0 flex-1">
                     <p class="text-sm font-bold text-foreground">{{ style.name }}</p>
-                    <p v-if="style.description" class="mt-0.5 text-xs leading-snug text-foreground/60">{{ style.description }}</p>
+                    <p v-if="style.description" class="mt-0.5 text-xs leading-snug text-muted-foreground">{{ style.description }}</p>
                 </div>
                 <IconCheck v-if="modelValue === style.key" class="mr-1 size-4 shrink-0 text-foreground" stroke-width="3" />
             </button>

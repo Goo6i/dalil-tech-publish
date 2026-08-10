@@ -103,7 +103,7 @@ const tabs = computed(() => [
                         </div>
 
                         <div v-if="mustVerifyEmail && !user.email_verified_at">
-                            <p class="-mt-4 text-sm text-foreground/70">
+                            <p class="-mt-4 text-sm text-muted-foreground">
                                 {{ $t('settings.profile.email_unverified') }}
                                 <Link
                                     :href="send()"

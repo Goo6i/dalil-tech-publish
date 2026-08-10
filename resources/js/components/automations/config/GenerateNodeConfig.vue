@@ -296,7 +296,7 @@ const channels = computed<Channel[]>(() =>
         <div class="space-y-2">
             <Label class="text-sm font-bold">{{ $t('automations.config.generate.social_accounts') }}</Label>
             <InputError :message="errors?.accounts" />
-            <p v-if="socialAccounts.length === 0" class="text-xs text-foreground/60">
+            <p v-if="socialAccounts.length === 0" class="text-xs text-muted-foreground">
                 {{ $t('automations.config.generate.social_accounts_empty') }}
             </p>
             <ChannelConfigurator
@@ -317,7 +317,7 @@ const channels = computed<Channel[]>(() =>
 
         <div v-if="imageCountCap >= 1" class="space-y-2">
             <Label class="text-sm font-bold">{{ $t('automations.config.generate.image_count') }}</Label>
-            <p class="text-xs text-foreground/60">{{ $t('automations.config.generate.image_count_hint') }}</p>
+            <p class="text-xs text-muted-foreground">{{ $t('automations.config.generate.image_count_hint') }}</p>
             <div class="flex flex-wrap gap-2">
                 <Button
                     v-for="n in imageCountOptions"
@@ -335,7 +335,7 @@ const channels = computed<Channel[]>(() =>
         <div v-show="!editorExpanded" class="flex items-start justify-between gap-3">
             <div class="space-y-0.5">
                 <Label class="text-sm font-bold">{{ $t('automations.config.generate.use_brand_voice') }}</Label>
-                <p class="text-xs text-foreground/60">{{ $t('automations.config.generate.use_brand_voice_hint') }}</p>
+                <p class="text-xs text-muted-foreground">{{ $t('automations.config.generate.use_brand_voice_hint') }}</p>
             </div>
             <Switch v-model="local.use_brand_voice" />
         </div>
@@ -343,7 +343,7 @@ const channels = computed<Channel[]>(() =>
         <div v-show="!editorExpanded && local.target_slide_count >= 1" class="flex items-start justify-between gap-3">
             <div class="space-y-0.5">
                 <Label class="text-sm font-bold">{{ $t('automations.config.generate.use_brand_visuals') }}</Label>
-                <p class="text-xs text-foreground/60">{{ $t('automations.config.generate.use_brand_visuals_hint') }}</p>
+                <p class="text-xs text-muted-foreground">{{ $t('automations.config.generate.use_brand_visuals_hint') }}</p>
             </div>
             <Switch v-model="local.use_brand_visuals" />
         </div>
@@ -359,7 +359,7 @@ const channels = computed<Channel[]>(() =>
                     placeholder="Write a social media post about {{ trigger.title }}…"
                 />
             </div>
-            <p class="mt-1 text-xs text-foreground/50">{{ $t('automations.config.generate.prompt_template_hint') }}</p>
+            <p class="mt-1 text-xs text-subtle-foreground">{{ $t('automations.config.generate.prompt_template_hint') }}</p>
             <InputError :message="errors?.prompt_template" class="mt-1" />
         </div>
     </div>

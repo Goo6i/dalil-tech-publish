@@ -24,7 +24,7 @@ defineProps<{
             >
                 {{ title }}
             </h3>
-            <p class="text-sm text-foreground/60">{{ description }}</p>
+            <p class="text-sm text-muted-foreground">{{ description }}</p>
         </div>
         <div v-if="$slots.action" class="mt-2">
             <slot name="action" />

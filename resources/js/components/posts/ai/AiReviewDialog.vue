@@ -93,13 +93,13 @@ watch(open, (isOpen) => {
                 <DialogDescription>{{ $t('posts.ai.review.description') }}</DialogDescription>
             </DialogHeader>
 
-            <p v-if="status === 'loading'" class="py-8 text-center text-sm font-medium text-foreground/60">
+            <p v-if="status === 'loading'" class="py-8 text-center text-sm font-medium text-muted-foreground">
                 {{ $t('posts.ai.review.loading') }}
             </p>
 
             <p v-else-if="status === 'failed'" class="py-4 text-sm font-semibold text-rose-700">{{ errorMessage }}</p>
 
-            <p v-else-if="noIssues" class="py-8 text-center text-sm font-medium text-foreground/60">
+            <p v-else-if="noIssues" class="py-8 text-center text-sm font-medium text-muted-foreground">
                 {{ $t('posts.ai.review.no_issues') }}
             </p>
 
@@ -116,12 +116,12 @@ watch(open, (isOpen) => {
                                 <span class="rounded-md border-2 border-foreground bg-rose-100 px-1.5 py-0.5 font-bold text-rose-700 line-through decoration-rose-700/60 shadow-2xs break-words">
                                     {{ s.original }}
                                 </span>
-                                <span class="font-bold text-foreground/40">→</span>
+                                <span class="font-bold text-subtle-foreground">→</span>
                                 <span class="rounded-md border-2 border-foreground bg-emerald-100 px-1.5 py-0.5 font-bold text-emerald-700 shadow-2xs break-words">
                                     {{ s.suggestion }}
                                 </span>
                             </p>
-                            <p class="text-xs font-medium text-foreground/60">{{ s.reason }}</p>
+                            <p class="text-xs font-medium text-muted-foreground">{{ s.reason }}</p>
                         </div>
                         <Button
                             size="sm"

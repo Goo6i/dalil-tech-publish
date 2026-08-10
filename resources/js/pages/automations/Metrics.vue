@@ -73,7 +73,7 @@ const platformLabel = (platform: string): string => platform.charAt(0).toUpperCa
     <AutomationDetailLayout :automation="automation" current="metrics">
         <div class="space-y-6 p-4">
             <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <h2 class="text-sm font-semibold text-foreground/70">{{ $t('automations.metrics.overview') }}</h2>
+                <h2 class="text-sm font-semibold text-muted-foreground">{{ $t('automations.metrics.overview') }}</h2>
                 <DateRangePicker v-model="dateRange" dusk="metrics-range" />
             </div>
 
@@ -90,7 +90,7 @@ const platformLabel = (platform: string): string => platform.charAt(0).toUpperCa
                     <div class="flex flex-wrap items-center gap-4">
                         <div v-for="item in legend" :key="item.key" class="flex items-center gap-1.5">
                             <span class="size-2.5 rounded-full" :style="{ backgroundColor: item.color }"></span>
-                            <span class="text-xs text-foreground/60">{{ $t(item.label) }}</span>
+                            <span class="text-xs text-muted-foreground">{{ $t(item.label) }}</span>
                         </div>
                     </div>
                 </div>
@@ -99,16 +99,16 @@ const platformLabel = (platform: string): string => platform.charAt(0).toUpperCa
 
             <div class="rounded-xl border-2 border-foreground/10 bg-card p-4">
                 <h3 class="mb-3 text-sm font-semibold">{{ $t('automations.metrics.posts_by_platform') }}</h3>
-                <div v-if="metrics.platforms.length === 0" class="py-6 text-center text-sm text-foreground/50">
+                <div v-if="metrics.platforms.length === 0" class="py-6 text-center text-sm text-subtle-foreground">
                     {{ $t('automations.metrics.no_posts') }}
                 </div>
                 <ul v-else class="space-y-2">
                     <li v-for="item in metrics.platforms" :key="item.platform" class="flex items-center gap-3">
-                        <span class="w-24 shrink-0 text-sm text-foreground/70">{{ platformLabel(item.platform) }}</span>
+                        <span class="w-24 shrink-0 text-sm text-muted-foreground">{{ platformLabel(item.platform) }}</span>
                         <div class="h-5 flex-1 overflow-hidden rounded bg-muted">
                             <div class="h-full rounded bg-primary/70" :style="{ width: `${(item.count / maxPlatform) * 100}%` }"></div>
                         </div>
-                        <span class="w-8 shrink-0 text-right text-sm tabular-nums text-foreground/70">{{ item.count }}</span>
+                        <span class="w-8 shrink-0 text-right text-sm tabular-nums text-muted-foreground">{{ item.count }}</span>
                     </li>
                 </ul>
             </div>

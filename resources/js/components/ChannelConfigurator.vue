@@ -87,7 +87,7 @@ const selectedChannels = computed(() => props.channels.filter((channel) => isSel
                             </div>
                             <span
                                 class="line-clamp-2 text-center text-xs leading-tight"
-                                :class="isSelected(channel.id) ? 'font-bold text-foreground' : 'font-medium text-foreground/70'"
+                                :class="isSelected(channel.id) ? 'font-bold text-foreground' : 'font-medium text-muted-foreground'"
                             >
                                 {{ channel.displayName }}
                             </span>

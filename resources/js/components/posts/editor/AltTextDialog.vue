@@ -59,7 +59,7 @@ const save = () => {
                 />
                 <p
                     class="text-right text-xs tabular-nums"
-                    :class="isOverLimit ? 'text-destructive' : 'text-foreground/60'"
+                    :class="isOverLimit ? 'text-destructive' : 'text-muted-foreground'"
                     data-testid="alt-text-counter"
                 >
                     {{ length }} / {{ MAX_ALT_TEXT_LENGTH }}

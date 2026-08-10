@@ -245,7 +245,7 @@ const startGeneration = async () => {
         <!-- Back button -->
         <button
             type="button"
-            class="group inline-flex cursor-pointer items-center gap-1.5 text-sm font-semibold text-foreground/70 transition-colors hover:text-foreground"
+            class="group inline-flex cursor-pointer items-center gap-1.5 text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground"
             @click="goBack"
         >
             <span class="inline-flex size-7 items-center justify-center rounded-md border-2 border-foreground bg-card shadow-2xs transition-transform group-hover:-translate-x-0.5">
@@ -290,7 +290,7 @@ const startGeneration = async () => {
         <!-- Account (when template needs_account OR there's a choice to make) -->
         <div v-if="selectedFormat && (templateNeedsAccount || showsAccountPicker)" class="space-y-2">
             <Label class="text-sm font-bold">{{ $t('posts.create.steps.account_title') }}</Label>
-            <p v-if="templateNeedsAccount && accountsForFormat.length === 0" class="text-sm text-foreground/60">
+            <p v-if="templateNeedsAccount && accountsForFormat.length === 0" class="text-sm text-muted-foreground">
                 {{ $t('posts.create.steps.no_account_for_template') }}
             </p>
             <div v-else class="grid grid-cols-2 gap-2 sm:grid-cols-3">
@@ -313,7 +313,7 @@ const startGeneration = async () => {
                     </span>
                     <div class="min-w-0 flex-1">
                         <p class="truncate text-xs font-bold leading-tight text-foreground">{{ account.display_name }}</p>
-                        <p v-if="account.username" class="truncate text-xs font-medium text-foreground/60">@{{ account.username }}</p>
+                        <p v-if="account.username" class="truncate text-xs font-medium text-muted-foreground">@{{ account.username }}</p>
                     </div>
                     <IconCheck v-if="selectedAccountId === account.id" class="absolute right-2 top-2 size-3.5 text-foreground" stroke-width="3" />
                 </button>
@@ -368,7 +368,7 @@ const startGeneration = async () => {
         >
             <div class="space-y-0.5">
                 <Label for="apply-brand-visuals" class="text-sm font-bold">{{ $t('posts.create.steps.brand_colors_label') }}</Label>
-                <p class="text-sm text-foreground/70">{{ $t('posts.create.steps.brand_colors_description') }}</p>
+                <p class="text-sm text-muted-foreground">{{ $t('posts.create.steps.brand_colors_description') }}</p>
             </div>
             <Switch id="apply-brand-visuals" v-model="useBrandColors" />
         </div>

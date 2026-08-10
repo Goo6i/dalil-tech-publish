@@ -64,7 +64,7 @@ const clear = () => {
                     <IconTag class="size-4 shrink-0 opacity-60" />
 
                     <template v-if="selectedLabels.length === 0">
-                        <span class="text-foreground/70">{{ trans('posts.filter_by_label') }}</span>
+                        <span class="text-muted-foreground">{{ trans('posts.filter_by_label') }}</span>
                     </template>
                     <template v-else>
                         <div class="flex flex-wrap items-center gap-1">
@@ -75,7 +75,7 @@ const clear = () => {
                             />
                             <span
                                 v-if="selectedLabels.length > 3"
-                                class="text-xs font-bold text-foreground/60"
+                                class="text-xs font-bold text-muted-foreground"
                             >+{{ selectedLabels.length - 3 }}</span>
                         </div>
                     </template>
@@ -86,7 +86,7 @@ const clear = () => {
                         <TooltipTrigger as-child>
                             <button
                                 type="button"
-                                class="ml-1 inline-flex size-4 shrink-0 cursor-pointer items-center justify-center rounded text-foreground/60 hover:text-foreground"
+                                class="ml-1 inline-flex size-4 shrink-0 cursor-pointer items-center justify-center rounded text-muted-foreground hover:text-foreground"
                                 :aria-label="trans('posts.clear_label_filter')"
                                 @click.stop="clear"
                                 @pointerdown.stop

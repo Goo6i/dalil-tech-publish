@@ -215,7 +215,7 @@ const isBodyJsonInvalid = computed(() => {
                         type="button"
                         variant="ghost"
                         size="icon"
-                        class="shrink-0 text-foreground/60 hover:text-destructive"
+                        class="shrink-0 text-muted-foreground hover:text-destructive"
                         @click="removeHeader(index)"
                     >
                         <IconTrash class="size-4" />
@@ -229,10 +229,10 @@ const isBodyJsonInvalid = computed(() => {
         </div>
 
         <div class="border-t-2 border-foreground/10 pt-4">
-            <p class="mb-2 text-[11px] font-black uppercase tracking-widest text-foreground/60">
+            <p class="mb-2 text-[11px] font-black uppercase tracking-widest text-muted-foreground">
                 {{ $t('automations.config.http_request.polling_section') }}
             </p>
-            <p class="mb-3 text-xs text-foreground/60">
+            <p class="mb-3 text-xs text-muted-foreground">
                 {{ $t('automations.config.http_request.polling_hint') }}
             </p>
 
@@ -240,19 +240,19 @@ const isBodyJsonInvalid = computed(() => {
                 <div>
                     <Label class="mb-1 block">{{ $t('automations.config.http_request.items_path') }}</Label>
                     <Input v-model="local.items_path" placeholder="data.items" />
-                    <p class="mt-1 text-xs text-foreground/50">{{ $t('automations.config.http_request.items_path_hint') }}</p>
+                    <p class="mt-1 text-xs text-subtle-foreground">{{ $t('automations.config.http_request.items_path_hint') }}</p>
                     <InputError :message="errors?.items_path" class="mt-1" />
                 </div>
                 <div>
                     <Label class="mb-1 block">{{ $t('automations.config.http_request.item_date_path') }}</Label>
                     <Input v-model="local.item_date_path" placeholder="published_at" />
-                    <p class="mt-1 text-xs text-foreground/50">{{ $t('automations.config.http_request.item_date_path_hint') }}</p>
+                    <p class="mt-1 text-xs text-subtle-foreground">{{ $t('automations.config.http_request.item_date_path_hint') }}</p>
                     <InputError :message="errors?.item_date_path" class="mt-1" />
                 </div>
                 <div>
                     <Label class="mb-1 block">{{ $t('automations.config.http_request.item_key_path') }}</Label>
                     <Input v-model="local.item_key_path" placeholder="id" />
-                    <p class="mt-1 text-xs text-foreground/50">{{ $t('automations.config.http_request.item_key_path_hint') }}</p>
+                    <p class="mt-1 text-xs text-subtle-foreground">{{ $t('automations.config.http_request.item_key_path_hint') }}</p>
                     <InputError :message="errors?.item_key_path" class="mt-1" />
                 </div>
             </div>

@@ -121,7 +121,7 @@ onBeforeUnmount(() => {
             </h1>
 
             <div v-if="status === 'loading'" class="flex w-full flex-col items-center gap-4">
-                <p class="text-center text-sm text-foreground/70">{{ etaLabel }}</p>
+                <p class="text-center text-sm text-muted-foreground">{{ etaLabel }}</p>
 
                 <div class="w-full max-w-md">
                     <div class="h-2 w-full overflow-hidden rounded-full border-2 border-foreground bg-card">
@@ -130,7 +130,7 @@ onBeforeUnmount(() => {
                             :style="{ width: `${Math.round(progress * 100)}%` }"
                         ></div>
                     </div>
-                    <div class="mt-1.5 flex justify-between text-[11px] font-mono text-foreground/50">
+                    <div class="mt-1.5 flex justify-between text-[11px] font-mono text-subtle-foreground">
                         <span>{{ elapsedLabel }}</span>
                         <span>{{ minutesLabel }}</span>
                     </div>
@@ -144,7 +144,7 @@ onBeforeUnmount(() => {
 
                 <div class="mt-8 flex w-full max-w-lg flex-col items-center gap-3 rounded-2xl border-2 border-foreground bg-card p-5 text-center shadow-2xs">
                     <p class="text-base font-bold text-foreground">{{ $t('posts.create.steps.loading_leave_title') }}</p>
-                    <p class="text-sm text-foreground/70">{{ $t('posts.create.steps.loading_leave_body') }}</p>
+                    <p class="text-sm text-muted-foreground">{{ $t('posts.create.steps.loading_leave_body') }}</p>
                     <div class="flex flex-wrap items-center justify-center gap-2 pt-1">
                         <Button @click="createAnother">{{ $t('posts.create.steps.loading_create_another_cta') }}</Button>
                         <Button variant="outline" @click="leave">{{ $t('posts.create.steps.loading_leave_cta') }}</Button>

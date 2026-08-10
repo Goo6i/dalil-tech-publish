@@ -64,7 +64,7 @@ watch(open, (isOpen) => {
                     />
                 </div>
 
-                <p v-if="status === 'processing'" class="text-sm text-foreground/70">
+                <p v-if="status === 'processing'" class="text-sm text-muted-foreground">
                     {{ $t('posts.ai.image_regenerate.processing') }}
                 </p>
                 <p v-if="errorMessage" class="text-sm font-semibold text-rose-700">{{ errorMessage }}</p>

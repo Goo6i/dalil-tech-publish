@@ -70,7 +70,7 @@ const daytypeLabel = (daytype: string): string => trans(`insights.hint.daytype.$
 <template>
     <span
         v-if="!isLoading && hint"
-        class="inline-flex items-center gap-1 rounded-full border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[11px] font-medium text-foreground/60"
+        class="inline-flex items-center gap-1 rounded-full border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[11px] font-medium text-muted-foreground"
     >
         {{
             $t('insights.hint.best_slot', {

@@ -479,13 +479,13 @@ watch(() => props.postId, () => {
 
             <!-- Empty state -->
             <div v-if="!loading && comments.length === 0" class="flex flex-col items-center justify-center py-12 text-center">
-                <p class="text-sm font-medium text-foreground/60">{{ $t('comments.empty') }}</p>
+                <p class="text-sm font-medium text-muted-foreground">{{ $t('comments.empty') }}</p>
             </div>
 
             <!-- Comments grouped by day -->
             <div class="px-2 py-1">
                 <template v-for="group in commentsByDay" :key="group.label">
-                    <div class="mb-4 mt-2 text-center text-[11px] font-black uppercase tracking-widest text-foreground/60">{{ group.label }}</div>
+                    <div class="mb-4 mt-2 text-center text-[11px] font-black uppercase tracking-widest text-muted-foreground">{{ group.label }}</div>
 
                 <template v-for="comment in group.comments" :key="comment.id">
                     <!-- Top-level comment -->
@@ -523,14 +523,14 @@ watch(() => props.postId, () => {
                                         <TooltipProvider>
                                             <Tooltip>
                                                 <TooltipTrigger as-child>
-                                                    <span class="text-xs font-medium text-foreground/60">{{ date.diffForHumans(comment.created_at) }}</span>
+                                                    <span class="text-xs font-medium text-muted-foreground">{{ date.diffForHumans(comment.created_at) }}</span>
                                                 </TooltipTrigger>
                                                 <TooltipContent side="top">
                                                     <span class="text-xs">{{ date.formatDateTime(comment.created_at) }}</span>
                                                 </TooltipContent>
                                             </Tooltip>
                                         </TooltipProvider>
-                                        <span v-if="comment.updated_at !== comment.created_at" class="text-xs font-medium italic text-foreground/60">({{ $t('comments.edited') }})</span>
+                                        <span v-if="comment.updated_at !== comment.created_at" class="text-xs font-medium italic text-muted-foreground">({{ $t('comments.edited') }})</span>
                                     </div>
                                     <div class="mt-0.5 text-sm leading-relaxed text-foreground">
                                         <CommentBody :body="comment.body" :members="memberNames" />
@@ -546,7 +546,7 @@ watch(() => props.postId, () => {
                                             @click="toggleReaction(comment, r.emoji)"
                                         >
                                             <span>{{ r.emoji }}</span>
-                                            <span class="text-[10px] font-medium text-foreground/60">{{ r.count }}</span>
+                                            <span class="text-[10px] font-medium text-muted-foreground">{{ r.count }}</span>
                                         </button>
                                     </div>
 
@@ -635,14 +635,14 @@ watch(() => props.postId, () => {
                                             <TooltipProvider>
                                                 <Tooltip>
                                                     <TooltipTrigger as-child>
-                                                        <span class="text-xs font-medium text-foreground/60">{{ date.diffForHumans(reply.created_at) }}</span>
+                                                        <span class="text-xs font-medium text-muted-foreground">{{ date.diffForHumans(reply.created_at) }}</span>
                                                     </TooltipTrigger>
                                                     <TooltipContent side="top">
                                                         <span class="text-xs">{{ date.formatDateTime(reply.created_at) }}</span>
                                                     </TooltipContent>
                                                 </Tooltip>
                                             </TooltipProvider>
-                                            <span v-if="reply.updated_at !== reply.created_at" class="text-xs font-medium italic text-foreground/60">({{ $t('comments.edited') }})</span>
+                                            <span v-if="reply.updated_at !== reply.created_at" class="text-xs font-medium italic text-muted-foreground">({{ $t('comments.edited') }})</span>
                                         </div>
                                         <div class="mt-0.5 text-sm leading-relaxed text-foreground">
                                             <CommentBody :body="reply.body" :members="memberNames" />
@@ -658,7 +658,7 @@ watch(() => props.postId, () => {
                                                 @click="toggleReaction(reply, r.emoji)"
                                             >
                                                 <span>{{ r.emoji }}</span>
-                                                <span class="text-[10px] font-medium text-foreground/60">{{ r.count }}</span>
+                                                <span class="text-[10px] font-medium text-muted-foreground">{{ r.count }}</span>
                                             </button>
                                         </div>
 
@@ -716,7 +716,7 @@ watch(() => props.postId, () => {
         <!-- Input area -->
         <div class="shrink-0 border-t-2 border-foreground/10 p-2">
             <!-- Replying to indicator -->
-            <div v-if="replyingTo" class="mb-1.5 flex items-center gap-1.5 text-xs font-medium text-foreground/70">
+            <div v-if="replyingTo" class="mb-1.5 flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
                 <IconArrowBackUp class="size-3" />
                 <span>{{ $t('comments.replying_to', { name: replyingTo.user.name }) }}</span>
                 <button class="ml-auto cursor-pointer rounded p-0.5 hover:bg-foreground/5" @click="cancelReply">

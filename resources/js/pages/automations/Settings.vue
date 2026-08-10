@@ -158,7 +158,7 @@ const openDeleteModal = () => {
                             <p class="text-sm font-semibold">
                                 {{ statusLabel }}
                             </p>
-                            <p class="text-xs text-foreground/50">
+                            <p class="text-xs text-subtle-foreground">
                                 {{ statusDetail }}
                             </p>
                         </div>
@@ -201,7 +201,7 @@ const openDeleteModal = () => {
                         <p class="font-medium">
                             {{ $t('automations.settings.delete_title') }}
                         </p>
-                        <p class="text-foreground/60">
+                        <p class="text-muted-foreground">
                             {{ $t('automations.settings.delete_description') }}
                         </p>
                     </div>

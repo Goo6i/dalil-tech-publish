@@ -121,7 +121,7 @@ watch(
         variant="outline"
         :class="cn(
           'w-full justify-start text-left font-medium sm:w-auto',
-          !value && 'text-foreground/60',
+          !value && 'text-muted-foreground',
           props.triggerClass,
         )"
       >
@@ -137,7 +137,7 @@ watch(
         <template v-else>
           {{ $t('common.date_range_picker.placeholder') }}
         </template>
-        <IconCalendar class="ml-auto size-4 text-foreground/60" />
+        <IconCalendar class="ml-auto size-4 text-muted-foreground" />
       </Button>
     </PopoverTrigger>
     <PopoverContent class="w-auto p-0" align="end">

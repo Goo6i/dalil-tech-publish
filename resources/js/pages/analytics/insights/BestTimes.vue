@@ -120,7 +120,7 @@ const isBest = (cell: BestTimeCell): boolean => toNum(cell.slot_rank) === 1;
                 </Select>
             </div>
 
-            <div v-if="accounts.length === 0" class="flex flex-1 items-center justify-center text-sm font-medium text-foreground/60">
+            <div v-if="accounts.length === 0" class="flex flex-1 items-center justify-center text-sm font-medium text-muted-foreground">
                 {{ $t('insights.no_accounts') }}
             </div>
 
@@ -156,17 +156,17 @@ const isBest = (cell: BestTimeCell): boolean => toNum(cell.slot_rank) === 1;
                                                     {{ $t('insights.best_times.cell.best') }}
                                                 </Badge>
                                             </div>
-                                            <p class="mt-0.5 text-[11px] font-medium text-foreground/60">
+                                            <p class="mt-0.5 text-[11px] font-medium text-muted-foreground">
                                                 {{ $t('insights.best_times.cell.median_views_24h') }}
                                                 &middot;
                                                 {{ $t('insights.best_times.cell.n', { n: toNum(cell.n_scored) }) }}
                                             </p>
                                         </template>
-                                        <p v-else class="text-xs font-medium text-foreground/50">
+                                        <p v-else class="text-xs font-medium text-subtle-foreground">
                                             {{ cell.note }}
                                         </p>
                                     </div>
-                                    <p v-else class="text-xs font-medium italic text-foreground/40">
+                                    <p v-else class="text-xs font-medium italic text-subtle-foreground">
                                         {{ $t('insights.best_times.cell.empty') }}
                                     </p>
                                 </TableCell>

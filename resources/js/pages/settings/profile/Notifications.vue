@@ -76,7 +76,7 @@ const submit = () => {
                         <div class="flex items-center justify-between gap-4 rounded-xl border-2 border-foreground bg-card p-4 shadow-2xs">
                             <div class="space-y-0.5">
                                 <Label for="post_published" class="text-sm font-bold">{{ $t('settings.notifications.post_published') }}</Label>
-                                <p class="text-sm text-foreground/70">
+                                <p class="text-sm text-muted-foreground">
                                     {{ $t('settings.notifications.post_published_description') }}
                                 </p>
                             </div>
@@ -86,7 +86,7 @@ const submit = () => {
                         <div class="flex items-center justify-between gap-4 rounded-xl border-2 border-foreground bg-card p-4 shadow-2xs">
                             <div class="space-y-0.5">
                                 <Label for="post_failed" class="text-sm font-bold">{{ $t('settings.notifications.post_failed') }}</Label>
-                                <p class="text-sm text-foreground/70">
+                                <p class="text-sm text-muted-foreground">
                                     {{ $t('settings.notifications.post_failed_description') }}
                                 </p>
                             </div>
@@ -96,7 +96,7 @@ const submit = () => {
                         <div class="flex items-center justify-between gap-4 rounded-xl border-2 border-foreground bg-card p-4 shadow-2xs">
                             <div class="space-y-0.5">
                                 <Label for="account_disconnected" class="text-sm font-bold">{{ $t('settings.notifications.account_disconnected') }}</Label>
-                                <p class="text-sm text-foreground/70">
+                                <p class="text-sm text-muted-foreground">
                                     {{ $t('settings.notifications.account_disconnected_description') }}
                                 </p>
                             </div>

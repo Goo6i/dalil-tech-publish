@@ -116,7 +116,7 @@ usePostEcho(props.post.id, '.post.platform.status.updated', () => {
             >
                 {{ $t('posts.edit.publishing_overlay_title') }}
             </p>
-            <p class="max-w-md text-center text-sm text-foreground/70">
+            <p class="max-w-md text-center text-sm text-muted-foreground">
                 {{ $t('posts.edit.publishing_overlay_subtitle') }}
             </p>
         </div>
@@ -132,8 +132,8 @@ usePostEcho(props.post.id, '.post.platform.status.updated', () => {
                     </Link>
                 </div>
                 <div class="flex flex-wrap items-center justify-between gap-x-3 gap-y-2 md:flex-nowrap md:justify-end">
-                    <span class="flex items-start gap-1.5 text-sm font-medium text-foreground/70">
-                        <IconCalendar class="mt-0.5 size-4 shrink-0 text-foreground/60" />
+                    <span class="flex items-start gap-1.5 text-sm font-medium text-muted-foreground">
+                        <IconCalendar class="mt-0.5 size-4 shrink-0 text-muted-foreground" />
                         <span v-if="post.published_at">
                             {{ $t('posts.show.published_on', { date: formatDateTime(post.published_at) }) }}
                         </span>
@@ -174,7 +174,7 @@ usePostEcho(props.post.id, '.post.platform.status.updated', () => {
                                         class="flex h-full w-full flex-col items-center justify-center gap-1.5 bg-rose-50 p-2 text-center"
                                     >
                                         <IconFileTypePdf class="size-8 text-rose-600" />
-                                        <span class="line-clamp-2 break-all text-[10px] font-medium text-foreground/70">{{ item.original_filename || 'PDF' }}</span>
+                                        <span class="line-clamp-2 break-all text-[10px] font-medium text-muted-foreground">{{ item.original_filename || 'PDF' }}</span>
                                     </div>
                                     <img
                                         v-else
@@ -209,13 +209,13 @@ usePostEcho(props.post.id, '.post.platform.status.updated', () => {
 
                 <!-- RIGHT: platforms breakdown -->
                 <div class="flex flex-col gap-4 p-6 lg:overflow-y-auto">
-                    <h2 class="text-[11px] font-black uppercase tracking-widest text-foreground/60">
+                    <h2 class="text-[11px] font-black uppercase tracking-widest text-muted-foreground">
                         {{ $t('posts.show.platforms') }}
-                        <span class="ml-1 text-foreground/40">({{ enabledPlatforms.length }})</span>
+                        <span class="ml-1 text-subtle-foreground">({{ enabledPlatforms.length }})</span>
                     </h2>
 
                     <Card v-if="enabledPlatforms.length === 0" class="py-0">
-                        <CardContent class="p-8 text-center text-sm font-medium text-foreground/60">
+                        <CardContent class="p-8 text-center text-sm font-medium text-muted-foreground">
                             {{ $t('posts.show.no_platforms') }}
                         </CardContent>
                     </Card>
@@ -240,7 +240,7 @@ usePostEcho(props.post.id, '.post.platform.status.updated', () => {
                                     </div>
                                     <div class="min-w-0 flex-1">
                                         <p class="truncate text-sm font-bold text-foreground">{{ getDisplayName(pp) }}</p>
-                                        <p class="truncate text-xs font-medium text-foreground/60">
+                                        <p class="truncate text-xs font-medium text-muted-foreground">
                                             <span v-if="getDisplayUsername(pp)">@{{ getDisplayUsername(pp) }} · </span>
                                             {{ getPlatformLabel(pp.platform) }}
                                         </p>

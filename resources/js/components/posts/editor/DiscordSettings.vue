@@ -194,10 +194,10 @@ const updateEmbed = (index: number, patch: Partial<EmbedDraft>) =>
                     <img :src="getPlatformLogo('discord')" alt="Discord" class="size-full object-cover" />
                 </span>
                 <span class="truncate font-bold text-foreground">{{ $t('posts.form.discord.settings') }}</span>
-                <span v-if="socialAccount?.display_name" class="truncate font-medium text-foreground/60">·&nbsp;{{ socialAccount.display_name }}</span>
+                <span v-if="socialAccount?.display_name" class="truncate font-medium text-muted-foreground">·&nbsp;{{ socialAccount.display_name }}</span>
             </span>
-            <IconChevronUp v-if="open" class="size-4 shrink-0 text-foreground/60" />
-            <IconChevronDown v-else class="size-4 shrink-0 text-foreground/60" />
+            <IconChevronUp v-if="open" class="size-4 shrink-0 text-muted-foreground" />
+            <IconChevronDown v-else class="size-4 shrink-0 text-muted-foreground" />
         </button>
 
         <div v-if="open" class="space-y-5 border-t-2 border-foreground/10 px-4 pb-4 pt-4">
@@ -208,14 +208,14 @@ const updateEmbed = (index: number, patch: Partial<EmbedDraft>) =>
                     class="size-9 shrink-0 rounded-full border-2 border-foreground shadow-2xs"
                 />
                 <div class="min-w-0 flex-1">
-                    <p class="text-[11px] font-black uppercase tracking-widest text-foreground/60">{{ $t('posts.form.discord.posting_to') }}</p>
+                    <p class="text-[11px] font-black uppercase tracking-widest text-muted-foreground">{{ $t('posts.form.discord.posting_to') }}</p>
                     <p class="truncate text-sm font-bold text-foreground">{{ socialAccount.display_name }}</p>
                 </div>
             </div>
 
             <!-- Channel -->
             <div class="space-y-2">
-                <p class="text-[11px] font-black uppercase tracking-widest text-foreground/60">{{ $t('posts.form.discord.channel') }}</p>
+                <p class="text-[11px] font-black uppercase tracking-widest text-muted-foreground">{{ $t('posts.form.discord.channel') }}</p>
                 <SearchableSelect
                     v-model="channelId"
                     :options="channelSelectOptions"
@@ -230,7 +230,7 @@ const updateEmbed = (index: number, patch: Partial<EmbedDraft>) =>
 
             <!-- Mentions -->
             <div class="space-y-2">
-                <p class="text-[11px] font-black uppercase tracking-widest text-foreground/60">{{ $t('posts.form.discord.mentions') }}</p>
+                <p class="text-[11px] font-black uppercase tracking-widest text-muted-foreground">{{ $t('posts.form.discord.mentions') }}</p>
                 <div v-if="mentions.length" class="flex flex-wrap gap-1.5">
                     <span
                         v-for="mention in mentions"
@@ -269,11 +269,11 @@ const updateEmbed = (index: number, patch: Partial<EmbedDraft>) =>
             <!-- Embeds -->
             <div class="space-y-2">
                 <div class="flex items-center justify-between">
-                    <p class="text-[11px] font-black uppercase tracking-widest text-foreground/60">{{ $t('posts.form.discord.embeds') }}</p>
+                    <p class="text-[11px] font-black uppercase tracking-widest text-muted-foreground">{{ $t('posts.form.discord.embeds') }}</p>
                     <button
                         type="button"
                         :disabled="disabled"
-                        class="inline-flex cursor-pointer items-center gap-1 text-xs font-bold text-foreground/70 hover:text-foreground disabled:opacity-50"
+                        class="inline-flex cursor-pointer items-center gap-1 text-xs font-bold text-muted-foreground hover:text-foreground disabled:opacity-50"
                         @click="addEmbed"
                     >
                         <IconPlus class="size-3.5" />
@@ -286,8 +286,8 @@ const updateEmbed = (index: number, patch: Partial<EmbedDraft>) =>
                     class="space-y-2 rounded-lg border-2 border-foreground/20 p-3"
                 >
                     <div class="flex items-center justify-between">
-                        <span class="text-[11px] font-black uppercase tracking-widest text-foreground/50">{{ $t('posts.form.discord.embed') }} {{ index + 1 }}</span>
-                        <button type="button" :disabled="disabled" class="text-foreground/50 hover:text-rose-600" @click="removeEmbed(index)">
+                        <span class="text-[11px] font-black uppercase tracking-widest text-subtle-foreground">{{ $t('posts.form.discord.embed') }} {{ index + 1 }}</span>
+                        <button type="button" :disabled="disabled" class="text-subtle-foreground hover:text-rose-600" @click="removeEmbed(index)">
                             <IconX class="size-3.5" />
                         </button>
                     </div>
@@ -325,7 +325,7 @@ const updateEmbed = (index: number, patch: Partial<EmbedDraft>) =>
                             class="h-8 w-12 cursor-pointer rounded border-2 border-foreground/30 disabled:opacity-50"
                             @input="updateEmbed(index, { color: ($event.target as HTMLInputElement).value })"
                         />
-                        <span class="text-xs font-medium text-foreground/60">{{ $t('posts.form.discord.embed_color') }}</span>
+                        <span class="text-xs font-medium text-muted-foreground">{{ $t('posts.form.discord.embed_color') }}</span>
                     </div>
                 </div>
             </div>

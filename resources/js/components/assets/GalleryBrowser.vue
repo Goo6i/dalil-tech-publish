@@ -618,7 +618,7 @@ onUnmounted(() => {
                         <IconCloudUpload class="size-6 text-foreground" stroke-width="2" />
                     </div>
                     <p class="text-sm font-semibold text-foreground">{{ trans('assets.upload.drag_drop') }}</p>
-                    <p class="text-xs text-foreground/60">{{ trans('assets.upload.formats') }}</p>
+                    <p class="text-xs text-muted-foreground">{{ trans('assets.upload.formats') }}</p>
                     <input
                         ref="fileInput"
                         type="file"
@@ -636,7 +636,7 @@ onUnmounted(() => {
                 </div>
 
                 <div class="relative mb-4">
-                    <IconSearch class="pointer-events-none absolute left-3.5 top-1/2 size-5 -translate-y-1/2 text-foreground/60" />
+                    <IconSearch class="pointer-events-none absolute left-3.5 top-1/2 size-5 -translate-y-1/2 text-muted-foreground" />
                     <Input
                         v-model="uploadsSearch"
                         type="search"
@@ -680,7 +680,7 @@ onUnmounted(() => {
                                 class="flex size-full flex-col items-center justify-center gap-1.5 bg-rose-50 p-3 text-center"
                             >
                                 <IconFileTypePdf class="size-9 text-rose-600" />
-                                <span class="line-clamp-2 break-all text-[11px] font-medium text-foreground/70">{{ asset.original_filename }}</span>
+                                <span class="line-clamp-2 break-all text-[11px] font-medium text-muted-foreground">{{ asset.original_filename }}</span>
                             </div>
                             <img
                                 v-else
@@ -732,14 +732,14 @@ onUnmounted(() => {
                 </div>
 
                 <div v-if="uploadsHasMore" ref="uploadsSentinel" class="mt-4 flex justify-center">
-                    <IconLoader2 v-if="uploadsLoadingMore" class="size-5 animate-spin text-foreground/60" />
+                    <IconLoader2 v-if="uploadsLoadingMore" class="size-5 animate-spin text-muted-foreground" />
                 </div>
             </TabsContent>
 
             <!-- ───── Stock Photos (Unsplash) ───── -->
             <TabsContent value="stock" class="mt-6" @vue:mounted="onUnsplashTabMounted">
                 <div class="relative mb-4">
-                    <IconSearch class="pointer-events-none absolute left-3.5 top-1/2 size-5 -translate-y-1/2 text-foreground/60" />
+                    <IconSearch class="pointer-events-none absolute left-3.5 top-1/2 size-5 -translate-y-1/2 text-muted-foreground" />
                     <Input
                         v-model="unsplashQuery"
                         :placeholder="trans('assets.unsplash.search_placeholder')"
@@ -751,7 +751,7 @@ onUnmounted(() => {
                 <div v-if="displayedPhotos.length > 0" class="space-y-3">
                     <p
                         v-if="!unsplashQuery && trendingPhotos.length > 0"
-                        class="text-[11px] font-black uppercase tracking-widest text-foreground/60"
+                        class="text-[11px] font-black uppercase tracking-widest text-muted-foreground"
                     >
                         {{ trans('assets.unsplash.trending') }}
                     </p>
@@ -841,7 +841,7 @@ onUnmounted(() => {
             <!-- ───── GIFs (Giphy) ───── -->
             <TabsContent value="gifs" class="mt-6" @vue:mounted="onGiphyTabMounted">
                 <div class="relative mb-4">
-                    <IconSearch class="pointer-events-none absolute left-3.5 top-1/2 size-5 -translate-y-1/2 text-foreground/60" />
+                    <IconSearch class="pointer-events-none absolute left-3.5 top-1/2 size-5 -translate-y-1/2 text-muted-foreground" />
                     <Input
                         v-model="giphyQuery"
                         :placeholder="trans('assets.giphy.search_placeholder')"
@@ -853,7 +853,7 @@ onUnmounted(() => {
                 <div v-if="displayedGifs.length > 0" class="space-y-3">
                     <p
                         v-if="!giphyQuery && giphyTrendingItems.length > 0"
-                        class="text-[11px] font-black uppercase tracking-widest text-foreground/60"
+                        class="text-[11px] font-black uppercase tracking-widest text-muted-foreground"
                     >
                         {{ trans('assets.giphy.trending') }}
                     </p>
@@ -927,7 +927,7 @@ onUnmounted(() => {
                 <div v-if="hasMoreGifs" ref="giphySentinel" class="h-1" />
 
                 <div v-if="displayedGifs.length > 0" class="mt-4 text-center">
-                    <a href="https://giphy.com" target="_blank" rel="noopener noreferrer" class="text-xs font-medium text-foreground/60 hover:text-foreground">
+                    <a href="https://giphy.com" target="_blank" rel="noopener noreferrer" class="text-xs font-medium text-muted-foreground hover:text-foreground">
                         {{ trans('assets.giphy.powered_by') }}
                     </a>
                 </div>

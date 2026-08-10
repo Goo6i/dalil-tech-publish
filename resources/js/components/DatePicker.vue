@@ -176,7 +176,7 @@ const displayText = computed(() => {
     <Popover v-model:open="popoverOpen">
         <PopoverTrigger as-child :disabled="disabled">
             <Button :id="name" type="button" variant="outline" class="w-full justify-between text-left font-medium"
-                :class="[{ 'text-foreground/60': !displayText }, $attrs.class]" :disabled="disabled">
+                :class="[{ 'text-muted-foreground': !displayText }, $attrs.class]" :disabled="disabled">
                 <span>{{ displayText || placeholder || $t('common.date_picker.select') }}</span>
                 <IconCalendar class="size-4 shrink-0" />
             </Button>
@@ -197,7 +197,7 @@ const displayText = computed(() => {
                             </SelectItem>
                         </SelectContent>
                     </Select>
-                    <span class="font-bold text-foreground/40">:</span>
+                    <span class="font-bold text-subtle-foreground">:</span>
                     <Select v-model="selectedMinute" @update:model-value="onTimeChange">
                         <SelectTrigger class="w-[80px]">
                             <SelectValue placeholder="MM" />

@@ -13,8 +13,8 @@ defineProps<{
             style="font-family: var(--font-display)"
         >
             {{ title }}
-            <span v-if="total != null && total > 0" class="text-foreground/40">({{ total }})</span>
+            <span v-if="total != null && total > 0" class="text-subtle-foreground">({{ total }})</span>
         </h1>
-        <p v-if="description" class="text-sm text-foreground/70">{{ description }}</p>
+        <p v-if="description" class="text-sm text-muted-foreground">{{ description }}</p>
     </header>
 </template>

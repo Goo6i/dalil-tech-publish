@@ -243,7 +243,7 @@ const toggleExpand = async (invocation: Invocation) => {
                         v-if="invocations.data.length === 0"
                         class="rounded-xl border-2 border-dashed border-foreground/25 bg-card p-12 text-center"
                     >
-                        <p class="text-foreground/60">
+                        <p class="text-muted-foreground">
                             {{ $t('automations.invocations.empty') }}
                         </p>
                     </div>
@@ -297,7 +297,7 @@ const toggleExpand = async (invocation: Invocation) => {
                                     >
                                         <TableCell>
                                             <IconChevronRight
-                                                class="size-4 text-foreground/40 transition-transform"
+                                                class="size-4 text-subtle-foreground transition-transform"
                                                 :class="{
                                                     'rotate-90':
                                                         expanded[invocation.id],
@@ -305,7 +305,7 @@ const toggleExpand = async (invocation: Invocation) => {
                                             />
                                         </TableCell>
                                         <TableCell
-                                            class="text-sm whitespace-nowrap text-foreground/70"
+                                            class="text-sm whitespace-nowrap text-muted-foreground"
                                             >{{
                                                 date.diffForHumans(
                                                     invocation.created_at,
@@ -315,7 +315,7 @@ const toggleExpand = async (invocation: Invocation) => {
                                         <TableCell>
                                             <button
                                                 type="button"
-                                                class="flex items-center gap-1.5 font-mono text-xs text-foreground/60 hover:text-foreground"
+                                                class="flex items-center gap-1.5 font-mono text-xs text-muted-foreground hover:text-foreground"
                                                 @click.stop="
                                                     copyId(invocation.id)
                                                 "
@@ -345,7 +345,7 @@ const toggleExpand = async (invocation: Invocation) => {
                                                 {{ summary(invocation) }}
                                             </p>
                                             <p
-                                                class="text-xs text-foreground/50"
+                                                class="text-xs text-subtle-foreground"
                                             >
                                                 {{
                                                     stepsLabel(
@@ -355,7 +355,7 @@ const toggleExpand = async (invocation: Invocation) => {
                                             </p>
                                         </TableCell>
                                         <TableCell
-                                            class="text-right text-sm text-foreground/70 tabular-nums"
+                                            class="text-right text-sm text-muted-foreground tabular-nums"
                                             >{{
                                                 date.formatDurationMs(
                                                     invocation.duration_ms,
@@ -375,7 +375,7 @@ const toggleExpand = async (invocation: Invocation) => {
                                                 v-if="
                                                     loadingRuns[invocation.id]
                                                 "
-                                                class="py-3 text-center text-sm text-foreground/50"
+                                                class="py-3 text-center text-sm text-subtle-foreground"
                                             >
                                                 {{
                                                     $t(
@@ -438,7 +438,7 @@ const toggleExpand = async (invocation: Invocation) => {
                                             </ul>
                                             <p
                                                 v-else
-                                                class="py-3 text-center text-sm text-foreground/50"
+                                                class="py-3 text-center text-sm text-subtle-foreground"
                                             >
                                                 {{
                                                     $t(

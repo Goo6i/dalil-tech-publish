@@ -130,7 +130,7 @@ onUnmounted(() => {
                     <h2 class="text-2xl font-normal tracking-tight text-foreground" style="font-family: var(--font-display);">
                         {{ $t('billing.processing.title') }}
                     </h2>
-                    <p class="mt-2 text-sm leading-relaxed text-foreground/70">
+                    <p class="mt-2 text-sm leading-relaxed text-muted-foreground">
                         {{ $t('billing.processing.description') }}
                     </p>
                 </div>

@@ -74,7 +74,7 @@ const submit = (): void => {
                     {{ $t('onboarding.continue') }}
                     <IconArrowRight class="size-4" />
                 </Button>
-                <p v-if="!hasConnected" class="text-center text-xs text-foreground/60">
+                <p v-if="!hasConnected" class="text-center text-xs text-muted-foreground">
                     {{ $t('onboarding.connect.must_connect') }}
                 </p>
             </div>

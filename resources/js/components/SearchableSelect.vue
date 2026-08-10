@@ -53,7 +53,7 @@ const select = (option: Option) => {
                 class="w-full justify-between font-normal"
                 :class="invalid ? 'border-rose-500' : ''"
             >
-                <span :class="selected ? 'text-foreground' : 'text-foreground/50'">
+                <span :class="selected ? 'text-foreground' : 'text-subtle-foreground'">
                     {{ selected ? selected.label : placeholder }}
                 </span>
                 <IconChevronDown class="ml-2 size-4 shrink-0 opacity-50" />

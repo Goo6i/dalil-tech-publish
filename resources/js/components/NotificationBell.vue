@@ -218,7 +218,7 @@ onBeforeUnmount(() => {
             >
                 <!-- Header -->
                 <div class="flex items-center justify-between gap-2 border-b-2 border-foreground/10 px-4 py-3">
-                    <h3 class="text-[11px] font-black uppercase tracking-widest text-foreground/60">
+                    <h3 class="text-[11px] font-black uppercase tracking-widest text-muted-foreground">
                         {{ $t('sidebar.notifications') }}
                     </h3>
                     <div class="flex items-center gap-1.5">
@@ -273,15 +273,15 @@ onBeforeUnmount(() => {
                             />
                             <div class="min-w-0 flex-1">
                                 <p class="truncate text-sm font-bold text-foreground">{{ notification.title }}</p>
-                                <p class="truncate text-xs text-foreground/70">{{ notification.body }}</p>
-                                <p class="mt-0.5 text-[11px] font-medium text-foreground/50">{{ formatTime(notification.created_at) }}</p>
+                                <p class="truncate text-xs text-muted-foreground">{{ notification.body }}</p>
+                                <p class="mt-0.5 text-[11px] font-medium text-subtle-foreground">{{ formatTime(notification.created_at) }}</p>
                             </div>
                             <div class="shrink-0" @click.stop>
                                 <Tooltip v-if="!notification.read_at">
                                     <TooltipTrigger as-child>
                                         <button
                                             type="button"
-                                            class="inline-flex size-7 max-sm:size-9 cursor-pointer items-center justify-center rounded-md text-foreground/60 transition-colors hover:bg-foreground/10 hover:text-foreground"
+                                            class="inline-flex size-7 max-sm:size-9 cursor-pointer items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-foreground/10 hover:text-foreground"
                                             @click="handleMarkAsRead(notification)"
                                         >
                                             <IconCheck class="size-3.5" stroke-width="2.5" />

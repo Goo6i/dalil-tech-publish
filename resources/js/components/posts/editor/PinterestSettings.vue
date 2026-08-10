@@ -101,10 +101,10 @@ const boardError = computed<string | undefined>(() => {
                     <img :src="getPlatformLogo('pinterest')" alt="Pinterest" class="size-full object-cover" />
                 </span>
                 <span class="truncate font-bold text-foreground">{{ $t('posts.form.pinterest.settings') }}</span>
-                <span v-if="socialAccount?.username" class="truncate font-medium text-foreground/60">·&nbsp;@{{ socialAccount.username }}</span>
+                <span v-if="socialAccount?.username" class="truncate font-medium text-muted-foreground">·&nbsp;@{{ socialAccount.username }}</span>
             </span>
-            <IconChevronUp v-if="open" class="size-4 shrink-0 text-foreground/60" />
-            <IconChevronDown v-else class="size-4 shrink-0 text-foreground/60" />
+            <IconChevronUp v-if="open" class="size-4 shrink-0 text-muted-foreground" />
+            <IconChevronDown v-else class="size-4 shrink-0 text-muted-foreground" />
         </button>
 
         <div v-if="open" class="space-y-5 border-t-2 border-foreground/10 px-4 pb-4 pt-4">
@@ -115,16 +115,16 @@ const boardError = computed<string | undefined>(() => {
                     class="size-9 shrink-0 rounded-full border-2 border-foreground shadow-2xs"
                 />
                 <div class="min-w-0 flex-1">
-                    <p class="text-[11px] font-black uppercase tracking-widest text-foreground/60">{{ $t('posts.form.pinterest.posting_to') }}</p>
+                    <p class="text-[11px] font-black uppercase tracking-widest text-muted-foreground">{{ $t('posts.form.pinterest.posting_to') }}</p>
                     <p class="truncate text-sm">
                         <span class="font-bold text-foreground">{{ socialAccount.display_name }}</span>
-                        <span v-if="socialAccount?.username" class="font-medium text-foreground/60">&nbsp;@{{ socialAccount.username }}</span>
+                        <span v-if="socialAccount?.username" class="font-medium text-muted-foreground">&nbsp;@{{ socialAccount.username }}</span>
                     </p>
                 </div>
             </div>
 
             <div class="space-y-2">
-                <p class="text-[11px] font-black uppercase tracking-widest text-foreground/60">{{ $t('posts.form.pinterest.variant_label') }}</p>
+                <p class="text-[11px] font-black uppercase tracking-widest text-muted-foreground">{{ $t('posts.form.pinterest.variant_label') }}</p>
                 <div class="flex flex-wrap gap-2">
                     <button
                         v-for="variant in variants"
@@ -133,7 +133,7 @@ const boardError = computed<string | undefined>(() => {
                         class="cursor-pointer rounded-full border-2 px-3 py-1 text-xs font-bold uppercase tracking-widest transition-colors disabled:cursor-not-allowed disabled:opacity-50"
                         :class="contentType === variant.value
                             ? 'border-foreground bg-violet-100 text-violet-950 shadow-2xs'
-                            : 'border-foreground/30 text-foreground/70 hover:border-foreground hover:text-foreground'"
+                            : 'border-foreground/30 text-muted-foreground hover:border-foreground hover:text-foreground'"
                         :disabled="disabled"
                         @click="pickVariant(variant.value)"
                     >
@@ -143,10 +143,10 @@ const boardError = computed<string | undefined>(() => {
             </div>
 
             <div class="space-y-2">
-                <p class="text-[11px] font-black uppercase tracking-widest text-foreground/60">{{ $t('posts.form.pinterest.board') }}</p>
+                <p class="text-[11px] font-black uppercase tracking-widest text-muted-foreground">{{ $t('posts.form.pinterest.board') }}</p>
                 <p
                     v-if="boards.length === 0"
-                    class="flex items-start gap-2 rounded-lg border-2 border-foreground/30 bg-foreground/5 p-2 text-xs font-semibold text-foreground/60"
+                    class="flex items-start gap-2 rounded-lg border-2 border-foreground/30 bg-foreground/5 p-2 text-xs font-semibold text-muted-foreground"
                 >
                     <IconAlertTriangle class="mt-0.5 size-3.5 shrink-0" />
                     {{ $t('posts.form.pinterest.no_boards') }}
@@ -165,10 +165,10 @@ const boardError = computed<string | undefined>(() => {
                                     :class="boardError ? 'border-rose-500' : 'border-foreground/30 hover:border-foreground'"
                                     :disabled="disabled"
                                 >
-                                    <span :class="selectedBoard ? 'text-foreground' : 'text-foreground/50'">
+                                    <span :class="selectedBoard ? 'text-foreground' : 'text-subtle-foreground'">
                                         {{ selectedBoard ? selectedBoard.label : $t('posts.form.pinterest.select_board') }}
                                     </span>
-                                    <IconChevronDown class="size-4 shrink-0 text-foreground/60" />
+                                    <IconChevronDown class="size-4 shrink-0 text-muted-foreground" />
                                 </button>
                             </ComboboxTrigger>
                         </ComboboxAnchor>

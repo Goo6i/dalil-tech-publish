@@ -369,7 +369,7 @@ const formatTime = (scheduledAt: string): string => {
                     </div>
 
                     <!-- Empty State -->
-                    <div v-else class="py-12 text-center text-foreground/60">
+                    <div v-else class="py-12 text-center text-muted-foreground">
                         <p class="font-medium">{{ $t('calendar.no_content') }}</p>
                     </div>
                 </div>
@@ -385,7 +385,7 @@ const formatTime = (scheduledAt: string): string => {
                 >
                     <!-- Day Header -->
                     <div class="flex flex-col items-center border-b-2 border-foreground/10 bg-card py-3">
-                        <span class="text-[11px] font-black uppercase tracking-widest text-foreground/60">
+                        <span class="text-[11px] font-black uppercase tracking-widest text-muted-foreground">
                             {{ day.format('dddd') }}
                         </span>
                         <span
@@ -402,7 +402,7 @@ const formatTime = (scheduledAt: string): string => {
                         <Link
                             v-if="canCreatePost"
                             :href="createPostUrl(day.format('YYYY-MM-DD'))"
-                            class="flex w-full items-center justify-center rounded-md border-2 border-dashed border-foreground/25 p-2 text-foreground/60 transition-colors hover:border-foreground hover:bg-foreground/5 hover:text-foreground"
+                            class="flex w-full items-center justify-center rounded-md border-2 border-dashed border-foreground/25 p-2 text-muted-foreground transition-colors hover:border-foreground hover:bg-foreground/5 hover:text-foreground"
                         >
                             <IconPlus class="size-4" />
                         </Link>
@@ -460,7 +460,7 @@ const formatTime = (scheduledAt: string): string => {
                     <div
                         v-for="day in weekdayNames"
                         :key="day"
-                        class="py-3 text-center text-[11px] font-black uppercase tracking-widest text-foreground/60"
+                        class="py-3 text-center text-[11px] font-black uppercase tracking-widest text-muted-foreground"
                     >
                         {{ day }}
                     </div>
@@ -491,7 +491,7 @@ const formatTime = (scheduledAt: string): string => {
                                     class="inline-flex size-7 items-center justify-center rounded-full text-sm font-bold"
                                     :class="{
                                         'border-2 border-foreground bg-foreground text-background shadow-2xs': isToday(day),
-                                        'text-foreground/40': !isCurrentMonth(day),
+                                        'text-subtle-foreground': !isCurrentMonth(day),
                                         'text-foreground': isCurrentMonth(day) && !isToday(day),
                                     }"
                                 >
@@ -550,7 +550,7 @@ const formatTime = (scheduledAt: string): string => {
                                 </Link>
                                 <div
                                     v-if="getPostsForDay(day).length > 3"
-                                    class="px-2 py-0.5 text-xs font-medium text-foreground/60"
+                                    class="px-2 py-0.5 text-xs font-medium text-muted-foreground"
                                 >
                                     {{ $t('calendar.more', { count: String(getPostsForDay(day).length - 3) }) }}
                                 </div>

@@ -52,6 +52,7 @@ class HandleInertiaRequests extends Middleware
             'applicationUrl' => config('app.url'),
             'env' => config('app.env'),
             'locale' => app()->getLocale(),
+            'isRtl' => str_starts_with(app()->getLocale(), 'ar'),
             'languages' => collect(config('languages.available'))->map(fn ($name, $code) => [
                 'code' => $code,
                 'name' => $name,

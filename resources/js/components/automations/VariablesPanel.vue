@@ -31,13 +31,13 @@ const updateValue = (index: number, value: string) => {
 <template>
     <div class="flex flex-col gap-4">
         <div>
-            <p class="text-[11px] font-black uppercase tracking-widest text-foreground/50">{{ $t('automations.variables.title') }}</p>
-            <p class="mt-1 text-xs text-foreground/60">{{ $t('automations.variables.hint') }}</p>
+            <p class="text-[11px] font-black uppercase tracking-widest text-subtle-foreground">{{ $t('automations.variables.title') }}</p>
+            <p class="mt-1 text-xs text-muted-foreground">{{ $t('automations.variables.hint') }}</p>
         </div>
 
         <div
             v-if="variables.length === 0"
-            class="rounded-xl border-2 border-dashed border-foreground/25 bg-card/40 p-6 text-center text-sm font-medium text-foreground/60"
+            class="rounded-xl border-2 border-dashed border-foreground/25 bg-card/40 p-6 text-center text-sm font-medium text-muted-foreground"
         >
             {{ $t('automations.variables.empty') }}
         </div>
@@ -49,7 +49,7 @@ const updateValue = (index: number, value: string) => {
         >
             <div class="flex items-start gap-2">
                 <div class="flex-1 space-y-1">
-                    <Label class="text-[11px] font-bold uppercase tracking-wider text-foreground/60">{{ $t('automations.variables.key') }}</Label>
+                    <Label class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">{{ $t('automations.variables.key') }}</Label>
                     <Input
                         :model-value="variable.key"
                         :placeholder="$t('automations.variables.key_placeholder')"
@@ -62,7 +62,7 @@ const updateValue = (index: number, value: string) => {
             </div>
 
             <div class="space-y-1">
-                <Label class="text-[11px] font-bold uppercase tracking-wider text-foreground/60">{{ $t('automations.variables.value') }}</Label>
+                <Label class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">{{ $t('automations.variables.value') }}</Label>
                 <Input
                     :model-value="variable.value"
                     :placeholder="$t('automations.variables.value_placeholder')"

@@ -92,7 +92,7 @@ const stepHeader = computed(() => {
                             </div>
                             <div class="space-y-1">
                                 <p class="text-base font-bold text-foreground">{{ $t('posts.create.scratch_title') }}</p>
-                                <p class="text-xs leading-relaxed text-foreground/70">
+                                <p class="text-xs leading-relaxed text-muted-foreground">
                                     {{ $t('posts.create.scratch_description') }}
                                 </p>
                             </div>
@@ -109,7 +109,7 @@ const stepHeader = computed(() => {
                             </div>
                             <div class="space-y-1">
                                 <p class="text-base font-bold text-foreground">{{ $t('posts.create.ai_title') }}</p>
-                                <p class="text-xs leading-relaxed text-foreground/70">
+                                <p class="text-xs leading-relaxed text-muted-foreground">
                                     <template v-if="!hasConnectedAccounts">
                                         {{ $t('posts.create.steps.connect_first') }}
                                     </template>
@@ -129,7 +129,7 @@ const stepHeader = computed(() => {
                             </div>
                             <div class="space-y-1">
                                 <p class="text-base font-bold text-foreground">{{ $t('posts.create.template_title') }}</p>
-                                <p class="text-xs leading-relaxed text-foreground/70">
+                                <p class="text-xs leading-relaxed text-muted-foreground">
                                     {{ $t('posts.create.template_description') }}
                                 </p>
                             </div>

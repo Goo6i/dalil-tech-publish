@@ -280,7 +280,7 @@ const alertTypeLabel = (type: string): string => trans(`insights.alerts.types.${
                 </Select>
             </div>
 
-            <div v-if="accounts.length === 0" class="flex flex-1 items-center justify-center text-sm font-medium text-foreground/60">
+            <div v-if="accounts.length === 0" class="flex flex-1 items-center justify-center text-sm font-medium text-muted-foreground">
                 {{ $t('insights.no_accounts') }}
             </div>
 
@@ -298,7 +298,7 @@ const alertTypeLabel = (type: string): string => trans(`insights.alerts.types.${
                 <div class="grid gap-4 sm:grid-cols-3">
                     <Card>
                         <CardHeader class="pb-2">
-                            <CardTitle class="text-xs font-black uppercase tracking-widest text-foreground/60">
+                            <CardTitle class="text-xs font-black uppercase tracking-widest text-muted-foreground">
                                 {{ $t('insights.stats.followers') }}
                             </CardTitle>
                         </CardHeader>
@@ -309,7 +309,7 @@ const alertTypeLabel = (type: string): string => trans(`insights.alerts.types.${
 
                     <Card>
                         <CardHeader class="pb-2">
-                            <CardTitle class="text-xs font-black uppercase tracking-widest text-foreground/60">
+                            <CardTitle class="text-xs font-black uppercase tracking-widest text-muted-foreground">
                                 {{ $t('insights.stats.net_7d') }}
                             </CardTitle>
                         </CardHeader>
@@ -320,13 +320,13 @@ const alertTypeLabel = (type: string): string => trans(`insights.alerts.types.${
 
                     <Card>
                         <CardHeader class="pb-2">
-                            <CardTitle class="text-xs font-black uppercase tracking-widest text-foreground/60">
+                            <CardTitle class="text-xs font-black uppercase tracking-widest text-muted-foreground">
                                 {{ $t('insights.stats.received_views_7d') }}
                             </CardTitle>
                         </CardHeader>
                         <CardContent>
                             <div class="text-2xl font-bold text-foreground">{{ formatNumber(receivedViews7d) }}</div>
-                            <p v-if="accounts.length > 1" class="mt-1 text-xs font-medium text-foreground/60">
+                            <p v-if="accounts.length > 1" class="mt-1 text-xs font-medium text-muted-foreground">
                                 {{ $t('insights.stats.received_views_7d_scope') }}
                             </p>
                         </CardContent>
@@ -338,7 +338,7 @@ const alertTypeLabel = (type: string): string => trans(`insights.alerts.types.${
                         <CardTitle>{{ $t('insights.chart.title') }}</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <div v-if="chartData.length === 0" class="flex h-48 items-center justify-center text-sm font-medium text-foreground/60">
+                        <div v-if="chartData.length === 0" class="flex h-48 items-center justify-center text-sm font-medium text-muted-foreground">
                             {{ $t('insights.chart.no_data') }}
                         </div>
                         <template v-else>
@@ -362,7 +362,7 @@ const alertTypeLabel = (type: string): string => trans(`insights.alerts.types.${
                                 <VisGroupedBar :x="chartX" :y="chartYPosts" color="#f59e0b" />
                                 <VisAxis type="y" :num-ticks="2" :grid-line="false" :domain-line="false" :tick-line="false" color="var(--color-foreground)" />
                             </VisXYContainer>
-                            <p class="mt-1 text-center text-[11px] font-medium text-foreground/50">{{ $t('insights.chart.posts_that_day') }}</p>
+                            <p class="mt-1 text-center text-[11px] font-medium text-subtle-foreground">{{ $t('insights.chart.posts_that_day') }}</p>
                         </template>
                     </CardContent>
                 </Card>
@@ -372,7 +372,7 @@ const alertTypeLabel = (type: string): string => trans(`insights.alerts.types.${
                         <CardTitle>{{ $t('insights.scorecard.title') }}</CardTitle>
                     </CardHeader>
                     <CardContent class="p-0">
-                        <div v-if="sortedScorecard.length === 0" class="flex h-32 items-center justify-center text-sm font-medium text-foreground/60">
+                        <div v-if="sortedScorecard.length === 0" class="flex h-32 items-center justify-center text-sm font-medium text-muted-foreground">
                             {{ $t('insights.scorecard.no_data') }}
                         </div>
                         <Table v-else class="border-0 shadow-none">
@@ -453,7 +453,7 @@ const alertTypeLabel = (type: string): string => trans(`insights.alerts.types.${
                                             <TooltipProvider :delay-duration="200">
                                                 <Tooltip>
                                                     <TooltipTrigger as-child>
-                                                        <IconInfoCircle class="size-3.5 shrink-0 cursor-help text-foreground/50" />
+                                                        <IconInfoCircle class="size-3.5 shrink-0 cursor-help text-subtle-foreground" />
                                                     </TooltipTrigger>
                                                     <TooltipContent>
                                                         <p class="max-w-64 text-xs">{{ $t('insights.scorecard.class_experimental_tooltip') }}</p>
@@ -474,12 +474,12 @@ const alertTypeLabel = (type: string): string => trans(`insights.alerts.types.${
                                             {{ row.title || row.video_id }}
                                         </Link>
                                     </TableCell>
-                                    <TableCell class="whitespace-nowrap text-foreground/70">{{ relativeTime(row.posted_at) }}</TableCell>
+                                    <TableCell class="whitespace-nowrap text-muted-foreground">{{ relativeTime(row.posted_at) }}</TableCell>
                                     <TableCell class="text-right tabular-nums">{{ formatNumber(toNum(row.views)) }}</TableCell>
                                     <TableCell class="text-right tabular-nums">{{ formatNumber(toNum(row.views_24h)) }}</TableCell>
                                     <TableCell class="text-right tabular-nums">{{ toNum(row.er_views) }}%</TableCell>
                                     <TableCell class="text-right tabular-nums">{{ toNum(row.share_rate) }}%</TableCell>
-                                    <TableCell class="whitespace-nowrap text-foreground/70">{{ row.rank_24h || $t('insights.chips.unknown') }}</TableCell>
+                                    <TableCell class="whitespace-nowrap text-muted-foreground">{{ row.rank_24h || $t('insights.chips.unknown') }}</TableCell>
                                     <TableCell>
                                         <Badge :variant="trajectoryVariant(row.trajectory)">{{ trajectoryLabel(row.trajectory) }}</Badge>
                                     </TableCell>
@@ -497,7 +497,7 @@ const alertTypeLabel = (type: string): string => trans(`insights.alerts.types.${
                         <CardTitle>{{ $t('insights.alerts.title') }}</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <p v-if="filteredAlerts.length === 0" class="py-6 text-center text-sm font-medium text-foreground/60">
+                        <p v-if="filteredAlerts.length === 0" class="py-6 text-center text-sm font-medium text-muted-foreground">
                             {{ $t('insights.alerts.empty') }}
                         </p>
                         <ul v-else class="divide-y divide-border">
@@ -506,7 +506,7 @@ const alertTypeLabel = (type: string): string => trans(`insights.alerts.types.${
                                     <Badge variant="outline">{{ alertTypeLabel(alert.alert_type) }}</Badge>
                                     <span class="truncate text-sm font-medium text-foreground">{{ alert.title || alert.video_id }}</span>
                                 </div>
-                                <span class="shrink-0 text-xs font-medium text-foreground/60">{{ relativeTime(alert.sent_at) }}</span>
+                                <span class="shrink-0 text-xs font-medium text-muted-foreground">{{ relativeTime(alert.sent_at) }}</span>
                             </li>
                         </ul>
                     </CardContent>

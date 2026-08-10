@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ $htmlDir ?? 'ltr' }}" class="dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ $htmlDir ?? 'ltr' }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,11 +22,17 @@
 
         {{-- Inline page-paint background. Matches `--background` so the
              first paint doesn't flash light before CSS loads. --}}
-        <style>
-            html {
-                background-color: #0E1116;
-            }
-        </style>
+                <script>
+            (function () {
+                try {
+                    var a = localStorage.getItem('appearance') || 'system';
+                    var d = a === 'dark' || (a === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                    var el = document.documentElement;
+                    el.classList.toggle('dark', d);
+                    el.style.backgroundColor = d ? '#0E1116' : '#FBFAF7';
+                } catch (e) {}
+            })();
+        </script>
 
         <title data-inertia>{{ config('app.name', 'Dalil Tech Publish') }}</title>
 

@@ -198,7 +198,7 @@ const platforms = [
                                 <h3 class="h3 text-foreground">
                                     {{ activeSlide.title }}
                                 </h3>
-                                <p class="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-foreground/70">
+                                <p class="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">
                                     {{ activeSlide.description }}
                                 </p>
                             </div>

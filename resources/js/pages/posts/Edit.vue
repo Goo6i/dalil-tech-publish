@@ -421,7 +421,7 @@ usePostEcho(post.value.id, '.post.comment.created', (e: any) => {
                         >
                             {{ $t('posts.edit.publishing_overlay_title') }}
                         </p>
-                        <p class="mt-1 text-sm text-foreground/70">{{ $t('posts.edit.publishing_overlay_subtitle') }}</p>
+                        <p class="mt-1 text-sm text-muted-foreground">{{ $t('posts.edit.publishing_overlay_subtitle') }}</p>
                     </div>
                 </div>
                 <div

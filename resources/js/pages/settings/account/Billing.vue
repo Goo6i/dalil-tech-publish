@@ -106,13 +106,13 @@ const upgradeToAnnual = (): void => {
                         <p class="text-base font-bold text-foreground">
                             {{ $t('billing.annual_banner.title') }}
                         </p>
-                        <p class="text-sm text-foreground/70">
+                        <p class="text-sm text-muted-foreground">
                             {{ $t('billing.annual_banner.description') }}
                         </p>
                         <p class="mt-1 text-sm font-semibold text-foreground">
-                            <span class="text-foreground/50 line-through tabular-nums">{{ monthlyPrice }}</span>
+                            <span class="text-subtle-foreground line-through tabular-nums">{{ monthlyPrice }}</span>
                             <span class="ml-1.5 tabular-nums">{{ yearlyPerMonthPrice }}</span>
-                            <span class="font-medium text-foreground/60">/{{ $t('billing.plan.month') }} · {{ $t('billing.subscribe.billed_yearly') }}</span>
+                            <span class="font-medium text-muted-foreground">/{{ $t('billing.plan.month') }} · {{ $t('billing.subscribe.billed_yearly') }}</span>
                         </p>
                     </div>
                     <Button class="shrink-0" :disabled="upgradeForm.processing" @click="upgradeToAnnual">
@@ -130,7 +130,7 @@ const upgradeToAnnual = (): void => {
                     <div class="rounded-2xl border-2 border-foreground bg-card p-6 shadow-2xs">
                         <div class="flex items-start justify-between gap-6">
                             <div class="space-y-2">
-                                <p class="text-[11px] font-black uppercase tracking-widest text-foreground/60">
+                                <p class="text-[11px] font-black uppercase tracking-widest text-muted-foreground">
                                     {{ $t('billing.plan.label') }}
                                 </p>
                                 <div class="flex flex-wrap items-center gap-3">
@@ -145,16 +145,16 @@ const upgradeToAnnual = (): void => {
                                     <Badge v-else-if="subscription?.stripe_status === 'past_due'" variant="destructive">{{ $t('billing.plan.past_due') }}</Badge>
                                     <Badge v-else-if="subscription?.ends_at" variant="secondary">{{ $t('billing.plan.cancelling') }}</Badge>
                                 </div>
-                                <p class="text-base text-foreground/70">
+                                <p class="text-base text-muted-foreground">
                                     <span class="text-2xl font-bold tabular-nums text-foreground">{{ displayPrice(plan?.slug) }}</span>
                                     <span class="ml-1">/{{ $t('billing.plan.month') }} {{ $t('billing.plan.per_workspace') }}</span>
                                 </p>
-                                <p v-if="plan" class="text-xs font-medium text-foreground/60">
+                                <p v-if="plan" class="text-xs font-medium text-muted-foreground">
                                     {{ isYearly ? $t('billing.subscribe.billed_yearly') : $t('billing.subscribe.billed_monthly') }}
                                 </p>
                                 <p
                                     v-if="onTrial && trialEndsAt"
-                                    class="text-sm font-semibold text-foreground/70"
+                                    class="text-sm font-semibold text-muted-foreground"
                                 >
                                     {{ $t('billing.plan.trial_ends') }}: <span class="text-foreground">{{ date.formatDate(trialEndsAt) }}</span>
                                 </p>
@@ -180,13 +180,13 @@ const upgradeToAnnual = (): void => {
                             <IconCreditCard class="size-6 text-foreground" stroke-width="2" />
                         </span>
                         <div v-if="defaultPaymentMethod" class="min-w-0 flex-1">
-                            <p class="text-[11px] font-black uppercase tracking-widest text-foreground/60">
+                            <p class="text-[11px] font-black uppercase tracking-widest text-muted-foreground">
                                 {{ $t('billing.subscription.payment_method') }}
                             </p>
                             <p class="text-base font-bold capitalize text-foreground">
                                 {{ defaultPaymentMethod.brand }} •••• {{ defaultPaymentMethod.last4 }}
                             </p>
-                            <p class="text-xs font-medium text-foreground/60">
+                            <p class="text-xs font-medium text-muted-foreground">
                                 {{ $t('billing.subscription.expires_on', {
                                     month: defaultPaymentMethod.exp_month.toString().padStart(2, '0'),
                                     year: defaultPaymentMethod.exp_year.toString(),
@@ -194,10 +194,10 @@ const upgradeToAnnual = (): void => {
                             </p>
                         </div>
                         <div v-else class="min-w-0 flex-1">
-                            <p class="text-[11px] font-black uppercase tracking-widest text-foreground/60">
+                            <p class="text-[11px] font-black uppercase tracking-widest text-muted-foreground">
                                 {{ $t('billing.subscription.payment_method') }}
                             </p>
-                            <p class="text-sm font-semibold text-foreground/70">
+                            <p class="text-sm font-semibold text-muted-foreground">
                                 {{ $t('billing.subscription.no_payment_method') }}
                             </p>
                         </div>
@@ -225,7 +225,7 @@ const upgradeToAnnual = (): void => {
                             </span>
                             <div class="min-w-0 flex-1">
                                 <p class="text-sm font-bold text-foreground">{{ date.formatDate(invoice.date) }}</p>
-                                <p class="text-xs font-medium tabular-nums text-foreground/60">{{ invoice.total }}</p>
+                                <p class="text-xs font-medium tabular-nums text-muted-foreground">{{ invoice.total }}</p>
                             </div>
                             <Badge :variant="invoice.status === 'paid' ? 'success' : 'outline'">
                                 {{ invoice.status === 'paid' ? $t('billing.invoices.paid') : invoice.status }}

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Link, router, usePage } from '@inertiajs/vue3';
+import ThemeToggle from '@/components/ThemeToggle.vue';
 import {
     IconAffiliate,
     IconAlertTriangle,
@@ -65,6 +66,7 @@ const page = usePage();
 const currentWorkspace = computed<Workspace | null>(() => page.props.auth.currentWorkspace as Workspace | null);
 const workspaces = computed<Workspace[]>(() => page.props.auth.workspaces as Workspace[]);
 const subscriptionPastDue = computed<boolean>(() => Boolean(page.props.auth.subscriptionPastDue));
+const isRtl = computed<boolean>(() => Boolean((page.props as Record<string, unknown>).isRtl));
 
 const { canCreatePost, canManageAccounts, canManageAutomations, canCreateWorkspace } = useWorkspaceRole();
 
@@ -170,7 +172,7 @@ const handleCreateWorkspace = () => {
 </script>
 
 <template>
-    <Sidebar collapsible="offcanvas">
+    <Sidebar collapsible="offcanvas" :side="isRtl ? 'right' : 'left'">
         <SidebarHeader>
             <SidebarMenu>
                 <SidebarMenuItem>
@@ -256,6 +258,7 @@ const handleCreateWorkspace = () => {
                     {{ $t('billing.past_due_notice.cta') }}
                 </Button>
             </div>
+            <ThemeToggle />
             <NavUser />
         </SidebarFooter>
     </Sidebar>

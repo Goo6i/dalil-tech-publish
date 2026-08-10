@@ -152,7 +152,7 @@ defineExpose({
                                     <button
                                         type="button"
                                         tabindex="-1"
-                                        class="inline-flex shrink-0 cursor-pointer items-center rounded text-foreground/60 hover:text-foreground"
+                                        class="inline-flex shrink-0 cursor-pointer items-center rounded text-muted-foreground hover:text-foreground"
                                         @click="
                                             copyToClipboard(
                                                 confirmText,

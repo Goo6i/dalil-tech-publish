@@ -79,10 +79,10 @@ const warning = computed(() => getMediaValidationWarning(props.contentType, prop
                     <img :src="getPlatformLogo(socialAccount?.platform ?? 'instagram')" alt="Instagram" class="size-full object-cover" />
                 </span>
                 <span class="truncate font-bold text-foreground">{{ $t('posts.form.instagram.settings') }}</span>
-                <span v-if="socialAccount?.username" class="truncate font-medium text-foreground/60">·&nbsp;@{{ socialAccount.username }}</span>
+                <span v-if="socialAccount?.username" class="truncate font-medium text-muted-foreground">·&nbsp;@{{ socialAccount.username }}</span>
             </span>
-            <IconChevronUp v-if="open" class="size-4 shrink-0 text-foreground/60" />
-            <IconChevronDown v-else class="size-4 shrink-0 text-foreground/60" />
+            <IconChevronUp v-if="open" class="size-4 shrink-0 text-muted-foreground" />
+            <IconChevronDown v-else class="size-4 shrink-0 text-muted-foreground" />
         </button>
 
         <div v-if="open" class="space-y-5 border-t-2 border-foreground/10 px-4 pb-4 pt-4">
@@ -93,16 +93,16 @@ const warning = computed(() => getMediaValidationWarning(props.contentType, prop
                     class="size-9 shrink-0 rounded-full border-2 border-foreground shadow-2xs"
                 />
                 <div class="min-w-0 flex-1">
-                    <p class="text-[11px] font-black uppercase tracking-widest text-foreground/60">{{ $t('posts.form.instagram.posting_to') }}</p>
+                    <p class="text-[11px] font-black uppercase tracking-widest text-muted-foreground">{{ $t('posts.form.instagram.posting_to') }}</p>
                     <p class="truncate text-sm">
                         <span class="font-bold text-foreground">{{ socialAccount.display_name }}</span>
-                        <span v-if="socialAccount?.username" class="font-medium text-foreground/60">&nbsp;@{{ socialAccount.username }}</span>
+                        <span v-if="socialAccount?.username" class="font-medium text-muted-foreground">&nbsp;@{{ socialAccount.username }}</span>
                     </p>
                 </div>
             </div>
 
             <div class="space-y-2">
-                <p class="text-[11px] font-black uppercase tracking-widest text-foreground/60">{{ $t('posts.form.instagram.variant_label') }}</p>
+                <p class="text-[11px] font-black uppercase tracking-widest text-muted-foreground">{{ $t('posts.form.instagram.variant_label') }}</p>
                 <div class="flex flex-wrap gap-2">
                     <button
                         v-for="variant in variants"
@@ -111,7 +111,7 @@ const warning = computed(() => getMediaValidationWarning(props.contentType, prop
                         class="cursor-pointer rounded-full border-2 px-3 py-1 text-xs font-bold uppercase tracking-widest transition-colors disabled:cursor-not-allowed disabled:opacity-50"
                         :class="contentType === variant.value
                             ? 'border-foreground bg-violet-100 text-violet-950 shadow-2xs'
-                            : 'border-foreground/30 text-foreground/70 hover:border-foreground hover:text-foreground'"
+                            : 'border-foreground/30 text-muted-foreground hover:border-foreground hover:text-foreground'"
                         :disabled="disabled"
                         @click="pickVariant(variant.value)"
                     >
@@ -121,7 +121,7 @@ const warning = computed(() => getMediaValidationWarning(props.contentType, prop
             </div>
 
             <div v-if="isFeed" class="space-y-2">
-                <p class="text-[11px] font-black uppercase tracking-widest text-foreground/60">{{ $t('posts.form.instagram.aspect_label') }}</p>
+                <p class="text-[11px] font-black uppercase tracking-widest text-muted-foreground">{{ $t('posts.form.instagram.aspect_label') }}</p>
                 <div class="flex flex-wrap gap-2">
                     <button
                         v-for="ratio in aspectRatios"
@@ -130,7 +130,7 @@ const warning = computed(() => getMediaValidationWarning(props.contentType, prop
                         class="cursor-pointer rounded-full border-2 px-3 py-1 text-xs font-bold uppercase tracking-widest transition-colors disabled:cursor-not-allowed disabled:opacity-50"
                         :class="selectedAspectRatio === ratio.value
                             ? 'border-foreground bg-violet-100 text-violet-950 shadow-2xs'
-                            : 'border-foreground/30 text-foreground/70 hover:border-foreground hover:text-foreground'"
+                            : 'border-foreground/30 text-muted-foreground hover:border-foreground hover:text-foreground'"
                         :disabled="disabled"
                         @click="pickAspectRatio(ratio.value)"
                     >

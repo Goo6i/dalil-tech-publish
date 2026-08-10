@@ -194,7 +194,7 @@ const pageTitle = computed(() => trans('posts.templates.browser_title'));
                             :aria-expanded="platformPickerOpen"
                             class="w-56 justify-between font-medium"
                         >
-                            <span v-if="!selectedPlatformOption" class="text-foreground/60">
+                            <span v-if="!selectedPlatformOption" class="text-muted-foreground">
                                 {{ $t('posts.templates.all_platforms') }}
                             </span>
                             <span v-else class="flex min-w-0 items-center gap-2">
@@ -206,9 +206,9 @@ const pageTitle = computed(() => trans('posts.templates.browser_title'));
                                     />
                                 </span>
                                 <span class="truncate font-semibold">{{ selectedPlatformOption.brand }}</span>
-                                <span class="shrink-0 text-xs font-medium text-foreground/60">{{ selectedPlatformOption.format }}</span>
+                                <span class="shrink-0 text-xs font-medium text-muted-foreground">{{ selectedPlatformOption.format }}</span>
                             </span>
-                            <IconChevronDown class="ml-2 size-4 shrink-0 text-foreground/60" />
+                            <IconChevronDown class="ml-2 size-4 shrink-0 text-muted-foreground" />
                         </Button>
                     </PopoverTrigger>
                     <PopoverContent class="w-(--reka-popover-trigger-width) p-0" align="start">
@@ -231,7 +231,7 @@ const pageTitle = computed(() => trans('posts.templates.browser_title'));
                                             <img :src="opt.logo" :alt="opt.brand" class="size-full object-cover" />
                                         </span>
                                         <span class="truncate font-semibold">{{ opt.brand }}</span>
-                                        <span class="shrink-0 text-xs font-medium text-foreground/60">{{ opt.format }}</span>
+                                        <span class="shrink-0 text-xs font-medium text-muted-foreground">{{ opt.format }}</span>
                                         <IconCheck :class="cn('ml-auto size-4', isCurrentPlatform(opt.value) ? 'opacity-100' : 'opacity-0')" stroke-width="3" />
                                     </CommandItem>
                                 </CommandGroup>
@@ -241,7 +241,7 @@ const pageTitle = computed(() => trans('posts.templates.browser_title'));
                 </Popover>
 
                 <div class="relative w-full max-w-sm">
-                    <IconSearch class="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-foreground/60" />
+                    <IconSearch class="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
                     <Input
                         v-model="searchQuery"
                         :placeholder="$t('posts.templates.search_placeholder')"
@@ -283,7 +283,7 @@ const pageTitle = computed(() => trans('posts.templates.browser_title'));
 
                         <p
                             v-if="template.description"
-                            class="mt-2 text-sm leading-relaxed text-foreground/70"
+                            class="mt-2 text-sm leading-relaxed text-muted-foreground"
                         >
                             {{ template.description }}
                         </p>
@@ -294,7 +294,7 @@ const pageTitle = computed(() => trans('posts.templates.browser_title'));
                             </Badge>
                             <span
                                 v-if="template.slides && template.slides.length > 0"
-                                class="text-xs font-medium text-foreground/60"
+                                class="text-xs font-medium text-muted-foreground"
                             >
                                 {{ transChoice('posts.templates.slides_count', template.slides.length, { count: template.slides.length }) }}
                             </span>

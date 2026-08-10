@@ -144,13 +144,13 @@ const isZeroFetchResult = (nodeRun: NodeRun): boolean => {
             >
                 {{ $t('automations.test.dry_badge') }}
             </span>
-            <p class="text-sm text-foreground/60" :class="{ 'mt-2': run?.is_dry_run }">
+            <p class="text-sm text-muted-foreground" :class="{ 'mt-2': run?.is_dry_run }">
                 {{ run?.is_dry_run === false ? $t('automations.test.real_data_hint') : $t('automations.test.description') }}
             </p>
         </div>
 
         <div class="flex items-center justify-between gap-3 rounded-xl border-2 border-foreground bg-card p-3 shadow-[3px_3px_0_var(--foreground)]">
-            <Label class="cursor-pointer font-semibold text-foreground/70">
+            <Label class="cursor-pointer font-semibold text-muted-foreground">
                 <Checkbox v-model="realData" :disabled="isStarting" />
                 {{ $t('automations.test.with_real_data') }}
             </Label>
@@ -168,12 +168,12 @@ const isZeroFetchResult = (nodeRun: NodeRun): boolean => {
 
         <div
             v-if="run === null && !isStarting"
-            class="rounded-xl border-2 border-dashed border-foreground/25 bg-card/40 p-8 text-center text-sm font-medium text-foreground/60"
+            class="rounded-xl border-2 border-dashed border-foreground/25 bg-card/40 p-8 text-center text-sm font-medium text-muted-foreground"
         >
             {{ $t('automations.test.idle_hint') }}
         </div>
 
-        <div v-if="run === null && isStarting" class="flex items-center gap-2.5 text-sm font-medium text-foreground/70">
+        <div v-if="run === null && isStarting" class="flex items-center gap-2.5 text-sm font-medium text-muted-foreground">
             <IconLoader2 class="size-5 animate-spin" />
             {{ $t('automations.test.starting') }}
         </div>
@@ -186,7 +186,7 @@ const isZeroFetchResult = (nodeRun: NodeRun): boolean => {
             <span>{{ run.error.message }}</span>
         </div>
 
-        <div v-if="run && nodeRuns.length === 0" class="rounded-xl border-2 border-dashed border-foreground/25 bg-card/40 p-8 text-center text-sm font-medium text-foreground/60">
+        <div v-if="run && nodeRuns.length === 0" class="rounded-xl border-2 border-dashed border-foreground/25 bg-card/40 p-8 text-center text-sm font-medium text-muted-foreground">
             <IconLoader2 class="mx-auto mb-2 size-6 animate-spin" />
             {{ $t('automations.test.no_node_runs') }}
         </div>
@@ -205,7 +205,7 @@ const isZeroFetchResult = (nodeRun: NodeRun): boolean => {
                     </div>
                     <div class="min-w-0 flex-1">
                         <p class="text-base font-bold capitalize leading-tight">{{ $t(`automations.node_type.${nodeRun.node_type}`) }}</p>
-                        <p class="text-xs font-semibold uppercase tracking-wider text-foreground/50">{{ statusLabel(nodeRun.status) }}</p>
+                        <p class="text-xs font-semibold uppercase tracking-wider text-subtle-foreground">{{ statusLabel(nodeRun.status) }}</p>
                     </div>
                 </div>
 
@@ -216,14 +216,14 @@ const isZeroFetchResult = (nodeRun: NodeRun): boolean => {
                     </p>
                     <p
                         v-if="isZeroFetchResult(nodeRun)"
-                        class="flex items-center gap-2 rounded-lg border-2 border-foreground/30 bg-card p-3 text-sm font-medium text-foreground/70"
+                        class="flex items-center gap-2 rounded-lg border-2 border-foreground/30 bg-card p-3 text-sm font-medium text-muted-foreground"
                         :class="{ 'mt-3': nodeRun.error }"
                     >
-                        <IconInfoCircle class="size-5 shrink-0 text-foreground/50" stroke-width="2.5" />
+                        <IconInfoCircle class="size-5 shrink-0 text-subtle-foreground" stroke-width="2.5" />
                         {{ $t('automations.test.no_new_items') }}
                     </p>
                     <details v-if="nodeRun.output && !isZeroFetchResult(nodeRun)" class="group" :class="{ 'mt-3': nodeRun.error }">
-                        <summary class="flex cursor-pointer items-center gap-1.5 text-xs font-black uppercase tracking-wider text-foreground/60 hover:text-foreground">
+                        <summary class="flex cursor-pointer items-center gap-1.5 text-xs font-black uppercase tracking-wider text-muted-foreground hover:text-foreground">
                             <IconChevronRight class="size-4 transition-transform group-open:rotate-90" stroke-width="2.5" />
                             {{ $t('automations.test.node_output') }}
                         </summary>

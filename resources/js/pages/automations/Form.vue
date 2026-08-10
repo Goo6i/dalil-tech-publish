@@ -558,7 +558,7 @@ const defaultEdgeOptions = {
                 <div class="inline-flex size-14 items-center justify-center rounded-2xl border-2 border-foreground bg-violet-200 shadow-2xs">
                     <IconDeviceDesktop class="size-7 text-foreground" stroke-width="2" />
                 </div>
-                <p class="max-w-sm text-sm text-foreground/70">{{ $t('automations.mobile_notice') }}</p>
+                <p class="max-w-sm text-sm text-muted-foreground">{{ $t('automations.mobile_notice') }}</p>
             </div>
         </div>
     </AppLayout>

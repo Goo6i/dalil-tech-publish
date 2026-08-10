@@ -140,13 +140,13 @@ const changeRole = (member: Member, role: string) => {
                     </TableCell>
                 </TableRow>
                 <TableRow v-for="invitation in invitations" :key="`inv-${invitation.id}`">
-                    <TableCell class="text-foreground/60">
+                    <TableCell class="text-muted-foreground">
                         <div class="flex items-center gap-2">
                             <IconClock class="size-4" />
                             <span class="italic">{{ $t('settings.members.pending.title') }}</span>
                         </div>
                     </TableCell>
-                    <TableCell class="text-foreground/60">
+                    <TableCell class="text-muted-foreground">
                         {{ invitation.email }}
                     </TableCell>
                     <TableCell>

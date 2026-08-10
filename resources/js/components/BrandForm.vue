@@ -184,7 +184,7 @@ const runAutofill = async () => {
                 :search-placeholder="$t('settings.brand.language_search')"
                 :empty-text="$t('settings.brand.language_empty')"
             />
-            <p class="text-xs font-medium text-foreground/60">
+            <p class="text-xs font-medium text-muted-foreground">
                 {{ $t('settings.brand.content_language_description') }}
             </p>
             <InputError :message="errors.content_language" />
@@ -193,7 +193,7 @@ const runAutofill = async () => {
         <div class="grid gap-5">
             <div class="grid gap-1">
                 <Label>{{ $t('settings.brand.voice') }}</Label>
-                <p class="text-xs font-medium text-foreground/60">{{ $t('settings.brand.voice_description') }}</p>
+                <p class="text-xs font-medium text-muted-foreground">{{ $t('settings.brand.voice_description') }}</p>
             </div>
 
             <div v-for="(values, group) in availableVoiceTraits" :key="group" class="grid gap-2">
@@ -250,7 +250,7 @@ const runAutofill = async () => {
 
         <div class="grid gap-2">
             <Label>{{ $t('settings.brand.image_style') }}</Label>
-            <p class="text-xs font-medium text-foreground/60">
+            <p class="text-xs font-medium text-muted-foreground">
                 {{ $t('settings.brand.image_style_description') }}
             </p>
             <div class="grid grid-cols-2 gap-4 sm:grid-cols-4">

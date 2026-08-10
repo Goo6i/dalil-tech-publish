@@ -162,7 +162,7 @@ const bestTimeHintChannel = computed(() =>
     <div class="space-y-6">
         <div>
             <div class="mb-3 flex flex-wrap items-center justify-between gap-2">
-                <p class="text-[11px] font-black uppercase tracking-widest text-foreground/60">
+                <p class="text-[11px] font-black uppercase tracking-widest text-muted-foreground">
                     {{ $t('posts.edit.publish_to') }}
                 </p>
                 <BestTimeHint
@@ -182,7 +182,7 @@ const bestTimeHintChannel = computed(() =>
                 @update:meta="(id: string, value: Record<string, any>) => emit('update:platformMeta', id, value)"
             >
                 <div v-if="postPlatforms.some(pp => pp.status !== PostPlatformStatus.Pending)">
-                    <p class="mb-2 text-[11px] font-black uppercase tracking-widest text-foreground/60">
+                    <p class="mb-2 text-[11px] font-black uppercase tracking-widest text-muted-foreground">
                         {{ $t('posts.edit.platform_status') }}
                     </p>
                     <div class="space-y-2">
@@ -221,7 +221,7 @@ const bestTimeHintChannel = computed(() =>
         </div>
 
         <div>
-            <p class="mb-3 text-[11px] font-black uppercase tracking-widest text-foreground/60">
+            <p class="mb-3 text-[11px] font-black uppercase tracking-widest text-muted-foreground">
                 {{ $t('posts.edit.labels') }}
             </p>
             <div v-if="labels.length > 0" class="flex flex-wrap gap-2">
@@ -235,7 +235,7 @@ const bestTimeHintChannel = computed(() =>
                     @click="emit('toggleLabel', label.id)"
                 />
             </div>
-            <p v-else class="text-sm font-medium text-foreground/60">{{ $t('posts.edit.no_labels') }}</p>
+            <p v-else class="text-sm font-medium text-muted-foreground">{{ $t('posts.edit.no_labels') }}</p>
         </div>
     </div>
 </template>

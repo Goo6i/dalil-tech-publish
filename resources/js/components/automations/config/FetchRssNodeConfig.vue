@@ -76,7 +76,7 @@ const inspect = async () => {
             <Label class="mb-1 block">{{ $t('automations.config.fetch_rss.feed_url') }}</Label>
             <Input v-model="local.feed_url" placeholder="https://example.com/feed.xml" />
             <InputError :message="errors?.feed_url" class="mt-1" />
-            <p class="mt-1 text-xs text-foreground/50">{{ $t('automations.config.fetch_rss.feed_url_hint') }}</p>
+            <p class="mt-1 text-xs text-subtle-foreground">{{ $t('automations.config.fetch_rss.feed_url_hint') }}</p>
         </div>
 
         <div>
@@ -85,7 +85,7 @@ const inspect = async () => {
                 <IconRefresh v-else class="size-4" />
                 {{ isInspecting ? $t('automations.config.fetch_rss.inspecting') : $t('automations.config.fetch_rss.inspect') }}
             </Button>
-            <p class="mt-1 text-xs text-foreground/50">{{ $t('automations.config.fetch_rss.inspect_hint') }}</p>
+            <p class="mt-1 text-xs text-subtle-foreground">{{ $t('automations.config.fetch_rss.inspect_hint') }}</p>
             <InputError v-if="inspectError" :message="inspectError" class="mt-1" />
         </div>
 
@@ -94,7 +94,7 @@ const inspect = async () => {
             <ul class="max-h-48 space-y-1.5 overflow-y-auto rounded-md border border-border p-2">
                 <li v-for="field in local.discovered_fields" :key="field.path" class="flex flex-col gap-0.5">
                     <code class="text-xs text-foreground">{{ expression(field.path) }}</code>
-                    <span v-if="field.sample" class="truncate text-xs text-foreground/50">{{ field.sample }}</span>
+                    <span v-if="field.sample" class="truncate text-xs text-subtle-foreground">{{ field.sample }}</span>
                 </li>
             </ul>
         </div>

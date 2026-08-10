@@ -186,7 +186,7 @@ useWorkspaceEcho(
             <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
                     <div class="relative w-full sm:w-64">
-                        <IconSearch class="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-foreground/60" />
+                        <IconSearch class="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
                         <Input
                             v-model="searchQuery"
                             :placeholder="trans('posts.search')"
@@ -262,7 +262,7 @@ useWorkspaceEcho(
                                             </div>
                                             <span
                                                 v-if="getEnabledPlatforms(post).length > 4"
-                                                class="text-xs font-bold text-foreground/60"
+                                                class="text-xs font-bold text-muted-foreground"
                                             >+{{ getEnabledPlatforms(post).length - 4 }}</span>
                                             <div v-if="post.labels?.length" class="ml-1 flex flex-wrap items-center gap-1">
                                                 <LabelBadge
@@ -270,7 +270,7 @@ useWorkspaceEcho(
                                                     :key="label.id"
                                                     :label="label"
                                                 />
-                                                <span v-if="post.labels.length > 3" class="text-xs font-bold text-foreground/60">
+                                                <span v-if="post.labels.length > 3" class="text-xs font-bold text-muted-foreground">
                                                     +{{ post.labels.length - 3 }}
                                                 </span>
                                             </div>

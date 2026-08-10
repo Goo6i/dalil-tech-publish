@@ -37,13 +37,13 @@ defineProps<{
                 >
                     <div class="flex items-start justify-between">
                         <div class="inline-flex size-12 -rotate-2 items-center justify-center rounded-2xl border-2 border-foreground bg-violet-200 shadow-2xs transition-transform group-hover:rotate-0">
-                            <IconUser class="size-6 text-foreground" stroke-width="2" />
+                            <IconUser class="size-6 text-neutral-900" stroke-width="2" />
                         </div>
-                        <IconChevronRight class="size-5 text-foreground/40 transition-transform group-hover:translate-x-0.5 group-hover:text-foreground" />
+                        <IconChevronRight class="size-5 text-subtle-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-foreground" />
                     </div>
                     <div>
                         <h2 class="text-lg font-bold text-foreground">{{ $t('settings.hub.profile.title') }}</h2>
-                        <p class="mt-1 text-sm text-foreground/70">
+                        <p class="mt-1 text-sm text-muted-foreground">
                             {{ $t('settings.hub.profile.description') }}
                         </p>
                     </div>
@@ -56,13 +56,13 @@ defineProps<{
                 >
                     <div class="flex items-start justify-between">
                         <div class="inline-flex size-12 rotate-1 items-center justify-center rounded-2xl border-2 border-foreground bg-amber-200 shadow-2xs transition-transform group-hover:rotate-0">
-                            <IconBuildingCommunity class="size-6 text-foreground" stroke-width="2" />
+                            <IconBuildingCommunity class="size-6 text-neutral-900" stroke-width="2" />
                         </div>
-                        <IconChevronRight class="size-5 text-foreground/40 transition-transform group-hover:translate-x-0.5 group-hover:text-foreground" />
+                        <IconChevronRight class="size-5 text-subtle-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-foreground" />
                     </div>
                     <div>
                         <h2 class="text-lg font-bold text-foreground">{{ $t('settings.hub.workspace.title') }}</h2>
-                        <p class="mt-1 text-sm text-foreground/70">
+                        <p class="mt-1 text-sm text-muted-foreground">
                             {{ $t('settings.hub.workspace.description') }}
                         </p>
                     </div>
@@ -75,13 +75,13 @@ defineProps<{
                 >
                     <div class="flex items-start justify-between">
                         <div class="inline-flex size-12 -rotate-1 items-center justify-center rounded-2xl border-2 border-foreground bg-emerald-200 shadow-2xs transition-transform group-hover:rotate-0">
-                            <IconCreditCard class="size-6 text-foreground" stroke-width="2" />
+                            <IconCreditCard class="size-6 text-neutral-900" stroke-width="2" />
                         </div>
-                        <IconChevronRight class="size-5 text-foreground/40 transition-transform group-hover:translate-x-0.5 group-hover:text-foreground" />
+                        <IconChevronRight class="size-5 text-subtle-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-foreground" />
                     </div>
                     <div>
                         <h2 class="text-lg font-bold text-foreground">{{ $t('settings.hub.account.title') }}</h2>
-                        <p class="mt-1 text-sm text-foreground/70">
+                        <p class="mt-1 text-sm text-muted-foreground">
                             {{ $t('settings.hub.account.description') }}
                         </p>
                     </div>

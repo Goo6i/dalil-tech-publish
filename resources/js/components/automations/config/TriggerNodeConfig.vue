@@ -128,13 +128,13 @@ watch(local, (val) => emit('update', val), { deep: true });
         </div>
 
         <template v-if="local.trigger_type === TriggerType.PostPublished">
-            <p class="rounded-md bg-muted px-3 py-2 text-xs text-foreground/70">
+            <p class="rounded-md bg-muted px-3 py-2 text-xs text-muted-foreground">
                 {{ $t('automations.config.trigger.post_published_hint') }}
             </p>
         </template>
 
         <template v-if="local.trigger_type === TriggerType.PostScheduled">
-            <p class="rounded-md bg-muted px-3 py-2 text-xs text-foreground/70">
+            <p class="rounded-md bg-muted px-3 py-2 text-xs text-muted-foreground">
                 {{ $t('automations.config.trigger.post_scheduled_hint') }}
             </p>
         </template>
@@ -221,7 +221,7 @@ watch(local, (val) => emit('update', val), { deep: true });
                             class="rounded-md border-2 px-3 py-1 text-xs font-semibold transition-colors"
                             :class="isWeekdaySelected(day.value)
                                 ? 'border-foreground bg-amber-200 text-amber-950'
-                                : 'border-foreground/15 bg-card text-foreground/70 hover:border-foreground/30'"
+                                : 'border-foreground/15 bg-card text-muted-foreground hover:border-foreground/30'"
                             @click="toggleWeekday(day.value)"
                         >
                             {{ $t(`automations.config.trigger.schedule.weekday_names.${day.label}`) }}
@@ -285,7 +285,7 @@ watch(local, (val) => emit('update', val), { deep: true });
                 </div>
             </template>
 
-            <p class="rounded-md bg-muted px-3 py-2 text-xs text-foreground/70">{{ scheduleSummaryLine }}</p>
+            <p class="rounded-md bg-muted px-3 py-2 text-xs text-muted-foreground">{{ scheduleSummaryLine }}</p>
         </template>
     </div>
 </template>
