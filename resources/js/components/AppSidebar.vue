@@ -19,6 +19,7 @@ import {
     IconPlus,
     IconSelector,
     IconTag,
+    IconBrandGithub,
 } from '@tabler/icons-vue';
 import { trans } from 'laravel-vue-i18n';
 import { computed } from 'vue';
@@ -167,6 +168,11 @@ const supportNavItems = computed(() => [
         title: trans('sidebar.support.docs'),
         href: 'https://dalil-tech.com/publish',
         icon: IconLifebuoy,
+    },
+    {
+        title: 'Source code',
+        href: 'https://github.com/Goo6i/dalil-tech-publish',
+        icon: IconBrandGithub,
     },
 ]);
 

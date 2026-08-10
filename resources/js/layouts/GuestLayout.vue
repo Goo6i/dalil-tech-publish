@@ -31,6 +31,8 @@ const currentYear = dayjs().year();
             <div class="mx-auto max-w-5xl px-6 py-8">
                 <p class="text-sm text-muted-foreground text-center">
                     &copy; {{ currentYear }} Dalil Tech. All rights reserved.
+                    <span class="mx-1">·</span>
+                    <a href="https://github.com/Goo6i/dalil-tech-publish" target="_blank" rel="noopener" class="underline hover:text-foreground">Source code</a>
                 </p>
             </div>
         </footer>
