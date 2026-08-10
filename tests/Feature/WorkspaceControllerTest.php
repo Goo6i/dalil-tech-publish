@@ -292,16 +292,16 @@ test('update workspace settings rejects unknown image_style values', function ()
         ])->assertSessionHasErrors(['image_style']);
 });
 
-test('update workspace settings persists a newly supported content language', function () {
+test('update workspace settings persists a supported non-default content language', function () {
     $this->actingAs($this->user)
         ->from(route('app.workspace.brand'))
         ->put(route('app.workspace.settings.update'), [
             'name' => $this->workspace->name,
-            'content_language' => 'fr',
+            'content_language' => 'ar',
         ])->assertRedirect(route('app.workspace.brand'))
         ->assertSessionHasNoErrors();
 
-    expect($this->workspace->refresh()->content_language)->toBe('fr');
+    expect($this->workspace->refresh()->content_language)->toBe('ar');
 });
 
 test('update workspace settings rejects an unsupported content language', function () {
@@ -628,18 +628,18 @@ test('store persists brand fields and redirects to /accounts', function () {
     expect($workspace->brand_description)->toBe('We sell rockets.');
 });
 
-test('store persists a newly supported non-default content language', function () {
+test('store persists a supported non-default content language', function () {
     $account = Account::factory()->create();
     $user = User::factory()->create(['account_id' => $account->id]);
     $account->update(['owner_id' => $user->id]);
 
     $this->actingAs($user)->post(route('app.workspaces.store'), [
-        'name' => 'Beispiel GmbH',
-        'content_language' => 'de',
+        'name' => 'Arabic Brand',
+        'content_language' => 'ar',
     ])->assertSessionHasNoErrors();
 
-    // 'de' is not the DB default ('en'), so this proves the field is written.
-    expect(Workspace::where('name', 'Beispiel GmbH')->sole()->content_language)->toBe('de');
+    // 'ar' is not the DB default ('en'), so this proves the field is written.
+    expect(Workspace::where('name', 'Arabic Brand')->sole()->content_language)->toBe('ar');
 });
 
 test('store rejects an unsupported content language', function () {

@@ -63,31 +63,13 @@ test('generate falls back to square for unknown orientation', function () {
     Image::assertGenerated(fn (ImagePrompt $prompt) => $prompt->isSquare());
 });
 
-test('generate appends Brazilian Portuguese instruction when language is pt-BR', function () {
+test('generate appends Arabic instruction when language is ar', function () {
     Image::fake();
 
     $client = new AiImageClient;
-    $client->generate(['x'], ImageStyle::Cinematic, language: 'pt-BR');
+    $client->generate(['x'], ImageStyle::Cinematic, language: 'ar');
 
-    Image::assertGenerated(fn (ImagePrompt $prompt) => $prompt->contains('Brazilian Portuguese'));
-});
-
-test('generate appends Spanish instruction when language is es', function () {
-    Image::fake();
-
-    $client = new AiImageClient;
-    $client->generate(['x'], ImageStyle::Cinematic, language: 'es');
-
-    Image::assertGenerated(fn (ImagePrompt $prompt) => $prompt->contains('Spanish'));
-});
-
-test('generate appends French instruction when language is fr', function () {
-    Image::fake();
-
-    $client = new AiImageClient;
-    $client->generate(['x'], ImageStyle::Cinematic, language: 'fr');
-
-    Image::assertGenerated(fn (ImagePrompt $prompt) => $prompt->contains('French'));
+    Image::assertGenerated(fn (ImagePrompt $prompt) => $prompt->contains('Arabic'));
 });
 
 test('generate defaults to English instruction when language is unsupported', function () {

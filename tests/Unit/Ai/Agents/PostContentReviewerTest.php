@@ -10,7 +10,7 @@ test('instructions render brand context and language', function () {
     $workspace = Workspace::factory()->make([
         'name' => 'TryPost',
         'brand_voice_traits' => ['friendly', 'concise'],
-        'content_language' => 'pt-BR',
+        'content_language' => 'ar',
     ]);
 
     $agent = new PostContentReviewer(workspace: $workspace);
@@ -19,7 +19,7 @@ test('instructions render brand context and language', function () {
     expect($instructions)->toContain('TryPost');
     expect($instructions)->toContain('friendly'); // "Be warm and friendly."
     expect($instructions)->toContain('short'); // "Keep sentences short and objective."
-    expect($instructions)->toContain('pt-BR');
+    expect($instructions)->toContain('ar');
 });
 
 test('schema requires suggestions array with original/suggestion/reason', function () {
