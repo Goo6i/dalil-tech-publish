@@ -328,7 +328,7 @@ const onAltTextSave = (alt: string): void => {
                         <button
                             v-if="canRegenerateWithAi(item)"
                             type="button"
-                            class="absolute bottom-1.5 left-1.5 inline-flex h-6 cursor-pointer items-center gap-1 rounded-md border-2 border-foreground bg-card px-1.5 text-[10px] font-semibold text-foreground opacity-100 shadow-2xs lg:opacity-0 transition-all hover:bg-violet-100 lg:group-hover:opacity-100 lg:group-focus:opacity-100"
+                            class="absolute bottom-1.5 left-1.5 inline-flex h-6 cursor-pointer items-center gap-1 rounded-md border-2 border-foreground bg-card px-1.5 text-[10px] font-semibold text-foreground opacity-100 shadow-2xs lg:opacity-0 transition-all hover:bg-violet-100 hover:text-violet-950 lg:group-hover:opacity-100 lg:group-focus:opacity-100"
                             @click.stop="emit('open-ai-regenerate-image', item.id)"
                         >
                             <IconRefresh class="size-3" />
@@ -340,7 +340,7 @@ const onAltTextSave = (alt: string): void => {
                             type="button"
                             :title="$t('posts.edit.alt_text.edit')"
                             :aria-label="$t('posts.edit.alt_text.edit')"
-                            class="absolute right-9 top-1.5 inline-flex size-6 cursor-pointer items-center justify-center rounded-md border-2 border-foreground bg-card text-foreground opacity-100 shadow-2xs lg:opacity-0 transition-all hover:bg-violet-100 lg:group-hover:opacity-100 lg:group-focus:opacity-100"
+                            class="absolute right-9 top-1.5 inline-flex size-6 cursor-pointer items-center justify-center rounded-md border-2 border-foreground bg-card text-foreground opacity-100 shadow-2xs lg:opacity-0 transition-all hover:bg-violet-100 hover:text-violet-950 lg:group-hover:opacity-100 lg:group-focus:opacity-100"
                             data-testid="alt-text-button"
                             @click.stop="openAltText(index)"
                         >
@@ -379,7 +379,7 @@ const onAltTextSave = (alt: string): void => {
                                 <TooltipTrigger as-child>
                                     <button
                                         type="button"
-                                        class="inline-flex size-9 cursor-pointer items-center justify-center rounded-lg border-2 border-foreground bg-card text-foreground shadow-2xs transition-all hover:-translate-y-0.5 hover:bg-violet-100 hover:shadow-sm"
+                                        class="inline-flex size-9 cursor-pointer items-center justify-center rounded-lg border-2 border-foreground bg-card text-foreground shadow-2xs transition-all hover:-translate-y-0.5 hover:bg-violet-100 hover:text-violet-950 hover:shadow-sm"
                                         @click="emojiOpen = !emojiOpen"
                                     >
                                         <IconMoodSmile class="size-4" />
@@ -399,7 +399,7 @@ const onAltTextSave = (alt: string): void => {
                         <TooltipTrigger as-child>
                             <button
                                 type="button"
-                                class="inline-flex size-9 cursor-pointer items-center justify-center rounded-lg border-2 border-foreground bg-card text-foreground shadow-2xs transition-all hover:-translate-y-0.5 hover:bg-violet-100 hover:shadow-sm"
+                                class="inline-flex size-9 cursor-pointer items-center justify-center rounded-lg border-2 border-foreground bg-card text-foreground shadow-2xs transition-all hover:-translate-y-0.5 hover:bg-violet-100 hover:text-violet-950 hover:shadow-sm"
                                 @click="signaturesModal?.open()"
                             >
                                 <IconHash class="size-4" />
@@ -414,7 +414,7 @@ const onAltTextSave = (alt: string): void => {
                         <TooltipTrigger as-child>
                             <button
                                 type="button"
-                                class="inline-flex size-9 cursor-pointer items-center justify-center rounded-lg border-2 border-foreground bg-card text-foreground shadow-2xs transition-all hover:-translate-y-0.5 hover:bg-violet-100 hover:shadow-sm"
+                                class="inline-flex size-9 cursor-pointer items-center justify-center rounded-lg border-2 border-foreground bg-card text-foreground shadow-2xs transition-all hover:-translate-y-0.5 hover:bg-violet-100 hover:text-violet-950 hover:shadow-sm"
                                 @click="emit('open-ai-generate')"
                             >
                                 <IconSparkles class="size-4" />
@@ -429,7 +429,7 @@ const onAltTextSave = (alt: string): void => {
                         <TooltipTrigger as-child>
                             <button
                                 type="button"
-                                class="inline-flex size-9 cursor-pointer items-center justify-center rounded-lg border-2 border-foreground bg-card text-foreground shadow-2xs transition-all hover:-translate-y-0.5 hover:bg-violet-100 hover:shadow-sm"
+                                class="inline-flex size-9 cursor-pointer items-center justify-center rounded-lg border-2 border-foreground bg-card text-foreground shadow-2xs transition-all hover:-translate-y-0.5 hover:bg-violet-100 hover:text-violet-950 hover:shadow-sm"
                                 @click="emit('open-ai-review')"
                             >
                                 <IconWriting class="size-4" />

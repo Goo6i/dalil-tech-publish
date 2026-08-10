@@ -143,7 +143,7 @@ defineExpose({
                 <p class="flex flex-wrap items-center gap-1 text-sm text-foreground/80">
                     <span>{{ trans('common.confirm_modal.type') }}</span>
                     <code
-                        class="inline-flex items-center gap-1.5 rounded-md border-2 border-foreground bg-amber-100 px-1.5 py-0.5 font-mono text-xs font-bold break-all text-foreground shadow-2xs"
+                        class="inline-flex items-center gap-1.5 rounded-md border-2 border-foreground bg-amber-100 px-1.5 py-0.5 font-mono text-xs font-bold break-all text-amber-950 shadow-2xs"
                     >
                         {{ confirmText }}
                         <TooltipProvider>

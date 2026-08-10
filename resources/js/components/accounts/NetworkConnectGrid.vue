@@ -253,7 +253,7 @@ const cardState = computed((): Record<string, CardStateValue> => {
                 </span>
                 <span
                     v-else
-                    class="pointer-events-none absolute -top-2 -right-2 inline-flex size-6 items-center justify-center rounded-full border-2 border-foreground bg-violet-200 text-foreground opacity-0 shadow-2xs transition-all group-hover:scale-110 group-hover:rotate-90 group-hover:opacity-100"
+                    class="pointer-events-none absolute -top-2 -right-2 inline-flex size-6 items-center justify-center rounded-full border-2 border-foreground bg-violet-200 text-violet-950 opacity-0 shadow-2xs transition-all group-hover:scale-110 group-hover:rotate-90 group-hover:opacity-100"
                     aria-hidden="true"
                 >
                     <IconPlus class="size-3.5" stroke-width="3" />

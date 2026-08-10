@@ -140,7 +140,7 @@ const isZeroFetchResult = (nodeRun: NodeRun): boolean => {
         <div class="min-w-0">
             <span
                 v-if="run?.is_dry_run"
-                class="inline-flex -rotate-3 items-center rounded-md border-2 border-foreground bg-amber-200 px-2 py-0.5 text-[10px] font-black uppercase tracking-widest text-foreground shadow-[2px_2px_0_var(--foreground)]"
+                class="inline-flex -rotate-3 items-center rounded-md border-2 border-foreground bg-amber-200 px-2 py-0.5 text-[10px] font-black uppercase tracking-widest text-amber-950 shadow-[2px_2px_0_var(--foreground)]"
             >
                 {{ $t('automations.test.dry_badge') }}
             </span>

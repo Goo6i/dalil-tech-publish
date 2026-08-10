@@ -54,7 +54,7 @@ const select = (account: AnalyticsAccount) => {
                     <div class="relative shrink-0">
                         <Avatar class="size-7 rounded-full border-2 border-foreground shadow-2xs">
                             <AvatarImage v-if="selected.avatar_url" :src="selected.avatar_url" :alt="selected.display_name" />
-                            <AvatarFallback class="rounded-full bg-violet-100 text-xs font-bold text-foreground">
+                            <AvatarFallback class="rounded-full bg-violet-100 text-xs font-bold text-violet-950">
                                 {{ selected.display_name?.charAt(0) }}
                             </AvatarFallback>
                         </Avatar>
@@ -96,7 +96,7 @@ const select = (account: AnalyticsAccount) => {
                             <div class="relative shrink-0">
                                 <Avatar class="size-9 rounded-full border-2 border-foreground shadow-2xs">
                                     <AvatarImage v-if="account.avatar_url" :src="account.avatar_url" :alt="account.display_name" />
-                                    <AvatarFallback class="rounded-full bg-violet-100 font-bold text-foreground">
+                                    <AvatarFallback class="rounded-full bg-violet-100 font-bold text-violet-950">
                                         {{ account.display_name?.charAt(0) }}
                                     </AvatarFallback>
                                 </Avatar>

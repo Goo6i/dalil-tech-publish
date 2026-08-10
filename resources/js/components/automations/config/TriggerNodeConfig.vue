@@ -220,7 +220,7 @@ watch(local, (val) => emit('update', val), { deep: true });
                             type="button"
                             class="rounded-md border-2 px-3 py-1 text-xs font-semibold transition-colors"
                             :class="isWeekdaySelected(day.value)
-                                ? 'border-foreground bg-amber-200 text-foreground'
+                                ? 'border-foreground bg-amber-200 text-amber-950'
                                 : 'border-foreground/15 bg-card text-foreground/70 hover:border-foreground/30'"
                             @click="toggleWeekday(day.value)"
                         >
