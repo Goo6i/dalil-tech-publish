@@ -18,11 +18,11 @@ return [
     'throttle' => 'Te veel inlogpogingen. Probeer het over :seconds seconden opnieuw.',
 
     'flash' => [
-        'welcome' => 'Welkom bij TryPost!',
-        'welcome_trial' => 'Welkom bij TryPost! Je proefperiode is gestart.',
+        'welcome' => 'Welkom bij Dalil Tech Publish!',
+        'welcome_trial' => 'Welkom bij Dalil Tech Publish! Je proefperiode is gestart.',
     ],
 
-    'legal' => 'Door door te gaan ga je akkoord met onze <a href="https://trypost.it/terms" target="_blank">Servicevoorwaarden</a> en <a href="https://trypost.it/privacy" target="_blank">Privacybeleid</a>.',
+    'legal' => 'Door door te gaan ga je akkoord met onze <a href="https://dalil-tech.com/terms" target="_blank">Servicevoorwaarden</a> en <a href="https://dalil-tech.com/privacy" target="_blank">Privacybeleid</a>.',
 
     'slides' => [
         'calendar' => [

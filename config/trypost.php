@@ -88,7 +88,7 @@ return [
     |
     */
 
-    'user_agent' => env('TRYPOST_USER_AGENT', 'TryPost.it/1.0 (+https://trypost.it)'),
+    'user_agent' => env('TRYPOST_USER_AGENT', 'DalilTechPublish/1.0 (+https://dalil-tech.com)'),
 
     'google_auth_enabled' => env('GOOGLE_AUTH_ENABLED', false),
 

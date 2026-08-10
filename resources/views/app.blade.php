@@ -1,31 +1,36 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ $htmlDir ?? 'ltr' }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ $htmlDir ?? 'ltr' }}" class="dark">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="theme-color" content="#0E1116">
+        <meta name="description" content="Dalil Tech Publish, a social media management service. Schedule and publish to TikTok, Instagram, YouTube, LinkedIn and more from one calendar.">
+        <meta property="og:title" content="{{ config('app.name', 'Dalil Tech Publish') }}">
+        <meta property="og:description" content="Schedule and publish to TikTok, Instagram, YouTube, LinkedIn and more from one calendar.">
+        <meta property="og:type" content="website">
 
         @include('partials.gtm')
 
         {{-- Inline page-paint background. Matches `--background` so the
-             first paint doesn't flash white before CSS loads. --}}
+             first paint doesn't flash light before CSS loads. --}}
         <style>
             html {
-                background-color: #faf8f5;
+                background-color: #0E1116;
             }
         </style>
 
-        <title data-inertia>{{ config('app.name', 'TryPost.it') }}</title>
+        <title data-inertia>{{ config('app.name', 'Dalil Tech Publish') }}</title>
 
         <link rel="icon" href="/favicon.ico" sizes="any">
         <link rel="icon" href="/favicon.svg" type="image/svg+xml">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-        <!-- Fonts: Figtree (UI), Instrument Serif (display headlines),
-             JetBrains Mono (code/numbers). Mirrors the marketing site. -->
+        <!-- Fonts: Space Grotesk (headings/brand), Inter Tight (UI body),
+             JetBrains Mono (numbers/code). The Dalil Tech typeface triad. -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300..900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
         @vite(['resources/js/app.ts'])
         @inertiaHead

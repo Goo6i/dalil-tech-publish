@@ -2,7 +2,7 @@
 
 return [
     'mentioned' => [
-        'subject' => ':name heeft je genoemd op TryPost',
+        'subject' => ':name heeft je genoemd op Dalil Tech Publish',
         'title' => ':name heeft je genoemd',
         'intro' => ':name heeft je genoemd in een reactie op een post.',
         'cta' => 'Reactie bekijken',
@@ -14,7 +14,7 @@ return [
         'intro' => 'De volgende social accounts in je workspace <strong>:workspace</strong> zijn losgekoppeld en moeten opnieuw worden gekoppeld:',
         'reasons_title' => 'Dit kan gebeurd zijn omdat:',
         'reason_expired' => 'Toegangstokens zijn verlopen',
-        'reason_revoked' => 'Je hebt de toegang van TryPost op het platform ingetrokken',
+        'reason_revoked' => 'Je hebt de toegang van Dalil Tech Publish op het platform ingetrokken',
         'reason_changed' => 'Het platform heeft zijn authenticatievereisten gewijzigd',
         'reconnect_cta' => 'Koppel deze accounts opnieuw om posts te blijven plannen en publiceren.',
         'button' => 'Accounts opnieuw koppelen',

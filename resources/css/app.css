@@ -7,74 +7,72 @@
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
-/* Dark mode is intentionally disabled to match the marketing site
-   (which is light-only). Tailwind v4 defaults `dark:` to the
-   `prefers-color-scheme: dark` media query, so without this override
-   the OS theme would still flip preview internals to dark. Pin the
-   variant to a `.dark` class that we never apply. */
+/* Dalil Tech is dark-first. The app renders with the `.dark` class on
+   <html> (set in app.blade.php) so shadcn-vue's dark: variants activate
+   and align with the dark tokens below. */
 @custom-variant dark (&:where(.dark, .dark *));
 
 
 :root {
-  /* TryPost design system — warm cream + ink + signature violet.
-     Mirrors the marketing site (~/Herd/trypost-site) so the app and the
-     site share one identity. All structural borders are ink-black. */
-  --background: #faf8f5;
-  --foreground: #0a0a0a;
-  --card: #ffffff;
-  --card-foreground: #0a0a0a;
-  --popover: #ffffff;
-  --popover-foreground: #0a0a0a;
-  --primary: #7c3aed;
-  --primary-foreground: #ffffff;
-  --secondary: #f4f4f0;
-  --secondary-foreground: #0a0a0a;
-  --muted: #f4f4f0;
-  --muted-foreground: #52525b;
-  --accent: #ede9fe;
-  --accent-foreground: #5b21b6;
-  --destructive: #e54b4f;
+  /* Dalil Tech Publish design system, dark-first.
+     Signal green (#3ECF8E) accent on a near-black canvas (#0E1116),
+     borders over shadows, 2px geometry. Mirrors the Dalil Tech brand
+     (~/dalil-tech/docs/design-system.md, "Application UI" tier). */
+  --background: #0E1116;
+  --foreground: #E6EAF0;
+  --card: #161B22;
+  --card-foreground: #E6EAF0;
+  --popover: #1C2230;
+  --popover-foreground: #E6EAF0;
+  --primary: #3ECF8E;
+  --primary-foreground: #06231A;
+  --secondary: #1C2230;
+  --secondary-foreground: #E6EAF0;
+  --muted: #161B22;
+  --muted-foreground: #9BA6B4;
+  --accent: #1C2230;
+  --accent-foreground: #E6EAF0;
+  --destructive: #E5544B;
   --destructive-foreground: #ffffff;
-  --success: #16a34a;
-  --error: #e54b4f;
-  --warning: #d97706;
-  --info: #2563eb;
-  --border: #0a0a0a;
-  --input: #0a0a0a;
-  --ring: #7c3aed;
-  --chart-1: #7c3aed;
-  --chart-2: #8b5cf6;
-  --chart-3: #a78bfa;
-  --chart-4: #5b21b6;
-  --chart-5: #4c1d95;
-  --sidebar: #ffffff;
-  --sidebar-foreground: #0a0a0a;
-  --sidebar-primary: #7c3aed;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #ede9fe;
-  --sidebar-accent-foreground: #5b21b6;
-  --sidebar-border: #0a0a0a;
-  --sidebar-ring: #7c3aed;
-  --font-sans: Figtree, ui-sans-serif, system-ui, -apple-system,
+  --success: #3ECF8E;
+  --error: #E5544B;
+  --warning: #E0A33E;
+  --info: #6FA8DC;
+  --border: #2A313C;
+  --input: #2A313C;
+  --ring: #3ECF8E;
+  --chart-1: #3ECF8E;
+  --chart-2: #6FA8DC;
+  --chart-3: #E0A33E;
+  --chart-4: #9B7DF2;
+  --chart-5: #7CE0B0;
+  --sidebar: #0A0D11;
+  --sidebar-foreground: #E6EAF0;
+  --sidebar-primary: #3ECF8E;
+  --sidebar-primary-foreground: #06231A;
+  --sidebar-accent: #1C2230;
+  --sidebar-accent-foreground: #E6EAF0;
+  --sidebar-border: #2A313C;
+  --sidebar-ring: #3ECF8E;
+  --font-sans: 'Inter Tight', ui-sans-serif, system-ui, -apple-system,
     BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
     'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
     'Segoe UI Symbol', 'Noto Color Emoji';
-  --font-serif: 'Instrument Serif', ui-serif, Georgia, Cambria,
-    'Times New Roman', Times, serif;
-  --font-display: 'Instrument Serif', ui-serif, Georgia, Cambria,
-    'Times New Roman', Times, serif;
+  --font-serif: 'Source Serif 4', Georgia, Cambria, 'Times New Roman',
+    Times, serif;
+  --font-display: 'Space Grotesk', 'Segoe UI', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco,
     Consolas, 'Liberation Mono', 'Courier New', monospace;
-  --radius: 0.75rem;
-  /* Gumroad-style offset shadows: solid ink, no blur. */
-  --shadow-2xs: 1px 1px 0 0 #0a0a0a;
-  --shadow-xs: 2px 2px 0 0 #0a0a0a;
-  --shadow-sm: 3px 3px 0 0 #0a0a0a;
-  --shadow: 4px 4px 0 0 #0a0a0a;
-  --shadow-md: 5px 5px 0 0 #0a0a0a;
-  --shadow-lg: 6px 6px 0 0 #0a0a0a;
-  --shadow-xl: 8px 8px 0 0 #0a0a0a;
-  --shadow-2xl: 10px 10px 0 0 #0a0a0a;
+  --radius: 0.125rem;
+  /* Restraint: borders over shadows. Subtle dark elevation only. */
+  --shadow-2xs: 0 1px 1px rgba(0, 0, 0, 0.25);
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 20px rgba(0, 0, 0, 0.45);
+  --shadow-xl: 0 12px 28px rgba(0, 0, 0, 0.5);
+  --shadow-2xl: 0 16px 40px rgba(0, 0, 0, 0.55);
   --tracking-normal: 0em;
   --spacing: 0.25rem;
 }
@@ -118,10 +116,10 @@
   --font-serif: var(--font-serif);
   --font-display: var(--font-display);
 
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-sm: var(--radius);
+  --radius-md: calc(var(--radius) + 2px);
+  --radius-lg: calc(var(--radius) + 4px);
+  --radius-xl: calc(var(--radius) + 8px);
 
   --shadow-2xs: var(--shadow-2xs);
   --shadow-xs: var(--shadow-xs);
@@ -144,26 +142,22 @@
   }
 }
 
-/* Site headline + container utility classes — mirrors trypost-site's
-   `assets/css/utility-patterns.css`. Use `.h1`/.h2`/.h3` for serif
-   display headlines (Instrument Serif) instead of stacking Tailwind
-   text-* utilities. */
+/* Display headlines use Space Grotesk (the Dalil Tech brand face). */
 .h1 {
   font-family: var(--font-display);
-  @apply text-4xl sm:text-5xl lg:text-7xl xl:text-[5.5rem] font-normal tracking-tight leading-[1.05];
+  @apply text-4xl sm:text-5xl lg:text-7xl xl:text-[5.5rem] font-bold tracking-tight leading-[1.05];
 }
 
 .h2 {
   font-family: var(--font-display);
-  @apply text-pretty text-3xl font-normal tracking-tight leading-[1.1] sm:text-5xl;
+  @apply text-pretty text-3xl font-bold tracking-tight leading-[1.1] sm:text-5xl;
 }
 
 .h3 {
   font-family: var(--font-display);
-  @apply text-pretty text-2xl font-normal tracking-tight sm:text-4xl;
+  @apply text-pretty text-2xl font-bold tracking-tight sm:text-4xl;
 }
 
 .trypost-container {
   @apply relative max-w-7xl w-full flex-1 mx-auto flex flex-col justify-center;
 }
-

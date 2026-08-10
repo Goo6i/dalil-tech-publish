@@ -2,7 +2,7 @@
 
 return [
     'mentioned' => [
-        'subject' => 'أشار إليك :name على TryPost',
+        'subject' => 'أشار إليك :name على Dalil Tech Publish',
         'title' => 'أشار إليك :name',
         'intro' => 'أشار إليك :name في تعليق على منشور.',
         'cta' => 'عرض التعليق',
@@ -14,7 +14,7 @@ return [
         'intro' => 'تم فصل الحسابات الاجتماعية التالية في مساحة العمل <strong>:workspace</strong> وتحتاج إلى إعادة الربط:',
         'reasons_title' => 'قد يكون هذا قد حدث بسبب:',
         'reason_expired' => 'انتهاء صلاحية رموز الوصول',
-        'reason_revoked' => 'قيامك بإلغاء وصول TryPost على المنصة',
+        'reason_revoked' => 'قيامك بإلغاء وصول Dalil Tech Publish على المنصة',
         'reason_changed' => 'قيام المنصة بتغيير متطلبات المصادقة الخاصة بها',
         'reconnect_cta' => 'يرجى إعادة ربط هذه الحسابات لمواصلة جدولة المنشورات ونشرها.',
         'button' => 'إعادة ربط الحسابات',

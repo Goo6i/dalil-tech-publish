@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 return [
-    'title' => 'Witamy w TryPost',
+    'title' => 'Witamy w Dalil Tech Publish',
     'description' => 'Powiedz nam, co najlepiej opisuje Ciebie lub Twoją firmę, abyśmy mogli dopasować Twoje doświadczenie.',
     'continue' => 'Kontynuuj',
     'personas' => [
@@ -17,8 +17,8 @@ return [
         'online_store' => 'Sklep internetowy',
         'other' => 'Inne',
     ],
-    'goals_title' => 'Jaki jest Twój cel z TryPost?',
-    'goals_description' => 'Wybierz wszystko, co pasuje, a my skonfigurujemy TryPost dla Ciebie.',
+    'goals_title' => 'Jaki jest Twój cel z Dalil Tech Publish?',
+    'goals_description' => 'Wybierz wszystko, co pasuje, a my skonfigurujemy Dalil Tech Publish dla Ciebie.',
     'goals' => [
         'save_time' => 'Oszczędzaj czas, publikując wszędzie naraz',
         'ai_content' => 'Twórz posty szybciej dzięki AI',
@@ -34,7 +34,7 @@ return [
         'other' => 'Coś innego',
     ],
     'referral_source_title' => 'Jak nas znalazłeś?',
-    'referral_source_description' => 'To pomaga nam zrozumieć, jak ludzie odkrywają TryPost.',
+    'referral_source_description' => 'To pomaga nam zrozumieć, jak ludzie odkrywają Dalil Tech Publish.',
     'referral_source' => [
         'google' => 'Google lub wyszukiwarka',
         'x' => 'X (Twitter)',

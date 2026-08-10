@@ -18,7 +18,7 @@ import { store as labelsStore } from '@/routes/app/labels';
 
 const open = defineModel<boolean>('open', { default: false });
 
-const DEFAULT_COLOR = '#7c3aed';
+const DEFAULT_COLOR = '#3ECF8E';
 
 const form = useForm({
     name: '',

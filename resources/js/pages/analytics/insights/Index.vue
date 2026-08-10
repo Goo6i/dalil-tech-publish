@@ -164,7 +164,7 @@ const chartTickFormat = (value: number): string => {
 const chartTooltip = (d: { day: string; followers: number; postsThatDay: number }): string =>
     `<div style="font-size:12px;line-height:1.5">
         <div style="font-weight:600;margin-bottom:2px">${dayjs(d.day).format('MMM D, YYYY')}</div>
-        <div style="color:#7c3aed">&#9679; ${trans('insights.chart.followers')}: ${formatNumber(d.followers)}</div>
+        <div style="color:#3ECF8E">&#9679; ${trans('insights.chart.followers')}: ${formatNumber(d.followers)}</div>
         <div style="color:#f59e0b">&#9679; ${trans('insights.chart.posts_that_day')}: ${formatNumber(d.postsThatDay)}</div>
     </div>`;
 
@@ -343,8 +343,8 @@ const alertTypeLabel = (type: string): string => trans(`insights.alerts.types.${
                         </div>
                         <template v-else>
                             <VisXYContainer :data="chartData" :height="220" :margin="{ top: 12, right: 8, bottom: 4, left: 8 }">
-                                <VisArea :x="chartX" :y="chartYFollowers" color="#7c3aed" :opacity="0.08" :curve-type="CurveType.MonotoneX" />
-                                <VisLine :x="chartX" :y="chartYFollowers" color="#7c3aed" :line-width="2.5" :curve-type="CurveType.MonotoneX" />
+                                <VisArea :x="chartX" :y="chartYFollowers" color="#3ECF8E" :opacity="0.08" :curve-type="CurveType.MonotoneX" />
+                                <VisLine :x="chartX" :y="chartYFollowers" color="#3ECF8E" :line-width="2.5" :curve-type="CurveType.MonotoneX" />
                                 <VisAxis
                                     type="x"
                                     :tick-format="chartTickFormat"
@@ -355,7 +355,7 @@ const alertTypeLabel = (type: string): string => trans(`insights.alerts.types.${
                                     color="var(--color-foreground)"
                                 />
                                 <VisAxis type="y" :num-ticks="3" :grid-line="false" :domain-line="false" :tick-line="false" color="var(--color-foreground)" />
-                                <VisCrosshair :template="chartTooltip" color="#7c3aed" />
+                                <VisCrosshair :template="chartTooltip" color="#3ECF8E" />
                                 <VisTooltip />
                             </VisXYContainer>
                             <VisXYContainer :data="chartData" :height="56" :margin="{ top: 0, right: 8, bottom: 4, left: 8 }">

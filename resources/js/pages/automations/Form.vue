@@ -441,7 +441,7 @@ const defaultEdgeOptions = {
         type: MarkerType.ArrowClosed,
         width: 18,
         height: 18,
-        color: '#0a0a0a',
+        color: '#9BA6B4',
     },
 };
 </script>
@@ -460,7 +460,7 @@ const defaultEdgeOptions = {
                             <TooltipTrigger as-child>
                                 <Button
                                     as="a"
-                                    href="https://docs.trypost.it/knowledge-base/automations/introduction"
+                                    href="https://dalil-tech.com/publish"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     variant="outline"

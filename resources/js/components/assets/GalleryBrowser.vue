@@ -811,11 +811,11 @@ onUnmounted(() => {
                                     </TooltipProvider>
                                 </div>
                                 <p class="text-xs text-white/80">
-                                    <a :href="photo.author.url + '?utm_source=trypost&utm_medium=referral'" target="_blank" rel="noopener noreferrer" class="hover:text-white" @click.stop>
+                                    <a :href="photo.author.url + '?utm_source=daliltech&utm_medium=referral'" target="_blank" rel="noopener noreferrer" class="hover:text-white" @click.stop>
                                         {{ photo.author.name }}
                                     </a>
                                     <span class="text-white/50"> / </span>
-                                    <a href="https://unsplash.com/?utm_source=trypost&utm_medium=referral" target="_blank" rel="noopener noreferrer" class="hover:text-white" @click.stop>
+                                    <a href="https://unsplash.com/?utm_source=daliltech&utm_medium=referral" target="_blank" rel="noopener noreferrer" class="hover:text-white" @click.stop>
                                         Unsplash
                                     </a>
                                 </p>

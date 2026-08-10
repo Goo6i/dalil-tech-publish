@@ -148,7 +148,7 @@ const trajectoryTickFormat = (value: number): string => `${Math.round(value)}h`;
 const trajectoryTooltip = (d: { age_h: number; views_per_hour: number }): string =>
     `<div style="font-size:12px;line-height:1.5">
         <div style="font-weight:600;margin-bottom:2px">${trajectoryTickFormat(d.age_h)}</div>
-        <div style="color:#7c3aed">&#9679; ${trans('insights.video.trajectory.views_per_hour')}: ${formatNumber(d.views_per_hour)}</div>
+        <div style="color:#3ECF8E">&#9679; ${trans('insights.video.trajectory.views_per_hour')}: ${formatNumber(d.views_per_hour)}</div>
     </div>`;
 
 const peakScatterSize = (_d: unknown, i: number) => (i === peakIndex.value ? 7 : 0);
@@ -218,8 +218,8 @@ const hasClass = computed(() => props.video.class !== null && props.video.class 
                     </div>
                     <template v-else>
                         <VisXYContainer :data="trajectoryPoints" :height="240" :margin="{ top: 16, right: 8, bottom: 4, left: 8 }">
-                            <VisArea :x="trajectoryX" :y="trajectoryY" color="#7c3aed" :opacity="0.08" :curve-type="CurveType.MonotoneX" />
-                            <VisLine :x="trajectoryX" :y="trajectoryY" color="#7c3aed" :line-width="2.5" :curve-type="CurveType.MonotoneX" />
+                            <VisArea :x="trajectoryX" :y="trajectoryY" color="#3ECF8E" :opacity="0.08" :curve-type="CurveType.MonotoneX" />
+                            <VisLine :x="trajectoryX" :y="trajectoryY" color="#3ECF8E" :line-width="2.5" :curve-type="CurveType.MonotoneX" />
                             <VisScatter
                                 :x="trajectoryX"
                                 :y="trajectoryY"
@@ -238,7 +238,7 @@ const hasClass = computed(() => props.video.class !== null && props.video.class 
                                 color="var(--color-foreground)"
                             />
                             <VisAxis type="y" :num-ticks="3" :grid-line="false" :domain-line="false" :tick-line="false" color="var(--color-foreground)" />
-                            <VisCrosshair :template="trajectoryTooltip" color="#7c3aed" />
+                            <VisCrosshair :template="trajectoryTooltip" color="#3ECF8E" />
                             <VisTooltip />
                         </VisXYContainer>
                         <p v-if="peakPoint" class="mt-1 text-center text-[11px] font-medium text-foreground/50">

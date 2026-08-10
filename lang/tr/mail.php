@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 return [
     'mentioned' => [
-        'subject' => ':name sizden TryPost\'ta bahsetti',
+        'subject' => ':name sizden Dalil Tech Publish\'ta bahsetti',
         'title' => ':name sizden bahsetti',
         'intro' => ':name bir gönderi yorumunda sizden bahsetti.',
         'cta' => 'Yorumu görüntüle',
@@ -16,7 +16,7 @@ return [
         'intro' => '<strong>:workspace</strong> çalışma alanınızdaki aşağıdaki sosyal hesapların bağlantısı kesildi ve yeniden bağlanması gerekiyor:',
         'reasons_title' => 'Bu şu nedenlerle olmuş olabilir:',
         'reason_expired' => 'Erişim tokenlarının süresi doldu',
-        'reason_revoked' => 'Platformda TryPost erişimini iptal ettiniz',
+        'reason_revoked' => 'Platformda Dalil Tech Publish erişimini iptal ettiniz',
         'reason_changed' => 'Platform kimlik doğrulama gereksinimlerini değiştirdi',
         'reconnect_cta' => 'Gönderi zamanlamaya ve yayınlamaya devam etmek için lütfen bu hesapları yeniden bağlayın.',
         'button' => 'Hesapları Yeniden Bağla',

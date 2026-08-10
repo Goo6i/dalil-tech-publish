@@ -2,6 +2,7 @@
 import { Head, Link, usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';
 
+import AppLogo from '@/components/AppLogo.vue';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { login, register } from '@/routes';
@@ -43,8 +44,7 @@ const inviteUrl = computed(() => `/invites/${props.invite.id}`);
             <div class="flex flex-col gap-8">
                 <div class="flex flex-col items-center gap-4">
                     <Link href="/" class="flex flex-col items-center gap-2 font-medium">
-                        <img src="/images/trypost/logo-light.png" alt="TryPost" class="dark:hidden h-8 w-auto" />
-                        <img src="/images/trypost/logo-dark.png" alt="TryPost" class="hidden dark:block h-8 w-auto" />
+                        <AppLogo />
                     </Link>
                 </div>
 

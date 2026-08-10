@@ -155,17 +155,17 @@ const workspaceNavItems = computed<NavItem[]>(() => [
 const supportNavItems = computed(() => [
     {
         title: trans('sidebar.support.referral'),
-        href: 'https://affiliates.trypost.it/',
+        href: 'https://dalil-tech.com',
         icon: IconGift,
     },
     {
         title: trans('sidebar.support.stay_updated'),
-        href: 'https://x.com/trypostit',
+        href: 'https://dalil-tech.com',
         icon: IconBrandX,
     },
     {
         title: trans('sidebar.support.docs'),
-        href: 'https://docs.trypost.it',
+        href: 'https://dalil-tech.com/publish',
         icon: IconLifebuoy,
     },
 ]);

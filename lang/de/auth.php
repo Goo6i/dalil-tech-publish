@@ -20,11 +20,11 @@ return [
     'throttle' => 'Zu viele Anmeldeversuche. Bitte versuche es in :seconds Sekunden erneut.',
 
     'flash' => [
-        'welcome' => 'Willkommen bei TryPost!',
-        'welcome_trial' => 'Willkommen bei TryPost! Deine Testphase hat begonnen.',
+        'welcome' => 'Willkommen bei Dalil Tech Publish!',
+        'welcome_trial' => 'Willkommen bei Dalil Tech Publish! Deine Testphase hat begonnen.',
     ],
 
-    'legal' => 'Indem du fortfährst, stimmst du unseren <a href="https://trypost.it/terms" target="_blank">Nutzungsbedingungen</a> und unserer <a href="https://trypost.it/privacy" target="_blank">Datenschutzerklärung</a> zu.',
+    'legal' => 'Indem du fortfährst, stimmst du unseren <a href="https://dalil-tech.com/terms" target="_blank">Nutzungsbedingungen</a> und unserer <a href="https://dalil-tech.com/privacy" target="_blank">Datenschutzerklärung</a> zu.',
 
     'slides' => [
         'calendar' => [

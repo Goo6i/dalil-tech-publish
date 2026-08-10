@@ -18,11 +18,11 @@ return [
     'throttle' => 'Слишком много попыток входа. Повторите попытку через :seconds сек.',
 
     'flash' => [
-        'welcome' => 'Добро пожаловать в TryPost!',
-        'welcome_trial' => 'Добро пожаловать в TryPost! Ваш пробный период начался.',
+        'welcome' => 'Добро пожаловать в Dalil Tech Publish!',
+        'welcome_trial' => 'Добро пожаловать в Dalil Tech Publish! Ваш пробный период начался.',
     ],
 
-    'legal' => 'Продолжая, вы соглашаетесь с нашими <a href="https://trypost.it/terms" target="_blank">Условиями использования</a> и <a href="https://trypost.it/privacy" target="_blank">Политикой конфиденциальности</a>.',
+    'legal' => 'Продолжая, вы соглашаетесь с нашими <a href="https://dalil-tech.com/terms" target="_blank">Условиями использования</a> и <a href="https://dalil-tech.com/privacy" target="_blank">Политикой конфиденциальности</a>.',
 
     'slides' => [
         'calendar' => [

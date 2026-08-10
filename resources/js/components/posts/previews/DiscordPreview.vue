@@ -64,7 +64,7 @@ const mentions = computed<MentionChip[]>(() => (Array.isArray(props.meta?.mentio
 
                 <div class="min-w-0 flex-1">
                     <div class="flex items-baseline gap-2">
-                        <span class="text-[15px] font-medium text-[#060607]">{{ socialAccount.display_name || 'TryPost' }}</span>
+                        <span class="text-[15px] font-medium text-[#060607]">{{ socialAccount.display_name || 'Dalil Tech Publish' }}</span>
                         <span class="rounded bg-[#5865F2] px-1 text-[10px] font-bold uppercase tracking-wide text-white">Bot</span>
                         <span class="text-[11px] text-[#5c5e66]">Today at 4:30 PM</span>
                     </div>

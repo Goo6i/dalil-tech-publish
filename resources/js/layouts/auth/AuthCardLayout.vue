@@ -8,6 +8,7 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
+import AppLogo from '@/components/AppLogo.vue';
 import { home } from '@/routes/app';
 
 defineProps<{
@@ -20,9 +21,8 @@ defineProps<{
     <div class="flex min-h-svh flex-col items-center justify-center gap-6 bg-muted p-6 md:p-10">
         <div class="flex w-full max-w-md flex-col gap-6">
             <Link :href="home()" class="flex items-center gap-2 self-center font-medium">
-                <div class="flex h-9 w-9 items-center justify-center">
-                    <img src="/images/trypost/logo-light.png" alt="TryPost" class="dark:hidden h-8 w-auto" />
-                    <img src="/images/trypost/logo-dark.png" alt="TryPost" class="hidden dark:block h-8 w-auto" />
+                <div class="flex items-center justify-center">
+                    <AppLogo />
                 </div>
             </Link>
 

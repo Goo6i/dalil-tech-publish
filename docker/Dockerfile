@@ -99,7 +99,7 @@ FROM composer-deps AS asset-build
 # Node 22 for Vite + npm scripts.
 RUN apk add --no-cache nodejs npm
 
-ARG VITE_APP_NAME=TryPost
+ARG VITE_APP_NAME="Dalil Tech Publish"
 ARG VITE_REVERB_APP_KEY=
 ARG VITE_REVERB_HOST=localhost
 ARG VITE_REVERB_PORT=8080

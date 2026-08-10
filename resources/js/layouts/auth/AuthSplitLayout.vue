@@ -10,6 +10,8 @@ import {
 import { trans } from 'laravel-vue-i18n';
 import { onBeforeUnmount, onMounted, ref, computed } from 'vue';
 
+import AppLogo from '@/components/AppLogo.vue';
+
 defineProps<{
     title?: string;
     description?: string;
@@ -88,11 +90,7 @@ const platforms = [
     <div class="grid min-h-svh grid-cols-1 lg:grid-cols-2">
         <div class="flex min-w-0 flex-col gap-4 p-6 md:p-10">
             <div class="flex items-start">
-                <img
-                    src="/images/trypost/logo-light.png"
-                    alt="TryPost"
-                    class="h-7"
-                />
+                <AppLogo />
             </div>
 
             <div class="flex flex-1 items-center justify-center">
@@ -151,7 +149,7 @@ const platforms = [
                                             <span class="size-3 rounded-full border border-foreground bg-emerald-300" />
                                         </div>
                                         <div class="ml-2 truncate text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
-                                            trypost.it
+                                            dalil-tech.com
                                         </div>
                                         <span class="ml-auto inline-flex items-center gap-1.5 rounded-md border-2 border-foreground bg-foreground px-2 py-0.5 text-[10px] font-black uppercase tracking-widest text-background shadow-2xs">
                                             <span class="relative flex size-1.5">

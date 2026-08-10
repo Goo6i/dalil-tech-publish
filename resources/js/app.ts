@@ -12,7 +12,7 @@ import dayjs from './dayjs';
 import { capturePageview, initializePostHog, syncPostHogContext } from './posthog';
 import type { Auth } from './types';
 
-const appName = import.meta.env.VITE_APP_NAME || 'TryPost.it';
+const appName = import.meta.env.VITE_APP_NAME || 'Dalil Tech Publish';
 
 createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
@@ -65,6 +65,6 @@ createInertiaApp({
             .mount(el);
     },
     progress: {
-        color: '#4B5563',
+        color: '#3ECF8E',
     },
 });

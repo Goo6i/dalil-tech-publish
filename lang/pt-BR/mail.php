@@ -2,7 +2,7 @@
 
 return [
     'mentioned' => [
-        'subject' => ':name mencionou você no TryPost',
+        'subject' => ':name mencionou você no Dalil Tech Publish',
         'title' => ':name mencionou você',
         'intro' => ':name mencionou você num comentário.',
         'cta' => 'Ver comentário',
@@ -14,7 +14,7 @@ return [
         'intro' => 'As seguintes contas de redes sociais no seu workspace <strong>:workspace</strong> foram desconectadas e precisam ser reconectadas:',
         'reasons_title' => 'Isso pode ter acontecido porque:',
         'reason_expired' => 'Os tokens de acesso expiraram',
-        'reason_revoked' => 'Você revogou o acesso ao TryPost na plataforma',
+        'reason_revoked' => 'Você revogou o acesso ao Dalil Tech Publish na plataforma',
         'reason_changed' => 'A plataforma mudou os requisitos de autenticação',
         'reconnect_cta' => 'Por favor, reconecte essas contas para continuar agendando e publicando posts.',
         'button' => 'Reconectar Contas',

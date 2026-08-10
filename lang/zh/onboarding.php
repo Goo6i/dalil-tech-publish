@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 return [
-    'title' => '欢迎使用 TryPost',
+    'title' => '欢迎使用 Dalil Tech Publish',
     'description' => '告诉我们最能描述你或你业务的选项，以便我们为你定制体验。',
     'continue' => '继续',
     'personas' => [
@@ -17,8 +17,8 @@ return [
         'online_store' => '网店',
         'other' => '其他',
     ],
-    'goals_title' => '你使用 TryPost 的目标是什么？',
-    'goals_description' => '选择所有符合的选项，我们会为你配置好 TryPost。',
+    'goals_title' => '你使用 Dalil Tech Publish 的目标是什么？',
+    'goals_description' => '选择所有符合的选项，我们会为你配置好 Dalil Tech Publish。',
     'goals' => [
         'save_time' => '一次发布到所有平台，节省时间',
         'ai_content' => '借助 AI 更快地创建帖子',
@@ -34,7 +34,7 @@ return [
         'other' => '其他需求',
     ],
     'referral_source_title' => '您是如何找到我们的？',
-    'referral_source_description' => '这有助于我们了解人们是如何发现 TryPost 的。',
+    'referral_source_description' => '这有助于我们了解人们是如何发现 Dalil Tech Publish 的。',
     'referral_source' => [
         'google' => 'Google 或搜索',
         'x' => 'X (Twitter)',

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 return [
-    'title' => 'TryPost へようこそ',
+    'title' => 'Dalil Tech Publish へようこそ',
     'description' => 'あなたやあなたのビジネスに最も当てはまるものを教えてください。体験を最適化します。',
     'continue' => '続ける',
     'personas' => [
@@ -17,8 +17,8 @@ return [
         'online_store' => 'オンラインストア',
         'other' => 'その他',
     ],
-    'goals_title' => 'TryPost での目標は何ですか？',
-    'goals_description' => '当てはまるものをすべて選んでください。TryPost をあなた向けに設定します。',
+    'goals_title' => 'Dalil Tech Publish での目標は何ですか？',
+    'goals_description' => '当てはまるものをすべて選んでください。Dalil Tech Publish をあなた向けに設定します。',
     'goals' => [
         'save_time' => 'すべての場所へ一度に投稿して時間を節約する',
         'ai_content' => 'AI でより速く投稿を作成する',
@@ -34,7 +34,7 @@ return [
         'other' => 'その他',
     ],
     'referral_source_title' => 'どこで私たちを知りましたか？',
-    'referral_source_description' => 'これは、人々がどのように TryPost を見つけるかを理解するのに役立ちます。',
+    'referral_source_description' => 'これは、人々がどのように Dalil Tech Publish を見つけるかを理解するのに役立ちます。',
     'referral_source' => [
         'google' => 'Google または検索',
         'x' => 'X (Twitter)',
