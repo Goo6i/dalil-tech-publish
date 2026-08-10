@@ -9,6 +9,14 @@
         <meta property="og:title" content="{{ config('app.name', 'Dalil Tech Publish') }}">
         <meta property="og:description" content="Schedule and publish to TikTok, Instagram, YouTube, LinkedIn and more from one calendar.">
         <meta property="og:type" content="website">
+        <meta property="og:url" content="https://publish.dalil-tech.com">
+        <meta property="og:image" content="https://publish.dalil-tech.com/images/og.png">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="{{ config('app.name', 'Dalil Tech Publish') }}">
+        <meta name="twitter:description" content="Schedule and publish to TikTok, Instagram, YouTube, LinkedIn and more from one calendar.">
+        <meta name="twitter:image" content="https://publish.dalil-tech.com/images/og.png">
 
         @include('partials.gtm')
 
@@ -25,6 +33,7 @@
         <link rel="icon" href="/favicon.ico" sizes="any">
         <link rel="icon" href="/favicon.svg" type="image/svg+xml">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+        <link rel="manifest" href="/site.webmanifest">
 
         <!-- Fonts: Space Grotesk (headings/brand), Inter Tight (UI body),
              JetBrains Mono (numbers/code). The Dalil Tech typeface triad. -->

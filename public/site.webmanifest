@@ -1,0 +1,13 @@
+{
+  "name": "Dalil Tech Publish",
+  "short_name": "Publish",
+  "description": "Schedule and publish to TikTok, Instagram, YouTube, LinkedIn and more from one calendar.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0E1116",
+  "theme_color": "#0E1116",
+  "icons": [
+    { "src": "/images/icon-256.png", "sizes": "256x256", "type": "image/png" },
+    { "src": "/images/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
