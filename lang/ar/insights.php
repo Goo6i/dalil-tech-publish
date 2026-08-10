@@ -7,7 +7,7 @@ return [
 
     'tabs' => [
         'nav_label' => 'عرض التحليلات',
-        'live' => 'مباشر',
+        'live' => 'الأحدث',
         'insights' => 'الرؤى',
         'best_times' => 'أفضل الأوقات',
     ],

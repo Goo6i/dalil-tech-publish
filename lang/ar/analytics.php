@@ -6,6 +6,7 @@ return [
     'search_account' => 'البحث عن حساب…',
     'select_account' => 'اختر حسابًا لعرض التحليلات.',
     'no_data' => 'لا تتوفر بيانات تحليلات.',
+    'last_updated' => 'آخر تحديث',
 
     'metrics' => [
         'avg_view_duration' => 'متوسط مدة المشاهدة (ث)',

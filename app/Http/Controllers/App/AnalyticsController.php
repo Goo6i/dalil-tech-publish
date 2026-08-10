@@ -85,6 +85,10 @@ class AnalyticsController extends Controller
             default => [],
         };
 
-        return response()->json(['metrics' => $metrics]);
+        $fetchedAt = $account->platform === Platform::TikTok
+            ? app(TikTokAnalytics::class)->getFetchedAt($account)
+            : null;
+
+        return response()->json(['metrics' => $metrics, 'fetched_at' => $fetchedAt]);
     }
 }
