@@ -412,7 +412,7 @@ usePostEcho(post.value.id, '.post.comment.created', (e: any) => {
                     class="absolute inset-0 z-40 flex flex-col items-center justify-center gap-4 bg-background/80 backdrop-blur-sm"
                 >
                     <div class="inline-flex size-14 -rotate-3 items-center justify-center rounded-2xl border-2 border-foreground bg-violet-200 shadow-2xs">
-                        <IconLoader2 class="size-7 animate-spin text-foreground" stroke-width="2" />
+                        <IconLoader2 class="size-7 animate-spin text-neutral-900" stroke-width="2" />
                     </div>
                     <div class="text-center">
                         <p

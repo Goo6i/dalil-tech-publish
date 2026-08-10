@@ -161,7 +161,7 @@ const upgradeToAnnual = (): void => {
                             </div>
                             <div class="flex shrink-0 flex-col items-end gap-4">
                                 <span class="inline-flex size-14 -rotate-3 items-center justify-center rounded-2xl border-2 border-foreground bg-amber-200 shadow-2xs">
-                                    <IconSparkles class="size-7 text-foreground" stroke-width="2" />
+                                    <IconSparkles class="size-7 text-neutral-900" stroke-width="2" />
                                 </span>
                             </div>
                         </div>
@@ -177,7 +177,7 @@ const upgradeToAnnual = (): void => {
 
                     <div class="flex flex-wrap items-center gap-4 rounded-2xl border-2 border-foreground bg-card p-4 shadow-2xs">
                         <span class="inline-flex size-12 rotate-2 items-center justify-center rounded-2xl border-2 border-foreground bg-violet-200 shadow-2xs">
-                            <IconCreditCard class="size-6 text-foreground" stroke-width="2" />
+                            <IconCreditCard class="size-6 text-neutral-900" stroke-width="2" />
                         </span>
                         <div v-if="defaultPaymentMethod" class="min-w-0 flex-1">
                             <p class="text-[11px] font-black uppercase tracking-widest text-muted-foreground">
@@ -221,7 +221,7 @@ const upgradeToAnnual = (): void => {
                             class="flex items-center gap-4 rounded-xl border-2 border-foreground bg-card p-4 shadow-2xs"
                         >
                             <span class="inline-flex size-10 -rotate-2 items-center justify-center rounded-2xl border-2 border-foreground bg-violet-100 shadow-2xs">
-                                <IconFileText class="size-5 text-foreground" stroke-width="2" />
+                                <IconFileText class="size-5 text-neutral-900" stroke-width="2" />
                             </span>
                             <div class="min-w-0 flex-1">
                                 <p class="text-sm font-bold text-foreground">{{ date.formatDate(invoice.date) }}</p>

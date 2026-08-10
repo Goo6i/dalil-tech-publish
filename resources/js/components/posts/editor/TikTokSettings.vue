@@ -303,7 +303,7 @@ watch(
                 <p class="text-xs font-medium text-muted-foreground">{{ $t("posts.form.tiktok.privacy_hint") }}</p>
                 <p
                     v-if="brandContentToggle"
-                    class="flex items-start gap-1.5 rounded-md border-2 border-foreground bg-amber-50 p-2 text-xs font-semibold text-amber-800"
+                    class="flex items-start gap-1.5 rounded-md border-2 border-foreground bg-warning/10 p-2 text-xs font-semibold text-warning"
                 >
                     <IconAlertTriangle class="mt-0.5 size-3.5 shrink-0" />
                     {{ $t('posts.form.tiktok.privacy.private_disabled_branded') }}
@@ -311,7 +311,7 @@ watch(
             </div>
 
             <!-- Max duration warning -->
-            <p v-if="isVideoPost && exceedsMaxDuration && !previewOnly" class="flex items-start gap-2 rounded-lg border-2 border-foreground bg-rose-50 p-2 text-xs font-semibold text-rose-700">
+            <p v-if="isVideoPost && exceedsMaxDuration && !previewOnly" class="flex items-start gap-2 rounded-lg border-2 border-foreground bg-destructive/10 p-2 text-xs font-semibold text-destructive">
                 <IconAlertTriangle class="mt-0.5 size-3.5 shrink-0" />
                 {{ $t('posts.form.tiktok.max_duration_exceeded', { duration: String(videoDurationSec ?? 0), max: String(maxDurationSec ?? 0) }) }}
             </p>
@@ -371,7 +371,7 @@ watch(
                 <!-- Promotional Content warning (shown once a sub-toggle is picked) -->
                 <div v-if="hasAnyBrandToggle" class="ml-6 flex items-start gap-3 rounded-lg border-2 border-foreground bg-amber-100 p-3 shadow-2xs">
                     <IconAlertTriangle class="mt-0.5 size-4 shrink-0 text-amber-700" />
-                    <div class="text-xs text-amber-800">
+                    <div class="text-xs text-warning">
                         <p class="font-bold">{{ $t(promotionalTitleKey) }}</p>
                         <p class="font-medium">{{ $t('posts.form.tiktok.promotional_description') }}</p>
                     </div>
@@ -411,7 +411,7 @@ watch(
             <!-- creator_info unavailable — publishing is blocked, not merely degraded -->
             <div
                 v-if="creatorInfoUnavailable"
-                class="flex items-start gap-2 rounded-lg border-2 border-foreground bg-rose-50 p-3 text-xs font-semibold text-rose-700"
+                class="flex items-start gap-2 rounded-lg border-2 border-foreground bg-destructive/10 p-3 text-xs font-semibold text-destructive"
             >
                 <IconAlertTriangle class="mt-0.5 size-4 shrink-0" />
                 <span>{{ $t(creatorInfoMessageKey) }}</span>

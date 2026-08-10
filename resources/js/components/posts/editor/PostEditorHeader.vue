@@ -49,7 +49,7 @@ const isPublished = computed(() => PUBLISHED_STATUSES.includes(props.post.status
         <template v-if="isScheduled">
             <div class="flex min-w-0 flex-1 items-start gap-3 pl-12 md:items-center md:pl-0">
                 <div class="inline-flex size-10 shrink-0 items-center justify-center rounded-lg border-2 border-foreground bg-violet-200 md:size-9">
-                    <IconCalendar class="size-4 text-foreground" stroke-width="2" />
+                    <IconCalendar class="size-4 text-neutral-900" stroke-width="2" />
                 </div>
                 <div class="min-w-0 flex-1 leading-tight">
                     <p class="text-sm font-semibold text-foreground">
@@ -67,11 +67,11 @@ const isPublished = computed(() => PUBLISHED_STATUSES.includes(props.post.status
                 <IconLoader2 class="size-3.5 animate-spin" />
                 {{ $t('posts.edit.saving') }}
             </span>
-            <span v-else-if="showSaved" class="flex items-center gap-1.5 text-xs font-semibold text-emerald-700">
+            <span v-else-if="showSaved" class="flex items-center gap-1.5 text-xs font-semibold text-success">
                 <IconCircleCheck class="size-3.5" stroke-width="2.5" />
                 {{ $t('posts.edit.saved') }}
             </span>
-            <span v-else-if="isPublished" class="flex items-center gap-1.5 text-xs font-semibold text-emerald-700">
+            <span v-else-if="isPublished" class="flex items-center gap-1.5 text-xs font-semibold text-success">
                 <IconCircleCheck class="size-3.5" stroke-width="2.5" />
                 {{ $t('posts.edit.status.published') }}
             </span>

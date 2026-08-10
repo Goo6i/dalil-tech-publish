@@ -15,9 +15,9 @@ withDefaults(defineProps<Props>(), {
             <!-- Inner frame -->
             <div class="relative bg-[#0a0a0a] rounded-[34px] overflow-hidden">
                 <!-- Screen Content - iPhone 14 Pro proportions (393x852 scaled down) -->
-                <div class="relative bg-white dark:bg-black w-[360px] h-[780px] overflow-hidden">
+                <div class="relative bg-background w-[360px] h-[780px] overflow-hidden">
                     <!-- iOS Status Bar - dark text on light mode, light text on dark mode -->
-                    <div class="absolute top-0 left-0 right-0 h-[44px] flex items-center justify-between px-5 z-40 text-black dark:text-white">
+                    <div class="absolute top-0 left-0 right-0 h-[44px] flex items-center justify-between px-5 z-40 text-foreground">
                         <!-- Left: Time -->
                         <span class="text-[15px] font-semibold tracking-tight w-[54px]">9:41</span>
 

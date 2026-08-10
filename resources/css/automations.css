@@ -45,24 +45,44 @@
   flex-shrink: 0;
 }
 
-/* Category hues, dark-adapted: low-alpha tinted fill with a bright hue icon. */
-.automation-node__icon-tile--violet  { background: #201B33; color: #B9A6F5; }
-.automation-node__icon-tile--blue    { background: #16283F; color: #6FA8DC; }
-.automation-node__icon-tile--amber   { background: #2B230F; color: #E0A33E; }
-.automation-node__icon-tile--rose    { background: #2E181C; color: #E5544B; }
-.automation-node__icon-tile--emerald { background: #10291F; color: #3ECF8E; }
-.automation-node__icon-tile--slate   { background: #1C2230; color: #9BA6B4; }
-.automation-node__icon-tile--zinc    { background: #1B1F27; color: #A0A6B0; }
-.automation-node__icon-tile--cyan    { background: #103038; color: #6FD3E0; }
+/* Category hues. Base = light theme (tinted fill + AA-legible dark icon);
+   .dark overrides restore the dark-adapted fill + bright icon. */
+.automation-node__icon-tile--violet  { background: #EDE9FE; color: #6D28D9; }
+.automation-node__icon-tile--blue    { background: #DBEAFE; color: #1D4ED8; }
+.automation-node__icon-tile--amber   { background: #FEF3C7; color: #B45309; }
+.automation-node__icon-tile--rose    { background: #FFE4E6; color: #BE123C; }
+.automation-node__icon-tile--emerald { background: #D1FAE5; color: #047857; }
+.automation-node__icon-tile--slate   { background: #E2E8F0; color: #334155; }
+.automation-node__icon-tile--zinc    { background: #E4E4E7; color: #3F3F46; }
+.automation-node__icon-tile--cyan    { background: #CFFAFE; color: #0E7490; }
 
-.automation-node--accent-violet  .automation-node__header { background: #191527; }
-.automation-node--accent-blue    .automation-node__header { background: #131F2E; }
-.automation-node--accent-amber   .automation-node__header { background: #201B0E; }
-.automation-node--accent-rose    .automation-node__header { background: #221317; }
-.automation-node--accent-emerald .automation-node__header { background: #0E1F18; }
-.automation-node--accent-slate   .automation-node__header { background: #171C26; }
-.automation-node--accent-zinc    .automation-node__header { background: #171A20; }
-.automation-node--accent-cyan    .automation-node__header { background: #0E2229; }
+.dark .automation-node__icon-tile--violet  { background: #201B33; color: #B9A6F5; }
+.dark .automation-node__icon-tile--blue    { background: #16283F; color: #6FA8DC; }
+.dark .automation-node__icon-tile--amber   { background: #2B230F; color: #E0A33E; }
+.dark .automation-node__icon-tile--rose    { background: #2E181C; color: #E5544B; }
+.dark .automation-node__icon-tile--emerald { background: #10291F; color: #3ECF8E; }
+.dark .automation-node__icon-tile--slate   { background: #1C2230; color: #9BA6B4; }
+.dark .automation-node__icon-tile--zinc    { background: #1B1F27; color: #A0A6B0; }
+.dark .automation-node__icon-tile--cyan    { background: #103038; color: #6FD3E0; }
+
+/* Header accent wash. Base = light tint; .dark restores the dark wash. */
+.automation-node--accent-violet  .automation-node__header { background: #F5F3FF; }
+.automation-node--accent-blue    .automation-node__header { background: #EFF6FF; }
+.automation-node--accent-amber   .automation-node__header { background: #FFFBEB; }
+.automation-node--accent-rose    .automation-node__header { background: #FFF1F2; }
+.automation-node--accent-emerald .automation-node__header { background: #ECFDF5; }
+.automation-node--accent-slate   .automation-node__header { background: #F1F5F9; }
+.automation-node--accent-zinc    .automation-node__header { background: #FAFAFA; }
+.automation-node--accent-cyan    .automation-node__header { background: #ECFEFF; }
+
+.dark .automation-node--accent-violet  .automation-node__header { background: #191527; }
+.dark .automation-node--accent-blue    .automation-node__header { background: #131F2E; }
+.dark .automation-node--accent-amber   .automation-node__header { background: #201B0E; }
+.dark .automation-node--accent-rose    .automation-node__header { background: #221317; }
+.dark .automation-node--accent-emerald .automation-node__header { background: #0E1F18; }
+.dark .automation-node--accent-slate   .automation-node__header { background: #171C26; }
+.dark .automation-node--accent-zinc    .automation-node__header { background: #171A20; }
+.dark .automation-node--accent-cyan    .automation-node__header { background: #0E2229; }
 
 .automation-node__title {
   min-width: 0;
@@ -99,5 +119,7 @@
   letter-spacing: 0.06em;
 }
 
-.automation-node__branch--yes { color: #3ECF8E; }
-.automation-node__branch--no  { color: #E5544B; }
+.automation-node__branch--yes { color: #059669; }
+.automation-node__branch--no  { color: #DC2626; }
+.dark .automation-node__branch--yes { color: #3ECF8E; }
+.dark .automation-node__branch--no  { color: #E5544B; }

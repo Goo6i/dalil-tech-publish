@@ -192,7 +192,7 @@ const boardError = computed<string | undefined>(() => {
 
             <p
                 v-if="warning && !previewOnly"
-                class="flex items-start gap-2 rounded-lg border-2 border-foreground bg-rose-50 p-2 text-xs font-semibold text-rose-700"
+                class="flex items-start gap-2 rounded-lg border-2 border-foreground bg-destructive/10 p-2 text-xs font-semibold text-destructive"
             >
                 <IconAlertTriangle class="mt-0.5 size-3.5 shrink-0" />
                 {{ $t(`posts.form.warnings.${warning.key}`, warning.params) }}

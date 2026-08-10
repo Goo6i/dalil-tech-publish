@@ -89,7 +89,7 @@ const onKeydown = (event: KeyboardEvent): void => {
 const KNOWN_EXPR_STYLE =
     'background-color:color-mix(in srgb,var(--primary) 16%,transparent);color:var(--primary);border-radius:4px;padding:1px 3px;font-weight:600;';
 const UNKNOWN_EXPR_STYLE =
-    'background-color:color-mix(in srgb,#f59e0b 18%,transparent);color:#b45309;border-radius:4px;padding:1px 3px;font-weight:600;text-decoration:underline wavy #f59e0b;';
+    'background-color:color-mix(in srgb,var(--warning) 18%,transparent);color:var(--warning);border-radius:4px;padding:1px 3px;font-weight:600;text-decoration:underline wavy var(--warning);';
 
 const expressionHighlighter = (() => {
     const matcher = new MatchDecorator({

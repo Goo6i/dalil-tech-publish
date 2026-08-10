@@ -120,8 +120,8 @@ const platforms = [
 
             <!-- Dot pattern overlay (subtle). -->
             <div
-                class="pointer-events-none absolute inset-0 opacity-[0.06]"
-                style="background-image: radial-gradient(circle, #0a0a0a 1px, transparent 1px); background-size: 28px 28px;"
+                class="pointer-events-none absolute inset-0 text-foreground opacity-[0.06]"
+                style="background-image: radial-gradient(circle, currentColor 1px, transparent 1px); background-size: 28px 28px;"
             />
 
             <div class="relative flex h-full flex-col items-center justify-center px-12 xl:px-16">

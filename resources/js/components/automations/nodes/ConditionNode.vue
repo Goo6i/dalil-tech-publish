@@ -42,23 +42,23 @@ const summary = computed(() => {
         <Handle
             type="target"
             :position="Position.Left"
-            class="!bg-rose-500"
+            class="!bg-destructive/100"
         />
         <Handle
             :id="ConditionHandle.Yes"
             type="source"
             :position="Position.Right"
-            class="!bg-emerald-500"
+            class="!bg-primary/100"
             :style="{ top: '35%' }"
         />
-        <span class="pointer-events-none absolute left-full top-[35%] z-10 ml-3 -translate-y-1/2 rounded bg-background px-1.5 text-[10px] font-bold uppercase tracking-wider text-emerald-700">yes</span>
+        <span class="pointer-events-none absolute left-full top-[35%] z-10 ml-3 -translate-y-1/2 rounded bg-background px-1.5 text-[10px] font-bold uppercase tracking-wider text-success">yes</span>
         <Handle
             :id="ConditionHandle.No"
             type="source"
             :position="Position.Right"
-            class="!bg-rose-500"
+            class="!bg-destructive/100"
             :style="{ top: '75%' }"
         />
-        <span class="pointer-events-none absolute left-full top-[75%] z-10 ml-3 -translate-y-1/2 rounded bg-background px-1.5 text-[10px] font-bold uppercase tracking-wider text-rose-700">no</span>
+        <span class="pointer-events-none absolute left-full top-[75%] z-10 ml-3 -translate-y-1/2 rounded bg-background px-1.5 text-[10px] font-bold uppercase tracking-wider text-destructive">no</span>
     </div>
 </template>

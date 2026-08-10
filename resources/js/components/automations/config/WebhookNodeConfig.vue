@@ -75,7 +75,7 @@ const isPayloadJsonInvalid = computed(() => !isPayloadTemplateValid(local.value.
                     placeholder='{"content": "{{ post.content }}"}'
                 />
             </div>
-            <p v-if="isPayloadJsonInvalid" class="mt-1 text-xs text-amber-600 dark:text-amber-500">
+            <p v-if="isPayloadJsonInvalid" class="mt-1 text-xs text-warning">
                 {{ $t('automations.config.invalid_json') }}
             </p>
             <InputError :message="errors?.payload_template" class="mt-1" />

@@ -86,7 +86,7 @@ const tabs = computed(() => [
             <!-- New token alert -->
             <div
                 v-if="newToken"
-                class="rounded-xl border-2 border-foreground bg-emerald-50 p-4 shadow-2xs"
+                class="rounded-xl border-2 border-foreground bg-primary/10 p-4 shadow-2xs"
             >
                 <p class="mb-2 text-sm font-bold text-emerald-800">
                     {{ $t('settings.api_keys.new_token_message') }}

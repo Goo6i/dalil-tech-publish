@@ -37,12 +37,12 @@ const summary = computed(() => {
         <Handle
             type="target"
             :position="Position.Left"
-            class="!bg-slate-500"
+            class="!bg-muted-foreground"
         />
         <Handle
             type="source"
             :position="Position.Right"
-            class="!bg-slate-500"
+            class="!bg-muted-foreground"
         />
     </div>
 </template>

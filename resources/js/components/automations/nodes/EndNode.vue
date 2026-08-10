@@ -30,7 +30,7 @@ const summary = computed(() => props.data.reason || null);
         <Handle
             type="target"
             :position="Position.Left"
-            class="!bg-zinc-500"
+            class="!bg-muted-foreground"
         />
     </div>
 </template>

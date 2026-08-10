@@ -615,7 +615,7 @@ onUnmounted(() => {
                     @drop.prevent="handleDrop"
                 >
                     <div class="inline-flex size-12 -rotate-3 items-center justify-center rounded-2xl border-2 border-foreground bg-violet-200 shadow-2xs">
-                        <IconCloudUpload class="size-6 text-foreground" stroke-width="2" />
+                        <IconCloudUpload class="size-6 text-neutral-900" stroke-width="2" />
                     </div>
                     <p class="text-sm font-semibold text-foreground">{{ trans('assets.upload.drag_drop') }}</p>
                     <p class="text-xs text-muted-foreground">{{ trans('assets.upload.formats') }}</p>
@@ -677,7 +677,7 @@ onUnmounted(() => {
                             />
                             <div
                                 v-else-if="isDocument(asset)"
-                                class="flex size-full flex-col items-center justify-center gap-1.5 bg-rose-50 p-3 text-center"
+                                class="flex size-full flex-col items-center justify-center gap-1.5 bg-destructive/10 p-3 text-center"
                             >
                                 <IconFileTypePdf class="size-9 text-rose-600" />
                                 <span class="line-clamp-2 break-all text-[11px] font-medium text-muted-foreground">{{ asset.original_filename }}</span>
@@ -720,7 +720,7 @@ onUnmounted(() => {
                                     data-testid="gallery-asset-delete"
                                     @click.stop="handleDelete(asset.id)"
                                 >
-                                    <IconTrash class="size-4 text-rose-700" />
+                                    <IconTrash class="size-4 text-destructive" />
                                 </Button>
                             </div>
                             <div class="space-y-0.5">

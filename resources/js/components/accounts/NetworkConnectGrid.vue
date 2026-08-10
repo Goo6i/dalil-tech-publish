@@ -231,15 +231,15 @@ const cardState = computed((): Record<string, CardStateValue> => {
                 :class="[
                     'group relative flex flex-col items-center gap-3 rounded-xl border-2 border-foreground p-4 text-center shadow-xs transition-shadow',
                     cardState[platform.value] === CardState.Connected
-                        ? 'bg-emerald-50'
+                        ? 'bg-primary/10'
                         : cardState[platform.value] === CardState.Reconnect
-                          ? 'bg-amber-50'
+                          ? 'bg-warning/10'
                           : 'bg-card hover:shadow-md',
                 ]"
             >
                 <span
                     v-if="cardState[platform.value] === CardState.Connected"
-                    class="absolute -top-2 -right-2 inline-flex size-6 items-center justify-center rounded-full border-2 border-foreground bg-emerald-200 text-emerald-700 shadow-2xs"
+                    class="absolute -top-2 -right-2 inline-flex size-6 items-center justify-center rounded-full border-2 border-foreground bg-emerald-200 text-success shadow-2xs"
                     aria-hidden="true"
                 >
                     <IconCheck class="size-3.5" stroke-width="3" />

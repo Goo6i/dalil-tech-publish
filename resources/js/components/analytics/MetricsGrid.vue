@@ -46,17 +46,17 @@ withDefaults(
 // (English regardless of UI locale), so substring matching covers things
 // like "Profile views", "Video views", "Total likes", etc. without a
 // per-platform mapping.
-type StickerTone = { bg: string; rotate: string };
+type StickerTone = { bg: string; ink: string; rotate: string };
 
 const TONES = {
-    eye: { bg: 'bg-violet-200', rotate: '-rotate-2' },
-    heart: { bg: 'bg-rose-200', rotate: 'rotate-2' },
-    chat: { bg: 'bg-sky-200', rotate: '-rotate-1' },
-    share: { bg: 'bg-emerald-200', rotate: 'rotate-1' },
-    star: { bg: 'bg-amber-200', rotate: '-rotate-2' },
-    play: { bg: 'bg-fuchsia-200', rotate: 'rotate-1' },
-    users: { bg: 'bg-cyan-200', rotate: '-rotate-1' },
-    default: { bg: 'bg-foreground/10', rotate: 'rotate-1' },
+    eye: { bg: 'bg-violet-200', ink: 'text-neutral-900', rotate: '-rotate-2' },
+    heart: { bg: 'bg-rose-200', ink: 'text-neutral-900', rotate: 'rotate-2' },
+    chat: { bg: 'bg-sky-200', ink: 'text-neutral-900', rotate: '-rotate-1' },
+    share: { bg: 'bg-emerald-200', ink: 'text-neutral-900', rotate: 'rotate-1' },
+    star: { bg: 'bg-amber-200', ink: 'text-neutral-900', rotate: '-rotate-2' },
+    play: { bg: 'bg-fuchsia-200', ink: 'text-neutral-900', rotate: 'rotate-1' },
+    users: { bg: 'bg-cyan-200', ink: 'text-neutral-900', rotate: '-rotate-1' },
+    default: { bg: 'bg-muted', ink: 'text-muted-foreground', rotate: 'rotate-1' },
 } satisfies Record<string, StickerTone>;
 
 interface Mapping {
@@ -68,25 +68,25 @@ interface Mapping {
 // across English, Portuguese, and Spanish so icons render correctly regardless
 // of the active locale. Order matters — earlier rules win.
 const MATCHES: Array<{ keys: string[]; mapping: Mapping }> = [
-    { keys: ['view', 'visualiz', 'vista', 'impress', 'impres', 'reach', 'alcanc'], mapping: { icon: IconEye, tone: TONES.eye } },
-    { keys: ['like', 'curtid', 'me gust', 'favour', 'favorit', 'reaction', 'love'], mapping: { icon: IconHeart, tone: TONES.heart } },
-    { keys: ['reply', 'replies', 'respost', 'respue', 'comment', 'coment'], mapping: { icon: IconMessage, tone: TONES.chat } },
-    { keys: ['repost', 'reblog', 'retweet'], mapping: { icon: IconRepeat, tone: TONES.share } },
-    { keys: ['quote', 'cita'], mapping: { icon: IconQuote, tone: TONES.share } },
-    { keys: ['save', 'salv', 'guardad', 'bookmark'], mapping: { icon: IconBookmark, tone: TONES.star } },
-    { keys: ['watch', 'duration', 'duraç', 'duración', 'minut', 'tempo', 'time'], mapping: { icon: IconClock, tone: TONES.play } },
-    { keys: ['video', 'vídeo', 'play'], mapping: { icon: IconPlayerPlay, tone: TONES.play } },
-    { keys: ['follower', 'seguidor', 'subscriber', 'inscrit', 'suscrip', 'audience'], mapping: { icon: IconUserPlus, tone: TONES.users } },
-    { keys: ['profile', 'perfil', 'visit'], mapping: { icon: IconUsers, tone: TONES.users } },
-    { keys: ['click', 'cliqu', 'clic'], mapping: { icon: IconClick, tone: TONES.share } },
-    { keys: ['tap', 'pointer'], mapping: { icon: IconPointer, tone: TONES.share } },
-    { keys: ['engage', 'engaj', 'engagement', 'interacti', 'interaç'], mapping: { icon: IconActivity, tone: TONES.heart } },
+    { keys: ['view', 'visualiz', 'vista', 'impress', 'impres', 'reach', 'alcanc', 'مشاهد', 'ظهور', 'انطباع', 'وصول'], mapping: { icon: IconEye, tone: TONES.eye } },
+    { keys: ['like', 'curtid', 'me gust', 'favour', 'favorit', 'reaction', 'love', 'عجاب', 'اعجاب'], mapping: { icon: IconHeart, tone: TONES.heart } },
+    { keys: ['reply', 'replies', 'respost', 'respue', 'comment', 'coment', 'تعليق', 'ردود'], mapping: { icon: IconMessage, tone: TONES.chat } },
+    { keys: ['repost', 'reblog', 'retweet', 'إعادة نشر'], mapping: { icon: IconRepeat, tone: TONES.share } },
+    { keys: ['quote', 'cita', 'اقتباس'], mapping: { icon: IconQuote, tone: TONES.share } },
+    { keys: ['save', 'salv', 'guardad', 'bookmark', 'حفظ', 'محفوظ'], mapping: { icon: IconBookmark, tone: TONES.star } },
+    { keys: ['watch', 'duration', 'duraç', 'duración', 'minut', 'tempo', 'time', 'مدة', 'دقائق'], mapping: { icon: IconClock, tone: TONES.play } },
+    { keys: ['video', 'vídeo', 'play', 'فيديو', 'مقاطع'], mapping: { icon: IconPlayerPlay, tone: TONES.play } },
+    { keys: ['follower', 'seguidor', 'subscriber', 'inscrit', 'suscrip', 'audience', 'متابع', 'مشترك', 'جمهور'], mapping: { icon: IconUserPlus, tone: TONES.users } },
+    { keys: ['profile', 'perfil', 'visit', 'ملف', 'زيار', 'زوار'], mapping: { icon: IconUsers, tone: TONES.users } },
+    { keys: ['click', 'cliqu', 'clic', 'نقر'], mapping: { icon: IconClick, tone: TONES.share } },
+    { keys: ['tap', 'pointer', 'ضغط'], mapping: { icon: IconPointer, tone: TONES.share } },
+    { keys: ['engage', 'engaj', 'engagement', 'interacti', 'interaç', 'تفاعل'], mapping: { icon: IconActivity, tone: TONES.heart } },
     { keys: ['thumb'], mapping: { icon: IconThumbUp, tone: TONES.share } },
-    { keys: ['shar', 'compart'], mapping: { icon: IconShare, tone: TONES.share } },
+    { keys: ['shar', 'compart', 'مشارك'], mapping: { icon: IconShare, tone: TONES.share } },
 ];
 
 const matchMetric = (label: string): Mapping => {
-    const haystack = label.toLowerCase();
+    const haystack = label.toLowerCase().replace(/[\u064B-\u0652\u0670\u0640]/g, '');
     for (const { keys, mapping } of MATCHES) {
         if (keys.some((k) => haystack.includes(k))) return mapping;
     }
@@ -121,7 +121,7 @@ const matchMetric = (label: string): Mapping => {
                             matchMetric(metric.label).tone.rotate,
                         ]"
                     >
-                        <component :is="matchMetric(metric.label).icon" class="size-5 text-foreground" stroke-width="2" />
+                        <component :is="matchMetric(metric.label).icon" :class="['size-5', matchMetric(metric.label).tone.ink]" stroke-width="2" />
                     </span>
                 </div>
                 <p class="mt-3 text-3xl font-bold tabular-nums tracking-tight text-foreground">

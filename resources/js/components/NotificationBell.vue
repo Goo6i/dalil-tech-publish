@@ -196,7 +196,7 @@ onBeforeUnmount(() => {
         <IconBell class="size-4" />
         <span
             v-if="unreadCount > 0"
-            class="absolute -right-1 -top-1 inline-flex size-4 items-center justify-center rounded-full border-2 border-foreground bg-rose-100 text-[9px] font-bold text-rose-700 shadow-2xs"
+            class="absolute -right-1 -top-1 inline-flex size-4 items-center justify-center rounded-full border-2 border-foreground bg-rose-100 text-[9px] font-bold text-destructive shadow-2xs"
         >
             {{ unreadCount > 9 ? '9+' : unreadCount }}
         </span>
@@ -248,7 +248,7 @@ onBeforeUnmount(() => {
                         </Tooltip>
                         <button
                             type="button"
-                            class="inline-flex size-7 max-sm:size-9 cursor-pointer items-center justify-center rounded-full border-2 border-foreground bg-card text-foreground shadow-2xs transition-all hover:-rotate-90 hover:bg-rose-100 hover:text-rose-700"
+                            class="inline-flex size-7 max-sm:size-9 cursor-pointer items-center justify-center rounded-full border-2 border-foreground bg-card text-foreground shadow-2xs transition-all hover:-rotate-90 hover:bg-rose-100 hover:text-destructive"
                             @click="close"
                         >
                             <IconX class="size-3.5" stroke-width="2.5" />
@@ -296,7 +296,7 @@ onBeforeUnmount(() => {
                     <!-- Empty state -->
                     <div v-else-if="!loading" class="flex flex-col items-center justify-center gap-3 px-6 py-12 text-center">
                         <div class="inline-flex size-12 -rotate-3 items-center justify-center rounded-2xl border-2 border-foreground bg-violet-200 shadow-2xs">
-                            <IconInbox class="size-6 text-foreground" stroke-width="2" />
+                            <IconInbox class="size-6 text-neutral-900" stroke-width="2" />
                         </div>
                         <p class="text-base font-bold text-foreground" style="font-family: var(--font-display)">
                             {{ $t('sidebar.no_notifications') }}

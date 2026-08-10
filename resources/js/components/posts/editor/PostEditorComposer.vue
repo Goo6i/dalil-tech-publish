@@ -99,7 +99,7 @@ const limitsWithUsage = computed(() =>
 );
 
 const limitClass = (state: string): string => {
-    if (state === 'over') return 'border-foreground bg-rose-100 text-rose-700';
+    if (state === 'over') return 'border-foreground bg-rose-100 text-destructive';
     if (state === 'warn') return 'border-foreground bg-amber-100 text-amber-800';
     return 'border-foreground bg-card text-foreground';
 };
@@ -266,7 +266,7 @@ const onAltTextSave = (alt: string): void => {
                         />
                         <div
                             v-else-if="isDocument(item)"
-                            class="flex h-full w-full flex-col items-center justify-center gap-1 bg-rose-50 p-2 text-center"
+                            class="flex h-full w-full flex-col items-center justify-center gap-1 bg-destructive/10 p-2 text-center"
                         >
                             <IconFileTypePdf class="size-7 text-rose-600" />
                             <span class="line-clamp-2 break-all text-[10px] font-medium text-muted-foreground">{{ item.original_filename || 'PDF' }}</span>
@@ -301,7 +301,7 @@ const onAltTextSave = (alt: string): void => {
                         <TooltipProvider v-if="mediaIssues[item.id]" :delay-duration="100">
                             <Tooltip>
                                 <TooltipTrigger as-child>
-                                    <span class="absolute bottom-1.5 right-1.5 inline-flex h-5 items-center gap-0.5 rounded-full border-2 border-foreground bg-rose-100 px-1.5 text-[10px] font-bold text-rose-700 shadow-2xs">
+                                    <span class="absolute bottom-1.5 right-1.5 inline-flex h-5 items-center gap-0.5 rounded-full border-2 border-foreground bg-rose-100 px-1.5 text-[10px] font-bold text-destructive shadow-2xs">
                                         <IconAlertTriangle class="size-2.5" />
                                         {{ mediaIssues[item.id].length }}
                                     </span>
@@ -350,7 +350,7 @@ const onAltTextSave = (alt: string): void => {
                         <button
                             v-if="!readOnly"
                             type="button"
-                            class="absolute right-1.5 top-1.5 inline-flex size-6 cursor-pointer items-center justify-center rounded-md border-2 border-foreground bg-card text-foreground opacity-100 shadow-2xs lg:opacity-0 transition-all hover:bg-rose-100 hover:text-rose-700 lg:group-hover:opacity-100 lg:group-focus:opacity-100"
+                            class="absolute right-1.5 top-1.5 inline-flex size-6 cursor-pointer items-center justify-center rounded-md border-2 border-foreground bg-card text-foreground opacity-100 shadow-2xs lg:opacity-0 transition-all hover:bg-rose-100 hover:text-destructive lg:group-hover:opacity-100 lg:group-focus:opacity-100"
                             data-testid="media-remove"
                             @click.stop="removeMedia(item.id)"
                         >
@@ -473,7 +473,7 @@ const onAltTextSave = (alt: string): void => {
                     aria-hidden="true"
                     class="pointer-events-none absolute inset-0 whitespace-pre-wrap break-words p-0 font-sans text-base leading-[1.7] text-transparent"
                 >
-                    <span>{{ overflowParts.fits }}</span><span class="rounded-sm bg-rose-100 text-rose-700">{{ overflowParts.overflow }}</span>
+                    <span>{{ overflowParts.fits }}</span><span class="rounded-sm bg-rose-100 text-destructive">{{ overflowParts.overflow }}</span>
                 </div>
                 <textarea
                     v-model="content"

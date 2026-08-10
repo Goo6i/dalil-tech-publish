@@ -45,8 +45,8 @@ const focusFirstInput = () => {
             :title="$t('settings.delete_account.heading')"
             :description="$t('settings.delete_account.description')"
         />
-        <div class="space-y-4 rounded-xl border-2 border-foreground bg-rose-50 p-4 shadow-2xs">
-            <div class="relative space-y-0.5 text-rose-700">
+        <div class="space-y-4 rounded-xl border-2 border-foreground bg-destructive/10 p-4 shadow-2xs">
+            <div class="relative space-y-0.5 text-destructive">
                 <p class="font-bold">{{ $t('settings.delete_account.warning') }}</p>
                 <p class="text-sm font-medium">
                     {{ $t('settings.delete_account.warning_message') }}

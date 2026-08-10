@@ -111,7 +111,7 @@ watch(open, () => {
                 <div v-if="status !== 'idle'" class="grid gap-2">
                     <Label class="text-[11px] font-black uppercase tracking-widest text-muted-foreground">{{ $t('posts.ai.generate.preview_label') }}</Label>
                     <div class="min-h-[120px] whitespace-pre-wrap break-words rounded-lg border-2 border-foreground bg-card px-3 py-2 text-sm font-medium text-foreground shadow-2xs">{{ previewText || '...' }}</div>
-                    <p v-if="status === 'failed'" class="text-xs font-semibold text-rose-700">{{ errorMessage }}</p>
+                    <p v-if="status === 'failed'" class="text-xs font-semibold text-destructive">{{ errorMessage }}</p>
                 </div>
             </div>
 

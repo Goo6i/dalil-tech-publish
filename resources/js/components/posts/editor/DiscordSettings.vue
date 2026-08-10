@@ -235,10 +235,10 @@ const updateEmbed = (index: number, patch: Partial<EmbedDraft>) =>
                     <span
                         v-for="mention in mentions"
                         :key="mention.token"
-                        class="inline-flex items-center gap-1 rounded-full border-2 border-foreground/30 bg-indigo-50 px-2 py-0.5 text-xs font-semibold text-indigo-950"
+                        class="inline-flex items-center gap-1 rounded-full border-2 border-foreground/30 bg-muted px-2 py-0.5 text-xs font-semibold text-foreground"
                     >
                         {{ mention.label }}
-                        <button type="button" :disabled="disabled" class="text-indigo-950/50 hover:text-indigo-950" @click="removeMention(mention.token)">
+                        <button type="button" :disabled="disabled" class="text-foreground/50 hover:text-foreground" @click="removeMention(mention.token)">
                             <IconX class="size-3" />
                         </button>
                     </span>

@@ -11,3 +11,17 @@
 .json-viewer .hljs-literal     { color: #cf222e; }
 .json-viewer .hljs-punctuation { color: #57606a; }
 .json-viewer .hljs-comment     { color: #6e7781; font-style: italic; }
+
+
+/* Dark theme: GitHub-dark surface + syntax palette, all AA-legible on #0d1117. */
+.dark .json-viewer__body {
+  background: #0d1117;
+  color: #e6edf3;
+}
+
+.dark .json-viewer .hljs-attr        { color: #79c0ff; }
+.dark .json-viewer .hljs-string      { color: #a5d6ff; }
+.dark .json-viewer .hljs-number      { color: #79c0ff; }
+.dark .json-viewer .hljs-literal     { color: #ff7b72; }
+.dark .json-viewer .hljs-punctuation { color: #8b949e; }
+.dark .json-viewer .hljs-comment     { color: #8b949e; font-style: italic; }

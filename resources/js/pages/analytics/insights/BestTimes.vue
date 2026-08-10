@@ -149,14 +149,14 @@ const isBest = (cell: BestTimeCell): boolean => toNum(cell.slot_rank) === 1;
                                     >
                                         <template v-if="isRanked(cell)">
                                             <div class="flex items-center justify-between gap-2">
-                                                <span class="text-lg font-bold tabular-nums text-foreground">
+                                                <span class="text-lg font-bold tabular-nums text-neutral-900">
                                                     {{ formatNumber(toNum(cell.med_views_24h)) }}
                                                 </span>
                                                 <Badge v-if="isBest(cell)" variant="success">
                                                     {{ $t('insights.best_times.cell.best') }}
                                                 </Badge>
                                             </div>
-                                            <p class="mt-0.5 text-[11px] font-medium text-muted-foreground">
+                                            <p class="mt-0.5 text-[11px] font-medium text-neutral-700">
                                                 {{ $t('insights.best_times.cell.median_views_24h') }}
                                                 &middot;
                                                 {{ $t('insights.best_times.cell.n', { n: toNum(cell.n_scored) }) }}
