@@ -18,9 +18,9 @@ export const badgeVariants = cva(
         destructive:
           "bg-destructive text-white [a&]:hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40",
         success:
-          "bg-emerald-200 text-foreground [a&]:hover:bg-emerald-300",
+          "bg-emerald-200 text-emerald-950 [a&]:hover:bg-emerald-300",
         warning:
-          "bg-amber-200 text-foreground [a&]:hover:bg-amber-300",
+          "bg-amber-200 text-amber-950 [a&]:hover:bg-amber-300",
         outline:
           "bg-card text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
       },
