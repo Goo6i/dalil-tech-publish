@@ -76,6 +76,7 @@ const MATCHES: Array<{ keys: string[]; mapping: Mapping }> = [
     { keys: ['save', 'salv', 'guardad', 'bookmark', 'حفظ', 'محفوظ'], mapping: { icon: IconBookmark, tone: TONES.star } },
     { keys: ['watch', 'duration', 'duraç', 'duración', 'minut', 'tempo', 'time', 'مدة', 'دقائق'], mapping: { icon: IconClock, tone: TONES.play } },
     { keys: ['video', 'vídeo', 'play', 'فيديو', 'مقاطع'], mapping: { icon: IconPlayerPlay, tone: TONES.play } },
+    { keys: ['following', 'تتابع'], mapping: { icon: IconUsers, tone: TONES.users } },
     { keys: ['follower', 'seguidor', 'subscriber', 'inscrit', 'suscrip', 'audience', 'متابع', 'مشترك', 'جمهور'], mapping: { icon: IconUserPlus, tone: TONES.users } },
     { keys: ['profile', 'perfil', 'visit', 'ملف', 'زيار', 'زوار'], mapping: { icon: IconUsers, tone: TONES.users } },
     { keys: ['click', 'cliqu', 'clic', 'نقر'], mapping: { icon: IconClick, tone: TONES.share } },
