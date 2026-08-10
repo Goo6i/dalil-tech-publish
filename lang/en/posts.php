@@ -241,6 +241,10 @@ return [
             'apply' => 'Use this content',
             'retry' => 'Try again',
             'cancel' => 'Cancel',
+            'errors' => [
+                'start_failed' => 'Could not start generation.',
+                'generation_failed' => 'AI generation failed.',
+            ],
         ],
         'review' => [
             'button_tooltip' => 'Review with AI',
