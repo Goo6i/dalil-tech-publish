@@ -7,7 +7,7 @@ return [
     'select_title' => 'مساحات العمل الخاصة بك',
     'select_description' => 'اختر مساحة عمل للمتابعة',
     'current' => 'الحالية',
-    'connections' => ':count اتصال',
+    'connections' => ':count حساب متصل',
     'posts' => ':count منشور',
 
     'create' => [
