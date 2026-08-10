@@ -4,14 +4,12 @@ import {
     IconAffiliate,
     IconAlertTriangle,
     IconBolt,
-    IconBrandX,
     IconCalendar,
     IconChartBar,
     IconChevronRight,
     IconClock,
     IconFileCheck,
     IconFileText,
-    IconGift,
     IconHash,
     IconLifebuoy,
     IconPhoto,
@@ -19,7 +17,6 @@ import {
     IconPlus,
     IconSelector,
     IconTag,
-    IconBrandGithub,
 } from '@tabler/icons-vue';
 import { trans } from 'laravel-vue-i18n';
 import { computed } from 'vue';
@@ -155,19 +152,9 @@ const workspaceNavItems = computed<NavItem[]>(() => [
 
 const supportNavItems = computed(() => [
     {
-        title: trans('sidebar.support.stay_updated'),
-        href: 'https://dalil-tech.com',
-        icon: IconBrandX,
-    },
-    {
         title: trans('sidebar.support.docs'),
         href: 'https://dalil-tech.com/publish',
         icon: IconLifebuoy,
-    },
-    {
-        title: 'Source code',
-        href: 'https://github.com/Goo6i/dalil-tech-publish',
-        icon: IconBrandGithub,
     },
 ]);
 
