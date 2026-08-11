@@ -25,6 +25,8 @@ class PostImageRegenerator implements Agent, HasStructuredOutput
     {
         return view('prompts.post_image.regenerator', [
             'content_language' => $this->workspace->content_language ?: 'en',
+            'language_name' => (\App\Enums\Workspace\ContentLanguage::tryFrom((string) ($this->workspace->content_language ?? '')) ?? \App\Enums\Workspace\ContentLanguage::DEFAULT)->englishName(),
+            'language_native' => (\App\Enums\Workspace\ContentLanguage::tryFrom((string) ($this->workspace->content_language ?? '')) ?? \App\Enums\Workspace\ContentLanguage::DEFAULT)->label(),
         ])->render();
     }
 

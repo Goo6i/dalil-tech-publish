@@ -7,7 +7,7 @@ Brand voice:
 @include('prompts.post_content._voice', ['brand_voice_traits' => $brand_voice_traits])
 @endif
 
-Output language: {{ $content_language ?? 'en' }}.
+@include('prompts.post_content._language')
 
 Rules:
 - Return ONLY suggestions. Do NOT rewrite the whole post. Do NOT change the author's voice or tone.

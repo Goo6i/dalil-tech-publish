@@ -44,6 +44,8 @@ class PostContentHumanizer implements Agent, HasStructuredOutput
             'brand_name' => $this->workspace->name ?? '',
             'brand_voice_traits' => $this->applyBrandVoice ? ($this->workspace->brand_voice_traits ?? []) : [],
             'content_language' => $this->workspace->content_language,
+            'language_name' => (\App\Enums\Workspace\ContentLanguage::tryFrom((string) ($this->workspace->content_language ?? '')) ?? \App\Enums\Workspace\ContentLanguage::DEFAULT)->englishName(),
+            'language_native' => (\App\Enums\Workspace\ContentLanguage::tryFrom((string) ($this->workspace->content_language ?? '')) ?? \App\Enums\Workspace\ContentLanguage::DEFAULT)->label(),
             'format' => $this->format->value,
             'hard_max_chars' => $budget['hard_max_chars'],
             'target_chars' => $budget['target_chars'],
