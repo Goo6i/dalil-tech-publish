@@ -146,7 +146,7 @@ test('existing google user login consumes the utm session so utms do not leak to
     $this->get(route('auth.google.callback'))
         ->assertRedirect(route('app.home'));
 
-    expect(session()->get('utm_parameters'))->toBeNull();
+    expect(session()->get('attribution_parameters'))->toBeNull();
 });
 
 test('invitation registration does not include utm parameters in its redirect', function () {
