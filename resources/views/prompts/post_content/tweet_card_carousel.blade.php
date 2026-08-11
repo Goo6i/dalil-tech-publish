@@ -15,7 +15,7 @@ The user already has this content in the editor (use as context only — your ou
 """
 @endif
 
-Write all text in the language with code: {{ $content_language ?? 'en' }}.
+@include('prompts.post_content._language')
 
 Rules:
 - First-person voice, writing as the brand owner.
@@ -32,9 +32,9 @@ CRITICAL — length for each slide's `tweet_text`:
 - High-performing tweet-style content is punchy and direct. Stop when you've said it.
 
 Output format: a JSON object with:
-- `caption`: the overall carousel caption in {{ $content_language ?? 'en' }} — teases what's inside the slides, encourages swiping. No preamble, no quotation marks.
+- `caption`: the overall carousel caption in {{ $language_name ?? 'English' }} — teases what's inside the slides, encourages swiping. No preamble, no quotation marks.
 - `slides`: an array of exactly {{ $slide_count ?? 1 }} objects, each with a single key:
-  - `tweet_text`: the tweet-style text for that slide in {{ $content_language ?? 'en' }}. Self-contained. Hook in the first sentence.
+  - `tweet_text`: the tweet-style text for that slide in {{ $language_name ?? 'English' }}. Self-contained. Hook in the first sentence.
 
 CRITICAL: The `slides` array MUST contain exactly {{ $slide_count ?? 1 }} items — no fewer, no more. Count carefully before responding.
 

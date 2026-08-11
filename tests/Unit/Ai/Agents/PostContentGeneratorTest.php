@@ -21,7 +21,7 @@ test('instructions render brand context', function () {
     expect($instructions)->toContain('TryPost');
     expect($instructions)->toContain('friendly'); // "Be warm and friendly."
     expect($instructions)->toContain('direct'); // "Use direct, plain, accessible language."
-    expect($instructions)->toContain('en');
+    expect($instructions)->toContain('English');
 });
 
 test('instructions omit brand description and voice when applyBrandVoice is false', function () {
@@ -39,7 +39,7 @@ test('instructions omit brand description and voice when applyBrandVoice is fals
     expect($instructions)->not->toContain('first person');
     expect($instructions)->not->toContain('behind-the-scenes');
     // Language still applies — it isn't part of the brand voice.
-    expect($instructions)->toContain('en');
+    expect($instructions)->toContain('English');
 });
 
 test('instructions include current_content when provided', function () {

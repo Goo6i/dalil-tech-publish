@@ -15,7 +15,7 @@ The user already has this content in the editor (use as context only — your ou
 """
 @endif
 
-Write all text in the language with code: {{ $content_language ?? 'en' }}.
+@include('prompts.post_content._language')
 
 Rules:
 - First-person voice, writing as the brand owner.
@@ -38,9 +38,9 @@ Image keywords rules (per slide):
 - The photo will be blurred and darkened — choose scenes that work as textured backgrounds.
 
 Output format: a JSON object with:
-- `caption`: the overall carousel caption in {{ $content_language ?? 'en' }} — teases what's inside the slides, encourages swiping. No preamble, no quotation marks.
+- `caption`: the overall carousel caption in {{ $language_name ?? 'English' }} — teases what's inside the slides, encourages swiping. No preamble, no quotation marks.
 - `slides`: an array of exactly {{ $slide_count ?? 1 }} objects, each with:
-  - `tweet_text`: the tweet-style text for that slide in {{ $content_language ?? 'en' }}. Self-contained. Hook in the first sentence.
+  - `tweet_text`: the tweet-style text for that slide in {{ $language_name ?? 'English' }}. Self-contained. Hook in the first sentence.
   - `image_keywords`: an array of 2-4 English strings for this slide's background photo.
 
 CRITICAL: The `slides` array MUST contain exactly {{ $slide_count ?? 1 }} items — no fewer, no more. Count carefully before responding.

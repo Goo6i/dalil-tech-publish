@@ -36,6 +36,8 @@ class PostContentStreamer implements Agent
             'brand_description' => $this->workspace->brand_description ?? '',
             'brand_voice_traits' => $this->workspace->brand_voice_traits ?? [],
             'content_language' => $this->workspace->content_language,
+            'language_name' => (\App\Enums\Workspace\ContentLanguage::tryFrom((string) ($this->workspace->content_language ?? '')) ?? \App\Enums\Workspace\ContentLanguage::DEFAULT)->englishName(),
+            'language_native' => (\App\Enums\Workspace\ContentLanguage::tryFrom((string) ($this->workspace->content_language ?? '')) ?? \App\Enums\Workspace\ContentLanguage::DEFAULT)->label(),
             'current_content' => $this->currentContent,
             'format' => GeneratorFormat::Single->value,
             'slide_count' => 1,
