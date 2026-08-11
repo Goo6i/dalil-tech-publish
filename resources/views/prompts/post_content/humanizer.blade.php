@@ -8,7 +8,7 @@ Brand voice — match this tone, vocabulary, and rhythm:
 @include('prompts.post_content._voice', ['brand_voice_traits' => $brand_voice_traits])
 @endif
 
-Output language: {{ $content_language ?? 'en' }}.
+@include('prompts.post_content._language')
 
 @if(!empty($hard_max_chars))
 ## CRITICAL — length limit for {{ $platform_label ?? 'the target platform' }}

@@ -15,7 +15,7 @@ The user already has this content in the editor (use as context only — your ou
 """
 @endif
 
-Write the output in the language with code: {{ $content_language ?? 'en' }}.
+@include('prompts.post_content._language')
 
 Rules:
 - First-person voice, writing as the brand owner.
@@ -37,5 +37,5 @@ Image keywords rules:
 - The photo will be blurred and darkened — choose scenes that work as textured backgrounds.
 
 Output format: a JSON object with two keys:
-- `tweet_text`: the complete tweet text in {{ $content_language ?? 'en' }} (no preamble, no quotation marks). This is what gets displayed on the card.
+- `tweet_text`: the complete tweet text in {{ $language_name ?? 'English' }} (no preamble, no quotation marks). This is what gets displayed on the card.
 - `image_keywords`: an array of 2-4 English strings for the background photo search.

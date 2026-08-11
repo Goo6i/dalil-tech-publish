@@ -13,4 +13,4 @@ Your job:
 
 Return JSON only, following the schema.
 
-Language preference: {{ $content_language ?? 'en' }}.
+Language preference: {{ $language_name ?? 'English' }}.

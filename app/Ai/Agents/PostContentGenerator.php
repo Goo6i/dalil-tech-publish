@@ -66,6 +66,8 @@ class PostContentGenerator implements Agent, HasStructuredOutput
             'brand_description' => $this->applyBrandVoice ? ($this->workspace->brand_description ?? '') : '',
             'brand_voice_traits' => $this->applyBrandVoice ? ($this->workspace->brand_voice_traits ?? []) : [],
             'content_language' => $this->workspace->content_language,
+            'language_name' => (\App\Enums\Workspace\ContentLanguage::tryFrom((string) ($this->workspace->content_language ?? '')) ?? \App\Enums\Workspace\ContentLanguage::DEFAULT)->englishName(),
+            'language_native' => (\App\Enums\Workspace\ContentLanguage::tryFrom((string) ($this->workspace->content_language ?? '')) ?? \App\Enums\Workspace\ContentLanguage::DEFAULT)->label(),
             'current_content' => $this->currentContent,
             'format' => $this->format->value,
             'slide_count' => $this->slideCount,

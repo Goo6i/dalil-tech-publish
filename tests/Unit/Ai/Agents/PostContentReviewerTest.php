@@ -19,7 +19,7 @@ test('instructions render brand context and language', function () {
     expect($instructions)->toContain('TryPost');
     expect($instructions)->toContain('friendly'); // "Be warm and friendly."
     expect($instructions)->toContain('short'); // "Keep sentences short and objective."
-    expect($instructions)->toContain('ar');
+    expect($instructions)->toContain('Arabic');
 });
 
 test('schema requires suggestions array with original/suggestion/reason', function () {

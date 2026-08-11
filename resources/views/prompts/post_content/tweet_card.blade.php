@@ -15,7 +15,7 @@ The user already has this content in the editor (use as context only — your ou
 """
 @endif
 
-Write the output in the language with code: {{ $content_language ?? 'en' }}.
+@include('prompts.post_content._language')
 
 Rules:
 - First-person voice, writing as the brand owner.
@@ -32,4 +32,4 @@ CRITICAL — length for {{ $platform_label ?? 'X' }}:
 - Count before responding. Stop when you've said it.
 
 Output format: a JSON object with a single key:
-- `tweet_text`: the complete tweet text in {{ $content_language ?? 'en' }} (no preamble, no quotation marks). This is what gets displayed on the card.
+- `tweet_text`: the complete tweet text in {{ $language_name ?? 'English' }} (no preamble, no quotation marks). This is what gets displayed on the card.
