@@ -53,7 +53,7 @@ const select = (key: string) => {
                     <p class="truncate text-sm font-bold text-foreground">{{ style.name }}</p>
                     <p v-if="style.description" class="mt-0.5 text-xs leading-snug text-muted-foreground">{{ style.description }}</p>
                 </div>
-                <IconCheck v-if="modelValue === style.key" class="mt-0.5 size-4 shrink-0 text-foreground" stroke-width="3" />
+                <IconCheck v-if="modelValue === style.key" class="mt-0.5 size-4 shrink-0 text-neutral-900" stroke-width="3" />
             </div>
         </button>
     </div>
@@ -91,7 +91,7 @@ const select = (key: string) => {
                     <p class="text-sm font-bold text-foreground">{{ style.name }}</p>
                     <p v-if="style.description" class="mt-0.5 text-xs leading-snug text-muted-foreground">{{ style.description }}</p>
                 </div>
-                <IconCheck v-if="modelValue === style.key" class="mr-1 size-4 shrink-0 text-foreground" stroke-width="3" />
+                <IconCheck v-if="modelValue === style.key" class="mr-1 size-4 shrink-0 text-neutral-900" stroke-width="3" />
             </button>
         </CollapsibleContent>
     </Collapsible>

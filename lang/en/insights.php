@@ -7,7 +7,7 @@ return [
 
     'tabs' => [
         'nav_label' => 'Analytics view',
-        'live' => 'Live',
+        'live' => 'Latest',
         'insights' => 'Insights',
         'best_times' => 'Best Times',
     ],

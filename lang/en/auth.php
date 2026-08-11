@@ -56,9 +56,6 @@ return [
     'or_continue_with_email' => 'Or continue with email',
     'google_login' => 'Log in with Google',
     'google_signup' => 'Sign up with Google',
-    'github_login' => 'Log in with GitHub',
-    'github_signup' => 'Sign up with GitHub',
-    'github_email_unavailable' => 'Unable to retrieve your email from GitHub. Make your GitHub email public or grant the email scope, then try again.',
 
     'signup_success' => [
         'page_title' => 'Welcome',

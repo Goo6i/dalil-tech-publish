@@ -441,7 +441,7 @@ const defaultEdgeOptions = {
         type: MarkerType.ArrowClosed,
         width: 18,
         height: 18,
-        color: '#9BA6B4',
+        color: 'var(--foreground)',
     },
 };
 </script>
@@ -498,7 +498,6 @@ const defaultEdgeOptions = {
                         class="automations-canvas"
                     >
                         <Background
-                            pattern-color="#8b919c"
                             :gap="16"
                             :size="1.4"
                         />
@@ -556,7 +555,7 @@ const defaultEdgeOptions = {
                 class="flex flex-1 flex-col items-center justify-center gap-3 p-8 text-center lg:hidden"
             >
                 <div class="inline-flex size-14 items-center justify-center rounded-2xl border-2 border-foreground bg-violet-200 shadow-2xs">
-                    <IconDeviceDesktop class="size-7 text-foreground" stroke-width="2" />
+                    <IconDeviceDesktop class="size-7 text-neutral-900" stroke-width="2" />
                 </div>
                 <p class="max-w-sm text-sm text-muted-foreground">{{ $t('automations.mobile_notice') }}</p>
             </div>
@@ -575,6 +574,10 @@ const defaultEdgeOptions = {
 
 .automations-canvas .vue-flow__background {
     background-color: transparent;
+}
+
+.automations-canvas .vue-flow__background circle {
+    fill: var(--muted-foreground);
 }
 
 /* Controls — keep TryPost's ink-border, hard-shadow identity but adopt n8n's

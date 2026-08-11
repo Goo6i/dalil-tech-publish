@@ -88,7 +88,7 @@ const stepHeader = computed(() => {
                             @click="startFromScratch"
                         >
                             <div class="inline-flex size-12 -rotate-2 items-center justify-center rounded-2xl border-2 border-foreground bg-violet-200 shadow-2xs transition-transform group-hover:rotate-0">
-                                <IconPencil class="size-6 text-foreground" stroke-width="2" />
+                                <IconPencil class="size-6 text-neutral-900" stroke-width="2" />
                             </div>
                             <div class="space-y-1">
                                 <p class="text-base font-bold text-foreground">{{ $t('posts.create.scratch_title') }}</p>
@@ -105,7 +105,7 @@ const stepHeader = computed(() => {
                             @click="view = 'ai'"
                         >
                             <div class="inline-flex size-12 rotate-1 items-center justify-center rounded-2xl border-2 border-foreground bg-amber-200 shadow-2xs transition-transform group-hover:rotate-0">
-                                <IconSparkles class="size-6 text-foreground" stroke-width="2" />
+                                <IconSparkles class="size-6 text-neutral-900" stroke-width="2" />
                             </div>
                             <div class="space-y-1">
                                 <p class="text-base font-bold text-foreground">{{ $t('posts.create.ai_title') }}</p>
@@ -125,7 +125,7 @@ const stepHeader = computed(() => {
                             class="group flex flex-col items-start gap-4 rounded-2xl border-2 border-foreground bg-card p-5 text-left shadow-2xs transition-all hover:-translate-y-0.5 hover:shadow-md"
                         >
                             <div class="inline-flex size-12 -rotate-1 items-center justify-center rounded-2xl border-2 border-foreground bg-emerald-200 shadow-2xs transition-transform group-hover:rotate-0">
-                                <IconBookmarks class="size-6 text-foreground" stroke-width="2" />
+                                <IconBookmarks class="size-6 text-neutral-900" stroke-width="2" />
                             </div>
                             <div class="space-y-1">
                                 <p class="text-base font-bold text-foreground">{{ $t('posts.create.template_title') }}</p>

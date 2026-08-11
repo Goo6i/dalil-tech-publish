@@ -65,7 +65,7 @@ return [
             'privacy' => [
                 'public' => 'عام للجميع',
                 'friends' => 'الأصدقاء المتابَعون بشكل متبادل',
-                'followers' => 'المتابِعون',
+                'followers' => 'المتابعون',
                 'private' => 'أنا فقط',
                 'private_disabled_branded' => 'لا يمكن ضبط ظهور المحتوى ذي العلامة التجارية على خاص.',
             ],
@@ -89,7 +89,7 @@ return [
             'branded_cleared_private' => 'تم مسح الخصوصية لأن المحتوى ذا العلامة التجارية لا يمكن أن يكون خاصًا.',
             'interaction_disabled_by_creator' => 'مُعطَّل في إعدادات حسابك على TikTok',
             'max_duration_exceeded' => 'مدة الفيديو :duration ث لكن هذا الحساب يمكنه نشر مقاطع فيديو حتى :max ث فقط.',
-            'processing_hint' => 'بعد النشر، قد يستغرق معالجة المحتوى وظهوره على ملفك الشخصي في TikTok بضع دقائق.',
+            'processing_hint' => 'بعد النشر، قد تستغرق معالجة المحتوى وظهوره على ملفك الشخصي في TikTok بضع دقائق.',
             'creator_info' => [
                 'unavailable' => 'تعذّر تحميل إعدادات النشر لحساب TikTok هذا، لذلك لا يمكن نشر هذا المنشور الآن. أعد المحاولة بعد بضع دقائق.',
                 'spam_risk_too_many_posts' => 'أوقف TikTok النشر مؤقتًا على هذا الحساب بسبب نشر عدد كبير من المنشورات مؤخرًا. أعد المحاولة لاحقًا.',
@@ -299,10 +299,10 @@ return [
         'scheduled_for' => 'مجدول لـ :date',
         'draft' => 'مسودة',
         'status_pending' => 'قيد الانتظار',
-        'metrics' => 'المقاييس',
-        'metrics_loading' => 'جارٍ تحميل المقاييس…',
-        'metrics_unavailable' => 'المقاييس غير متاحة لهذه المنصة بعد.',
-        'metrics_empty' => 'لم تُرجَع أي مقاييس.',
+        'metrics' => 'الإحصائيات',
+        'metrics_loading' => 'جارٍ تحميل الإحصائيات…',
+        'metrics_unavailable' => 'الإحصائيات غير متاحة لهذه المنصة بعد.',
+        'metrics_empty' => 'لا توجد إحصائيات.',
     ],
 
     'edit' => [
@@ -359,7 +359,7 @@ return [
             'document_too_large' => 'يتجاوز ملف PDF حد الحجم لهذه المنصة.',
             'aspect_ratio_invalid' => 'نسبة العرض إلى الارتفاع غير مدعومة في هذا التنسيق.',
             'no_content_type' => 'اختر نوع محتوى لهذه المنصة.',
-            'requires_text' => 'أضِف نصًا — يتطلب هذا التنسيق عنوانًا.',
+            'requires_text' => 'أضِف نصًا: يتطلب هذا التنسيق عنوانًا.',
         ],
         'publishing' => 'جارٍ النشر...',
         'publishing_overlay_title' => 'جارٍ نشر منشورك',
@@ -478,11 +478,11 @@ return [
         ],
         'linkedin_post' => [
             'label' => 'منشور',
-            'description' => 'منشور قياسي — صورة واحدة أو متعددة أو فيديو أو PDF',
+            'description' => 'منشور قياسي: صورة واحدة أو عدة صور أو فيديو أو PDF',
         ],
         'linkedin_page_post' => [
             'label' => 'منشور',
-            'description' => 'منشور قياسي — صورة واحدة أو متعددة أو فيديو أو PDF',
+            'description' => 'منشور قياسي: صورة واحدة أو عدة صور أو فيديو أو PDF',
         ],
         'facebook_post' => [
             'label' => 'منشور',
@@ -572,7 +572,7 @@ return [
     'errors' => [
         'account_disconnected' => 'الحساب الاجتماعي مفصول',
         'account_inactive' => 'الحساب الاجتماعي مُعطَّل',
-        'account_token_expired' => 'انتهت جلسة الحساب الاجتماعي — يرجى إعادة الربط',
+        'account_token_expired' => 'انتهت جلسة الحساب الاجتماعي، يرجى إعادة الربط',
     ],
 
     'delete' => [
@@ -621,16 +621,16 @@ return [
             'loading_page_title' => 'جارٍ إنشاء منشورك',
             'loading_eta' => 'الوقت المقدّر: حوالي :minutes.',
             'loading_eta_minute_one' => 'دقيقة واحدة',
-            'loading_eta_minute_other' => ':count دقيقة',
+            'loading_eta_minute_other' => ':count دقائق',
             'loading_leave_title' => 'يمكنك متابعة عملك.',
             'loading_leave_body' => 'سنُعلمك عندما يصبح المنشور جاهزًا.',
             'loading_leave_cta' => 'الذهاب إلى التقويم',
             'loading_create_another_cta' => 'إنشاء منشور آخر',
-            'loading_tip_credits' => 'تستخدم كل صورة بالذكاء الاصطناعي حوالي 15 من الرصيد.',
+            'loading_tip_credits' => 'تستهلك كل صورة بالذكاء الاصطناعي نحو 15 وحدة من الرصيد.',
             'loading_tip_edit' => 'ستتمكن من تعديل كل شيء بمجرد أن يصبح المنشور جاهزًا.',
-            'loading_tip_draft' => 'تصل المنشورات المُنشأة إلى مسوداتك.',
+            'loading_tip_draft' => 'تُحفظ المنشورات المُنشأة في مسوداتك.',
             'loading_tip_brand' => 'عدّل إعدادات علامتك التجارية للتأثير في المنشورات المستقبلية.',
-            'loading_tip_carousel' => 'تقدّم العروض الدائرية شريحة واحدة لكل صورة مرفوعة.',
+            'loading_tip_carousel' => 'ينشئ العرض الدائري شريحة واحدة لكل صورة مرفوعة.',
             'loading_tip_quality' => 'تم ضبط جودة الصورة لتحقيق توازن بين السرعة والتكلفة.',
             'create' => 'إنشاء منشور',
             'back' => 'رجوع',

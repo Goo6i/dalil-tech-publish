@@ -26,11 +26,18 @@ class TikTokAnalytics
     public function getMetrics(SocialAccount $account): array
     {
         $cacheKey = "analytics:tiktok:{$account->id}";
-        $cacheTtl = app()->isProduction() ? 3600 : 1;
+        $cacheTtl = app()->isProduction() ? 1800 : 1;
 
-        return Cache::remember($cacheKey, $cacheTtl, function () use ($account) {
+        return Cache::remember($cacheKey, $cacheTtl, function () use ($account, $cacheKey, $cacheTtl) {
+            Cache::put("{$cacheKey}:at", now()->toIso8601String(), $cacheTtl);
+
             return $this->fetchMetricsFromApi($account);
         });
+    }
+
+    public function getFetchedAt(SocialAccount $account): ?string
+    {
+        return Cache::get("analytics:tiktok:{$account->id}:at");
     }
 
     private function fetchMetricsFromApi(SocialAccount $account): array

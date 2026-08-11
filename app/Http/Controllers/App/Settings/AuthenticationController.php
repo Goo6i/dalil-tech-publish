@@ -18,7 +18,7 @@ use Laravel\Socialite\Facades\Socialite;
 
 class AuthenticationController extends Controller
 {
-    private const array PROVIDERS = ['google', 'github'];
+    private const array PROVIDERS = ['google'];
 
     public function edit(Request $request): Response
     {
@@ -70,7 +70,6 @@ class AuthenticationController extends Controller
 
         return match ($provider) {
             'google' => Socialite::driver('google-auth')->redirect(),
-            'github' => Socialite::driver('github')->scopes(['read:user', 'user:email'])->redirect(),
         };
     }
 
@@ -126,7 +125,6 @@ class AuthenticationController extends Controller
     {
         $labels = [
             'google' => 'Google',
-            'github' => 'GitHub',
         ];
 
         return collect(self::PROVIDERS)->map(fn (string $provider) => [

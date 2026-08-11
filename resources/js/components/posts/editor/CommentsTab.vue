@@ -579,7 +579,7 @@ watch(() => props.postId, () => {
                                             </Tooltip>
                                             <Tooltip>
                                                 <TooltipTrigger as-child>
-                                                    <button class="rounded p-1 text-muted-foreground hover:bg-rose-100 hover:text-rose-700" @click="deleteComment(comment)"><IconTrash class="h-3.5 w-3.5" /></button>
+                                                    <button class="rounded p-1 text-muted-foreground hover:bg-rose-100 hover:text-destructive" @click="deleteComment(comment)"><IconTrash class="h-3.5 w-3.5" /></button>
                                                 </TooltipTrigger>
                                                 <TooltipContent side="top" class="text-xs">{{ $t('comments.delete') }}</TooltipContent>
                                             </Tooltip>
@@ -685,7 +685,7 @@ watch(() => props.postId, () => {
                                                 </Tooltip>
                                                 <Tooltip>
                                                     <TooltipTrigger as-child>
-                                                        <button class="rounded p-1 text-muted-foreground hover:bg-rose-100 hover:text-rose-700" @click="deleteComment(reply)"><IconTrash class="h-3.5 w-3.5" /></button>
+                                                        <button class="rounded p-1 text-muted-foreground hover:bg-rose-100 hover:text-destructive" @click="deleteComment(reply)"><IconTrash class="h-3.5 w-3.5" /></button>
                                                     </TooltipTrigger>
                                                     <TooltipContent side="top" class="text-xs">{{ $t('comments.delete') }}</TooltipContent>
                                                 </Tooltip>

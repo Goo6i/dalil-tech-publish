@@ -34,8 +34,8 @@ const statusDot = computed(
     () =>
         ({
             draft: 'bg-foreground/30',
-            active: 'bg-emerald-500',
-            paused: 'bg-amber-500',
+            active: 'bg-primary/100',
+            paused: 'bg-warning/100',
         })[props.automation.status] ?? 'bg-foreground/30',
 );
 

@@ -276,7 +276,7 @@ const startGeneration = async () => {
                         />
                     </span>
                     <span class="flex-1 font-semibold text-foreground">{{ $t(`posts.create.steps.format.${format.value}`) }}</span>
-                    <IconCheck v-if="selectedFormat === format.value" class="size-4 text-foreground" stroke-width="3" />
+                    <IconCheck v-if="selectedFormat === format.value" class="size-4 text-neutral-900" stroke-width="3" />
                 </button>
             </div>
         </div>
@@ -315,7 +315,7 @@ const startGeneration = async () => {
                         <p class="truncate text-xs font-bold leading-tight text-foreground">{{ account.display_name }}</p>
                         <p v-if="account.username" class="truncate text-xs font-medium text-muted-foreground">@{{ account.username }}</p>
                     </div>
-                    <IconCheck v-if="selectedAccountId === account.id" class="absolute right-2 top-2 size-3.5 text-foreground" stroke-width="3" />
+                    <IconCheck v-if="selectedAccountId === account.id" class="absolute right-2 top-2 size-3.5 text-neutral-900" stroke-width="3" />
                 </button>
             </div>
         </div>

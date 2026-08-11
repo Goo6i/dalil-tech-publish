@@ -40,12 +40,12 @@ const summary = computed(() => {
         <Handle
             type="target"
             :position="Position.Left"
-            class="!bg-emerald-500"
+            class="!bg-primary/100"
         />
         <Handle
             type="source"
             :position="Position.Right"
-            class="!bg-emerald-500"
+            class="!bg-primary/100"
         />
     </div>
 </template>

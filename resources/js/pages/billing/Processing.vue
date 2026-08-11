@@ -92,8 +92,8 @@ onUnmounted(() => {
     <section class="relative flex min-h-screen items-center justify-center overflow-hidden bg-background px-6">
         <!-- Dot pattern overlay -->
         <div
-            class="pointer-events-none absolute inset-0 opacity-[0.06]"
-            style="background-image: radial-gradient(circle, #0a0a0a 1px, transparent 1px); background-size: 28px 28px;"
+            class="pointer-events-none absolute inset-0 text-foreground opacity-[0.06]"
+            style="background-image: radial-gradient(circle, currentColor 1px, transparent 1px); background-size: 28px 28px;"
         />
 
         <!-- Soft violet glow blobs -->

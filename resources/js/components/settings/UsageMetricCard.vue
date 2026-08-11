@@ -58,7 +58,7 @@ const isOverLimit = computed(
                     rotate,
                 ]"
             >
-                <component :is="icon" class="size-5 text-foreground" stroke-width="2" />
+                <component :is="icon" class="size-5 text-neutral-900" stroke-width="2" />
             </span>
         </div>
 

@@ -64,7 +64,7 @@ test('user can update their locale via cookie', function () {
         ->actingAs($user)
         ->from(route('app.posts.index'))
         ->put(route('app.profile.language'), [
-            'locale' => 'es',
+            'locale' => 'ar',
         ]);
 
     $response

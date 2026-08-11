@@ -45,6 +45,8 @@ test('google callback logs in existing user by email', function () {
 });
 
 test('google callback creates new user when email does not exist', function () {
+    config(['trypost.self_hosted' => false]);
+
     $socialiteUser = new SocialiteUser;
     $socialiteUser->map([
         'id' => '789',
@@ -72,31 +74,26 @@ test('google callback creates new user when email does not exist', function () {
     $this->assertAuthenticatedAs($user);
 });
 
-test('github callback creates new user with a default workspace', function () {
+test('google callback blocks a new signup when registration is closed', function () {
+    config(['trypost.self_hosted' => true]);
+
     $socialiteUser = new SocialiteUser;
     $socialiteUser->map([
-        'id' => '987',
-        'name' => 'New Dev',
-        'email' => 'newdev@example.com',
+        'id' => '999',
+        'name' => 'Blocked User',
+        'email' => 'blocked@example.com',
     ]);
 
     Socialite::shouldReceive('driver')
-        ->with('github')
+        ->with('google-auth')
         ->andReturn($driver = Mockery::mock());
     $driver->shouldReceive('user')->andReturn($socialiteUser);
 
-    $response = $this->get(route('auth.github.callback'));
+    $response = $this->get(route('auth.google.callback'));
 
-    $response->assertRedirect(route('register.success'));
-
-    $user = User::where('email', 'newdev@example.com')->first();
-    expect($user)->not->toBeNull();
-    expect($user->github_id)->toBe('987');
-    expect($user->name)->toBe('New Dev');
-    expect($user->workspaces()->count())->toBe(1);
-    expect($user->workspaces()->first()->name)->toBe("New Dev's Workspace");
-    expect($user->current_workspace_id)->toBe($user->workspaces()->first()->id);
-    $this->assertAuthenticatedAs($user);
+    $response->assertRedirect(route('login'));
+    expect(User::where('email', 'blocked@example.com')->exists())->toBeFalse();
+    $this->assertGuest();
 });
 
 test('google callback marks unverified existing user as verified', function () {

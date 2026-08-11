@@ -107,7 +107,7 @@ const activeContentType = computed((): string | undefined => {
             </PhoneMockup>
             <div v-else class="flex flex-col items-center gap-3 text-center">
                 <div class="inline-flex size-12 -rotate-3 items-center justify-center rounded-2xl border-2 border-foreground bg-violet-200 shadow-2xs">
-                    <IconDeviceMobile class="size-6 text-foreground" stroke-width="2" />
+                    <IconDeviceMobile class="size-6 text-neutral-900" stroke-width="2" />
                 </div>
                 <p
                     class="text-base font-bold text-foreground"

@@ -163,7 +163,7 @@ const changeRole = (member: Member, role: string) => {
                             :aria-label="$t('settings.members.cancel_invite_modal.action')"
                             @click="cancelInvitationModal?.open({ url: destroyInvite.url(invitation.id) })"
                         >
-                            <IconTrash class="size-4 text-rose-700" />
+                            <IconTrash class="size-4 text-destructive" />
                         </Button>
                     </TableCell>
                 </TableRow>

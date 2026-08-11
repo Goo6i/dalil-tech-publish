@@ -1,0 +1,14 @@
+title = "Dalil Tech Publish gitleaks config"
+
+# Use gitleaks' default rule set, then allowlist known non-production fixtures.
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Test fixtures and the deploy template carry dummy or empty values, not real secrets."
+paths = [
+  '''\.env\.ci$''',
+  '''\.env\.testing$''',
+  '''\.env\.example$''',
+  '''compose\.prod\.yaml$''',
+]

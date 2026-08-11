@@ -191,7 +191,7 @@ const isBodyJsonInvalid = computed(() => {
                     placeholder='{"id": "{{ trigger.post.id }}"}'
                 />
             </div>
-            <p v-if="isBodyJsonInvalid" class="mt-1 text-xs text-amber-600 dark:text-amber-500">
+            <p v-if="isBodyJsonInvalid" class="mt-1 text-xs text-warning">
                 {{ $t('automations.config.invalid_json') }}
             </p>
             <InputError :message="errors?.body_template" class="mt-1" />

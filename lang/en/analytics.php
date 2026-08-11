@@ -6,6 +6,7 @@ return [
     'search_account' => 'Search account…',
     'select_account' => 'Select an account to view analytics.',
     'no_data' => 'No analytics data available.',
+    'last_updated' => 'Last updated',
 
     'metrics' => [
         'avg_view_duration' => 'Avg. View Duration (s)',

@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'الاتصالات',
+    'title' => 'الحسابات المتصلة',
     'page_title' => 'الحسابات الاجتماعية',
     'description' => 'نظرة عامة على جميع حساباتك الاجتماعية المتصلة',
     'connect_cta' => 'ربط',
@@ -21,7 +21,7 @@ return [
         'tiktok' => 'اربط حسابك على TikTok',
         'youtube' => 'اربط قناة على YouTube',
         'facebook' => 'اربط صفحة على Facebook',
-        'instagram' => 'اربط حساب Instagram احترافيًا',
+        'instagram' => 'اربط حسابًا احترافيًا على Instagram',
         'instagram-facebook' => 'اربط Instagram عبر صفحة Facebook',
         'threads' => 'اربط حسابك على Threads',
         'pinterest' => 'اربط حسابك على Pinterest',
@@ -40,7 +40,7 @@ return [
 
     'bluesky' => [
         'title' => 'ربط Bluesky',
-        'description' => 'أدخل بيانات اعتمادك للربط',
+        'description' => 'أدخل بيانات الدخول للربط',
         'email' => 'البريد الإلكتروني',
         'email_placeholder' => 'yourhandle.bsky.social',
         'app_password' => 'كلمة مرور التطبيق',
@@ -66,7 +66,7 @@ return [
         'step_admin' => 'أضِف :bot كمشرف على قناتك أو مجموعتك على Telegram.',
         'step_command' => 'انشر هذا الأمر في القناة أو المجموعة:',
         'waiting' => 'في انتظار اتصال القناة…',
-        'connected' => 'تم اتصال القناة!',
+        'connected' => 'تم ربط القناة!',
         'connected_toast' => 'تم ربط قناة Telegram بنجاح!',
         'copied_toast' => 'تم نسخ الأمر إلى الحافظة',
         'copy_tooltip' => 'نسخ الأمر',
@@ -122,7 +122,7 @@ return [
     ],
 
     'popup_callback' => [
-        'title_success' => 'تم الاتصال',
+        'title_success' => 'تم الربط',
         'title_error' => 'خطأ',
         'closing' => 'ستُغلق هذه النافذة تلقائيًا...',
         'manual_close' => 'يمكنك إغلاق هذه النافذة.',

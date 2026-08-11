@@ -47,14 +47,14 @@ const categories = computed(() => [
 ]);
 
 const accentClasses: Record<string, { tint: string; text: string }> = {
-    violet: { tint: 'bg-violet-200', text: 'text-violet-900' },
-    blue: { tint: 'bg-blue-200', text: 'text-blue-900' },
-    amber: { tint: 'bg-amber-200', text: 'text-amber-900' },
-    rose: { tint: 'bg-rose-200', text: 'text-rose-900' },
-    emerald: { tint: 'bg-emerald-200', text: 'text-emerald-900' },
-    slate: { tint: 'bg-slate-200', text: 'text-slate-900' },
-    zinc: { tint: 'bg-zinc-200', text: 'text-zinc-900' },
-    cyan: { tint: 'bg-cyan-200', text: 'text-cyan-900' },
+    violet: { tint: 'bg-violet-200', text: 'text-neutral-900' },
+    blue: { tint: 'bg-blue-200', text: 'text-neutral-900' },
+    amber: { tint: 'bg-amber-200', text: 'text-neutral-900' },
+    rose: { tint: 'bg-rose-200', text: 'text-neutral-900' },
+    emerald: { tint: 'bg-emerald-200', text: 'text-neutral-900' },
+    slate: { tint: 'bg-secondary', text: 'text-secondary-foreground' },
+    zinc: { tint: 'bg-muted', text: 'text-foreground' },
+    cyan: { tint: 'bg-cyan-200', text: 'text-neutral-900' },
 };
 
 const onDragStart = (event: DragEvent, nodeType: string) => {

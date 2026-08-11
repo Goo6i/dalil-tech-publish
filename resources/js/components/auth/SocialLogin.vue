@@ -3,7 +3,6 @@ import { usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';
 
 import { Button } from '@/components/ui/button';
-import { redirect as githubRedirect } from '@/routes/auth/github';
 import { redirect as googleRedirect } from '@/routes/auth/google';
 
 withDefaults(
@@ -16,8 +15,7 @@ withDefaults(
 
 const page = usePage();
 const googleEnabled = computed(() => Boolean(page.props.googleAuthEnabled));
-const githubEnabled = computed(() => Boolean(page.props.githubAuthEnabled));
-const hasSocial = computed(() => googleEnabled.value || githubEnabled.value);
+const hasSocial = computed(() => googleEnabled.value);
 </script>
 
 <template>
@@ -26,11 +24,6 @@ const hasSocial = computed(() => googleEnabled.value || githubEnabled.value);
             <Button v-if="googleEnabled" variant="outline" class="w-full" as="a" :href="googleRedirect.url()">
                 <img src="/images/social/google.svg" alt="Google" class="size-4" />
                 {{ mode === 'login' ? $t('auth.google_login') : $t('auth.google_signup') }}
-            </Button>
-
-            <Button v-if="githubEnabled" variant="outline" class="w-full" as="a" :href="githubRedirect.url()">
-                <img src="/images/social/github.svg" alt="GitHub" class="size-4 dark:invert" />
-                {{ mode === 'login' ? $t('auth.github_login') : $t('auth.github_signup') }}
             </Button>
         </div>
 

@@ -158,7 +158,7 @@ const isDisconnected = (account: SocialAccount | null): boolean => {
                             platform.connected &&
                             !isDisconnected(platform.account)
                         "
-                        class="absolute -right-0.5 -bottom-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-green-500 text-white ring-2 ring-white dark:ring-neutral-900"
+                        class="absolute -right-0.5 -bottom-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-green-500 text-white ring-2 ring-background"
                     >
                         <IconCheck class="h-2 w-2" />
                     </div>
@@ -167,7 +167,7 @@ const isDisconnected = (account: SocialAccount | null): boolean => {
                             platform.connected &&
                             isDisconnected(platform.account)
                         "
-                        class="absolute -right-0.5 -bottom-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-white ring-2 ring-white dark:ring-neutral-900"
+                        class="absolute -right-0.5 -bottom-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-white ring-2 ring-background"
                     >
                         <IconAlertCircle class="h-2 w-2" />
                     </div>

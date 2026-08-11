@@ -112,7 +112,7 @@ onBeforeUnmount(() => {
     <AppLayout>
         <div class="mx-auto flex w-full max-w-2xl flex-col items-center gap-6 px-4 py-12">
             <div class="inline-flex size-14 -rotate-2 items-center justify-center rounded-2xl border-2 border-foreground bg-violet-200 shadow-2xs">
-                <IconLoader2 v-if="status === 'loading'" class="size-7 animate-spin text-foreground" stroke-width="2" />
+                <IconLoader2 v-if="status === 'loading'" class="size-7 animate-spin text-neutral-900" stroke-width="2" />
                 <IconSparkles v-else class="size-7 text-foreground" stroke-width="2" />
             </div>
 
@@ -153,8 +153,8 @@ onBeforeUnmount(() => {
             </div>
 
             <div v-else class="flex w-full max-w-lg flex-col items-center gap-4">
-                <div class="w-full rounded-xl border-2 border-foreground bg-rose-50 p-4 shadow-2xs">
-                    <p class="text-center text-sm font-semibold text-rose-700">
+                <div class="w-full rounded-xl border-2 border-foreground bg-destructive/10 p-4 shadow-2xs">
+                    <p class="text-center text-sm font-semibold text-destructive">
                         {{ errorMessage || $t('posts.create.steps.preview_error') }}
                     </p>
                 </div>

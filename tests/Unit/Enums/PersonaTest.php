@@ -15,4 +15,4 @@ test('every persona has an onboarding label in every locale', function (string $
 
         expect(__($key, [], $locale))->not->toBe($key);
     }
-})->with(['en', 'es', 'pt-BR']);
+})->with(['en', 'ar']);

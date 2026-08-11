@@ -118,10 +118,10 @@ const nodeStatusIcon = (status: NodeRunStatusValue) => {
 };
 
 const nodeStatusTile = (status: NodeRunStatusValue): string => {
-    if (status === NodeRunStatus.Completed) return 'bg-emerald-200 text-emerald-900';
-    if (status === NodeRunStatus.Failed) return 'bg-rose-200 text-rose-900';
-    if (status === NodeRunStatus.Running) return 'bg-amber-200 text-amber-900';
-    return 'bg-zinc-200 text-zinc-900';
+    if (status === NodeRunStatus.Completed) return 'bg-emerald-200 text-neutral-900';
+    if (status === NodeRunStatus.Failed) return 'bg-rose-200 text-neutral-900';
+    if (status === NodeRunStatus.Running) return 'bg-amber-200 text-neutral-900';
+    return 'bg-muted text-foreground';
 };
 
 // Fetch nodes (RSS / HTTP) short-circuit via the `no_items` handle with an
@@ -161,7 +161,7 @@ const isZeroFetchResult = (nodeRun: NodeRun): boolean => {
             </Button>
         </div>
 
-        <p v-if="configIssue" class="flex items-center gap-1.5 text-xs font-medium text-amber-600 dark:text-amber-500">
+        <p v-if="configIssue" class="flex items-center gap-1.5 text-xs font-medium text-warning">
             <IconAlertCircle class="size-4 flex-shrink-0" />
             {{ configIssue }}
         </p>
@@ -180,7 +180,7 @@ const isZeroFetchResult = (nodeRun: NodeRun): boolean => {
 
         <div
             v-if="run && run.status === RunStatus.Failed && run.error?.message"
-            class="flex items-start gap-2.5 rounded-xl border-2 border-rose-700 bg-rose-50 p-4 text-sm font-medium text-rose-800"
+            class="flex items-start gap-2.5 rounded-xl border-2 border-rose-700 bg-destructive/10 p-4 text-sm font-medium text-destructive"
         >
             <IconAlertCircle class="mt-0.5 size-5 shrink-0" stroke-width="2.5" />
             <span>{{ run.error.message }}</span>
@@ -210,7 +210,7 @@ const isZeroFetchResult = (nodeRun: NodeRun): boolean => {
                 </div>
 
                 <div v-if="nodeRun.error || nodeRun.output" class="border-t-2 border-foreground/10 px-4 pb-4 pt-3">
-                    <p v-if="nodeRun.error" class="rounded-lg border-2 border-rose-700 bg-rose-50 p-3 text-sm font-medium text-rose-800">
+                    <p v-if="nodeRun.error" class="rounded-lg border-2 border-rose-700 bg-destructive/10 p-3 text-sm font-medium text-destructive">
                         <span class="font-black uppercase text-xs tracking-wider">{{ $t('automations.test.node_error') }}:</span>
                         <span class="ml-1">{{ nodeRun.error.message }}</span>
                     </p>

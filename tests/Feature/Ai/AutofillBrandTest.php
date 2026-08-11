@@ -20,7 +20,7 @@ test('extracts name, description, language, and logo from meta tags', function (
     Http::fake([
         'example.com' => Http::response(<<<'HTML'
             <!DOCTYPE html>
-            <html lang="pt-BR">
+            <html lang="ar">
             <head>
               <title>Acme Coffee | The best beans online</title>
               <meta name="description" content="Premium artisan coffee beans shipped worldwide.">
@@ -39,7 +39,7 @@ test('extracts name, description, language, and logo from meta tags', function (
 
     expect($result->name)->toBe('Acme Coffee');
     expect($result->description)->toBe('Premium artisan coffee beans shipped worldwide.');
-    expect($result->language)->toBe('pt-BR');
+    expect($result->language)->toBe('ar');
     // The 512x512 PNG favicon wins over the unsized apple-touch-icon; og:image is ignored.
     expect($result->logoUrl)->toBe('https://example.com/icon-512.png');
 });
@@ -102,27 +102,13 @@ test('normalizes various language codes to supported locales', function (string 
 })->with([
     // Every supported language, detected from its primary subtag.
     ['en', 'en'],
-    ['pt', 'pt-BR'],
-    ['es', 'es'],
-    ['fr', 'fr'],
-    ['de', 'de'],
-    ['it', 'it'],
-    ['nl', 'nl'],
-    ['pl', 'pl'],
-    ['el', 'el'],
-    ['ja', 'ja'],
-    ['ko', 'ko'],
-    ['zh', 'zh'],
-    ['ru', 'ru'],
-    ['tr', 'tr'],
     ['ar', 'ar'],
     // Region/script subtags still resolve to the supported language.
-    ['pt-PT', 'pt-BR'],
     ['en-US', 'en'],
-    ['es-MX', 'es'],
-    ['ja-JP', 'ja'],
-    ['zh-Hans', 'zh'],
+    ['ar-SA', 'ar'],
     // Unsupported languages stay null.
+    ['pt', null],
+    ['fr', null],
     ['sv', null],
 ]);
 
@@ -390,48 +376,47 @@ test('when llm is configured, polishes description/tone/language/voice_notes via
     expect($result->toArray()['brand_voice_traits'])->toBe(['third_person', 'direct', 'no_hype']);
 });
 
-test('LLM language detection wins and carries any supported language, not just en/es/pt-BR', function () {
+test('LLM language detection wins and carries a supported non-default language', function () {
     config()->set('services.gemini.api_key', 'fake-key');
     config()->set('ai.default', 'gemini');
 
     // The <html lang> declares "en", so the deterministic extractor yields 'en'.
-    // The LLM reads the actual German body and returns 'de'. Since the fixture's
+    // The LLM reads the actual Arabic body and returns 'ar'. Since the fixture's
     // deterministic value differs from the LLM's, this isolates the mergeLlm
-    // precedence: the LLM value must win, and it must be a language beyond the
-    // original en/es/pt-BR set.
+    // precedence: the LLM value must win, even against the default 'en'.
     Http::fake([
         'example.com' => Http::response(<<<'HTML'
             <html lang="en">
             <head>
-              <title>Beispiel GmbH</title>
-              <meta name="description" content="Kurze Beschreibung.">
+              <title>مثال</title>
+              <meta name="description" content="وصف قصير.">
             </head>
-            <body><main><p>Wir bauen Widgets für kleine Teams.</p></main></body>
+            <body><main><p>نبني أدوات لفرق صغيرة.</p></main></body>
             </html>
         HTML, 200),
     ]);
 
     BrandAnalyzer::fake([
         [
-            'description' => 'Beispiel GmbH baut Widgets für kleine Teams.',
-            'language' => 'de',
+            'description' => 'مثال يبني أدوات لفرق صغيرة.',
+            'language' => 'ar',
             'voice_traits' => ['third_person'],
         ],
     ]);
 
     $result = ($this->autofill)('https://example.com');
 
-    expect($result->language)->toBe('de');
+    expect($result->language)->toBe('ar');
 });
 
 test('when llm is not configured, falls back to meta tags only', function () {
     // beforeEach already cleared api keys.
     Http::fake([
         'example.com' => Http::response(<<<'HTML'
-            <html lang="pt-BR">
+            <html lang="ar">
             <head>
-              <title>Marca</title>
-              <meta name="description" content="Uma descrição curta.">
+              <title>علامة</title>
+              <meta name="description" content="وصف قصير.">
             </head>
             <body><main><p>hello</p></main></body>
             </html>
@@ -443,8 +428,8 @@ test('when llm is not configured, falls back to meta tags only', function () {
 
     $result = ($this->autofill)('https://example.com');
 
-    expect($result->description)->toBe('Uma descrição curta.');
-    expect($result->language)->toBe('pt-BR');
+    expect($result->description)->toBe('وصف قصير.');
+    expect($result->language)->toBe('ar');
 });
 
 test('falls back to meta tags when BrandAnalyzer throws', function () {

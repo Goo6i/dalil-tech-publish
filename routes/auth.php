@@ -6,7 +6,6 @@ use App\Http\Controllers\Auth\AcceptInviteController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
-use App\Http\Controllers\Auth\GitHubController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
@@ -33,7 +32,6 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/reset-password', [NewPasswordController::class, 'store'])->name('password.store');
 
     Route::get('/auth/google/redirect', [GoogleController::class, 'redirect'])->name('auth.google.redirect');
-    Route::get('/auth/github/redirect', [GitHubController::class, 'redirect'])->name('auth.github.redirect');
 });
 
 // Callbacks must be reachable by both guests (signup/login) and authenticated
@@ -41,7 +39,6 @@ Route::middleware(['guest'])->group(function () {
 // round-trip enforce the right middleware, so the callback can safely branch
 // on `Auth::check()` to dispatch to the matching flow.
 Route::get('/auth/google/callback', [GoogleController::class, 'callback'])->name('auth.google.callback');
-Route::get('/auth/github/callback', [GitHubController::class, 'callback'])->name('auth.github.callback');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/register/success', SignupSuccessController::class)->name('register.success');

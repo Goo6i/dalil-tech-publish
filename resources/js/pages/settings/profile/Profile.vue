@@ -116,7 +116,7 @@ const tabs = computed(() => [
 
                             <div
                                 v-if="status === 'verification-link-sent'"
-                                class="mt-2 text-sm font-semibold text-emerald-700"
+                                class="mt-2 text-sm font-semibold text-success"
                             >
                                 {{ $t('settings.profile.verification_sent') }}
                             </div>

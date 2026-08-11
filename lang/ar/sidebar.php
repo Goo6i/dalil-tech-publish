@@ -40,7 +40,7 @@ return [
     ],
 
     'workspace' => [
-        'connections' => 'الاتصالات',
+        'connections' => 'الحسابات المتصلة',
         'signatures' => 'التوقيعات',
         'labels' => 'التسميات',
         'assets' => 'الوسائط',

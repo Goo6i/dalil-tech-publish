@@ -10,7 +10,7 @@ const { urlIsActive } = useActiveUrl();
 const tabClass = (active: boolean) =>
     cn(
         'inline-flex h-10 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-md border-2 border-foreground px-3 text-sm font-bold text-foreground shadow-xs transition-all hover:shadow-sm',
-        active ? 'bg-amber-200 hover:bg-amber-300' : 'bg-card hover:bg-accent',
+        active ? 'bg-primary text-primary-foreground hover:bg-primary/90' : 'bg-card hover:bg-accent',
     );
 </script>
 

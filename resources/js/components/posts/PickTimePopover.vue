@@ -116,7 +116,7 @@ const remove = () => {
                     </Select>
                     <span v-if="timezoneAbbr" class="ml-1 text-xs text-muted-foreground">{{ timezoneAbbr }}</span>
                 </div>
-                <p v-if="isPastDateTime" class="mt-2 text-xs font-semibold text-rose-700">
+                <p v-if="isPastDateTime" class="mt-2 text-xs font-semibold text-destructive">
                     {{ $t('posts.edit.pick_time_past') }}
                 </p>
             </div>
@@ -127,7 +127,7 @@ const remove = () => {
                     type="button"
                     variant="outline"
                     size="sm"
-                    class="bg-rose-100 text-rose-700 hover:bg-rose-200"
+                    class="bg-rose-100 text-destructive hover:bg-rose-200"
                     @click="remove"
                 >
                     {{ $t('posts.edit.unschedule') }}

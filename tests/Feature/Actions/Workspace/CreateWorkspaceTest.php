@@ -43,25 +43,25 @@ test('CreateWorkspace switches user current workspace and attaches as admin', fu
 });
 
 test('CreateWorkspace inherits the app locale as content_language when none is given', function () {
-    app()->setLocale('pt-BR');
+    app()->setLocale('ar');
 
     $account = Account::factory()->create();
     $user = User::factory()->create(['account_id' => $account->id]);
 
     $workspace = CreateWorkspace::execute($user, ['name' => 'Acme']);
 
-    expect($workspace->content_language)->toBe('pt-BR');
+    expect($workspace->content_language)->toBe('ar');
 });
 
 test('CreateWorkspace keeps an explicit content_language over the app locale', function () {
-    app()->setLocale('pt-BR');
+    app()->setLocale('en');
 
     $account = Account::factory()->create();
     $user = User::factory()->create(['account_id' => $account->id]);
 
-    $workspace = CreateWorkspace::execute($user, ['name' => 'Acme', 'content_language' => 'es']);
+    $workspace = CreateWorkspace::execute($user, ['name' => 'Acme', 'content_language' => 'ar']);
 
-    expect($workspace->content_language)->toBe('es');
+    expect($workspace->content_language)->toBe('ar');
 });
 
 test('CreateWorkspace ignores unknown extra keys like logo_url', function () {

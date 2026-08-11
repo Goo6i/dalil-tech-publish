@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Link, router, usePage } from '@inertiajs/vue3';
-import ThemeToggle from '@/components/ThemeToggle.vue';
 import {
     IconAffiliate,
     IconAlertTriangle,
@@ -26,6 +25,7 @@ import { create as createPost, index as postsIndex } from '@/actions/App/Http/Co
 import NavMain from '@/components/NavMain.vue';
 import NavSupport from '@/components/NavSupport.vue';
 import NavUser from '@/components/NavUser.vue';
+import ThemeToggle from '@/components/ThemeToggle.vue';
 import { Avatar } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {

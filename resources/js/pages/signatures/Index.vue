@@ -152,7 +152,7 @@ const hasActiveSearch = computed(() => Boolean(searchQuery.value?.trim()));
                                             :aria-label="$t('signatures.actions.delete')"
                                             @click="handleDelete(signature)"
                                         >
-                                            <IconTrash class="size-4 text-rose-700" />
+                                            <IconTrash class="size-4 text-destructive" />
                                         </Button>
                                     </div>
                                 </TableCell>

@@ -63,7 +63,7 @@ const scheduledAtError = computed(() => errors.value.scheduled_at);
                             :disabled="isSaving || isSubmitting"
                             @click="emit('delete')"
                         >
-                            <IconTrash class="size-4 text-rose-700" />
+                            <IconTrash class="size-4 text-destructive" />
                         </Button>
                     </TooltipTrigger>
                     <TooltipContent>{{ $t('posts.edit.delete') }}</TooltipContent>

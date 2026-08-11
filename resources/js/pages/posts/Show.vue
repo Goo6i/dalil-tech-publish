@@ -108,7 +108,7 @@ usePostEcho(props.post.id, '.post.platform.status.updated', () => {
         <!-- Publishing state: clean centered loader, nothing else visible. -->
         <div v-if="isPublishing" class="flex flex-1 flex-col items-center justify-center gap-4 p-6">
             <div class="inline-flex size-14 -rotate-3 items-center justify-center rounded-2xl border-2 border-foreground bg-violet-200 shadow-2xs">
-                <IconLoader2 class="size-7 animate-spin text-foreground" stroke-width="2" />
+                <IconLoader2 class="size-7 animate-spin text-neutral-900" stroke-width="2" />
             </div>
             <p
                 class="text-2xl font-semibold leading-tight text-foreground"
@@ -171,7 +171,7 @@ usePostEcho(props.post.id, '.post.platform.status.updated', () => {
                                     />
                                     <div
                                         v-else-if="isDocumentItem(item)"
-                                        class="flex h-full w-full flex-col items-center justify-center gap-1.5 bg-rose-50 p-2 text-center"
+                                        class="flex h-full w-full flex-col items-center justify-center gap-1.5 bg-destructive/10 p-2 text-center"
                                     >
                                         <IconFileTypePdf class="size-8 text-rose-600" />
                                         <span class="line-clamp-2 break-all text-[10px] font-medium text-muted-foreground">{{ item.original_filename || 'PDF' }}</span>
@@ -276,7 +276,7 @@ usePostEcho(props.post.id, '.post.platform.status.updated', () => {
                                 <!-- Failed: error message -->
                                 <div
                                     v-if="pp.status === PostPlatformStatus.Failed && pp.error_message"
-                                    class="border-t-2 border-foreground/10 bg-rose-50 px-4 py-3 text-xs font-semibold text-rose-700"
+                                    class="border-t-2 border-foreground/10 bg-destructive/10 px-4 py-3 text-xs font-semibold text-destructive"
                                 >
                                     {{ pp.error_message }}
                                 </div>

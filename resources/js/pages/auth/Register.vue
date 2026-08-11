@@ -30,11 +30,7 @@ const showEmailForm = ref(false);
 
 const page = usePage();
 const isSelfHosted = computed(() => Boolean(page.props.selfHosted));
-const hasSocial = computed(
-    () =>
-        Boolean(page.props.googleAuthEnabled) ||
-        Boolean(page.props.githubAuthEnabled),
-);
+const hasSocial = computed(() => Boolean(page.props.googleAuthEnabled));
 
 // With no social providers the email form is the only way to sign up, so it
 // stays visible; otherwise it is revealed by the "Sign up with email" toggle.

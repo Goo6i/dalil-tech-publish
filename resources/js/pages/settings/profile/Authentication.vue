@@ -39,7 +39,7 @@ type Session = {
 };
 
 type ConnectedAccount = {
-    provider: 'google' | 'github';
+    provider: 'google';
     label: string;
     connected: boolean;
     can_disconnect: boolean;
@@ -98,7 +98,7 @@ const logoutDialogOpen = ref(false);
                             :key="session.id"
                             :class="[
                                 'flex items-center gap-4 rounded-xl border-2 border-foreground p-4 shadow-2xs',
-                                session.is_current ? 'bg-emerald-50' : 'bg-card',
+                                session.is_current ? 'bg-primary/10' : 'bg-card',
                             ]"
                             data-test="session-row"
                         >
@@ -130,9 +130,9 @@ const logoutDialogOpen = ref(false);
                                     <template v-if="session.is_current">
                                         <span class="relative flex size-2">
                                             <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/60" />
-                                            <span class="relative inline-flex size-2 rounded-full bg-emerald-500" />
+                                            <span class="relative inline-flex size-2 rounded-full bg-primary/100" />
                                         </span>
-                                        <span class="font-bold text-emerald-700">
+                                        <span class="font-bold text-success">
                                             {{ $t('settings.authentication.sessions.active_now') }}
                                         </span>
                                     </template>
@@ -294,9 +294,9 @@ const logoutDialogOpen = ref(false);
                                 <div class="text-sm font-bold text-foreground">{{ account.label }}</div>
                                 <div
                                     v-if="account.connected"
-                                    class="flex items-center gap-1.5 text-xs font-bold text-emerald-700"
+                                    class="flex items-center gap-1.5 text-xs font-bold text-success"
                                 >
-                                    <span class="size-1.5 rounded-full bg-emerald-500" />
+                                    <span class="size-1.5 rounded-full bg-primary/100" />
                                     <span>{{ $t('settings.authentication.providers.connected') }}</span>
                                 </div>
                                 <div v-else class="text-xs font-medium text-muted-foreground">
@@ -314,7 +314,7 @@ const logoutDialogOpen = ref(false);
                                     variant="outline"
                                     size="sm"
                                     :disabled="processing"
-                                    class="bg-rose-100 text-rose-700 hover:bg-rose-200"
+                                    class="bg-rose-100 text-destructive hover:bg-rose-200"
                                     :data-test="`disconnect-${account.provider}`"
                                 >
                                     {{ $t('settings.authentication.providers.disconnect') }}
