@@ -16,7 +16,6 @@ $minimalPng = fn () => base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFc
 beforeEach(function () {
     Storage::fake();
     Cache::flush();
-    fakeMiniMaxImage();
 });
 
 test('returns null when AI client cannot generate (no keywords)', function () {
