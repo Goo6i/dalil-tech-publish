@@ -412,8 +412,11 @@ class TemplateImageGenerator
         }
 
         if ($displayName) {
-            $canvas->text($displayName, $this->width - 60, $textY, function (FontFactory $font) use ($fontLight, $footerColor) {
-                $font->filename($fontLight);
+            $nameIsArabic = \App\Support\ArabicText::contains($displayName);
+            $nameFont = $nameIsArabic ? ($this->fontPath('Cairo-Light.ttf') ?? $fontLight) : $fontLight;
+            $nameText = $nameIsArabic ? \App\Support\ArabicText::shape($displayName) : $displayName;
+            $canvas->text($nameText, $this->width - 60, $textY, function (FontFactory $font) use ($nameFont, $footerColor) {
+                $font->filename($nameFont);
                 $font->size(24);
                 $font->color($footerColor);
                 $font->align('right', 'top');
