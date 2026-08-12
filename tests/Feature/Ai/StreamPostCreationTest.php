@@ -14,12 +14,12 @@ use App\Models\Workspace;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Laravel\Ai\Image;
+use Illuminate\Support\Facades\Http;
 
 beforeEach(function () {
     Bus::fake();
     Storage::fake();
-    Image::fake();
+    fakeMiniMaxImage();
 
     $this->user = User::factory()->create();
     $this->workspace = Workspace::factory()->create(['user_id' => $this->user->id]);
@@ -95,7 +95,7 @@ test('tweet_card template stores the tweet_text as post content and attaches a m
     ]]);
 
     $minimalPng = base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==');
-    Image::fake([base64_encode($minimalPng)]);
+    fakeMiniMaxImage();
 
     (new StreamPostCreation(
         userId: $this->user->id,
@@ -149,7 +149,7 @@ test('tweet_card carousel produces caption as content and N media items without 
 
     expect($platform->content_type)->toBe(ContentType::InstagramFeed);
 
-    Image::assertNothingGenerated();
+    Http::assertNothingSent();
 
     PostContentHumanizer::assertNeverPrompted();
 });
@@ -161,7 +161,7 @@ test('tweet_card_image single stores tweet_text as content, attaches media, and 
     ]]);
 
     $minimalPng = base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==');
-    Image::fake([base64_encode($minimalPng)]);
+    fakeMiniMaxImage();
 
     (new StreamPostCreation(
         userId: $this->user->id,
@@ -184,7 +184,7 @@ test('tweet_card_image single stores tweet_text as content, attaches media, and 
 
     PostContentHumanizer::assertNeverPrompted();
 
-    Image::assertGenerated(fn () => true);
+    Http::assertSent(fn ($r) => str_contains((string) $r->url(), 'image_generation'));
 });
 
 test('tweet_card_image carousel stores caption and N media items each with an AI background', function () {
@@ -197,7 +197,7 @@ test('tweet_card_image carousel stores caption and N media items each with an AI
     ]]);
 
     $minimalPng = base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==');
-    Image::fake([base64_encode($minimalPng), base64_encode($minimalPng)]);
+    fakeMiniMaxImage();
 
     (new StreamPostCreation(
         userId: $this->user->id,
@@ -220,7 +220,7 @@ test('tweet_card_image carousel stores caption and N media items each with an AI
 
     PostContentHumanizer::assertNeverPrompted();
 
-    Image::assertGenerated(fn () => true);
+    Http::assertSent(fn ($r) => str_contains((string) $r->url(), 'image_generation'));
 });
 
 test('the humanizer is given the same platform context as the generator so the rewrite honours the character cap', function () {
