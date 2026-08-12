@@ -85,9 +85,10 @@ test('renders a slide and stores webp when AI returns bytes', function () use ($
             ->toHaveKey('background_path');
     }
 
-    Http::assertSent(fn ($r) => str_contains((string) $r['prompt'], 'kitchen')
-        && str_contains((string) $r['prompt'], 'BRAND COLOR PALETTE')
-        && str_contains((string) $r['prompt'], 'blue'));
+    Http::assertSent(fn ($r) => str_contains((string) $r->url(), 'image_generation')
+        && str_contains((string) ($r['prompt'] ?? ''), 'kitchen')
+        && str_contains((string) ($r['prompt'] ?? ''), 'BRAND COLOR PALETTE')
+        && str_contains((string) ($r['prompt'] ?? ''), 'blue'));
 })->skip(fn () => ! extension_loaded('gd'), 'GD extension required');
 
 test('omits the brand colour palette from the AI image prompt when brand visuals are off', function () use ($minimalPng) {
@@ -112,8 +113,9 @@ test('omits the brand colour palette from the AI image prompt when brand visuals
     );
 
     // Despite the workspace having brand colours, the prompt must stay neutral.
-    Http::assertSent(fn ($r) => str_contains((string) $r['prompt'], 'kitchen')
-        && ! str_contains((string) $r['prompt'], 'BRAND COLOR PALETTE'));
+    Http::assertSent(fn ($r) => str_contains((string) $r->url(), 'image_generation')
+        && str_contains((string) ($r['prompt'] ?? ''), 'kitchen')
+        && ! str_contains((string) ($r['prompt'] ?? ''), 'BRAND COLOR PALETTE'));
 })->skip(fn () => ! extension_loaded('gd'), 'GD extension required');
 
 test('reuses existing background path when provided', function () use ($minimalPng) {
