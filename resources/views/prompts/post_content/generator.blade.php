@@ -16,6 +16,7 @@ The user already has this content in the editor (use as context only — your ou
 @endif
 
 @include('prompts.post_content._language')
+@include('prompts.post_content._own_posts')
 
 Rules:
 - Match the brand voice guidelines exactly.

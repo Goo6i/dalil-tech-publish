@@ -9,6 +9,7 @@ Brand voice — match this tone, vocabulary, and rhythm:
 @endif
 
 @include('prompts.post_content._language')
+@include('prompts.post_content._own_posts')
 
 @if(!empty($hard_max_chars))
 ## CRITICAL — length limit for {{ $platform_label ?? 'the target platform' }}
