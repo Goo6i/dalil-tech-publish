@@ -68,6 +68,7 @@ class PostContentGenerator implements Agent, HasStructuredOutput
             'content_language' => $this->workspace->content_language,
             'language_name' => (\App\Enums\Workspace\ContentLanguage::tryFrom((string) ($this->workspace->content_language ?? '')) ?? \App\Enums\Workspace\ContentLanguage::DEFAULT)->englishName(),
             'language_native' => (\App\Enums\Workspace\ContentLanguage::tryFrom((string) ($this->workspace->content_language ?? '')) ?? \App\Enums\Workspace\ContentLanguage::DEFAULT)->label(),
+            'own_posts' => \App\Ai\Support\WorkspaceVoiceSamples::for($this->workspace),
             'current_content' => $this->currentContent,
             'format' => $this->format->value,
             'slide_count' => $this->slideCount,
