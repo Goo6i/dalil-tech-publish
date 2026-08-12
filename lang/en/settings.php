@@ -148,7 +148,7 @@ return [
         'delete_only_description' => 'You cannot delete your only workspace. Cancel your subscription in billing to stop paying, or delete your account in Authentication settings to cancel billing and permanently remove everything.',
         'delete_go_to_billing' => 'Go to billing',
         'delete_go_to_delete_account' => 'Delete account',
-        'delete_members_warning' => '{1}:count other member will lose access. Members without another TryPost workspace are permanently deleted.|[2,*]:count other members will lose access. Members without another TryPost workspace are permanently deleted.',
+        'delete_members_warning' => '{1}:count other member will lose access. Members without another Dalil Tech Publish workspace are permanently deleted.|[2,*]:count other members will lose access. Members without another Dalil Tech Publish workspace are permanently deleted.',
         'delete_action' => 'Delete workspace',
         'delete_cancel' => 'Cancel',
         'delete_confirm_title' => 'Delete workspace?',
@@ -291,7 +291,7 @@ return [
 
         'errors' => [
             'invite_exists' => 'An invite already exists for this email.',
-            'email_belongs_to_account' => 'This email already belongs to another TryPost account. Ask for a dedicated work email instead.',
+            'email_belongs_to_account' => 'This email already belongs to another Dalil Tech Publish account. Ask for a dedicated work email instead.',
         ],
 
         'flash' => [

@@ -9,23 +9,13 @@ use App\Enums\Workspace\ContentLanguage;
  * LocalizationParityTest (MorphMap-style). These markers catch stale translations
  * that still have the key but omit the invited-members / conditional-delete warning.
  *
+ * This fork ships only English and Arabic (see ContentLanguage), so the marker
+ * maps cover en + ar and the brand is Dalil Tech Publish, not the upstream name.
+ *
  * @var array<string, string>
  */
 $accountDeleteInvitedMemberMarkers = [
     'en' => 'invited members',
-    'pt-BR' => 'membros convidados',
-    'es' => 'miembros invitados',
-    'fr' => 'membres invités',
-    'de' => 'eingeladene Mitglieder',
-    'it' => 'membri invitati',
-    'nl' => 'uitgenodigde leden',
-    'pl' => 'zaproszeni członkowie',
-    'el' => 'προσκεκλημένα μέλη',
-    'ja' => '招待されたメンバー',
-    'ko' => '초대된 멤버',
-    'zh' => '受邀成员',
-    'ru' => 'приглашённые участники',
-    'tr' => 'davet edilen üyeler',
     'ar' => 'الأعضاء المدعوون',
 ];
 
@@ -33,21 +23,8 @@ $accountDeleteInvitedMemberMarkers = [
  * @var array<string, string>
  */
 $workspaceDeleteConditionalMemberMarkers = [
-    'en' => 'without another TryPost workspace',
-    'pt-BR' => 'sem outro workspace no TryPost',
-    'es' => 'sin otro workspace en TryPost',
-    'fr' => 'sans autre workspace TryPost',
-    'de' => 'ohne anderen TryPost-Workspace',
-    'it' => 'senza un altro workspace TryPost',
-    'nl' => 'zonder andere TryPost-workspace',
-    'pl' => 'bez innego workspace w TryPost',
-    'el' => 'χωρίς άλλο workspace στο TryPost',
-    'ja' => '別のTryPostワークスペースがない',
-    'ko' => '다른 TryPost 워크스페이스가 없는',
-    'zh' => '没有其他 TryPost 工作区',
-    'ru' => 'без другого workspace в TryPost',
-    'tr' => 'Başka bir TryPost workspace',
-    'ar' => 'مساحة عمل أخرى في TryPost',
+    'en' => 'without another Dalil Tech Publish workspace',
+    'ar' => 'مساحة عمل أخرى في Dalil Tech Publish',
 ];
 
 test('workspace delete members warning describes conditional permanent deletion', function () {
@@ -55,7 +32,7 @@ test('workspace delete members warning describes conditional permanent deletion'
 
     expect($warning)
         ->toContain('lose access')
-        ->toContain('without another TryPost workspace')
+        ->toContain('without another Dalil Tech Publish workspace')
         ->toContain('permanently deleted')
         ->not->toContain('personal account');
 });
