@@ -9,14 +9,13 @@ use App\Services\Image\BrandColorMapper;
 use App\Services\Image\TemplateImageGenerator;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
-use Laravel\Ai\Image;
+use Illuminate\Support\Facades\Http;
 
 $minimalPng = fn () => base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==');
 
 beforeEach(function () {
     Storage::fake();
     Cache::flush();
-    Image::fake();
 });
 
 test('returns null when AI client cannot generate (no keywords)', function () {
@@ -30,11 +29,11 @@ test('returns null when AI client cannot generate (no keywords)', function () {
     );
 
     expect($result)->toBeNull();
-    Image::assertNothingGenerated();
+    Http::assertNothingSent();
 });
 
 test('returns null when AI generation throws', function () {
-    Image::fake(fn () => throw new RuntimeException('upstream outage'));
+    failMiniMaxImage();
 
     $service = new TemplateImageGenerator(new BrandColorMapper, new AiImageClient);
     $result = $service->render(
@@ -49,7 +48,7 @@ test('returns null when AI generation throws', function () {
 });
 
 test('renders a slide and stores webp when AI returns bytes', function () use ($minimalPng) {
-    Image::fake([base64_encode($minimalPng())]);
+    fakeMiniMaxImage();
 
     if (! file_exists(base_path('resources/fonts/Inter-Bold.ttf'))) {
         $this->markTestSkipped('Inter fonts not available — skipping render-dependent test.');
@@ -77,7 +76,7 @@ test('renders a slide and stores webp when AI returns bytes', function () use ($
         expect($result['source_meta'])
             ->toHaveKey('keywords')
             ->toHaveKey('style', 'illustration')
-            ->toHaveKey('model', 'gpt-image-2')
+            ->toHaveKey('model', 'image-01')
             ->toHaveKey('title', 'Hello World')
             ->toHaveKey('brand_color', '#0000ff')
             ->toHaveKey('background_color', '#ffffff')
@@ -85,13 +84,14 @@ test('renders a slide and stores webp when AI returns bytes', function () use ($
             ->toHaveKey('background_path');
     }
 
-    Image::assertGenerated(fn ($prompt) => $prompt->contains('kitchen')
-        && $prompt->contains('BRAND COLOR PALETTE')
-        && $prompt->contains('blue'));
+    Http::assertSent(fn ($r) => str_contains((string) $r->url(), 'image_generation')
+        && str_contains((string) ($r['prompt'] ?? ''), 'kitchen')
+        && str_contains((string) ($r['prompt'] ?? ''), 'BRAND COLOR PALETTE')
+        && str_contains((string) ($r['prompt'] ?? ''), 'blue'));
 })->skip(fn () => ! extension_loaded('gd'), 'GD extension required');
 
 test('omits the brand colour palette from the AI image prompt when brand visuals are off', function () use ($minimalPng) {
-    Image::fake([base64_encode($minimalPng())]);
+    fakeMiniMaxImage();
 
     if (! file_exists(base_path('resources/fonts/Inter-Bold.ttf'))) {
         $this->markTestSkipped('Inter fonts not available — skipping render-dependent test.');
@@ -112,8 +112,9 @@ test('omits the brand colour palette from the AI image prompt when brand visuals
     );
 
     // Despite the workspace having brand colours, the prompt must stay neutral.
-    Image::assertGenerated(fn ($prompt) => $prompt->contains('kitchen')
-        && ! $prompt->contains('BRAND COLOR PALETTE'));
+    Http::assertSent(fn ($r) => str_contains((string) $r->url(), 'image_generation')
+        && str_contains((string) ($r['prompt'] ?? ''), 'kitchen')
+        && ! str_contains((string) ($r['prompt'] ?? ''), 'BRAND COLOR PALETTE'));
 })->skip(fn () => ! extension_loaded('gd'), 'GD extension required');
 
 test('reuses existing background path when provided', function () use ($minimalPng) {
@@ -136,5 +137,5 @@ test('reuses existing background path when provided', function () use ($minimalP
 
     expect($result)->not->toBeNull();
     expect(data_get($result, 'source_meta.background_path'))->toBe($backgroundPath);
-    Image::assertNothingGenerated();
+    Http::assertNothingSent();
 })->skip(fn () => ! extension_loaded('gd'), 'GD extension required');

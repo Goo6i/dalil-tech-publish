@@ -7,11 +7,11 @@ use App\Models\Workspace;
 use App\Services\Image\PostImagePipeline;
 use App\Services\Image\TemplateImageGenerator;
 use Illuminate\Support\Facades\Storage;
-use Laravel\Ai\Image;
+use Illuminate\Support\Facades\Http;
 
 test('renderTweetCard produces a stored webp without calling the AI image client', function () {
     Storage::fake();
-    Image::fake();
+    fakeMiniMaxImage();
     $workspace = Workspace::factory()->create(['brand_color' => '#1d9bf0']);
     $account = SocialAccount::factory()->create([
         'workspace_id' => $workspace->id,
@@ -30,12 +30,12 @@ test('renderTweetCard produces a stored webp without calling the AI image client
         ->and(Storage::exists($result['path']))->toBeTrue()
         ->and(data_get($result, 'source_meta.template'))->toBe('tweet_card');
 
-    Image::assertNothingGenerated();
+    Http::assertNothingSent();
 });
 
 test('renderTweetCard succeeds when the account has no avatar_url', function () {
     Storage::fake();
-    Image::fake();
+    fakeMiniMaxImage();
     $workspace = Workspace::factory()->create(['brand_color' => '#1d9bf0']);
     $account = SocialAccount::factory()->create([
         'workspace_id' => $workspace->id,

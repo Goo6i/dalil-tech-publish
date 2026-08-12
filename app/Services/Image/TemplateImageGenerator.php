@@ -508,6 +508,9 @@ class TemplateImageGenerator
         $color = $this->allocateColor($core, $hexColor);
 
         if ($letterSpacing <= 0) {
+            if (\App\Support\ArabicText::contains($text)) {
+                $text = \App\Support\ArabicText::shape($text);
+            }
             imagettftext($core, $fontSize, 0, $x, $baselineY, $color, $fontPath, $text);
 
             return;
@@ -715,9 +718,12 @@ class TemplateImageGenerator
         $cardW = $this->width - 2 * $cardX;
         $cardRadius = 24;
 
-        $fontBold = $this->fontPath('Inter-Bold.ttf');
-        $fontMedium = $this->fontPath('Inter-Medium.ttf');
-        $fontLight = $this->fontPath('Inter-Light.ttf');
+        $tweetText = \App\Support\ArabicText::stripEmoji($tweetText);
+        $rtl = \App\Support\ArabicText::contains($tweetText);
+
+        $fontBold = $this->fontPath($rtl ? 'Cairo-Bold.ttf' : 'Inter-Bold.ttf');
+        $fontMedium = $this->fontPath($rtl ? 'Cairo-Medium.ttf' : 'Inter-Medium.ttf');
+        $fontLight = $this->fontPath($rtl ? 'Cairo-Light.ttf' : 'Inter-Light.ttf');
 
         $avatarSize = 72;
         $headerH = $avatarSize + 2 * $cardPadding;
@@ -730,7 +736,7 @@ class TemplateImageGenerator
         $paragraphs = array_values(array_filter(array_map('trim', explode("\n\n", $tweetText)), fn ($p) => $p !== ''));
         $allBodyLines = [];
         foreach ($paragraphs as $i => $para) {
-            $lines = ($fontMedium ? $this->wrapText($para, $fontMedium, $bodySize, $cardW - 2 * $cardPadding) : [str_replace("\n", ' ', $para)]);
+            $lines = ($fontMedium ? $this->wrapText($para, $fontMedium, $bodySize, $cardW - 2 * $cardPadding, $rtl) : [str_replace("\n", ' ', $para)]);
             if ($i > 0) {
                 $allBodyLines[] = '';
             }
@@ -817,7 +823,14 @@ class TemplateImageGenerator
                     continue;
                 }
                 $color = $this->allocateColor($core, '#0f1419');
-                imagettftext($core, $bodySize, 0, $bodyX, $curY, $color, $fontMedium, $line);
+                $draw = $rtl ? \App\Support\ArabicText::shape($line) : $line;
+                if ($rtl && $draw !== '') {
+                    $lb = imagettfbbox($bodySize, 0, $fontMedium, $draw);
+                    $drawX = ($cardX + $cardW - $cardPadding) - abs($lb[2] - $lb[0]);
+                } else {
+                    $drawX = $bodyX;
+                }
+                imagettftext($core, $bodySize, 0, $drawX, $curY, $color, $fontMedium, $draw);
                 $curY += $lineSpacing;
             }
         }

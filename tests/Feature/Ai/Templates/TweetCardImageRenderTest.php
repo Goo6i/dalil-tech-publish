@@ -8,13 +8,13 @@ use App\Services\Ai\AiImageClient;
 use App\Services\Image\PostImagePipeline;
 use App\Services\Image\TemplateImageGenerator;
 use Illuminate\Support\Facades\Storage;
-use Laravel\Ai\Image;
+use Illuminate\Support\Facades\Http;
 
 test('renderTweetCard with image keywords generates an AI image background', function () {
     Storage::fake();
 
     $minimalPng = base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==');
-    Image::fake([base64_encode($minimalPng)]);
+    fakeMiniMaxImage();
 
     $workspace = Workspace::factory()->create(['brand_color' => '#1d9bf0']);
     $account = SocialAccount::factory()->create([
@@ -36,7 +36,7 @@ test('renderTweetCard with image keywords generates an AI image background', fun
         ->and(data_get($result, 'source_meta.template'))->toBe('tweet_card_image')
         ->and(data_get($result, 'source_meta.keywords'))->toBe(['productivity', 'laptop', 'morning']);
 
-    Image::assertGenerated(fn () => true);
+    Http::assertSent(fn ($r) => str_contains((string) $r->url(), 'image_generation'));
 });
 
 test('renderTweetCard with image keywords falls back to solid color when AI returns null', function () {
@@ -68,7 +68,7 @@ test('renderTweetCard with image keywords falls back to solid color when AI retu
 
 test('renderTweetCard without image keywords does not call the AI image client', function () {
     Storage::fake();
-    Image::fake();
+    fakeMiniMaxImage();
 
     $workspace = Workspace::factory()->create(['brand_color' => '#1d9bf0']);
     $account = SocialAccount::factory()->create([
@@ -86,7 +86,7 @@ test('renderTweetCard without image keywords does not call the AI image client',
     expect($result)->not->toBeNull()
         ->and(data_get($result, 'source_meta.template'))->toBe('tweet_card');
 
-    Image::assertNothingGenerated();
+    Http::assertNothingSent();
 });
 
 test('forTweetCard with image keywords delegates keywords to the generator', function () {
@@ -111,7 +111,7 @@ test('forTweetCard with image keywords delegates keywords to the generator', fun
 
 test('forTweetCardCarousel accepts slide arrays with image_keywords', function () {
     Storage::fake();
-    Image::fake();
+    fakeMiniMaxImage();
 
     $workspace = Workspace::factory()->create();
     $account = SocialAccount::factory()->create(['workspace_id' => $workspace->id]);
@@ -133,7 +133,7 @@ test('forTweetCardCarousel accepts slide arrays with image_keywords', function (
 
 test('forTweetCardCarousel still accepts plain string slides for backward compat', function () {
     Storage::fake();
-    Image::fake();
+    fakeMiniMaxImage();
 
     $workspace = Workspace::factory()->create();
     $account = SocialAccount::factory()->create(['workspace_id' => $workspace->id]);
@@ -146,5 +146,5 @@ test('forTweetCardCarousel still accepts plain string slides for backward compat
 
     expect($result)->toHaveCount(2);
 
-    Image::assertNothingGenerated();
+    Http::assertNothingSent();
 });

@@ -160,3 +160,31 @@ function subscribeAccount(Account $account): void
         'stripe_price' => 'price_123',
     ]);
 }
+
+
+/**
+ * Fake a successful MiniMax image-01 generation (and the image download).
+ */
+function fakeMiniMaxImage(?string $bytes = null): void
+{
+    $bytes ??= base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==');
+    \Illuminate\Support\Facades\Http::fake([
+        'api.minimax.io/*' => \Illuminate\Support\Facades\Http::response([
+            'data' => ['image_urls' => ['https://img.minimax.test/out.png']],
+            'base_resp' => ['status_code' => 0, 'status_msg' => 'success'],
+        ], 200),
+        'img.minimax.test/*' => \Illuminate\Support\Facades\Http::response($bytes, 200),
+    ]);
+}
+
+/**
+ * Fake a MiniMax image generation that reports an API error.
+ */
+function failMiniMaxImage(): void
+{
+    \Illuminate\Support\Facades\Http::fake([
+        'api.minimax.io/*' => \Illuminate\Support\Facades\Http::response([
+            'base_resp' => ['status_code' => 1000, 'status_msg' => 'upstream outage'],
+        ], 200),
+    ]);
+}

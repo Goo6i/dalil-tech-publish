@@ -75,6 +75,13 @@ return [
         'redirect' => env('GOOGLE_AUTH_CALLBACK'),
     ],
 
+    // MiniMax image generation (image-01). Reuses the MiniMax text key by default.
+    'minimax' => [
+        'image_key' => env('MINIMAX_IMAGE_KEY', env('ANTHROPIC_API_KEY')),
+        'image_url' => env('MINIMAX_IMAGE_URL', 'https://api.minimax.io/v1'),
+        'image_model' => env('MINIMAX_IMAGE_MODEL', 'image-01'),
+    ],
+
     // Facebook Pages
     'facebook' => [
         'client_id' => env('FACEBOOK_CLIENT_ID'),

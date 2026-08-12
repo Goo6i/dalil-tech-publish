@@ -7,18 +7,18 @@ namespace App\Services\Ai;
 use App\Enums\Workspace\ContentLanguage;
 use App\Enums\Workspace\ImageStyle;
 use App\Support\HexColorName;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-use Laravel\Ai\Image;
 use Throwable;
 
 class AiImageClient
 {
-    public const MODEL = 'gpt-image-2';
+    public const MODEL = 'image-01';
 
     private const BRAND_DESCRIPTION_MAX = 200;
 
     /**
-     * Generate raw image bytes via OpenAI gpt-image-2. Returns null on any
+     * Generate raw image bytes via MiniMax image-01. Returns null on any
      * failure so the caller can fall back to a stock photo without throwing.
      *
      * @param  array<int, string>  $keywords
@@ -64,15 +64,7 @@ class AiImageClient
         ])->render();
 
         try {
-            $builder = Image::of($prompt)->quality($quality)->timeout($timeout);
-
-            $builder = match ($orientation) {
-                'portrait' => $builder->portrait(),
-                'landscape' => $builder->landscape(),
-                default => $builder->square(),
-            };
-
-            $image = $builder->generate(model: self::MODEL);
+            $bytes = $this->generateBackground($prompt, $orientation, $timeout);
         } catch (Throwable $e) {
             Log::warning('AiImageClient: generation failed', [
                 'style' => $style->value,
@@ -83,9 +75,51 @@ class AiImageClient
             return null;
         }
 
-        $bytes = (string) $image;
+        return ($bytes !== null && $bytes !== '') ? $bytes : null;
+    }
 
-        return $bytes !== '' ? $bytes : null;
+    /**
+     * Generate a background image via MiniMax image-01 and return its raw
+     * bytes. Uses the MiniMax key, shared with the text model by default.
+     */
+    private function generateBackground(string $prompt, string $orientation, int $timeout): ?string
+    {
+        $aspectRatio = match ($orientation) {
+            'portrait' => '9:16',
+            'landscape' => '16:9',
+            default => '1:1',
+        };
+
+        $base = rtrim((string) config('services.minimax.image_url'), '/');
+
+        $response = Http::withToken((string) config('services.minimax.image_key'))
+            ->timeout($timeout)
+            ->acceptJson()
+            ->post($base.'/image_generation', [
+                'model' => (string) config('services.minimax.image_model'),
+                'prompt' => mb_substr($prompt, 0, 1500),
+                'aspect_ratio' => $aspectRatio,
+                'response_format' => 'url',
+                'n' => 1,
+            ]);
+
+        if (! $response->successful()) {
+            throw new \RuntimeException('MiniMax image HTTP '.$response->status());
+        }
+
+        $json = $response->json();
+        if ((int) data_get($json, 'base_resp.status_code', -1) !== 0) {
+            throw new \RuntimeException('MiniMax image: '.(string) data_get($json, 'base_resp.status_msg', 'unknown error'));
+        }
+
+        $url = data_get($json, 'data.image_urls.0');
+        if (! is_string($url) || $url === '') {
+            throw new \RuntimeException('MiniMax image: no image URL in response');
+        }
+
+        $download = Http::timeout($timeout)->get($url);
+
+        return $download->successful() ? $download->body() : null;
     }
 
     private function languageName(string $code): string
