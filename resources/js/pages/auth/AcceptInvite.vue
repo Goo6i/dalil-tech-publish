@@ -6,6 +6,7 @@ import AppLogo from '@/components/AppLogo.vue';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { login, register } from '@/routes';
+import { home } from '@/routes/app';
 import { accept, decline } from '@/routes/app/invites';
 import { type SharedData } from '@/types';
 
@@ -32,7 +33,19 @@ const page = usePage<SharedData>();
 const user = computed(() => page.props.auth?.user);
 const isLoggedIn = computed(() => !!user.value);
 
-const inviteUrl = computed(() => `/invites/${props.invite.id}`);
+const title = computed(() =>
+    props.expired
+        ? trans('auth.accept_invite.expired_title')
+        : trans('auth.accept_invite.title'),
+);
+
+const description = computed(() =>
+    props.expired
+        ? trans('auth.accept_invite.expired_description')
+        : trans('auth.accept_invite.description', {
+              workspace: props.invite?.workspace.name ?? '',
+          }),
+);
 </script>
 
 <template>
@@ -65,9 +78,37 @@ const inviteUrl = computed(() => `/invites/${props.invite.id}`);
                                 <span class="shrink-0 text-muted-foreground">{{ $t('auth.accept_invite.your_role') }}</span>
                                 <span class="min-w-0 truncate font-medium">{{ invite.role.label }}</span>
                             </div>
-                            <div class="flex justify-between gap-3 text-sm">
-                                <span class="shrink-0 text-muted-foreground">{{ $t('auth.accept_invite.email') }}</span>
-                                <span class="min-w-0 truncate font-medium">{{ invite.email }}</span>
+
+                            <!-- User is not logged in - show Login/Register -->
+                            <div v-else class="flex flex-col gap-3">
+                                <p class="text-center text-sm text-muted-foreground">
+                                    {{ $t('auth.accept_invite.login_prompt') }}
+                                </p>
+                                <Button as-child size="lg" class="w-full">
+                                    <Link
+                                        :href="
+                                            login({
+                                                query: { invite: invite.id, email: invite.email },
+                                            })
+                                        "
+                                    >
+                                        {{ $t('auth.accept_invite.log_in') }}
+                                    </Link>
+                                </Button>
+                                <Button as-child variant="outline" size="lg" class="w-full">
+                                    <Link
+                                        :href="
+                                            register({
+                                                query: {
+                                                    invite: invite.id,
+                                                    email: invite.email,
+                                                },
+                                            })
+                                        "
+                                    >
+                                        {{ $t('auth.accept_invite.create_account') }}
+                                    </Link>
+                                </Button>
                             </div>
                         </div>
 

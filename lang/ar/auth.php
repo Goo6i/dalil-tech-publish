@@ -57,12 +57,6 @@ return [
     'google_login' => 'تسجيل الدخول عبر Google',
     'google_signup' => 'التسجيل عبر Google',
 
-    'signup_success' => [
-        'page_title' => 'مرحبًا',
-        'title' => 'جارٍ إعداد حسابك',
-        'description' => 'يستغرق هذا عادةً بضع ثوانٍ فقط...',
-    ],
-
     'login' => [
         'title' => 'تسجيل الدخول إلى حسابك',
         'description' => 'أدخل بريدك الإلكتروني وكلمة المرور أدناه لتسجيل الدخول',
