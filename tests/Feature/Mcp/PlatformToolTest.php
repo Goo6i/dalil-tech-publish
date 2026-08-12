@@ -43,5 +43,5 @@ test('list content types includes content types per platform', function () {
         ->tool(ListContentTypesTool::class, []);
 
     $response->assertOk()
-        ->assertSee(['linkedin', 'linkedin_post', 'x_post', 'instagram_feed', 'mastodon_post']);
+        ->assertSee(['linkedin', 'linkedin_post', 'x_post', 'instagram_feed', 'threads_post']);
 });
