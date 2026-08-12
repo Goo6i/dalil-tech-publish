@@ -187,8 +187,12 @@ class TemplateImageGenerator
         // Smooth gradient mask: covers full image height, peaks at 0.9 alpha (linear).
         $this->applyBottomGradient($image, 1.0, 0.9, 1.0);
 
-        $fontBold = $this->fontPath('Inter-Bold.ttf');
-        $fontMedium = $this->fontPath('Inter-Medium.ttf');
+        $title = \App\Support\ArabicText::stripEmoji($title);
+        $body = \App\Support\ArabicText::stripEmoji($body);
+        $rtl = \App\Support\ArabicText::contains($title) || \App\Support\ArabicText::contains($body);
+
+        $fontBold = $this->fontPath($rtl ? 'Cairo-Bold.ttf' : 'Inter-Bold.ttf');
+        $fontMedium = $this->fontPath($rtl ? 'Cairo-Medium.ttf' : 'Inter-Medium.ttf');
 
         // Layout (bottom-up): footer area → body → title. All text rendered via raw GD
         // for pixel-precise positioning. Same wrap+measure helper used for layout math.
@@ -202,8 +206,8 @@ class TemplateImageGenerator
         $padding = 60;
         $maxWidth = $this->width - 2 * $padding;
 
-        $bodyLines = $fontMedium ? $this->wrapText($body, $fontMedium, $bodySize, $maxWidth) : [];
-        $titleLines = $fontBold ? $this->wrapText($title, $fontBold, $titleSize, $maxWidth) : [];
+        $bodyLines = $fontMedium ? $this->wrapText($body, $fontMedium, $bodySize, $maxWidth, $rtl) : [];
+        $titleLines = $fontBold ? $this->wrapText($title, $fontBold, $titleSize, $maxWidth, $rtl) : [];
 
         $bodyHeight = $this->measureBlockHeight($bodyLines, $bodySize, $bodyLineHeight);
         $titleHeight = $this->measureBlockHeight($titleLines, $titleSize, $titleLineHeight);
@@ -214,10 +218,10 @@ class TemplateImageGenerator
         $core = $image->core()->native();
 
         if ($fontBold && $titleLines) {
-            $this->renderTextLines($core, $titleLines, $fontBold, $titleSize, $titleLineHeight, '#ffffff', $padding, $titleTopY);
+            $this->renderTextLines($core, $titleLines, $fontBold, $titleSize, $titleLineHeight, '#ffffff', $padding, $titleTopY, $rtl);
         }
         if ($fontMedium && $bodyLines) {
-            $this->renderTextLines($core, $bodyLines, $fontMedium, $bodySize, $bodyLineHeight, '#f5f5f5', $padding, $bodyTopY);
+            $this->renderTextLines($core, $bodyLines, $fontMedium, $bodySize, $bodyLineHeight, '#f5f5f5', $padding, $bodyTopY, $rtl);
         }
 
         return $image;
@@ -229,7 +233,7 @@ class TemplateImageGenerator
      *
      * @return array<int, string>
      */
-    private function wrapText(string $text, string $fontPath, int $fontSize, int $maxWidth): array
+    private function wrapText(string $text, string $fontPath, int $fontSize, int $maxWidth, bool $rtl = false): array
     {
         $lines = [];
         foreach (explode("\n", $text) as $paragraph) {
@@ -242,7 +246,8 @@ class TemplateImageGenerator
             $current = '';
             foreach ($words as $word) {
                 $candidate = $current === '' ? $word : $current.' '.$word;
-                $box = imagettfbbox($fontSize, 0, $fontPath, $candidate);
+                $measure = $rtl ? \App\Support\ArabicText::shape($candidate) : $candidate;
+                $box = imagettfbbox($fontSize, 0, $fontPath, $measure);
                 $width = abs($box[2] - $box[0]);
                 if ($width > $maxWidth && $current !== '') {
                     $lines[] = $current;
@@ -282,7 +287,7 @@ class TemplateImageGenerator
      *
      * @param  array<int, string>  $lines
      */
-    private function renderTextLines($core, array $lines, string $fontPath, int $fontSize, float $lineHeight, string $hexColor, int $x, int $topY): void
+    private function renderTextLines($core, array $lines, string $fontPath, int $fontSize, float $lineHeight, string $hexColor, int $x, int $topY, bool $rtl = false): void
     {
         $color = $this->allocateColor($core, $hexColor);
         $lineSpacing = (int) round($fontSize * $lineHeight);
@@ -291,9 +296,17 @@ class TemplateImageGenerator
         // from $topY to the first baseline.
         $ascent = (int) round($fontSize * 0.82);
         $baselineY = $topY + $ascent;
+        $rightEdge = $this->width - $x;
 
         foreach ($lines as $line) {
-            imagettftext($core, $fontSize, 0, $x, $baselineY, $color, $fontPath, $line);
+            $draw = $rtl ? \App\Support\ArabicText::shape($line) : $line;
+            if ($rtl && $draw !== '') {
+                $box = imagettfbbox($fontSize, 0, $fontPath, $draw);
+                $drawX = $rightEdge - abs($box[2] - $box[0]);
+            } else {
+                $drawX = $x;
+            }
+            imagettftext($core, $fontSize, 0, $drawX, $baselineY, $color, $fontPath, $draw);
             $baselineY += $lineSpacing;
         }
     }
