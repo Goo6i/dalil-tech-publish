@@ -160,9 +160,17 @@ return [
             'board' => 'Board',
             'select_board' => 'Select a board',
             'no_boards' => 'No Pinterest boards found. Create one in your Pinterest account first.',
+            'boards_truncated' => 'Some boards could not be loaded. If yours is missing, open Pinterest and try again.',
             'search_board' => 'Search boards...',
             'no_board_found' => 'No board matches your search.',
             'board_required' => 'Select a Pinterest board to publish this post.',
+            'title' => 'Title',
+            'title_placeholder' => 'Optional pin title',
+            'link' => 'Destination link',
+            'link_placeholder' => 'https://example.com',
+            'link_invalid' => 'Enter a valid destination link (http or https).',
+            'title_max' => 'Title may not be longer than 100 characters.',
+            'link_max' => 'Destination link may not be longer than 2048 characters.',
         ],
         'discord' => [
             'settings' => 'Discord Settings',
@@ -233,6 +241,10 @@ return [
             'apply' => 'Use this content',
             'retry' => 'Try again',
             'cancel' => 'Cancel',
+            'errors' => [
+                'start_failed' => 'Could not start generation.',
+                'generation_failed' => 'AI generation failed.',
+            ],
         ],
         'review' => [
             'button_tooltip' => 'Review with AI',
@@ -470,7 +482,7 @@ return [
         ],
         'instagram_reel' => [
             'label' => 'Reel',
-            'description' => 'Short video up to 90 seconds',
+            'description' => 'Short video up to 15 minutes',
         ],
         'instagram_story' => [
             'label' => 'Story',
@@ -506,7 +518,7 @@ return [
         ],
         'youtube_short' => [
             'label' => 'Short',
-            'description' => 'Vertical video up to 60 seconds',
+            'description' => 'Vertical video up to 3 minutes',
         ],
         'x_post' => [
             'label' => 'Post',
@@ -573,6 +585,9 @@ return [
         'account_disconnected' => 'Social account is disconnected',
         'account_inactive' => 'Social account is deactivated',
         'account_token_expired' => 'Social account session expired — please reconnect',
+        'platform_unavailable' => 'The platform is temporarily unavailable. We\'ll retry shortly.',
+        'platform_unavailable_exhausted' => 'The platform stayed unavailable after several retries. Please try again later.',
+        'publishing_timed_out' => 'Publishing timed out. Please try again.',
     ],
 
     'delete' => [

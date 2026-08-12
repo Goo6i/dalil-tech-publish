@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { IconAlertTriangle, IconChevronDown, IconChevronUp } from '@tabler/icons-vue';
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 
 import InputError from '@/components/InputError.vue';
 import { Avatar } from '@/components/ui/avatar';
@@ -14,9 +14,11 @@ import {
     ComboboxList,
     ComboboxTrigger,
 } from '@/components/ui/combobox';
+import { Input } from '@/components/ui/input';
 import { getMediaValidationWarning } from '@/composables/useMedia';
 import { usePageErrors } from '@/composables/usePageErrors';
 import { getPlatformLogo } from '@/composables/usePlatformLogo';
+import { fallbackImageCapableVariant, filterImageCapableVariants } from '@/lib/aiGenerateVariants';
 import type { PinterestBoard } from '@/types';
 import { ContentType } from '@/types/content-type';
 import type { MediaItem } from '@/types/media';
@@ -39,6 +41,7 @@ interface Props {
     contentType: string;
     media: MediaItem[];
     boards: PinterestBoard[];
+    boardsTruncated?: boolean;
     meta: Record<string, any>;
     disabled?: boolean;
     previewOnly?: boolean;
@@ -47,6 +50,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
     disabled: false,
     previewOnly: false,
+    boardsTruncated: false,
 });
 
 const emit = defineEmits<{
@@ -56,11 +60,25 @@ const emit = defineEmits<{
 
 const open = ref(false);
 
-const variants = [
+const allVariants = [
     { value: ContentType.PinterestPin, labelKey: 'posts.form.pinterest.variant.pin' },
     { value: ContentType.PinterestVideoPin, labelKey: 'posts.form.pinterest.variant.video_pin' },
     { value: ContentType.PinterestCarousel, labelKey: 'posts.form.pinterest.variant.carousel' },
-];
+] as const;
+
+// Generate node only creates images — hide Video Pin there.
+const variants = computed(() => filterImageCapableVariants(allVariants, props.previewOnly));
+
+watch(
+    () => [props.previewOnly, props.contentType, variants.value] as const,
+    () => {
+        const fallback = fallbackImageCapableVariant(props.contentType, variants.value);
+        if (fallback) {
+            emit('update:contentType', fallback);
+        }
+    },
+    { immediate: true },
+);
 
 const pickVariant = (value: string) => {
     if (props.disabled) return;
@@ -78,14 +96,38 @@ const selectedBoard = computed<BoardOption | undefined>({
     set: (board) => emit('update:meta', { ...props.meta, board_id: board?.value ?? null }),
 });
 
-// Surface the backend validation error keyed by platform index
-// (`platforms.0.meta.board_id`). Suffix match avoids threading the index
-// through props. Cleared as soon as a board is picked locally so the user
-// doesn't see a stale error after fixing the issue.
+const pinTitle = computed({
+    get: () => (props.meta?.title as string | undefined) || '',
+    set: (value: string) => {
+        // Whitespace-only clears the field; keep interior spaces while typing.
+        emit('update:meta', { ...props.meta, title: value.trim() === '' ? null : value });
+    },
+});
+
+const pinLink = computed({
+    get: () => (props.meta?.link as string | undefined) || '',
+    set: (value: string) => {
+        // Whitespace-only clears the field; keep partial URLs while typing.
+        emit('update:meta', { ...props.meta, link: value.trim() === '' ? null : value });
+    },
+});
+
+// Surface backend validation errors keyed by platform index
+// (`platforms.0.meta.*`). Suffix match avoids threading the index through props.
+// Board clears as soon as one is picked so the user doesn't see a stale error.
 const errors = usePageErrors();
 const boardError = computed<string | undefined>(() => {
-    if (props.meta?.board_id) return undefined;
+    if (props.meta?.board_id) {
+        return undefined;
+    }
+
     return Object.entries(errors.value).find(([key]) => key.endsWith('.meta.board_id'))?.[1];
+});
+const titleError = computed<string | undefined>(() => {
+    return Object.entries(errors.value).find(([key]) => key.endsWith('.meta.title'))?.[1];
+});
+const linkError = computed<string | undefined>(() => {
+    return Object.entries(errors.value).find(([key]) => key.endsWith('.meta.link'))?.[1];
 });
 </script>
 
@@ -187,7 +229,38 @@ const boardError = computed<string | undefined>(() => {
                         </ComboboxList>
                     </Combobox>
                     <InputError :message="boardError" />
+                    <p
+                        v-if="boardsTruncated"
+                        class="flex items-start gap-2 rounded-lg border-2 border-foreground/30 bg-foreground/5 p-2 text-xs font-semibold text-foreground/60"
+                    >
+                        <IconAlertTriangle class="mt-0.5 size-3.5 shrink-0" />
+                        {{ $t('posts.form.pinterest.boards_truncated') }}
+                    </p>
                 </template>
+            </div>
+
+            <div class="space-y-2">
+                <p class="text-[11px] font-black uppercase tracking-widest text-foreground/60">{{ $t('posts.form.pinterest.title') }}</p>
+                <Input
+                    v-model="pinTitle"
+                    type="text"
+                    :placeholder="$t('posts.form.pinterest.title_placeholder')"
+                    :disabled="disabled || previewOnly"
+                    :class="titleError ? 'border-rose-500' : undefined"
+                />
+                <InputError :message="titleError" />
+            </div>
+
+            <div class="space-y-2">
+                <p class="text-[11px] font-black uppercase tracking-widest text-foreground/60">{{ $t('posts.form.pinterest.link') }}</p>
+                <Input
+                    v-model="pinLink"
+                    type="text"
+                    :placeholder="$t('posts.form.pinterest.link_placeholder')"
+                    :disabled="disabled || previewOnly"
+                    :class="linkError ? 'border-rose-500' : undefined"
+                />
+                <InputError :message="linkError" />
             </div>
 
             <p

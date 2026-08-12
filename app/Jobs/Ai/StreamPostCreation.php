@@ -14,6 +14,7 @@ use App\Enums\Ai\ContentStyle;
 use App\Enums\Ai\GeneratorFormat;
 use App\Enums\Notification\Channel as NotificationChannel;
 use App\Enums\Notification\Type as NotificationType;
+use App\Enums\Post\CreatedVia;
 use App\Enums\PostPlatform\ContentType;
 use App\Events\Ai\PostCreationReady;
 use App\Jobs\SendNotification;
@@ -23,15 +24,18 @@ use App\Models\User;
 use App\Models\Workspace;
 use App\Services\Ai\RecordAiUsage;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 
-class StreamPostCreation implements ShouldQueue
+class StreamPostCreation implements ShouldBeUnique, ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+    public int $uniqueFor = 990;
 
     public function __construct(
         public string $userId,
@@ -46,6 +50,11 @@ class StreamPostCreation implements ShouldQueue
         public bool $applyBrandVisuals = true,
     ) {
         $this->onQueue('ai');
+    }
+
+    public function uniqueId(): string
+    {
+        return "{$this->userId}:{$this->creationId}";
     }
 
     public function handle(): void
@@ -195,6 +204,7 @@ class StreamPostCreation implements ShouldQueue
             'content' => $generated->content,
             'media' => $generated->media,
             'date' => $this->date,
+            'created_via' => CreatedVia::Web,
         ]);
 
         if ($generated->contentType && $socialAccount) {

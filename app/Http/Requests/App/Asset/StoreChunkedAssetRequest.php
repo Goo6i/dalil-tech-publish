@@ -28,9 +28,8 @@ class StoreChunkedAssetRequest extends FormRequest
             'range_start' => $parsed[0] ?? null,
             'range_end' => $parsed[1] ?? null,
             'total_size' => $parsed[2] ?? null,
-            // Lowercase the name so `ends_with` validation is effectively
-            // case-insensitive (IMG_1234.JPG vs img_1234.jpg).
-            'file_name' => strtolower((string) $this->header('X-File-Name', 'upload')),
+            'file_name' => strtolower(rawurldecode((string) $this->header('X-File-Name', 'upload'))),
+            'upload_id' => $this->header('X-Upload-Id'),
         ]);
     }
 
@@ -49,6 +48,7 @@ class StoreChunkedAssetRequest extends FormRequest
             'range_end' => ['required', 'integer', 'gte:range_start'],
             'total_size' => ['required', 'integer', 'min:1', 'max:'.MediaType::Video->maxSizeInBytes()],
             'file_name' => ['required', 'string', 'ends_with:'.implode(',', $allowedSuffixes)],
+            'upload_id' => ['required', 'string', 'uuid'],
         ];
     }
 
@@ -58,11 +58,7 @@ class StoreChunkedAssetRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'range_start.required' => 'Invalid Content-Range header',
-            'range_end.required' => 'Invalid Content-Range header',
-            'total_size.required' => 'Invalid Content-Range header',
-            'total_size.max' => 'File size exceeds the maximum allowed ('.MediaType::Video->maxSizeInMb().' MB).',
-            'file_name.ends_with' => 'File type not supported.',
+            'total_size.max' => __('assets.upload.file_too_large', ['max' => MediaType::Video->maxSizeInMb()]),
         ];
     }
 }

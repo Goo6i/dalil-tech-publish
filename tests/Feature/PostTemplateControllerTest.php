@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Enums\Post\CreatedVia;
 use App\Enums\UserWorkspace\Role;
 use App\Models\Account;
 use App\Models\SocialAccount;
@@ -72,6 +73,9 @@ test('apply creates post and returns post_id and redirect_url', function () {
 
     expect($response->json('post_id'))->toBeString();
     expect($response->json('redirect_url'))->toContain('edit');
+
+    $post = $this->workspace->posts()->find($response->json('post_id'));
+    expect($post->created_via)->toBe(CreatedVia::Web);
 });
 
 test('apply interpolates brand_name in content', function () {
@@ -123,7 +127,7 @@ test('apply returns 404 for unknown slug', function () {
         ->assertNotFound();
 });
 
-test('apply defaults scheduled_at to today when no date is provided', function () {
+test('apply leaves scheduled_at null when no date is provided', function () {
     Http::fake(['api.unsplash.com/*' => Http::response(['results' => []])]);
 
     $this->actingAs($this->user)
@@ -131,7 +135,7 @@ test('apply defaults scheduled_at to today when no date is provided', function (
         ->assertOk();
 
     $post = $this->workspace->posts()->latest()->first();
-    expect($post->scheduled_at->format('Y-m-d'))->toBe(now('UTC')->format('Y-m-d'));
+    expect($post->scheduled_at)->toBeNull();
 });
 
 test('apply schedules the post on the date param when provided', function () {
@@ -144,7 +148,7 @@ test('apply schedules the post on the date param when provided', function () {
         ->assertOk();
 
     $post = $this->workspace->posts()->latest()->first();
-    expect($post->scheduled_at->format('Y-m-d'))->toBe('2026-06-15');
+    expect($post->scheduled_at->utc()->format('Y-m-d H:i:s'))->toBe('2026-06-15 09:00:00');
 });
 
 test('apply rejects invalid date format', function () {

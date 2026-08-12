@@ -185,3 +185,15 @@ test('it refreshes the token before calling when expired', function () {
     Http::assertSent(fn ($request) => str_contains($request->url(), '/oauth/token/'));
     expect($this->account->fresh()->access_token)->toBe('new-token');
 });
+
+test('it sends an empty json object as the request body', function () {
+    Http::fake([
+        $this->api.'/post/publish/creator_info/query/' => Http::response(['data' => []], 200),
+    ]);
+
+    $this->service->fetch($this->account);
+
+    Http::assertSent(function ($request) {
+        return $request->body() === '{}';
+    });
+});

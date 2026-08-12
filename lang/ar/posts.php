@@ -160,9 +160,17 @@ return [
             'board' => 'اللوحة',
             'select_board' => 'اختر لوحة',
             'no_boards' => 'لم يتم العثور على لوحات Pinterest. أنشئ واحدة في حسابك على Pinterest أولًا.',
+            'boards_truncated' => 'تعذر تحميل بعض اللوحات. إذا كانت لوحتك مفقودة، افتح Pinterest وحاول مرة أخرى.',
             'search_board' => 'البحث في اللوحات...',
             'no_board_found' => 'لا توجد لوحة مطابقة لبحثك.',
             'board_required' => 'اختر لوحة Pinterest لنشر هذا المنشور.',
+            'title' => 'العنوان',
+            'title_placeholder' => 'عنوان اختياري للدبوس',
+            'link' => 'رابط الوجهة',
+            'link_placeholder' => 'https://example.com',
+            'link_invalid' => 'أدخل رابط وجهة صالحًا (http أو https).',
+            'title_max' => 'يجب ألا يتجاوز العنوان 100 حرفًا.',
+            'link_max' => 'يجب ألا يتجاوز رابط الوجهة 2048 حرفًا.',
         ],
         'discord' => [
             'settings' => 'إعدادات Discord',
@@ -233,6 +241,10 @@ return [
             'apply' => 'استخدام هذا المحتوى',
             'retry' => 'إعادة المحاولة',
             'cancel' => 'إلغاء',
+            'errors' => [
+                'start_failed' => 'تعذّر بدء الإنشاء.',
+                'generation_failed' => 'فشل الإنشاء بالذكاء الاصطناعي.',
+            ],
         ],
         'review' => [
             'button_tooltip' => 'المراجعة بالذكاء الاصطناعي',
@@ -470,7 +482,7 @@ return [
         ],
         'instagram_reel' => [
             'label' => 'ريل',
-            'description' => 'فيديو قصير حتى 90 ثانية',
+            'description' => 'فيديو قصير حتى 15 دقيقة',
         ],
         'instagram_story' => [
             'label' => 'قصة',
@@ -506,7 +518,7 @@ return [
         ],
         'youtube_short' => [
             'label' => 'مقطع قصير',
-            'description' => 'فيديو عمودي حتى 60 ثانية',
+            'description' => 'فيديو عمودي حتى 3 دقائق',
         ],
         'x_post' => [
             'label' => 'منشور',
@@ -573,6 +585,9 @@ return [
         'account_disconnected' => 'الحساب الاجتماعي مفصول',
         'account_inactive' => 'الحساب الاجتماعي مُعطَّل',
         'account_token_expired' => 'انتهت جلسة الحساب الاجتماعي، يرجى إعادة الربط',
+        'platform_unavailable' => 'المنصة غير متاحة مؤقتًا. سنعيد المحاولة قريبًا.',
+        'platform_unavailable_exhausted' => 'ظلت المنصة غير متاحة بعد عدة محاولات. يرجى المحاولة لاحقًا.',
+        'publishing_timed_out' => 'انتهت مهلة النشر. يرجى المحاولة مرة أخرى.',
     ],
 
     'delete' => [

@@ -37,9 +37,10 @@ return [
     | Billing
     |--------------------------------------------------------------------------
     |
-    | Control trial behavior for SaaS billing:
-    | - true: require card at checkout to start trial (Stripe trialing)
-    | - false: grant generic trial at signup without card
+    | Control whether signup requires a card before app access:
+    | - true: no generic trial at signup; access only after Stripe Checkout
+    |   (trialDays and/or first-month coupon come from cashier.* env knobs)
+    | - false: grant generic trial at signup without a card
     |
     */
 
@@ -56,6 +57,16 @@ return [
     | uploads (StoreAssetRequest, AssetController::storeChunked), URL
     | fetches (MediaAttacher), and the MediaType enum all read from here.
     |
+    | signed_upload_url_ttl_minutes controls the temporary signed POST URL
+    | issued for api.uploads.store (MCP / direct upload flow).
+    | MEDIA_SIGNED_UPLOAD_URL_TTL_MINUTES is preferred; MCP_UPLOAD_URL_TTL_MINUTES
+    | remains as a legacy fallback. MCP_UPLOAD_MAX_SIZE_MB was removed — size
+    | caps come from max_size_mb above (uploads stream to storage).
+    |
+    | signed_upload_per_*_per_minute backs the signed-uploads rate limiter:
+    | workspace bucket first (tenants isolated on shared MCP egress), then a
+    | high IP backstop.
+    |
     */
 
     'media' => [
@@ -65,6 +76,9 @@ return [
             // LinkedIn caps document (PDF carousel) uploads at 100MB.
             'document' => (int) env('MEDIA_DOCUMENT_MAX_SIZE_MB', 100),
         ],
+        'signed_upload_url_ttl_minutes' => (int) (env('MEDIA_SIGNED_UPLOAD_URL_TTL_MINUTES') ?? env('MCP_UPLOAD_URL_TTL_MINUTES', 15)),
+        'signed_upload_per_workspace_per_minute' => (int) env('MEDIA_SIGNED_UPLOAD_PER_WORKSPACE_PER_MINUTE', 60),
+        'signed_upload_per_ip_per_minute' => (int) env('MEDIA_SIGNED_UPLOAD_PER_IP_PER_MINUTE', 1200),
     ],
 
     /*

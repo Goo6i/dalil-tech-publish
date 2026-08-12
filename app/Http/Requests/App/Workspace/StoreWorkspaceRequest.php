@@ -8,6 +8,7 @@ use App\Enums\Workspace\BrandFont;
 use App\Enums\Workspace\BrandVoiceTrait;
 use App\Enums\Workspace\ContentLanguage;
 use App\Enums\Workspace\ImageStyle;
+use App\Models\Workspace;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -15,7 +16,7 @@ class StoreWorkspaceRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        return $this->user()->can('create', Workspace::class);
     }
 
     public function rules(): array
@@ -35,14 +36,6 @@ class StoreWorkspaceRequest extends FormRequest
             'image_style' => ['sometimes', 'string', Rule::in(ImageStyle::values())],
             'content_language' => ['nullable', 'string', Rule::in(ContentLanguage::values())],
             'logo_url' => ['nullable', 'url', 'max:1024'],
-        ];
-    }
-
-    public function messages(): array
-    {
-        return [
-            'name.required' => 'O nome do workspace é obrigatório.',
-            'name.max' => 'O nome do workspace deve ter no máximo 255 caracteres.',
         ];
     }
 }

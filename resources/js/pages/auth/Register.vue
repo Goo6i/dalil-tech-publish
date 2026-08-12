@@ -23,6 +23,7 @@ import { store } from '@/routes/register';
 defineProps<{
     email?: string | null;
     redirect?: string | null;
+    invite?: string | null;
 }>();
 
 const showPassword = ref(false);
@@ -68,6 +69,7 @@ const emailFormVisible = computed(() => !hasSocial.value || showEmailForm.value)
                 class="flex flex-col gap-6"
             >
                 <input v-if="redirect" type="hidden" name="redirect" :value="redirect" />
+                <input v-if="invite" type="hidden" name="invite" :value="invite" />
 
                 <div
                     v-if="hasSocial && showEmailForm"
@@ -106,6 +108,9 @@ const emailFormVisible = computed(() => !hasSocial.value || showEmailForm.value)
                                 name="email"
                                 placeholder="email@example.com"
                                 :default-value="email ?? ''"
+                                :readonly="Boolean(invite)"
+                                :aria-readonly="Boolean(invite)"
+                                :class="{ 'pointer-events-none opacity-60': invite }"
                             />
                             <InputError :message="errors.email" />
                         </div>
