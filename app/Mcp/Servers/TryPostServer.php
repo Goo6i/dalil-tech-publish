@@ -7,6 +7,9 @@ namespace App\Mcp\Servers;
 use App\Mcp\Tools\ApiKey\CreateApiKeyTool;
 use App\Mcp\Tools\ApiKey\DeleteApiKeyTool;
 use App\Mcp\Tools\ApiKey\ListApiKeysTool;
+use App\Mcp\Tools\Asset\AttachExistingAssetTool;
+use App\Mcp\Tools\Asset\GetAssetTool;
+use App\Mcp\Tools\Asset\ListAssetsTool;
 use App\Mcp\Tools\Label\CreateLabelTool;
 use App\Mcp\Tools\Label\DeleteLabelTool;
 use App\Mcp\Tools\Label\ListLabelsTool;
@@ -40,7 +43,7 @@ use Laravel\Mcp\Server\Attributes\Version;
 
 #[Name('Dalil Tech Publish')]
 #[Version('1.0.0')]
-#[Instructions('Dalil Tech Publish is a social media scheduling platform. Use this server to manage posts, signatures, labels, social accounts, workspaces, and API keys.')]
+#[Instructions('Dalil Tech Publish is a social media scheduling platform. Use this server to manage posts, the Asset Library, signatures, labels, social accounts, workspaces, and API keys.')]
 class TryPostServer extends Server
 {
     public int $defaultPaginationLength = 100;
@@ -58,6 +61,11 @@ class TryPostServer extends Server
         RequestMediaUploadTool::class,
         AttachMediaFromUploadTool::class,
         GetPostMetricsTool::class,
+
+        // Assets
+        ListAssetsTool::class,
+        GetAssetTool::class,
+        AttachExistingAssetTool::class,
 
         // Platforms (read-only metadata)
         ListContentTypesTool::class,
