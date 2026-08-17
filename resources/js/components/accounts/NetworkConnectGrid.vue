@@ -11,6 +11,10 @@ import { Button } from '@/components/ui/button';
 import { useOAuthPopup } from '@/composables/useOAuthPopup';
 import { disconnect } from '@/routes/app/accounts';
 import { Platform } from '@/types/platform';
+import {
+    SocialAccountStatus,
+    type SocialAccountStatusValue,
+} from '@/types/social-account-status';
 
 export interface AvailablePlatform {
     value: string;
@@ -28,7 +32,7 @@ export interface ConnectedAccount {
     display_label: string;
     handle_label: string;
     avatar_url: string | null;
-    status: 'connected' | 'disconnected' | 'token_expired' | null;
+    status: SocialAccountStatusValue | null;
 }
 
 const props = withDefaults(
@@ -174,7 +178,8 @@ const disconnectAccount = (account: ConnectedAccount) => {
 };
 
 const needsReconnect = (account: ConnectedAccount): boolean =>
-    account.status === 'disconnected' || account.status === 'token_expired';
+    account.status === SocialAccountStatus.Disconnected ||
+    account.status === SocialAccountStatus.TokenExpired;
 
 const connectEntryFor = (platformValue: string): string =>
     platformValue === Platform.LinkedInPage ? Platform.LinkedIn : platformValue;
