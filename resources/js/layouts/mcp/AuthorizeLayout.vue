@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Head } from '@inertiajs/vue3';
+import AppLogo from '@/components/AppLogo.vue';
 
 defineProps<{
     title: string;
@@ -16,11 +17,7 @@ defineProps<{
 
         <div class="w-full max-w-md space-y-8">
             <div class="flex flex-col items-center gap-4 text-center">
-                <img
-                    src="/images/trypost/logo-light.png"
-                    alt="TryPost"
-                    class="h-10 w-auto"
-                />
+                <AppLogo />
                 <div class="space-y-2">
                     <h1
                         class="text-xl font-semibold tracking-tight text-foreground"

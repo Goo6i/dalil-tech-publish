@@ -42,7 +42,6 @@ return [
         'labels' => 'التسميات',
         'assets' => 'الوسائط',
         'mcp' => 'MCP',
-        'api_keys' => 'مفاتيح API',
     ],
 
     'notifications' => 'الإشعارات',

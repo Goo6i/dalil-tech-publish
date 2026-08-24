@@ -97,35 +97,6 @@ test('google registration saves ad click ids captured before the oauth round-tri
     ]);
 });
 
-test('github registration saves ad click ids captured before the oauth round-trip', function () {
-    $clickIds = ['li_fat_id' => 'li-click', 'ttclid' => 'tt-click'];
-
-    $this->get(route('auth.github.redirect', $clickIds));
-
-    $socialiteUser = new SocialiteUser;
-    $socialiteUser->id = 'gh-click-user';
-    $socialiteUser->name = 'GitHub Click';
-    $socialiteUser->email = 'github-click@example.com';
-
-    Socialite::shouldReceive('driver')
-        ->with('github')
-        ->andReturn($driver = Mockery::mock());
-
-    $driver->shouldReceive('scopes')
-        ->andReturnSelf();
-
-    $driver->shouldReceive('user')
-        ->andReturn($socialiteUser);
-
-    $this->get(route('auth.github.callback'))
-        ->assertRedirect(route('app.welcome', absolute: false));
-
-    $this->assertDatabaseHas('users', [
-        'email' => 'github-click@example.com',
-        ...$clickIds,
-    ]);
-});
-
 test('existing google user login consumes the click id session so it does not leak to a later signup', function () {
     User::factory()->create([
         'email' => 'existing-click@example.com',
@@ -147,35 +118,6 @@ test('existing google user login consumes the click id session so it does not le
         ->andReturn($socialiteUser);
 
     $this->get(route('auth.google.callback'))
-        ->assertRedirect(route('app.home'));
-
-    expect(session()->get('attribution_parameters'))->toBeNull();
-});
-
-test('existing github user login consumes the click id session so it does not leak to a later signup', function () {
-    User::factory()->create([
-        'email' => 'existing-gh-click@example.com',
-        'github_id' => 'gh-existing-click',
-    ]);
-
-    $this->get(route('auth.github.redirect', ['gclid' => 'stale-gh-click']));
-
-    $socialiteUser = new SocialiteUser;
-    $socialiteUser->id = 'gh-existing-click';
-    $socialiteUser->name = 'Existing GitHub Click User';
-    $socialiteUser->email = 'existing-gh-click@example.com';
-
-    Socialite::shouldReceive('driver')
-        ->with('github')
-        ->andReturn($driver = Mockery::mock());
-
-    $driver->shouldReceive('scopes')
-        ->andReturnSelf();
-
-    $driver->shouldReceive('user')
-        ->andReturn($socialiteUser);
-
-    $this->get(route('auth.github.callback'))
         ->assertRedirect(route('app.home'));
 
     expect(session()->get('attribution_parameters'))->toBeNull();

@@ -16,8 +16,7 @@ const props = withDefaults(
 
 const page = usePage();
 const googleEnabled = computed(() => Boolean(page.props.googleAuthEnabled));
-const githubEnabled = computed(() => Boolean(page.props.githubAuthEnabled));
-const hasSocial = computed(() => googleEnabled.value || githubEnabled.value);
+const hasSocial = computed(() => googleEnabled.value);
 
 const query = computed(() => {
     const params: Record<string, string> = {};
@@ -26,7 +25,6 @@ const query = computed(() => {
 });
 
 const googleUrl = computed(() => googleRedirect.url({ query: query.value }));
-const githubUrl = computed(() => githubRedirect.url({ query: query.value }));
 </script>
 
 <template>
@@ -35,11 +33,6 @@ const githubUrl = computed(() => githubRedirect.url({ query: query.value }));
             <Button v-if="googleEnabled" variant="outline" class="w-full" as="a" :href="googleUrl">
                 <img src="/images/social/google.svg" alt="Google" class="size-4" />
                 {{ mode === 'login' ? $t('auth.google_login') : $t('auth.google_signup') }}
-            </Button>
-
-            <Button v-if="githubEnabled" variant="outline" class="w-full" as="a" :href="githubUrl">
-                <img src="/images/social/github.svg" alt="GitHub" class="size-4 dark:invert" />
-                {{ mode === 'login' ? $t('auth.github_login') : $t('auth.github_signup') }}
             </Button>
         </div>
 

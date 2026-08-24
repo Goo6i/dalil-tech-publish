@@ -97,15 +97,17 @@ class GoogleController extends Controller
 
     private function registerNewUser(\Laravel\Socialite\Contracts\User $googleUser): RedirectResponse
     {
+        // Resolve any pending invite without aborting; the SELF_HOSTED gate
+        // below turns "no invite" into a friendly redirect instead of the bare
+        // 404 that resolveInviteForRegistration() would raise.
+        $invite = Invite::fromId($this->retrieveInvite());
+
         // Respect the invite-only lock (SELF_HOSTED): social login may sign in
-        // an existing user, but must not CREATE a new account when public
-        // sign ups are closed and there is no pending invite. Mirrors
-        // EnsureRegistrationEnabled.
-        if (config('trypost.self_hosted') && ! session()->has('pending_invite_id')) {
+        // an existing user, but must not CREATE a new account when public sign
+        // ups are closed and there is no invite to consume.
+        if (config('trypost.self_hosted') && $invite === null) {
             return redirect()->route('login')->with('flash.error', __('auth.registration_closed'));
         }
-
-        $invite = $this->resolveInviteForRegistration();
 
         if ($redirect = $this->inviteEmailMismatchRedirect($invite, $googleUser->getEmail())) {
             return $redirect;
