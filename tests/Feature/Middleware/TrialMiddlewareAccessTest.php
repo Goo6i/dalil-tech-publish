@@ -21,6 +21,7 @@ test('user without subscription is redirected to subscribe', function () {
         'email' => 'alice@example.com',
         'password' => 'password123',
         'registration_ip' => '127.0.0.1',
+        'email_verified_at' => now(),
     ]);
 
     $workspace = Workspace::factory()->create([
@@ -41,6 +42,7 @@ test('user with active subscription can access the app', function () {
         'email' => 'alice2@example.com',
         'password' => 'password123',
         'registration_ip' => '127.0.0.1',
+        'email_verified_at' => now(),
     ]);
 
     $workspace = Workspace::factory()->create([
@@ -126,6 +128,7 @@ test('user on generic trial can access the app when card is not required', funct
         'email' => 'alice-generic@example.com',
         'password' => 'password123',
         'registration_ip' => '127.0.0.1',
+        'email_verified_at' => now(),
     ]);
 
     $workspace = Workspace::factory()->create([

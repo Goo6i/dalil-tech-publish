@@ -25,7 +25,8 @@ test('verification email renders in English, LTR, with the Dalil Tech footer', f
         ->and($html)->toContain('Verify Email Address')
         ->and($html)->toContain('https://dalil-tech.com/publish')
         ->and($html)->toContain(date('Y').' Dalil Tech')
-        ->and($html)->not->toContain('trypost')
+        ->and($html)->not->toContain('trypostit')
+        ->and($html)->not->toContain('trypost.it')
         ->and($html)->not->toContain('TryPost');
 });
 
