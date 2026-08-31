@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Middleware\App;
 
 use App\Models\Invite;
+use App\Support\Registration;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -13,7 +14,7 @@ class EnsureRegistrationEnabled
 {
     public function handle(Request $request, Closure $next): mixed
     {
-        if (! config('trypost.self_hosted')) {
+        if (Registration::isPublic()) {
             return $next($request);
         }
 

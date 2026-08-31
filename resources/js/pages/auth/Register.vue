@@ -29,7 +29,7 @@ const showPassword = ref(false);
 const showEmailForm = ref(false);
 
 const page = usePage();
-const isSelfHosted = computed(() => Boolean(page.props.selfHosted));
+const registrationEnabled = computed(() => Boolean(page.props.registrationEnabled));
 const hasSocial = computed(() => Boolean(page.props.googleAuthEnabled));
 
 // With no social providers the email form is the only way to sign up, so it
@@ -174,7 +174,7 @@ const emailFormVisible = computed(() => !hasSocial.value || showEmailForm.value)
 
             <!-- eslint-disable-next-line vue/no-v-html -->
             <div
-                v-if="!isSelfHosted"
+                v-if="registrationEnabled"
                 class="text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 [&_a]:hover:text-primary"
                 v-html="$t('auth.legal')"
             />

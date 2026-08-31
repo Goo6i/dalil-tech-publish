@@ -92,6 +92,7 @@ export interface SharedData {
     onboardingProgress?: OnboardingProgress | false;
     sidebarOpen: boolean;
     selfHosted: boolean;
+    registrationEnabled: boolean;
     contentTypeMediaRules?: Record<string, ContentTypeMediaRule>;
     [key: string]: unknown;
 }

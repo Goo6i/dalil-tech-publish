@@ -32,7 +32,7 @@ defineProps<{
 const showPassword = ref(false);
 
 const page = usePage();
-const isSelfHosted = computed(() => Boolean(page.props.selfHosted));
+const registrationEnabled = computed(() => Boolean(page.props.registrationEnabled));
 const pageErrors = usePageErrors();
 </script>
 
@@ -174,7 +174,7 @@ const pageErrors = usePageErrors();
                 </div>
 
                 <div
-                    v-if="!isSelfHosted"
+                    v-if="registrationEnabled"
                     class="text-center text-sm text-muted-foreground"
                 >
                     {{ $t('auth.login.no_account') }}

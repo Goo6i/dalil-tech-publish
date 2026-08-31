@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\Concerns\PreservesInvite;
 use App\Http\Controllers\Controller;
 use App\Models\Invite;
 use App\Models\User;
+use App\Support\Registration;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -97,15 +98,15 @@ class GoogleController extends Controller
 
     private function registerNewUser(\Laravel\Socialite\Contracts\User $googleUser): RedirectResponse
     {
-        // Resolve any pending invite without aborting; the SELF_HOSTED gate
-        // below turns "no invite" into a friendly redirect instead of the bare
-        // 404 that resolveInviteForRegistration() would raise.
+        // Resolve any pending invite without aborting; the public-registration
+        // gate below turns "no invite" into a friendly redirect instead of the
+        // bare 404 that resolveInviteForRegistration() would raise.
         $invite = Invite::fromId($this->retrieveInvite());
 
-        // Respect the invite-only lock (SELF_HOSTED): social login may sign in
-        // an existing user, but must not CREATE a new account when public sign
-        // ups are closed and there is no invite to consume.
-        if (config('trypost.self_hosted') && $invite === null) {
+        // Respect the invite-only lock: social login may sign in an existing
+        // user, but must not CREATE a new account when public sign ups are
+        // closed and there is no invite to consume.
+        if (! Registration::isPublic() && $invite === null) {
             return redirect()->route('login')->with('flash.error', __('auth.registration_closed'));
         }
 

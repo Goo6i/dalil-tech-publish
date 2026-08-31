@@ -146,6 +146,13 @@ class AppServiceProvider extends ServiceProvider
             return Limit::perMinute(60)->by($request->workspace?->id ?: $request->ip());
         });
 
+        // Public sign ups: a burst cap plus an hourly cap per IP, so one
+        // client cannot mass-create accounts or mass-send verification mail.
+        RateLimiter::for('register', fn (Request $request): array => [
+            Limit::perMinute(5)->by($request->ip()),
+            Limit::perHour(30)->by($request->ip()),
+        ]);
+
         RateLimiter::for(
             'mcp-oauth-registration',
             fn (Request $request): Limit => Limit::perMinute(30)->by($request->ip()),
@@ -238,14 +245,16 @@ class AppServiceProvider extends ServiceProvider
             ]);
         });
 
-        // Custom email verification template
+        // Custom email verification template, rendered in the request locale
+        // (SetLocale) so an Arabic session gets an Arabic, RTL email.
         VerifyEmail::toMailUsing(function (User $user, string $url) {
             return (new MailMessage)
                 ->from(config('mail.from.address'), config('mail.from.name'))
-                ->subject('Verify your email address')
+                ->subject(__('mail.verify_email.subject'))
                 ->view('mail.email-verification', [
-                    'title' => 'Verify your email address',
-                    'previewText' => 'Please verify your email address.',
+                    'title' => __('mail.verify_email.subject'),
+                    'previewText' => __('mail.verify_email.preview'),
+                    'htmlDir' => $this->mailDirection(),
                     'user' => $user,
                     'url' => $url,
                 ]);
@@ -260,13 +269,19 @@ class AppServiceProvider extends ServiceProvider
 
             return (new MailMessage)
                 ->from(config('mail.from.address'), config('mail.from.name'))
-                ->subject('Reset your password')
+                ->subject(__('mail.password_reset.subject'))
                 ->view('mail.password-reset', [
-                    'title' => 'Reset your password',
-                    'previewText' => 'Reset your password.',
+                    'title' => __('mail.password_reset.subject'),
+                    'previewText' => __('mail.password_reset.preview'),
+                    'htmlDir' => $this->mailDirection(),
                     'user' => $user,
                     'url' => $url,
                 ]);
         });
+    }
+
+    private function mailDirection(): string
+    {
+        return str_starts_with(app()->getLocale(), 'ar') ? 'rtl' : 'ltr';
     }
 }

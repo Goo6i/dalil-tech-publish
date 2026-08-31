@@ -103,44 +103,18 @@
         <tr>
           <td align="center" style="padding: 24px; text-align: center; font-size: 12px; color: #52525b">
             <p style="margin: 0 0 8px">
-              Open-source social media scheduling tool
+              {{ __('mail.footer.tagline') }}
             </p>
             <p style="margin: 8px 0 0">
               <a href="{{ route('app.notifications.preferences') }}" target="_blank" class="hover-i-text-decoration-underline" style="color: #52525b; text-decoration: none">
                 Manage notifications
               </a>
             </p>
-            <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-left: auto; margin-right: auto; margin-top: 16px">
-              <tr>
-                <td style="padding-left: 4px; padding-right: 4px">
-                  <a href="https://github.com/trypostit/trypost" target="_blank">
-                    <img src="{{ asset('/images/emails/social/github.png') }}" width="20" height="20" alt="GitHub" style="max-width: 100%; vertical-align: middle">
-                  </a>
-                </td>
-                <td style="padding-left: 4px; padding-right: 4px">
-                  <a href="https://x.com/trypostit" target="_blank">
-                    <img src="{{ asset('/images/emails/social/x.png') }}" width="20" height="20" alt="X" style="max-width: 100%; vertical-align: middle">
-                  </a>
-                </td>
-                <td style="padding-left: 4px; padding-right: 4px">
-                  <a href="https://www.youtube.com/@trypostit" target="_blank">
-                    <img src="{{ asset('/images/emails/social/youtube.png') }}" width="20" height="20" alt="YouTube" style="max-width: 100%; vertical-align: middle">
-                  </a>
-                </td>
-                <td style="padding-left: 4px; padding-right: 4px">
-                  <a href="https://trypost.it/discord" target="_blank">
-                    <img src="{{ asset('/images/emails/social/discord.png') }}" width="20" height="20" alt="Discord" style="max-width: 100%; vertical-align: middle">
-                  </a>
-                </td>
-                <td style="padding-left: 4px; padding-right: 4px">
-                  <a href="https://www.instagram.com/trypost.it" target="_blank">
-                    <img src="{{ asset('/images/emails/social/instagram.png') }}" width="20" height="20" alt="Instagram" style="max-width: 100%; vertical-align: middle">
-                  </a>
-                </td>
-              </tr>
-            </table>
+            <p style="margin: 8px 0 0">
+              <a href="https://dalil-tech.com/publish" target="_blank" style="color: #52525b; text-decoration: none">{{ __('mail.footer.site') }}</a>
+            </p>
             <p style="margin: 12px 0 0">
-              &copy; {{ date('Y') }} TryPost.it
+              {{ __('mail.footer.copyright', ['year' => date('Y')]) }}
             </p>
           </td>
         </tr>

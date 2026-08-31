@@ -53,7 +53,7 @@ use App\Http\Middleware\App\EnsureHasWorkspace;
 use Illuminate\Support\Facades\Route;
 
 // Subscription selection (requires auth but not subscription)
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/', function () {
         return redirect()->route('app.calendar');
@@ -91,7 +91,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Social Connect routes
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     // Starting a connection reads the user's current workspace, so these require
     // one — during onboarding they redirect to workspace creation. Disconnecting
     // lives here too (and not behind EnsureAccountReady) so it works before a
@@ -154,7 +154,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Routes that require account access and a current workspace
-Route::middleware(['auth', EnsureAccountReady::class, EnsureHasWorkspace::class])->group(function () {
+Route::middleware(['auth', 'verified', EnsureAccountReady::class, EnsureHasWorkspace::class])->group(function () {
     Route::get('onboarding', [OnboardingController::class, 'index'])->name('app.onboarding');
     Route::post('onboarding/mcp/skip', [OnboardingController::class, 'skipMcp'])->name('app.onboarding.mcp.skip');
     Route::post('onboarding/complete', [OnboardingController::class, 'complete'])->name('app.onboarding.complete');
@@ -303,7 +303,7 @@ Route::middleware(['auth', EnsureAccountReady::class, EnsureHasWorkspace::class]
 });
 
 // Notifications (auth only, no subscription required)
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('notifications', [NotificationController::class, 'index'])->name('app.notifications.index');
     Route::put('notifications/{notification}/read', [NotificationController::class, 'markAsRead'])->name('app.notifications.read');
     Route::post('notifications/read-all', [NotificationController::class, 'markAllAsRead'])->name('app.notifications.read-all');
@@ -311,7 +311,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Settings (auth required)
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('settings', [SettingsController::class, 'index'])->name('app.settings');
 
     Route::get('settings/profile', [ProfileController::class, 'edit'])->name('app.profile.edit');
@@ -321,7 +321,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('settings/language', [ProfileController::class, 'updateLanguage'])->name('app.profile.language');
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('settings/profile', [ProfileController::class, 'destroy'])->name('app.profile.destroy');
 
     Route::get('settings/authentication', [AuthenticationController::class, 'edit'])->name('app.authentication.edit');

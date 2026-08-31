@@ -18,6 +18,20 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Public Registration
+    |--------------------------------------------------------------------------
+    |
+    | Whether anyone can create an account at /register. Leave unset to keep
+    | the upstream behaviour (open when not self-hosted, invite-only when
+    | self-hosted). Set it explicitly to open or close public sign ups
+    | without touching the billing paths that SELF_HOSTED controls.
+    |
+    */
+
+    'public_registration' => env('PUBLIC_REGISTRATION'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Security
     |--------------------------------------------------------------------------
     |

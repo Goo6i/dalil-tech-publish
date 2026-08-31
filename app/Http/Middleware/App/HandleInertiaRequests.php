@@ -6,6 +6,7 @@ namespace App\Http\Middleware\App;
 
 use App\Actions\Onboarding\ResolveOnboardingStatus;
 use App\Enums\Auth\SocialAuthProvider;
+use App\Support\Registration;
 use App\Enums\PostPlatform\ContentType;
 use App\Http\Resources\App\HandleInertiaRequests\AuthAccountResource;
 use App\Http\Resources\App\HandleInertiaRequests\AuthPlanResource;
@@ -66,6 +67,7 @@ class HandleInertiaRequests extends Middleware
             ])->values()->all(),
             'aiEnabled' => ! empty(config('services.gemini.api_key')) || ! empty(config('services.openai.api_key')),
             'selfHosted' => $isSelfHosted,
+            'registrationEnabled' => Registration::isPublic(),
             'googleAuthEnabled' => SocialAuthProvider::Google->isEnabled(),
             'githubAuthEnabled' => SocialAuthProvider::GitHub->isEnabled(),
         ];
