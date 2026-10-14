@@ -311,6 +311,25 @@ enum Platform: string
     }
 
     /**
+     * Whether ConnectionVerifier has a real per-account token refresh flow
+     * for this platform. Facebook/InstagramFacebook use Page tokens and
+     * Mastodon's tokens don't expire (see defaultTokenTtlSeconds()); Telegram
+     * and Discord authenticate with one bot token shared across every
+     * connected account of that platform, with no per-account credential to
+     * refresh at all. For these, a rejected verify call can't be retried
+     * after a refresh — there's nothing to refresh.
+     */
+    public function hasTokenRefreshFlow(): bool
+    {
+        return match ($this) {
+            self::LinkedIn, self::LinkedInPage, self::X, self::Bluesky,
+            self::YouTube, self::TikTok, self::Pinterest,
+            self::Threads, self::Instagram => true,
+            default => false,
+        };
+    }
+
+    /**
      * The `platform` column values of the platforms that refresh by extending
      * their access token in place (Instagram and Threads — see
      * extendsAccessTokenOnRefresh), for use in database whereIn/whereNotIn
@@ -388,6 +407,27 @@ enum Platform: string
             self::LinkedIn => self::LinkedIn->isEnabled() || self::LinkedInPage->isEnabled(),
             default => $this->isEnabled(),
         };
+    }
+
+    /**
+     * Connectable platforms shaped for Inertia account/onboarding grids.
+     * Sorted alphabetically by label (ASC, case-insensitive).
+     *
+     * @return list<array{value: string, label: string, color: string, network: string}>
+     */
+    public static function connectableOptions(): array
+    {
+        return collect(self::cases())
+            ->filter(fn (self $platform): bool => $platform->isConnectable())
+            ->sortBy(fn (self $platform): string => mb_strtolower($platform->label()))
+            ->map(fn (self $platform): array => [
+                'value' => $platform->value,
+                'label' => $platform->label(),
+                'color' => $platform->color(),
+                'network' => $platform->network(),
+            ])
+            ->values()
+            ->all();
     }
 
     /**

@@ -19,4 +19,30 @@ return [
         'reconnect_cta' => 'Please reconnect these accounts to continue scheduling and publishing posts.',
         'button' => 'Reconnect Accounts',
     ],
+
+    'footer' => [
+        'tagline' => 'Schedule and publish to every network from one calendar.',
+        'site' => 'dalil-tech.com/publish',
+        'copyright' => '© :year Dalil Tech',
+    ],
+
+    'greeting' => 'Hi :name,',
+    'signoff' => 'Best regards,',
+    'team' => 'The Dalil Tech Team',
+
+    'verify_email' => [
+        'subject' => 'Verify your email address',
+        'preview' => 'Please verify your email address.',
+        'intro' => 'Please confirm your email address by clicking the button below:',
+        'button' => 'Verify Email Address →',
+        'ignore' => 'If you did not create an account, you can safely ignore this email.',
+    ],
+
+    'password_reset' => [
+        'subject' => 'Reset your password',
+        'preview' => 'Reset your password.',
+        'intro' => 'We received a request to reset your password. Click the button below to create a new password:',
+        'button' => 'Reset Password →',
+        'expires' => "This link expires in 60 minutes. If you didn't request a password reset, you can safely ignore this email.",
+    ],
 ];

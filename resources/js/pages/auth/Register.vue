@@ -22,7 +22,6 @@ import { store } from '@/routes/register';
 
 defineProps<{
     email?: string | null;
-    redirect?: string | null;
     invite?: string | null;
 }>();
 
@@ -30,7 +29,7 @@ const showPassword = ref(false);
 const showEmailForm = ref(false);
 
 const page = usePage();
-const isSelfHosted = computed(() => Boolean(page.props.selfHosted));
+const registrationEnabled = computed(() => Boolean(page.props.registrationEnabled));
 const hasSocial = computed(() => Boolean(page.props.googleAuthEnabled));
 
 // With no social providers the email form is the only way to sign up, so it
@@ -47,7 +46,7 @@ const emailFormVisible = computed(() => !hasSocial.value || showEmailForm.value)
 
         <div class="flex flex-col gap-6">
             <div v-if="hasSocial" class="flex flex-col gap-2">
-                <SocialLogin mode="signup" hide-divider />
+                <SocialLogin mode="signup" hide-divider :invite="invite" />
 
                 <Button
                     v-if="!showEmailForm"
@@ -68,7 +67,6 @@ const emailFormVisible = computed(() => !hasSocial.value || showEmailForm.value)
                 v-slot="{ errors, processing }"
                 class="flex flex-col gap-6"
             >
-                <input v-if="redirect" type="hidden" name="redirect" :value="redirect" />
                 <input v-if="invite" type="hidden" name="invite" :value="invite" />
 
                 <div
@@ -176,7 +174,7 @@ const emailFormVisible = computed(() => !hasSocial.value || showEmailForm.value)
 
             <!-- eslint-disable-next-line vue/no-v-html -->
             <div
-                v-if="!isSelfHosted"
+                v-if="registrationEnabled"
                 class="text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 [&_a]:hover:text-primary"
                 v-html="$t('auth.legal')"
             />

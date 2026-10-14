@@ -62,6 +62,11 @@ export interface NavItem {
     badge?: string;
 }
 
+export interface OnboardingProgress {
+    completed: number;
+    total: number;
+}
+
 export interface ContentTypeMediaRule {
     max_files: number;
     min_files: number | null;
@@ -84,8 +89,10 @@ export interface SharedData {
     name: string;
     auth: Auth;
     flash: FlashData;
+    onboardingProgress?: OnboardingProgress | false;
     sidebarOpen: boolean;
     selfHosted: boolean;
+    registrationEnabled: boolean;
     contentTypeMediaRules?: Record<string, ContentTypeMediaRule>;
     [key: string]: unknown;
 }
@@ -97,6 +104,7 @@ export type AppPageProps<
 export interface User {
     id: string;
     name: string;
+    first_name: string;
     email: string;
     has_photo: boolean;
     photo_url: string | null;

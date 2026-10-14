@@ -24,6 +24,7 @@ interface SocialAccount {
     platform: string;
     display_name: string;
     username: string;
+    display_label: string;
     avatar_url: string | null;
 }
 
@@ -293,6 +294,22 @@ watch(
                     </button>
                 </div>
                 <InputError :message="contentTypeError" />
+            </div>
+
+            <!-- Creator identity -->
+            <div v-if="socialAccount" class="flex items-center gap-3 rounded-lg bg-foreground/5 p-3">
+                <Avatar
+                    :src="socialAccount.avatar_url"
+                    :name="socialAccount.display_label"
+                    class="size-9 shrink-0 rounded-full border-2 border-foreground shadow-2xs"
+                />
+                <div class="min-w-0 flex-1">
+                    <p class="text-[11px] font-black uppercase tracking-widest text-foreground/60">{{ $t('posts.form.tiktok.posting_to') }}</p>
+                    <p class="truncate text-sm">
+                        <span class="font-bold text-foreground">{{ socialAccount.display_label }}</span>
+                        <span v-if="socialAccount?.username" class="font-medium text-foreground/60">&nbsp;@{{ socialAccount.username }}</span>
+                    </p>
+                </div>
             </div>
 
             <!-- Privacy Level -->

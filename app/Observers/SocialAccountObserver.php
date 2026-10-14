@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace App\Observers;
 
 use App\Enums\SocialAccount\Platform;
+use App\Enums\SocialAccount\Status;
+use App\Events\OnboardingStatusUpdated;
 use App\Exceptions\SocialAccount\NetworkAlreadyConnectedException;
+use App\Jobs\PostHog\IdentifyConnectedPlatforms;
 use App\Jobs\PostHog\SyncAccountUsage;
 use App\Models\SocialAccount;
 use App\Services\PostHogService;
@@ -21,45 +24,96 @@ class SocialAccountObserver
      */
     public function creating(SocialAccount $socialAccount): void
     {
-        if (config('trypost.self_hosted')) {
-            return;
-        }
-
-        $platform = $socialAccount->platform;
-
-        if (! $platform instanceof Platform) {
+        if (config('trypost.self_hosted') || ! $socialAccount->platform instanceof Platform) {
             return;
         }
 
         $conflict = SocialAccount::query()
             ->where('workspace_id', $socialAccount->workspace_id)
-            ->whereIn('platform', $platform->networkPlatformValues())
+            ->whereIn('platform', $socialAccount->platform->networkPlatformValues())
             ->exists();
 
         if ($conflict) {
-            throw new NetworkAlreadyConnectedException($platform);
+            throw new NetworkAlreadyConnectedException($socialAccount->platform);
         }
     }
 
     public function created(SocialAccount $socialAccount): void
     {
-        $this->syncUsage($socialAccount);
+        $this->syncUsageAndOnboarding($socialAccount);
     }
 
     public function deleted(SocialAccount $socialAccount): void
     {
-        $this->syncUsage($socialAccount);
+        $this->syncUsageAndOnboarding($socialAccount);
     }
 
-    private function syncUsage(SocialAccount $socialAccount): void
+    public function updated(SocialAccount $socialAccount): void
+    {
+        if (! $socialAccount->wasChanged('status')) {
+            return;
+        }
+
+        $wasConnected = $socialAccount->getRawOriginal('status') === Status::Connected->value;
+        $isConnected = $socialAccount->status === Status::Connected;
+
+        if ($wasConnected !== $isConnected) {
+            $this->identifyConnectedPlatforms($socialAccount);
+            $this->notifyOnboarding($socialAccount);
+        }
+    }
+
+    private function syncUsageAndOnboarding(SocialAccount $socialAccount): void
+    {
+        $this->syncUsage($socialAccount);
+        $this->identifyConnectedPlatforms($socialAccount);
+
+        if ($socialAccount->status === Status::Connected) {
+            $this->notifyOnboarding($socialAccount);
+        }
+    }
+
+    private function identifyConnectedPlatforms(SocialAccount $socialAccount): void
     {
         if (! PostHogService::isEnabled()) {
             return;
         }
 
-        SyncAccountUsage::dispatch(
-            (string) $socialAccount->workspace->account_id,
-            (string) $socialAccount->workspace_id,
-        );
+        IdentifyConnectedPlatforms::dispatch((string) $socialAccount->workspace_id);
+    }
+
+    /**
+     * First usable connect / last disconnect for the account.
+     * Actor-less → syncAndNotify falls back to the account owner.
+     */
+    private function notifyOnboarding(SocialAccount $socialAccount): void
+    {
+        $socialAccount->loadMissing('workspace.account');
+
+        $account = $socialAccount->workspace?->account;
+
+        if (! $account?->isOnboardingOpen()) {
+            return;
+        }
+
+        $hasOtherConnections = SocialAccount::query()
+            ->whereIn('workspace_id', $account->workspaces()->select('id'))
+            ->whereKeyNot($socialAccount->id)
+            ->where('status', Status::Connected)
+            ->exists();
+
+        if (! $hasOtherConnections) {
+            OnboardingStatusUpdated::dispatchForWorkspace($socialAccount->workspace_id);
+        }
+    }
+
+    private function syncUsage(SocialAccount $socialAccount): void
+    {
+        if (PostHogService::isEnabled()) {
+            SyncAccountUsage::dispatch(
+                (string) $socialAccount->workspace->account_id,
+                (string) $socialAccount->workspace_id,
+            );
+        }
     }
 }

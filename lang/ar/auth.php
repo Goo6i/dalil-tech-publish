@@ -57,18 +57,14 @@ return [
     'google_login' => 'تسجيل الدخول عبر Google',
     'google_signup' => 'التسجيل عبر Google',
 
-    'signup_success' => [
-        'page_title' => 'مرحبًا',
-        'title' => 'جارٍ إعداد حسابك',
-        'description' => 'يستغرق هذا عادةً بضع ثوانٍ فقط...',
-    ],
-
     'login' => [
         'title' => 'تسجيل الدخول إلى حسابك',
         'description' => 'أدخل بريدك الإلكتروني وكلمة المرور أدناه لتسجيل الدخول',
         'page_title' => 'تسجيل الدخول',
         'email' => 'البريد الإلكتروني',
         'password' => 'كلمة المرور',
+        'show_password' => 'إظهار كلمة المرور',
+        'hide_password' => 'إخفاء كلمة المرور',
         'forgot_password' => 'نسيت كلمة المرور؟',
         'remember_me' => 'تذكّرني',
         'submit' => 'تسجيل الدخول',

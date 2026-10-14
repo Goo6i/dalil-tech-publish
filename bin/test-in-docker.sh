@@ -55,6 +55,11 @@ RUN_ENV=(
     -e DB_PASSWORD="$DB_PASSWORD"
     -e APP_ENV=testing
     -e APP_KEY="$APP_KEY"
+    # Social OAuth client creds the token-refresh tests need. .env.testing is
+    # excluded from the image (.dockerignore), so provide the fake test values
+    # here to match CI; without them ConnectionVerifier::withBasicAuth() TypeErrors.
+    -e X_CLIENT_ID=test-x-client-id
+    -e X_CLIENT_SECRET=test-x-client-secret
     -e ANALYTICS_DB_DATABASE=analytics_test
     -e ANALYTICS_DB_USERNAME=trypost
     -e ANALYTICS_DB_PASSWORD="$DB_PASSWORD"

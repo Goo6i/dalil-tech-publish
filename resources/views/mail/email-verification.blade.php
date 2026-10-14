@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:v="urn:schemas-microsoft-com:vml">
+<html lang="{{ app()->getLocale() }}" dir="{{ $htmlDir ?? 'ltr' }}" xmlns:v="urn:schemas-microsoft-com:vml">
 <head>
   <meta charset="utf-8">
   <meta name="x-apple-disable-message-reformatting">
@@ -26,9 +26,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" media="screen">
   <style>
-    .hover-i-text-decoration-underline:hover {
-      text-decoration: underline !important
-    }
     @media (max-width: 600px) {
       .sm-my-8 {
         margin-top: 32px !important;
@@ -52,7 +49,7 @@
     &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847;
   </div>
   @endif
-  <div role="article" aria-roledescription="email" aria-label="{{ $title }}" lang="en">
+  <div role="article" aria-roledescription="email" aria-label="{{ $title }}" lang="{{ app()->getLocale() }}" dir="{{ $htmlDir ?? 'ltr' }}">
     <div class="sm-px-4" style="background-color: #fafafa; font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif">
       <table align="center" cellpadding="0" cellspacing="0" role="none">
         <tr>
@@ -66,29 +63,29 @@
               <tr>
                 <td class="sm-px-6" style="border-radius: 4px; background-color: #fffffe; padding: 48px; font-size: 16px; color: #27272a; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05)">
                   <p style="margin-top: 0; line-height: 24px">
-                    Hi {{ $user->name }},
+                    {{ __('mail.greeting', ['name' => $user->name]) }}
                   </p>
                   <p style="line-height: 24px">
-                    Please confirm your email address by clicking the button below:
+                    {{ __('mail.verify_email.intro') }}
                   </p>
                   <div role="separator" style="line-height: 24px">&zwj;</div>
                   <div style="text-align: center">
                     <div>
                       <a href="{{ $url }}" style="display: inline-block; text-decoration: none; padding: 16px 24px; font-size: 16px; line-height: 1; border-radius: 8px; background-color: #262626; color: #ffffff">
                         <!--[if mso]><i style="mso-font-width: 150%; mso-text-raise: 31px" hidden>&emsp;</i><![endif]-->
-                        <span style="mso-text-raise: 16px">Verify Email Address &rarr;</span>
+                        <span style="mso-text-raise: 16px">{{ __('mail.verify_email.button') }}</span>
                         <!--[if mso]><i hidden style="mso-font-width: 150%">&emsp;&#8203;</i><![endif]-->
                       </a>
                     </div>
                   </div>
                   <div role="separator" style="line-height: 24px">&zwj;</div>
                   <p style="line-height: 24px">
-                    If you did not create an account, you can safely ignore this email.
+                    {{ __('mail.verify_email.ignore') }}
                   </p>
                   <p style="margin-bottom: 0; line-height: 24px">
-                    Best regards,
+                    {{ __('mail.signoff') }}
                     <br>
-                    The Dalil Tech Team
+                    {{ __('mail.team') }}
                   </p>
                 </td>
               </tr>
@@ -98,15 +95,14 @@
         <tr>
           <td align="center" style="padding: 24px; text-align: center; font-size: 12px; color: #52525b">
             <p style="margin: 0 0 8px">
-              Open-source social media scheduling tool
+              {{ __('mail.footer.tagline') }}
             </p>
-            @if(isset($unsubscribe_url))
             <p style="margin: 8px 0 0">
-              <a href="{{ unsubscribe_url }}" target="_blank" class="hover-i-text-decoration-underline" style="color: #52525b; text-decoration: none">
-                Unsubscribe
-              </a>
+              <a href="https://dalil-tech.com/publish" target="_blank" style="color: #52525b; text-decoration: none">{{ __('mail.footer.site') }}</a>
             </p>
-            @endif
+            <p style="margin: 12px 0 0">
+              {{ __('mail.footer.copyright', ['year' => date('Y')]) }}
+            </p>
           </td>
         </tr>
       </table>

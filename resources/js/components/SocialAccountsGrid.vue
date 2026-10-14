@@ -19,9 +19,14 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { getInitials } from '@/composables/useInitials';
 import { useOAuthPopup } from '@/composables/useOAuthPopup';
 import { getPlatformLogo } from '@/composables/usePlatformLogo';
 import { toggle as toggleAccount } from '@/routes/app/accounts';
+import {
+    SocialAccountStatus,
+    type SocialAccountStatusValue,
+} from '@/types/social-account-status';
 
 export interface SocialAccount {
     id: string;
@@ -29,8 +34,10 @@ export interface SocialAccount {
     platform_user_id: string;
     username: string;
     display_name: string;
+    display_label: string;
+    handle_label: string;
     avatar_url: string;
-    status: 'connected' | 'disconnected' | 'token_expired' | null;
+    status: SocialAccountStatusValue | null;
     is_active: boolean;
     error_message: string | null;
 }
@@ -117,7 +124,8 @@ const getProfileUrl = (
 const isDisconnected = (account: SocialAccount | null): boolean => {
     if (!account) return false;
     return (
-        account.status === 'disconnected' || account.status === 'token_expired'
+        account.status === SocialAccountStatus.Disconnected ||
+        account.status === SocialAccountStatus.TokenExpired
     );
 };
 </script>
@@ -201,10 +209,7 @@ const isDisconnected = (account: SocialAccount | null): boolean => {
                         v-if="platform.connected && platform.account"
                         class="truncate text-sm text-muted-foreground"
                     >
-                        @{{
-                            platform.account.username ||
-                            platform.account.display_name
-                        }}
+                        @{{ platform.account.handle_label }}
                     </p>
                     <p v-else class="text-sm text-muted-foreground">
                         {{ trans('accounts.not_connected') }}
@@ -244,13 +249,13 @@ const isDisconnected = (account: SocialAccount | null): boolean => {
                                 :src="platform.account.avatar_url"
                             />
                             <AvatarFallback class="text-xs">
-                                {{ platform.account.display_name?.charAt(0) }}
+                                {{ getInitials(platform.account.display_label) }}
                             </AvatarFallback>
                         </Avatar>
                         <span
                             class="max-w-[120px] truncate text-sm font-medium"
                         >
-                            {{ platform.account.display_name }}
+                            {{ platform.account.display_label }}
                         </span>
                     </div>
                     <div class="flex items-center gap-1">

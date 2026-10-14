@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { router } from '@inertiajs/vue3';
-import { IconAlertTriangle, IconCheck, IconPlus } from '@tabler/icons-vue';
+import { IconAlertTriangle, IconCheck } from '@tabler/icons-vue';
 import { trans } from 'laravel-vue-i18n';
 import { computed, ref } from 'vue';
 import { toast } from 'vue-sonner';
@@ -11,6 +11,10 @@ import { Button } from '@/components/ui/button';
 import { useOAuthPopup } from '@/composables/useOAuthPopup';
 import { disconnect } from '@/routes/app/accounts';
 import { Platform } from '@/types/platform';
+import {
+    SocialAccountStatus,
+    type SocialAccountStatusValue,
+} from '@/types/social-account-status';
 
 export interface AvailablePlatform {
     value: string;
@@ -25,8 +29,10 @@ export interface ConnectedAccount {
     network: string;
     username: string;
     display_name: string;
+    display_label: string;
+    handle_label: string;
     avatar_url: string | null;
-    status: 'connected' | 'disconnected' | 'token_expired' | null;
+    status: SocialAccountStatusValue | null;
 }
 
 const props = withDefaults(
@@ -167,12 +173,13 @@ const { openOAuthPopup } = useOAuthPopup((result) => {
 const disconnectAccount = (account: ConnectedAccount) => {
     disconnectModal.value?.open({
         url: disconnect.url(account.id),
-        confirmText: account.username || account.display_name,
+        confirmText: account.handle_label,
     });
 };
 
 const needsReconnect = (account: ConnectedAccount): boolean =>
-    account.status === 'disconnected' || account.status === 'token_expired';
+    account.status === SocialAccountStatus.Disconnected ||
+    account.status === SocialAccountStatus.TokenExpired;
 
 const connectEntryFor = (platformValue: string): string =>
     platformValue === Platform.LinkedInPage ? Platform.LinkedIn : platformValue;
@@ -251,13 +258,6 @@ const cardState = computed((): Record<string, CardStateValue> => {
                 >
                     <IconAlertTriangle class="size-3.5" stroke-width="2.5" />
                 </span>
-                <span
-                    v-else
-                    class="pointer-events-none absolute -top-2 -right-2 inline-flex size-6 items-center justify-center rounded-full border-2 border-foreground bg-violet-200 text-violet-950 opacity-0 shadow-2xs transition-all group-hover:scale-110 group-hover:rotate-90 group-hover:opacity-100"
-                    aria-hidden="true"
-                >
-                    <IconPlus class="size-3.5" stroke-width="3" />
-                </span>
 
                 <div
                     :class="[
@@ -299,10 +299,7 @@ const cardState = computed((): Record<string, CardStateValue> => {
                         v-else
                         class="mt-0.5 truncate text-xs leading-tight text-muted-foreground"
                     >
-                        {{
-                            cardConnection[platform.value]?.display_name ||
-                            cardConnection[platform.value]?.username
-                        }}
+                        {{ cardConnection[platform.value]?.display_label }}
                     </p>
                 </div>
 

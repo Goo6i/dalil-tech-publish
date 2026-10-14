@@ -107,15 +107,19 @@
         <tr>
           <td align="center" style="padding: 24px; text-align: center; font-size: 12px; color: #52525b">
             <p style="margin: 0 0 8px">
-              Open-source social media scheduling tool
+              {{ __('mail.footer.tagline') }}
             </p>
-            @if(isset($unsubscribe_url))
             <p style="margin: 8px 0 0">
-              <a href="{{ unsubscribe_url }}" target="_blank" class="hover-i-text-decoration-underline" style="color: #52525b; text-decoration: none">
-                Unsubscribe
+              <a href="{{ route('app.notifications.preferences') }}" target="_blank" class="hover-i-text-decoration-underline" style="color: #52525b; text-decoration: none">
+                Manage notifications
               </a>
             </p>
-            @endif
+            <p style="margin: 8px 0 0">
+              <a href="https://dalil-tech.com/publish" target="_blank" style="color: #52525b; text-decoration: none">{{ __('mail.footer.site') }}</a>
+            </p>
+            <p style="margin: 12px 0 0">
+              {{ __('mail.footer.copyright', ['year' => date('Y')]) }}
+            </p>
           </td>
         </tr>
       </table>

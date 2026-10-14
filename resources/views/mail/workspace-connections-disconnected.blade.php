@@ -82,9 +82,7 @@
                           <div style="width: 8px; height: 8px; border-radius: 50%; background-color: {{ $account->platform->color() }}; margin-right: 12px"></div>
                           <div>
                             <strong style="color: #18181b">{{ $account->platform->label() }}</strong>
-                            @if($account->display_name || $account->username)
-                            <span style="color: #71717a"> - {{ $account->display_name ?? $account->username }}</span>
-                            @endif
+                            <span style="color: #71717a"> - {{ $account->accountDisplayName() }}</span>
                           </div>
                         </div>
                       </td>
@@ -120,15 +118,19 @@
         <tr>
           <td align="center" style="padding: 24px; text-align: center; font-size: 12px; color: #52525b">
             <p style="margin: 0 0 8px">
-              Open-source social media scheduling tool
+              {{ __('mail.footer.tagline') }}
             </p>
-            @if(isset($unsubscribe_url))
             <p style="margin: 8px 0 0">
-              <a href="{{ unsubscribe_url }}" target="_blank" class="hover-i-text-decoration-underline" style="color: #52525b; text-decoration: none">
-                Unsubscribe
+              <a href="{{ route('app.notifications.preferences') }}" target="_blank" class="hover-i-text-decoration-underline" style="color: #52525b; text-decoration: none">
+                Manage notifications
               </a>
             </p>
-            @endif
+            <p style="margin: 8px 0 0">
+              <a href="https://dalil-tech.com/publish" target="_blank" style="color: #52525b; text-decoration: none">{{ __('mail.footer.site') }}</a>
+            </p>
+            <p style="margin: 12px 0 0">
+              {{ __('mail.footer.copyright', ['year' => date('Y')]) }}
+            </p>
           </td>
         </tr>
       </table>

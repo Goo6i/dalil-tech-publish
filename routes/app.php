@@ -11,6 +11,7 @@ use App\Http\Controllers\App\DiscordController as AppDiscordController;
 use App\Http\Controllers\App\GiphyController;
 use App\Http\Controllers\App\InsightsController;
 use App\Http\Controllers\App\LinkPreviewController;
+use App\Http\Controllers\App\McpSettingsController;
 use App\Http\Controllers\App\NotificationController;
 use App\Http\Controllers\App\OnboardingController;
 use App\Http\Controllers\App\PostAiCreateController;
@@ -28,6 +29,7 @@ use App\Http\Controllers\App\Settings\ProfileController;
 use App\Http\Controllers\App\Settings\SettingsController;
 use App\Http\Controllers\App\Settings\UsageController;
 use App\Http\Controllers\App\UnsplashController;
+use App\Http\Controllers\App\WelcomeController;
 use App\Http\Controllers\App\WorkspaceController;
 use App\Http\Controllers\App\WorkspaceInviteController;
 use App\Http\Controllers\App\WorkspaceLabelController;
@@ -51,21 +53,27 @@ use App\Http\Middleware\App\EnsureHasWorkspace;
 use Illuminate\Support\Facades\Route;
 
 // Subscription selection (requires auth but not subscription)
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/', function () {
         return redirect()->route('app.calendar');
     })->name('app.home');
 
     Route::get('subscribe', [BillingController::class, 'subscribe'])->name('app.subscribe');
-    Route::get('onboarding', [OnboardingController::class, 'index'])->name('app.onboarding');
-    Route::post('onboarding', [OnboardingController::class, 'store'])->name('app.onboarding.store');
-    Route::get('onboarding/goals', [OnboardingController::class, 'goals'])->name('app.onboarding.goals');
-    Route::post('onboarding/goals', [OnboardingController::class, 'storeGoals'])->name('app.onboarding.goals.store');
-    Route::get('onboarding/referral-source', [OnboardingController::class, 'referralSource'])->name('app.onboarding.referral-source');
-    Route::post('onboarding/referral-source', [OnboardingController::class, 'storeReferralSource'])->name('app.onboarding.referral-source.store');
-    Route::get('onboarding/connect', [OnboardingController::class, 'connect'])->name('app.onboarding.connect');
-    Route::post('onboarding/connect', [OnboardingController::class, 'checkout'])->name('app.onboarding.checkout');
+    Route::get('welcome', fn () => redirect()->route('app.welcome.persona'))->name('app.welcome');
+    Route::get('welcome/persona', [WelcomeController::class, 'persona'])->name('app.welcome.persona');
+    Route::post('welcome/persona', [WelcomeController::class, 'storePersona'])->name('app.welcome.persona.store');
+    Route::get('welcome/goals', [WelcomeController::class, 'goals'])->name('app.welcome.goals');
+    Route::post('welcome/goals', [WelcomeController::class, 'storeGoals'])->name('app.welcome.goals.store');
+    Route::get('welcome/referral-source', [WelcomeController::class, 'referralSource'])->name('app.welcome.referral-source');
+    Route::post('welcome/referral-source', [WelcomeController::class, 'storeReferralSource'])
+        ->middleware('throttle:6,1')
+        ->name('app.welcome.referral-source.store');
+    Route::get('welcome/connect', [WelcomeController::class, 'connect'])->name('app.welcome.connect');
+    Route::post('welcome/connect', [WelcomeController::class, 'storeConnect'])
+        ->middleware('throttle:6,1')
+        ->name('app.welcome.connect.store');
+    Route::get('welcome/subscription-required', [WelcomeController::class, 'subscriptionRequired'])->name('app.welcome.subscription-required');
     Route::get('billing/processing', [BillingController::class, 'processing'])->name('app.billing.processing');
 
     Route::get('workspaces/create', [WorkspaceController::class, 'create'])->name('app.workspaces.create');
@@ -83,7 +91,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Social Connect routes
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     // Starting a connection reads the user's current workspace, so these require
     // one — during onboarding they redirect to workspace creation. Disconnecting
     // lives here too (and not behind EnsureAccountReady) so it works before a
@@ -145,8 +153,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('accounts/discord/callback', [DiscordController::class, 'callback'])->name('app.social.discord.callback');
 });
 
-// Routes that require active subscription and completed onboarding
-Route::middleware(['auth', EnsureAccountReady::class, EnsureHasWorkspace::class])->group(function () {
+// Routes that require account access and a current workspace
+Route::middleware(['auth', 'verified', EnsureAccountReady::class, EnsureHasWorkspace::class])->group(function () {
+    Route::get('onboarding', [OnboardingController::class, 'index'])->name('app.onboarding');
+    Route::post('onboarding/mcp/skip', [OnboardingController::class, 'skipMcp'])->name('app.onboarding.mcp.skip');
+    Route::post('onboarding/complete', [OnboardingController::class, 'complete'])->name('app.onboarding.complete');
+
     // Discord — live lookups for the composer (channel picker + mention autocomplete).
     // Throttled because they proxy the shared bot's (rate-limited) Discord API.
     Route::get('discord/accounts/{account}/channels', [AppDiscordController::class, 'channels'])
@@ -274,6 +286,10 @@ Route::middleware(['auth', EnsureAccountReady::class, EnsureHasWorkspace::class]
     Route::post('settings/workspace/api-keys', [ApiKeyController::class, 'store'])->name('app.api-keys.store');
     Route::delete('settings/workspace/api-keys/{tokenId}', [ApiKeyController::class, 'destroy'])->name('app.api-keys.destroy');
 
+    // MCP
+    Route::get('settings/workspace/mcp', [McpSettingsController::class, 'index'])->name('app.mcp.index');
+    Route::delete('settings/workspace/mcp/{client}', [McpSettingsController::class, 'disconnect'])->name('app.mcp.disconnect');
+
     // Account Settings
     Route::get('settings/account', [AccountController::class, 'edit'])->name('app.account.edit');
     Route::put('settings/account', [AccountController::class, 'update'])->name('app.account.update');
@@ -287,7 +303,7 @@ Route::middleware(['auth', EnsureAccountReady::class, EnsureHasWorkspace::class]
 });
 
 // Notifications (auth only, no subscription required)
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('notifications', [NotificationController::class, 'index'])->name('app.notifications.index');
     Route::put('notifications/{notification}/read', [NotificationController::class, 'markAsRead'])->name('app.notifications.read');
     Route::post('notifications/read-all', [NotificationController::class, 'markAllAsRead'])->name('app.notifications.read-all');
@@ -295,7 +311,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Settings (auth required)
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('settings', [SettingsController::class, 'index'])->name('app.settings');
 
     Route::get('settings/profile', [ProfileController::class, 'edit'])->name('app.profile.edit');
@@ -305,7 +321,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('settings/language', [ProfileController::class, 'updateLanguage'])->name('app.profile.language');
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('settings/profile', [ProfileController::class, 'destroy'])->name('app.profile.destroy');
 
     Route::get('settings/authentication', [AuthenticationController::class, 'edit'])->name('app.authentication.edit');

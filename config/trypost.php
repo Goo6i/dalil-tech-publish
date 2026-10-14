@@ -18,6 +18,20 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Public Registration
+    |--------------------------------------------------------------------------
+    |
+    | Whether anyone can create an account at /register. Leave unset to keep
+    | the upstream behaviour (open when not self-hosted, invite-only when
+    | self-hosted). Set it explicitly to open or close public sign ups
+    | without touching the billing paths that SELF_HOSTED controls.
+    |
+    */
+
+    'public_registration' => env('PUBLIC_REGISTRATION'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Security
     |--------------------------------------------------------------------------
     |
@@ -184,6 +198,8 @@ return [
             'video_service_did' => env('BLUESKY_VIDEO_SERVICE_DID', 'did:web:video.bsky.app'),
             // Seconds between transcode job-status polls.
             'video_poll_seconds' => env('BLUESKY_VIDEO_POLL_SECONDS', 2),
+            // Gradually back off status checks to at most this interval.
+            'video_poll_max_seconds' => env('BLUESKY_VIDEO_POLL_MAX_SECONDS', 30),
             // Bluesky rejects videos larger than 100 MB; skip oversized files early.
             'video_max_bytes' => env('BLUESKY_VIDEO_MAX_BYTES', 100 * 1024 * 1024),
             // PLC directory, used to resolve an account's real PDS host from its DID.

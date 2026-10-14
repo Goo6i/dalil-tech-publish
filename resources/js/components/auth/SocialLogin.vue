@@ -5,10 +5,11 @@ import { computed } from 'vue';
 import { Button } from '@/components/ui/button';
 import { redirect as googleRedirect } from '@/routes/auth/google';
 
-withDefaults(
+const props = withDefaults(
     defineProps<{
         mode: 'login' | 'signup';
         hideDivider?: boolean;
+        invite?: string | null;
     }>(),
     { hideDivider: false },
 );
@@ -16,12 +17,20 @@ withDefaults(
 const page = usePage();
 const googleEnabled = computed(() => Boolean(page.props.googleAuthEnabled));
 const hasSocial = computed(() => googleEnabled.value);
+
+const query = computed(() => {
+    const params: Record<string, string> = {};
+    if (props.invite) params.invite = props.invite;
+    return params;
+});
+
+const googleUrl = computed(() => googleRedirect.url({ query: query.value }));
 </script>
 
 <template>
     <template v-if="hasSocial">
         <div class="flex flex-col gap-2">
-            <Button v-if="googleEnabled" variant="outline" class="w-full" as="a" :href="googleRedirect.url()">
+            <Button v-if="googleEnabled" variant="outline" class="w-full" as="a" :href="googleUrl">
                 <img src="/images/social/google.svg" alt="Google" class="size-4" />
                 {{ mode === 'login' ? $t('auth.google_login') : $t('auth.google_signup') }}
             </Button>
